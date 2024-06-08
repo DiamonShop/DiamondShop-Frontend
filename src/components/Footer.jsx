@@ -51,7 +51,7 @@ export default function Footer() {
                     </div>
                     <div className="col-lg-3 col-md-6">
                         <div className="widget-item">
-                            <h6 className="widget-title">Follow Us</h6>
+                            <h6 className="widget-title">Kết nối với chúng tôi</h6>
                             <div className="widget-body social-link">
                                 <a href="#"><i className="fa fa-facebook"></i></a>
                                 <a href="#"><i className="fa fa-twitter"></i></a>
@@ -63,7 +63,7 @@ export default function Footer() {
                 </div>
                 <div className="row align-items-center mt-20">
                     <div className="col-md-6">
-                        <div className="newsletter-wrapper">
+                        {/* <div className="newsletter-wrapper">
                             <h6 className="widget-title-text">Signup for newsletter</h6>
                             <form className="newsletter-inner" id="mc-form">
                                 <input type="email" className="news-field" id="mc-email" autocomplete="off" placeholder="Enter your email address"/>
@@ -76,7 +76,7 @@ export default function Footer() {
                                 <div className="mailchimp-error"></div>
                             </div>
                            
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-md-6">
                         <div className="footer-payment">
