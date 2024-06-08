@@ -32,7 +32,18 @@ export default function Chi_tiet_san_pham() {
         }],
         ref: navSliderRef
     };
-
+    const relatedSliderSettings = {
+        speed: 1000,
+		autoplay: true,
+        infinite: true,
+		slidesToShow: 4,
+        slidesToRoll: 1,
+		adaptiveHeight: true,
+        arrows: true,
+		prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
+		
+    };
     return (
         <div>
             <div class="breadcrumb-area">
@@ -186,13 +197,16 @@ export default function Chi_tiet_san_pham() {
                                         <div class="product-review-info">
                                             <ul class="nav review-tab">
                                                 <li>
-                                                    <a class="active" data-bs-toggle="tab" href="#tab_one">description</a>
+                                                    <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
                                                 </li>
                                                 <li>
-                                                    <a data-bs-toggle="tab" href="#tab_two">information</a>
+                                                    <a data-bs-toggle="tab" href="#tab_two">Thông số</a>
                                                 </li>
                                                 <li>
-                                                    <a data-bs-toggle="tab" href="#tab_three">reviews (1)</a>
+                                                    <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
+                                                </li>
+                                                <li>
+                                                    <a data-bs-toggle="tab" href="#tab_four">Chính sách bảo hành</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content reviews-tab">
@@ -296,6 +310,11 @@ export default function Chi_tiet_san_pham() {
                                                         </div>
                                                     </form>
                                                 </div>
+                                                <div class="tab-pane fade" id="tab_four">
+                                                    <form action="#" class="review-form">
+                                                        <h2>Thêm vào sau ...</h2>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -322,8 +341,8 @@ export default function Chi_tiet_san_pham() {
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-
+                            
+                            <Slider {...relatedSliderSettings}  class="product-carousel-4 slick-row-10 slick-arrow-style">
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
@@ -575,8 +594,8 @@ export default function Chi_tiet_san_pham() {
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
+                            </Slider>
+                            
                         </div>
                     </div>
                 </div>
