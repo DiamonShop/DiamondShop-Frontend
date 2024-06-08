@@ -20,15 +20,11 @@ export default function Home() {
     const SecondSliderSettings = {
         speed: 1000,
         autoplay: true,
-        infinite: true,
         slidesToShow: 4,
         adaptiveHeight: true,
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         arrows: true,
-        row: 1,
-        coloum: 4,
-
     };
     const ThirdSliderSettings = {
         speed: 1000,
