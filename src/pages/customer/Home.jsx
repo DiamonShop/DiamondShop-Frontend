@@ -13,8 +13,8 @@ export default function Home() {
         dots: true,
         autoplay: true,
         arrows: true,
-        //prevArrow: '<button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>',
-        //nextArrow: '<button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>',
+        prevArrow: <button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>,
 
     };
     const SecondSliderSettings = {
@@ -23,8 +23,8 @@ export default function Home() {
         infinite: true,
         slidesToShow: 4,
         adaptiveHeight: true,
-        //prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
-        //nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         arrows: true,
         row: 1,
         coloum: 4,
@@ -37,8 +37,8 @@ export default function Home() {
         infinite: true,
         rows: 2,
         adaptiveHeight: true,
-        //prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
-        //nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         slidesToScroll: 1
     };
     const First_FourthSliderSettings = {
@@ -63,8 +63,8 @@ export default function Home() {
         infinite: true,
         rows: 4,
         autoplay: true,
-        //prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
-        //nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         dots: true,
         slidesToShow: 1,
 
@@ -76,8 +76,8 @@ export default function Home() {
         adaptiveHeight: true,
         infinite: true,
         autoplay: true,
-        //prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
-        //nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         slidesToScroll: 1,
 
     }
@@ -2327,102 +2327,6 @@ export default function Home() {
                             </div>
                         </div>
                     </section>
-                </div>
-            </section>
-
-
-
-            <section className="testimonial-area section-padding bg-img" data-bg="assets/img/testimonial/testimonials-bg.jpg">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-
-                            <div className="section-title text-center">
-                                <h2 className="title"> Ý kiến </h2>
-                                <p className="sub-title">Kim cương lút xu rì</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12">
-
-                            <div className="testimonial-thumb-wrapper">
-
-                                <div className="testimonial-thumb-carousel">
-                                    <Slider {...First_FourthSliderSettings}>
-                                        <div className="testimonial-thumb">
-                                            <img src="assets/img/testimonial/tran-thanh.png" alt="testimonial-thumb" />
-                                        </div>
-                                        <div className="testimonial-thumb">
-                                            <img src="assets/img/testimonial/ly-nha-ky-.png" alt="testimonial-thumb" />
-                                        </div>
-                                        <div className="testimonial-thumb">
-                                            <img src="assets/img/testimonial/Johnny_Dang.png" alt="testimonial-thumb" />
-                                        </div>
-                                        <div className="testimonial-thumb">
-                                            <img src="assets/img/testimonial/testimonial-2.png" alt="testimonial-thumb" />
-                                        </div>
-                                    </Slider>
-                                </div>
-
-                            </div>
-
-                            <div className="testimonial-content-wrapper">
-
-                                <div className="testimonial-content-carousel">
-                                    <Slider {...Second_FourthSliderSettings}>
-                                        <div className="testimonial-content">
-                                            <p>Tôi đã khóc khi đã mua được sản phẩm tuyệt vời như thế này. Cảm ơn cửa hàng Enternal Sparkle</p>
-                                            <div className="ratings">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                            </div>
-                                            <h5 className="testimonial-author">Trấn Thành aka Thành Cry</h5>
-                                        </div>
-                                        <div className="testimonial-content">
-                                            <p>Ở nhà tôi đã có rất nhiều trang sức và kim cương nhưng khi tôi mua sắm tại Enternal Sparkle, tôi đã mua thêm nhiều cái nữa...</p>
-                                            <div className="ratings">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                            </div>
-                                            <h5 className="testimonial-author">lý nhã kì</h5>
-                                        </div>
-                                        <div className="testimonial-content">
-                                            <p>Tôi có một cửa hàng kim cương ở Texas, sau khi được trải nghiệm mua hàng ở đây tôi rất muốn hợp tác với Enternal Sparkle </p>
-                                            <div className="ratings">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                            </div>
-                                            <h5 className="testimonial-author">Johny Dang </h5>
-                                        </div>
-                                        <div className="testimonial-content">
-                                            <p>Vivamus a lobortis ipsum, vel condimentum magna. Etiam id turpis tortor. Nunc scelerisque, nisi a blandit varius, nunc purus venenatis ligula, sed venenatis orci augue nec sapien. Cum sociis natoque</p>
-                                            <div className="ratings">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                            </div>
-                                            <h5 className="testimonial-author">Maria Mora</h5>
-                                        </div>
-                                    </Slider>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </section>
 
