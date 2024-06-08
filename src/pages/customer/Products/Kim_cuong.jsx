@@ -73,7 +73,7 @@ export default function Kim_cuong() {
 
                                         <div className="product-item">
                                             <figure className="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="/Chitietsanpham-kim-cuong">
                                                     <img className="pri-img"
                                                         src="assets/img/product/Kim-cuong/kim-cuong-3,6ly-g-vs2-ex-01.png"
                                                         alt="product" />
