@@ -203,7 +203,7 @@ export default function About_us() {
                                 </div>
                                 <div class="team-content text-center">
                                     <h6 class="team-member-name">oliver bastin</h6>
-                                    <p>designer</p>
+                                    <p>designer</p>1
                                 </div>
                             </div>
                         </div>
