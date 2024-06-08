@@ -6031,4 +6031,8 @@ Table of content
  font-weight: bold;
  }
  /*----- diamond price table end */
- 
+ /* banner diamond */
+ .banner-diamond img{
+   padding-bottom:  70px;
+ }
+ /* end banner diamond */

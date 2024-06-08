@@ -47,11 +47,11 @@ export default function Header() {
                           <ul className="dropdown">
                             <li><Link to="/Nhan"> Nhẫn <i class="fa fa-angle-right"></i></Link>
                               <ul className="dropdown">
-                                
+
                                 <li>
                                   <a href="/Nhan">Nhẫn cưới</a>
-                                  </li>
-                               
+                                </li>
+
                               </ul>
 
                             </li>
@@ -67,8 +67,21 @@ export default function Header() {
 
                           </ul>
                         </li>
-                        <li><Link to="/Kimcuong"> Kim cương </Link>
-
+                        <li><Link to="/Kimcuong"> Kim cương <i className="fa fa-angle-down"></i></Link>
+                          <ul className="dropdown">
+                            <li>
+                              <Link to="">Kim cương GIA 3.6ly</Link>
+                            </li>
+                            <li>
+                              <Link to="">Kim cương GIA 4.1ly</Link>
+                            </li>
+                            <li>
+                              <Link to="">Kim cương GIA 4.5ly</Link>
+                            </li>
+                            <li>
+                              <Link to="">Kim cương GIA 5.4ly</Link>
+                            </li>
+                          </ul>
                         </li>
 
                         <li><Link to="/Banggiakimcuong"> Bảng giá kim cương </Link>
