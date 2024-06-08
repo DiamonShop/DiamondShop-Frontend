@@ -17,7 +17,7 @@ export default function Footer() {
                                 </div>
                             </div>
                             <div className="widget-body">
-                                <p>We are a team of designers and developers that create high quality wordpress, shopify, Opencart </p>
+                                <p>Chúng tôi là một nhóm gồm các nhà thiết kế và phát triển tạo ra wordpress, shopify, Opencart chất lượng cao </p>
                             </div>
                         </div>
                     </div>
@@ -40,18 +40,18 @@ export default function Footer() {
                             <h6 className="widget-title">Thông tin</h6>
                             <div className="widget-body">
                                 <ul className="info-list">
-                                    <li><Link to="/Lienhe">Liên hệ</Link></li>
-                                    <li><a href="#">Về chúng tôi</a></li>
-                                    <li><a href="#">Chính sách bảo mật</a></li>
-                                    <li><Link to="/Chinhsach">Điều khoản và chính sách</Link></li>
-                                    <li><a href="#">Vị trí</a></li>
+                                    <li><Link to="/Lienhe">Liên hệ</Link></li><br/>
+                                    <li><Link to="/Vechungtoi">Về chúng tôi</Link></li><br/>
+                                    <li><a href="#">Chính sách bảo mật</a></li><br/>
+                                    <li><Link to="/Chinhsach">Điều khoản và chính sách</Link></li><br/>
+                                    <li><a href="#">Vị trí</a></li><br/>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-6">
                         <div className="widget-item">
-                            <h6 className="widget-title">Follow Us</h6>
+                            <h6 className="widget-title">Kết nối với chúng tôi</h6>
                             <div className="widget-body social-link">
                                 <a href="#"><i className="fa fa-facebook"></i></a>
                                 <a href="#"><i className="fa fa-twitter"></i></a>
@@ -63,7 +63,7 @@ export default function Footer() {
                 </div>
                 <div className="row align-items-center mt-20">
                     <div className="col-md-6">
-                        <div className="newsletter-wrapper">
+                        {/* <div className="newsletter-wrapper">
                             <h6 className="widget-title-text">Signup for newsletter</h6>
                             <form className="newsletter-inner" id="mc-form">
                                 <input type="email" className="news-field" id="mc-email" autocomplete="off" placeholder="Enter your email address"/>
@@ -76,7 +76,7 @@ export default function Footer() {
                                 <div className="mailchimp-error"></div>
                             </div>
                            
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-md-6">
                         <div className="footer-payment">

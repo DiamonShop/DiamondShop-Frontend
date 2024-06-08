@@ -6034,3 +6034,96 @@ Table of content
    padding-bottom:  70px;
  }
  /* end banner diamond */
+ /* diamond filter container */
+ .diamond-filter-line {
+  opacity: 0.5;
+ }
+ .diamond-filter-container {
+  width: 450px;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-group {
+  /* position: relative; */
+  margin-bottom: 5px;
+  list-style-type: none;
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+  
+}
+.filter-name {
+  display: flex;
+  align-items: center;
+  justify-content: ;
+  margin-right: 50px;
+  margin-left: 0px;
+  width: 200px;
+}
+.accordion {
+  
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.accordion::before {
+  content: '\25BC';
+  font-size: 12px;
+}
+
+select {
+  width: calc(100% - 20px); /* width - padding */
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.filter-img img{
+  width: 60px;
+  height: 20px;
+}
+.filter-group button {
+  margin-right: 20px;
+}
+
+.accordion.active::before {
+  content: '\25B2';
+}
+
+
+.diamond-filter-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền của overlay */
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.diamond-filter-overlay-content {
+  position: relative;
+  background-color: #fefefe; /* Màu nền của nội dung overlay */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.diamond-filter-overlay-content .diamond-filter-overplay-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #aaa;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.diamond-filter-overlay-content .diamond-filter-overplay-close:hover,
+.diamond-filter-overlay-content .diamond-filter-overplay-close:focus {
+  color: #000;
+}
+
+
+ /* end diamond filter container */
