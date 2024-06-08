@@ -13,8 +13,8 @@ export default function Home() {
         dots: true,
         autoplay: true,
         arrows: true,
-        prevArrow: <button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>,
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
 
     };
     const SecondSliderSettings = {
@@ -85,8 +85,8 @@ export default function Home() {
         <div>
 
             <section className="slider-area">
-                <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
-                    <Slider {...FirstSliderSettings}>
+                
+                    <Slider {...FirstSliderSettings} className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                         <div className="hero-single-slide hero-overlay">
                             {/* <div className="hero-slider-item bg-img" data-bg="assets/img/slider/home2-slide1.jpg"> */}
                             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/home2-slide1.jpg)` }}>
@@ -142,7 +142,7 @@ export default function Home() {
                             </div>
                         </div>
                     </Slider>
-                </div>
+                
             </section>
 
             <div className="service-policy">
@@ -249,8 +249,8 @@ export default function Home() {
 
                                             <div className="tab-pane fade show active"
                                                 id="tab1">
-                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
+                                                
+                                                    <Slider {...SecondSliderSettings} className="product-carousel-4 slick-row-10 slick-arrow-style">
                                                         <div className="product-item">
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
@@ -655,7 +655,7 @@ export default function Home() {
                                                             </div>
                                                         </div>
                                                     </Slider>
-                                                </div>
+                                                
                                             </div>
 
                                             <div className="tab-pane fade" id="tab3">
