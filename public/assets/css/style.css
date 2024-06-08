@@ -307,15 +307,13 @@ Table of content
  .slick-arrow-style button.slick-arrow.slick-next {
    left: auto;
    right: 0;
-   content: ''; /* Xóa nội dung văn bản */
-   font-size: 0; /* Đảm bảo không có không gian cho văn bản */
+
  
  }
  .slick-arrow-style button.slick-arrow.slick-prev {
    left: 0;
    right: auto;
-   content: ''; /* Xóa nội dung văn bản */
-   font-size: 0; /* Đảm bảo không có không gian cho văn bản */
+
    
  }
  .slick-arrow-style button.slick-arrow:hover {
