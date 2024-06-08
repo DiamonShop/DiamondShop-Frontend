@@ -13,18 +13,22 @@ export default function Home() {
         dots: true,
         autoplay: true,
         arrows: true,
-        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
+        prevArrow: <button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>,
+        nextArrow: <button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>,
 
     };
     const SecondSliderSettings = {
         speed: 1000,
         autoplay: true,
+        infinite: true,
         slidesToShow: 4,
         adaptiveHeight: true,
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         arrows: true,
+        row: 1,
+        coloum: 4,
+
     };
     const ThirdSliderSettings = {
         speed: 1000,
@@ -81,8 +85,8 @@ export default function Home() {
         <div>
 
             <section className="slider-area">
-                
-                    <Slider {...FirstSliderSettings} className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
+                <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
+                    <Slider {...FirstSliderSettings}>
                         <div className="hero-single-slide hero-overlay">
                             {/* <div className="hero-slider-item bg-img" data-bg="assets/img/slider/home2-slide1.jpg"> */}
                             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/home2-slide1.jpg)` }}>
@@ -138,7 +142,7 @@ export default function Home() {
                             </div>
                         </div>
                     </Slider>
-                
+                </div>
             </section>
 
             <div className="service-policy">
@@ -245,15 +249,15 @@ export default function Home() {
 
                                             <div className="tab-pane fade show active"
                                                 id="tab1">
-                                                
-                                                    <Slider {...SecondSliderSettings} className="product-carousel-4 slick-row-10 slick-arrow-style">
+                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">
+                                                    <Slider {...SecondSliderSettings}>
                                                         <div className="product-item">
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/dd00h000361-nhan-kim-cuong-vang-18k-01.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00h000361-nhan-kim-cuong-vang-18k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/dd00h000361-nhan-kim-cuong-vang-18k-02.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00h000361-nhan-kim-cuong-vang-18k-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -333,9 +337,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <a href="product-details.html">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/dd00W003598-Nhan-Kim-Cuong-Vang-Trang-14K-01.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00W003598-Nhan-Kim-Cuong-Vang-Trang-14K-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/dd00w003598-nhan-kim-cuong-vang-trang-14k-disney-mickey-02.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00w003598-nhan-kim-cuong-vang-trang-14k-disney-mickey-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -417,9 +421,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/ddddc001259-nhan-kim-cuong-vang-14k-01.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/ddddc001259-nhan-kim-cuong-vang-14k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/ddddc001259-nhan-kim-cuong-vang-14k-02.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/ddddc001259-nhan-kim-cuong-vang-14k-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -499,9 +503,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <a href="product-details.html">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-01.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-02.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -582,9 +586,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/ddddw001827-nhan-kim-cuong-vang-trang-14k-01.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/ddddw001827-nhan-kim-cuong-vang-trang-14k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/ddddw001827-nhan-kim-cuong-vang-trang-14k-02.png" alt="product" />
+                                                                        src="assets/img/product/Nhan/ddddw001827-nhan-kim-cuong-vang-trang-14k-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -651,7 +655,7 @@ export default function Home() {
                                                             </div>
                                                         </div>
                                                     </Slider>
-                                                
+                                                </div>
                                             </div>
 
                                             <div className="tab-pane fade" id="tab3">
@@ -1024,9 +1028,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/0000w060104-day-chuyen-bac-y-silver-01.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000w060104-day-chuyen-bac-y-silver-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/0000w060104-day-chuyen-bac-y-silver-02.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000w060104-day-chuyen-bac-y-silver-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -1097,9 +1101,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <a href="product-details.html">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/0000w000949-day-chuyen-vang-trang-y-18k-01.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000w000949-day-chuyen-vang-trang-y-18k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/0000w000949-day-chuyen-vang-trang-y-18k-02.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000w000949-day-chuyen-vang-trang-y-18k-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -1169,9 +1173,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <a href="product-details.html">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/0000W060094-day-chuyen-bac-01.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000W060094-day-chuyen-bac-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/0000W060094-day-chuyen-bac-02.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000W060094-day-chuyen-bac-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -1237,9 +1241,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <a href="product-details.html">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/0000W060096-day-chuyen-bac-01.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000W060096-day-chuyen-bac-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/0000W060096-day-chuyen-bac-02.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/0000W060096-day-chuyen-bac-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
@@ -1309,9 +1313,9 @@ export default function Home() {
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
                                                                     <img className="pri-img"
-                                                                        src="assets/img/product/gd0000w061234-day-chuyen-vang-trang-18k-01.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/gd0000w061234-day-chuyen-vang-trang-18k-01.png" alt="product" />
                                                                     <img className="sec-img"
-                                                                        src="assets/img/product/gd0000w061234-day-chuyen-vang-trang-18k-02.png" alt="product" />
+                                                                        src="assets/img/product/Day-chuyen/gd0000w061234-day-chuyen-vang-trang-18k-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
