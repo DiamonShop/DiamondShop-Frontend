@@ -172,25 +172,7 @@ export default function About_us() {
                         </div>
                     </div>
                     <div class="row mbn-30">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_1.png" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Nguyễn Đăng Khoa</h6>
-                                    <p>Leader</p>
-                                    <p>"Không làm kick ra khỏi nhóm"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="team-member mb-30">
                                 <div class="team-thumb">
                                     <img src="assets/img/team/team_member_2.jpg" alt="" />
@@ -202,15 +184,49 @@ export default function About_us() {
                                     </div>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h6 class="team-member-name">oliver bastin</h6>
-                                    <p>designer</p>
+                                    <h6 class="team-member-name">Nguyễn Đăng Khoa</h6>
+                                    <p>Leader</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="team-member mb-30">
                                 <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_3.png" alt="" />
+                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
+                                    <div class="team-social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-content text-center">
+                                    <h6 class="team-member-name">Trần Đức Vương</h6>
+                                    <p>Backend Leader</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="team-member mb-30">
+                                <div class="team-thumb">
+                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
+                                    <div class="team-social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-content text-center">
+                                    <h6 class="team-member-name">Đỗ Tuấn Hùng</h6>
+                                    <p>Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="team-member mb-30">
+                                <div class="team-thumb">
+                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
                                     <div class="team-social">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -220,15 +236,14 @@ export default function About_us() {
                                 </div>
                                 <div class="team-content text-center">
                                     <h6 class="team-member-name">Trần Lê Tuấn Kiệt</h6>
-                                    <p>developer</p>
-                                    <p>"Ok"</p>
+                                    <p>Frontend Leader</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-2 col-md-4 col-sm-6">
                             <div class="team-member mb-30">
-                                <div class="team-thumb img-full">
-                                    <img src="assets/img/team/team_member_4.jpg" alt="" />
+                                <div class="team-thumb">
+                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
                                     <div class="team-social">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -237,8 +252,25 @@ export default function About_us() {
                                     </div>
                                 </div>
                                 <div class="team-content text-center">
-                                    <h6 class="team-member-name">jon doe</h6>
-                                    <p>marketing officer</p>
+                                    <h6 class="team-member-name">Huỳnh Thanh Vinh</h6>
+                                    <p>Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="team-member mb-30">
+                                <div class="team-thumb">
+                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
+                                    <div class="team-social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-content text-center">
+                                    <h6 class="team-member-name">Nguyễn Hoàng Long</h6>
+                                    <p>Developer</p>
                                 </div>
                             </div>
                         </div>
