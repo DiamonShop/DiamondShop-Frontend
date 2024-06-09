@@ -126,8 +126,8 @@ export default function Chi_tiet_san_pham_kc() {
                         </div>
                       </div>
                       <div class="price-box">
-                        <span class="price-regular">$70.00</span>
-                        <span class="price-old"><del>$90.00</del></span>
+                        <span class="price-regular">10,382,000₫</span>
+                        <span class="price-old"><del>11,045,000₫</del></span>
                       </div>
                       {/* <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                             <div class="product-countdown" data-countdown="2022/12/20"></div>
@@ -439,8 +439,8 @@ export default function Chi_tiet_san_pham_kc() {
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly G VS1 EX</a>
                     </h6>
                     <div class="price-box">
-                      <span class="price-regular">$60.00</span>
-                      <span class="price-old"><del>$70.00</del></span>
+                      <span class="price-regular">10,736,000₫</span>
+                      <span class="price-old"><del>11,421,000₫</del></span>
                     </div>
                   </div>
                 </div>
@@ -490,8 +490,8 @@ export default function Chi_tiet_san_pham_kc() {
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS2 EX</a>
                     </h6>
                     <div class="price-box">
-                      <span class="price-regular">$50.00</span>
-                      <span class="price-old"><del>$80.00</del></span>
+                      <span class="price-regular">11,178,000₫</span>
+                      <span class="price-old"><del>11,891,000₫</del></span>
                     </div>
                   </div>
                 </div>
@@ -538,8 +538,8 @@ export default function Chi_tiet_san_pham_kc() {
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS1 EX</a>
                     </h6>
                     <div class="price-box">
-                      <span class="price-regular">$99.00</span>
-                      <span class="price-old"><del></del></span>
+                      <span class="price-regular">11,531,000₫</span>
+                      <span class="price-old"><del>12,267,000₫</del></span>
                     </div>
                   </div>
                 </div>
@@ -589,8 +589,8 @@ export default function Chi_tiet_san_pham_kc() {
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS2 EX</a>
                     </h6>
                     <div class="price-box">
-                      <span class="price-regular">$55.00</span>
-                      <span class="price-old"><del>$75.00</del></span>
+                      <span class="price-regular">11,531,000₫</span>
+                      {/* <span class="price-old"><del>$75.00</del></span> */}
                     </div>
                   </div>
                 </div>
@@ -640,8 +640,8 @@ export default function Chi_tiet_san_pham_kc() {
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS1 EX</a>
                     </h6>
                     <div class="price-box">
-                      <span class="price-regular">$60.00</span>
-                      <span class="price-old"><del>$70.00</del></span>
+                      <span class="price-regular">11,884,000₫</span>
+                      <span class="price-old"><del>12,643,000₫</del></span>
                     </div>
                   </div>
                 </div>
