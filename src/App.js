@@ -39,6 +39,7 @@ import Lien_he from './pages/customer/Lien_he';
 import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
+import Dashboard from './pages/Admin&Manager/Dashboard';
 function App() {
 
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path='/Yeuthich'element={<Wishlist />} />
           <Route path='/Dangnhap'element={<Dang_nhap />} />
           <Route path='/Dangki'element={<Dang_ki />} />
+          <Route path='/Dashboard'element={<Dashboard />} />
           <Route path='/Thongtintk'element={<Thong_tin_tk />} />
           <Route path='/Chitietsanpham'element={<Chi_tiet_san_pham />} />
           <Route path='/Chitietsanpham-kim-cuong'element={<Chi_tiet_san_pham_kc />} />
