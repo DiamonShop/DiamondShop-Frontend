@@ -1,5 +1,6 @@
 
 import React, { useRef } from 'react';
+import { useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -44,6 +45,16 @@ export default function Chi_tiet_san_pham_kc() {
     prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
     nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
 
+  };
+  // overlay of GIA image
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  const handleImageClick = () => {
+    setIsOverlayVisible(!isOverlayVisible);
+  };
+
+  const closeOverlay = () => {
+    setIsOverlayVisible(false);
   };
   return (
     <div>
@@ -150,15 +161,34 @@ export default function Chi_tiet_san_pham_kc() {
                         </li>
                         <li class="filter-group">
                           <p className='filter-name'>Giấy kiểm định</p>
-                          <div className='filter-img'>
+                          <div className='filter-img' onClick={handleImageClick}>
                             <img src="https://file.hstatic.net/1000381168/file/gia-logo_5deb96f1f2b541568f93dc916976d435.svg" alt="GIA" />
-
                           </div>
+                          {isOverlayVisible && (
+                            <div className="overlay">
+                              <div className="overlay-content">
+                                <div className='overlay-close-button'>
+                                  <button onClick={closeOverlay}>X</button>
+                                </div>
 
+                                <h1 className='overlay-title'>TRA CỨU GIẤY KIỂM ĐỊNH KIM CƯƠNG GIA</h1>
+                                <p class="overlay-description">
+                                  Kim cương được bán ra bởi Thế Giới Kim Cương luôn có đầy đủ giấy kiểm định quốc tế.
+                                  Quý Khách có thể tra cứu xác thực giấy kiểm định trên website của GIA <br />
+                                  theo đường link bên dưới.
+                                </p>
+                                <a href="https://www.gia.edu/report-check-landing" class="overlay-link" target='_blank'>Quý Khách nhấn vào đây để tra cứu giấy kiểm định GIA</a>
+                                <div className='overlay-GIA-image'>
+                                  <img src="assets\img\product\Kim-cuong\GIA\giay-kiem-dinh_b7f8dc6b92bd4c11bb2ac134bdd51398.webp" alt="GIA" />
+                                </div>
+
+                              </div>
+                            </div>
+                          )}
                         </li>
                       </ul>
 
-                      <p className='diamond-filter-line'>------------------------------------------------------------------------------------</p>
+
                       <div class="quantity-cart-box d-flex align-items-center">
                         {/* <h6 class="option-title">qty:</h6>
                                                 <div class="quantity">
@@ -418,8 +448,8 @@ export default function Chi_tiet_san_pham_kc() {
                 <div class="product-item">
                   <figure class="product-thumb">
                     <a href="product-details.html">
-                    <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                    <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
+                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
+                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
                     {/* <div class="product-badge">
                       <div class="product-label new">
@@ -469,8 +499,8 @@ export default function Chi_tiet_san_pham_kc() {
                 <div class="product-item">
                   <figure class="product-thumb">
                     <a href="product-details.html">
-                    <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                    <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
+                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
+                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
                     {/* <div class="product-badge">
                       <div class="product-label new">
@@ -517,8 +547,8 @@ export default function Chi_tiet_san_pham_kc() {
                 <div class="product-item">
                   <figure class="product-thumb">
                     <a href="product-details.html">
-                    <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                    <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
+                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
+                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
                     {/* <div class="product-badge">
                       <div class="product-label new">
@@ -568,8 +598,8 @@ export default function Chi_tiet_san_pham_kc() {
                 <div class="product-item">
                   <figure class="product-thumb">
                     <a href="product-details.html">
-                    <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                    <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
+                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
+                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
                     {/* <div class="product-badge">
                       <div class="product-label new">
