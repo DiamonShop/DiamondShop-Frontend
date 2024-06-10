@@ -116,7 +116,6 @@ export default function Header() {
                         </a>
                         <ul className="dropdown-list">
                           <li><Link to="/Dangnhap">Đăng nhập</Link></li>
-                          <li><Link to="/Dangki">Đăng kí</Link></li>
                           <li><Link to="/Thongtintk">Thông tin tài khoản</Link></li>
                         </ul>
                       </li>

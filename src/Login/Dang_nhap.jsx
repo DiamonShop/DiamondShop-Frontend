@@ -1,72 +1,151 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Dang_nhap() {
+    const [signInForm, setSignInForm] = useState({ username: '', password: '' });
+    const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
+
+    useEffect(() => {
+        const sign_in_btn = document.querySelector("#sign-in-btn");
+        const sign_up_btn = document.querySelector("#sign-up-btn");
+        const container = document.querySelector(".signin-signup-container");
+
+        const handleSignUpClick = () => {
+            container.classList.add("sign-up-mode");
+        };
+
+        const handleSignInClick = () => {
+            container.classList.remove("sign-up-mode");
+        };
+
+        sign_up_btn.addEventListener('click', handleSignUpClick);
+        sign_in_btn.addEventListener('click', handleSignInClick);
+
+        return () => {
+            sign_up_btn.removeEventListener('click', handleSignUpClick);
+            sign_in_btn.removeEventListener('click', handleSignInClick);
+        };
+    }, []);
+
+    const handleSignInChange = (e) => {
+        const { name, value } = e.target;
+        setSignInForm({ ...signInForm, [name]: value });
+    };
+
+    const handleSignUpChange = (e) => {
+        const { name, value } = e.target;
+        setSignUpForm({ ...signUpForm, [name]: value });
+    };
+
+    const handleSignInSubmit = (e) => {
+        e.preventDefault();
+        // Handle sign-in logic
+        console.log('Sign-In:', signInForm);
+    };
+
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+        // Handle sign-up logic
+        console.log('Sign-Up:', signUpForm);
+    };
+
     return (
         <div>
-
-            <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="breadcrumb-wrap">
-                                <nav aria-label="breadcrumb">
-                                    <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Đăng Nhập</li>
-                                    </ul>
-                                </nav>
+            <div className="signin-signup-container">
+                <div className="signin-signup-forms-container">
+                    <div className="signin-signup">
+                        <form onSubmit={handleSignInSubmit} className="sign-in-form">
+                            <h2 className="sign-in-form-title">Đăng nhập</h2>
+                            <div className="input-field">
+                                <i className="pe-7s-users"></i>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="Tên đăng nhập"
+                                    value={signInForm.username}
+                                    onChange={handleSignInChange}
+                                />
                             </div>
+                            <div className="input-field">
+                                <i className="pe-7s-door-lock"></i>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Mật khẩu"
+                                    value={signInForm.password}
+                                    onChange={handleSignInChange}
+                                />
+                            </div>
+                            <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
+                            <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
+                            <div className="social-media">
+                                <a href="#" className="social-icon">
+                                    <i ><img src="assets/img/logo/Google.png" alt="" /></i>
+                                </a>
+                            </div>
+                        </form>
+
+                        <form onSubmit={handleSignUpSubmit} className="sign-up-form">
+                            <h2 className="sign-up-form-title">Đăng kí</h2>
+                            <div className="input-field">
+                                <i className="pe-7s-users"></i>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="Tên đăng nhập"
+                                    value={signUpForm.username}
+                                    onChange={handleSignUpChange}
+                                />
+                            </div>
+                            <div className="input-field">
+                                <i className="pe-7s-mail"></i>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={signUpForm.email}
+                                    onChange={handleSignUpChange}
+                                />
+                            </div>
+                            <div className="input-field">
+                                <i className="pe-7s-door-lock"></i>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Mật khẩu"
+                                    value={signUpForm.password}
+                                    onChange={handleSignUpChange}
+                                />
+                            </div>
+                            <input type="submit" value="ĐĂNG KÍ" className="btn-signup solid" />
+                            <p className="social-text">Hoặc đăng kí bằng Google</p>
+                            <div className="social-media">
+                                <a href="#" className="social-icon">
+                                <i><img src="assets/img/logo/Google.png" alt="" /></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div className="panels-container">
+                    <div className="panel left-panel">
+                        <div className="content">
+                            <h3>Bạn chưa có tài khoản?</h3>
+                            <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
+                            <button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button>
                         </div>
+                       
+                    </div>
+                    <div className="panel right-panel">
+                        <div className="content">
+                            <h3>Đã có tài khoản ?</h3>
+                            <p>Đăng nhập để tiếp tục mua hàng</p>
+                            <button className="btn transparent" id="sign-in-btn">Đăng nhập</button>
+                        </div>
+                       
                     </div>
                 </div>
             </div>
-
-            <div class="login-register-wrapper section-padding">
-                <div class="container">
-                    <div class="member-area-from-wrap">
-                        <div class="login-reg-form-wrap">
-                            <h5>Đăng Nhập</h5>
-                            <form action="#" method="post">
-                                <div class="single-input-item">
-                                    <input type="email" placeholder="Email hoặc Tên Người dùng" required />
-                                </div>
-                                <div class="single-input-item">
-                                    <input type="password" placeholder="Mật Khẩu" required />
-                                </div>
-                                <div class="single-input-item">
-                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                        <div class="remember-meta">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="rememberMe" />
-                                                <label class="custom-control-label" for="rememberMe">Nhớ Mật Khẩu</label>
-                                            </div>
-                                        </div>
-                                        <a href="#" class="forget-pwd">Quên Mật Khẩu?</a>
-                                    </div>
-                                </div>
-                                <div class="single-input-item">
-                                    <button class="btn btn-sqr">Đăng Nhập</button>
-                                </div>
-                            </form>
-                            
-                            <h5 id="other-services"><span>đăng nhập với</span></h5>
-
-                            <div class="login-with-google">
-                                <button class="btn-login" onclick="loginWithGoogle()">
-                                    <img src="assets/img/logo/Google.png" alt="google-logo" />
-                                    <span>Login with Google</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-
         </div>
-    )
+    );
 }
