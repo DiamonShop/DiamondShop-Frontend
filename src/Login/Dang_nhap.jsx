@@ -57,30 +57,30 @@ export default function Dang_nhap() {
                         <form onSubmit={handleSignInSubmit} className="sign-in-form">
                             <h2 className="sign-in-form-title">Đăng nhập</h2>
                             <div className="input-field">
-                                <i className="fas fa-user"></i>
+                                <i className="pe-7s-users"></i>
                                 <input
                                     type="text"
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder="Tên đăng nhập"
                                     value={signInForm.username}
                                     onChange={handleSignInChange}
                                 />
                             </div>
                             <div className="input-field">
-                                <i className="fas fa-lock"></i>
+                                <i className="pe-7s-door-lock"></i>
                                 <input
                                     type="password"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Mật khẩu"
                                     value={signInForm.password}
                                     onChange={handleSignInChange}
                                 />
                             </div>
-                            <input type="submit" value="Login" className="btn-login solid" />
+                            <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
                             <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
                             <div className="social-media">
                                 <a href="#" className="social-icon">
-                                    <i className="fab fa-google"></i>
+                                    <i ><img src="assets/img/logo/Google.png" alt="" /></i>
                                 </a>
                             </div>
                         </form>
@@ -88,17 +88,17 @@ export default function Dang_nhap() {
                         <form onSubmit={handleSignUpSubmit} className="sign-up-form">
                             <h2 className="sign-up-form-title">Đăng kí</h2>
                             <div className="input-field">
-                                <i className="fas fa-user"></i>
+                                <i className="pe-7s-users"></i>
                                 <input
                                     type="text"
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder="Tên đăng nhập"
                                     value={signUpForm.username}
                                     onChange={handleSignUpChange}
                                 />
                             </div>
                             <div className="input-field">
-                                <i className="fas fa-envelope"></i>
+                                <i className="pe-7s-mail"></i>
                                 <input
                                     type="email"
                                     name="email"
@@ -108,20 +108,20 @@ export default function Dang_nhap() {
                                 />
                             </div>
                             <div className="input-field">
-                                <i className="fas fa-lock"></i>
+                                <i className="pe-7s-door-lock"></i>
                                 <input
                                     type="password"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Mật khẩu"
                                     value={signUpForm.password}
                                     onChange={handleSignUpChange}
                                 />
                             </div>
-                            <input type="submit" value="Sign Up" className="btn-signup solid" />
+                            <input type="submit" value="ĐĂNG KÍ" className="btn-signup solid" />
                             <p className="social-text">Hoặc đăng kí bằng Google</p>
                             <div className="social-media">
                                 <a href="#" className="social-icon">
-                                    <i className="fab fa-google"></i>
+                                <i><img src="assets/img/logo/Google.png" alt="" /></i>
                                 </a>
                             </div>
                         </form>
@@ -130,19 +130,19 @@ export default function Dang_nhap() {
                 <div className="panels-container">
                     <div className="panel left-panel">
                         <div className="content">
-                            <h3>New here?</h3>
+                            <h3>Bạn chưa có tài khoản?</h3>
                             <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
-                            <button className="btn transparent" id="sign-up-btn">Đăng kí</button>
+                            <button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button>
                         </div>
-                        <img src="./img/log.svg" className="image" alt="" />
+                       
                     </div>
                     <div className="panel right-panel">
                         <div className="content">
-                            <h3>One of us?</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio minus natus est.</p>
+                            <h3>Đã có tài khoản ?</h3>
+                            <p>Đăng nhập để tiếp tục mua hàng</p>
                             <button className="btn transparent" id="sign-in-btn">Đăng nhập</button>
                         </div>
-                        <img src="./img/register.svg" className="image" alt="" />
+                       
                     </div>
                 </div>
             </div>

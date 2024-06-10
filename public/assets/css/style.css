@@ -5986,13 +5986,12 @@ Table of content
  /*----- diamond price table end */
 
  /* signup-signin form */
- @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
 
  .signin-signup-container{
    margin: 0;
    padding: 0;
    box-sizing: border-box;
-
    font-family: "Poppins", sans-serif;
  }
  
@@ -6000,7 +5999,7 @@ Table of content
    position: relative;
    width: 100%;
    background-color: #fff;
-   min-height: 100vh;
+   min-height: 90vh;
    overflow: hidden;
  }
  
@@ -6131,10 +6130,27 @@ Table of content
    cursor: pointer;
    transition: 0.5s;
  }
+ .btn-signup{
+  width: 150px;
+   background-color: #c29958;
+   border: none;
+   outline: none;
+   height: 49px;
+   border-radius: 49px;
+   color: #fff;
+   text-transform: uppercase;
+   font-weight: 600;
+   margin: 10px 0;
+   cursor: pointer;
+   transition: 0.5s;
+ }
  
- .btn-login .btn-signup:hover {
+ .btn-login :hover {
    background-color: #c29958;
  }
+ .btn-signup:hover {
+  background-color: #c29958;
+}
  .panels-container {
    position: absolute;
    height: 100%;
@@ -6168,8 +6184,8 @@ Table of content
  .panel {
    display: flex;
    flex-direction: column;
-   align-items: flex-end;
-   justify-content: space-around;
+   align-items: center;
+   justify-content: center;
    text-align: center;
    z-index: 6;
  }
