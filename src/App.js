@@ -33,7 +33,6 @@ import About_us from './pages/customer/About_us';
 import Chinh_sach from './pages/customer/Chinh_sach';
 import Wishlist from './pages/customer/Wishlist';
 import Dang_nhap from './Login/Dang_nhap';
-import Dang_ki from './Login/Dang_ki';
 import Thong_tin_tk from './Login/Thong_tin_tk';
 import Chi_tiet_san_pham from './pages/customer/Products/Chi_tiet_san_pham';
 import Lien_he from './pages/customer/Lien_he';
@@ -56,7 +55,6 @@ function App() {
           <Route path='/Chinhsach' element={<MainLayout><Chinh_sach /></MainLayout>} />
           <Route path='/Yeuthich' element={<MainLayout><Wishlist /></MainLayout>} />
           <Route path='/Dangnhap' element={<MainLayout><Dang_nhap /></MainLayout>} />
-          <Route path='/Dangki' element={<MainLayout><Dang_ki /></MainLayout>} />
           <Route path='/Thongtintk' element={<MainLayout><Thong_tin_tk /></MainLayout>} />
           <Route path='/Chitietsanpham' element={<MainLayout><Chi_tiet_san_pham /></MainLayout>} />
           <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout><Chi_tiet_san_pham_kc /></MainLayout>} />
