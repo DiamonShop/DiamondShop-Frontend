@@ -25,11 +25,11 @@ export default function Dang_ki() {
             </div>
             <div class="login-register-wrapper section-padding">
                 <div class="container">
-                    <div class="member-area-from-wrap"></div>
+                    {/* <div class="member-area-from-wrap"></div>
                     <div class="login-reg-form-wrap sign-up-form">
                         <h5>Đăng Kí</h5>
-                        {/* Register Form */}
-                    </div>
+                        Register Form
+                    </div> */}
                     <div class="login-register-wrapper section-padding">
                         <div class="container">
                             <div class="member-area-from-wrap">
