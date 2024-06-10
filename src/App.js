@@ -1,5 +1,5 @@
 
-import './App.css';
+
 // import Header from './components/Header';
 // import Footer from './components/Footer';
 // import Home from './components/Home';
@@ -20,10 +20,11 @@ import './App.css';
 // import Lien_he from './components/Lien_he';
 // import Gio_hang from './components/cart/Gio_hang';
 // import getAllCategory from './api/CategoryAPI';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/customer/Home';
+import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MainLayout from './MainLayout';
+import DashboardLayout from './DashboardLayout';
+import Home from './pages/customer/Home';
 import Nhan from './pages/customer/Products/Nhan';
 import Day_chuyen from './pages/customer/Products/Day_chuyen';
 import Vong_tay from './pages/customer/Products/Vong_tay';
@@ -40,37 +41,32 @@ import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
 import Dashboard from './pages/Admin&Manager/Dashboard';
-function App() {
 
+function App() {
   return (
     <div>
       <Router>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Nhan" element={<Nhan />} />
-          <Route path='/Daychuyen'element={<Day_chuyen />} />
-          <Route path='/Vongtay'element={<Vong_tay />} />
-          <Route path='/Kimcuong'element={<Kim_cuong />} />
-          <Route path='/Vechungtoi'element={<About_us />} />
-          <Route path='/Chinhsach'element={<Chinh_sach />} />
-          <Route path='/Yeuthich'element={<Wishlist />} />
-          <Route path='/Dangnhap'element={<Dang_nhap />} />
-          <Route path='/Dangki'element={<Dang_ki />} />
-          <Route path='/Dashboard'element={<Dashboard />} />
-          <Route path='/Thongtintk'element={<Thong_tin_tk />} />
-          <Route path='/Chitietsanpham'element={<Chi_tiet_san_pham />} />
-          <Route path='/Chitietsanpham-kim-cuong'element={<Chi_tiet_san_pham_kc />} />
-          <Route path='/Lienhe'element={<Lien_he />} />
-          <Route path='/Giohang'element={<Gio_hang />} />
-          <Route path='/Banggiakimcuong'element={<Bang_gia_kim_cuong />} />
+          <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+          <Route path="/Nhan" element={<MainLayout><Nhan /></MainLayout>} />
+          <Route path='/Daychuyen' element={<MainLayout><Day_chuyen /></MainLayout>} />
+          <Route path='/Vongtay' element={<MainLayout><Vong_tay /></MainLayout>} />
+          <Route path='/Kimcuong' element={<MainLayout><Kim_cuong /></MainLayout>} />
+          <Route path='/Vechungtoi' element={<MainLayout><About_us /></MainLayout>} />
+          <Route path='/Chinhsach' element={<MainLayout><Chinh_sach /></MainLayout>} />
+          <Route path='/Yeuthich' element={<MainLayout><Wishlist /></MainLayout>} />
+          <Route path='/Dangnhap' element={<MainLayout><Dang_nhap /></MainLayout>} />
+          <Route path='/Dangki' element={<MainLayout><Dang_ki /></MainLayout>} />
+          <Route path='/Thongtintk' element={<MainLayout><Thong_tin_tk /></MainLayout>} />
+          <Route path='/Chitietsanpham' element={<MainLayout><Chi_tiet_san_pham /></MainLayout>} />
+          <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout><Chi_tiet_san_pham_kc /></MainLayout>} />
+          <Route path='/Lienhe' element={<MainLayout><Lien_he /></MainLayout>} />
+          <Route path='/Giohang' element={<MainLayout><Gio_hang /></MainLayout>} />
+          <Route path='/Banggiakimcuong' element={<MainLayout><Bang_gia_kim_cuong /></MainLayout>} />
+          <Route path='/Dashboard' element={<DashboardLayout><Dashboard /></DashboardLayout>} />
         </Routes>
-
-        <Footer />
       </Router>
-      
     </div>
-
   );
 }
 
