@@ -1,6 +1,6 @@
-export const handleLoginUser = (user) => {
+export const handleSignUpUser = (user) => {
     // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Login/Login", {
+    fetch("https://localhost:7101/api/Login", {
         method: 'POST',
         mode: 'cors',
         headers: {

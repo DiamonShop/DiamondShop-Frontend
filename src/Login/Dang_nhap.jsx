@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleLoginUser } from '../api/LoginAPI';
+import { handleSignUpUser } from '../api/SignUpAPI';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
@@ -40,38 +41,25 @@ export default function Dang_nhap() {
 
     const handleSignInSubmit = async (e) => {
         e.preventDefault();
-        const success = await submitLogin();
-        console.log(success)
-        if (success) {
-            navigate('/Thongtintk');
-        } else {
-            // Handle login failure (e.g., show an error message)
-            console.log('Login failed');
-        }
-    };
-
-    const handleSignUpSubmit = (e) => {
-        e.preventDefault();
-        // Handle sign-up logic
-        console.log('Sign-Up:', signUpForm);
-    };
-
-    const submitLogin = async () => {
         let user = {
             username: signInForm.username,
             password: signInForm.password
         };
         handleLoginUser(user);
+        navigate('/Thongtintk');
     };
 
-    // const submitSignUp = () => {
-    //     let user = {
-    //         username: signUpForm.username,
-    //         email: signUpForm.email,
-    //         password: signUpForm.password
-    //     }
-    //     handleSignUpUser(user);
-    // }
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+        let user = {
+            username: signUpForm.username,
+            email: signUpForm.email,
+            password: signUpForm.password
+        }
+        handleSignUpUser(user);
+        // Handle sign-up logic
+        console.log('Sign-Up:', signUpForm);
+    };
 
     return (
         <div>
@@ -100,7 +88,7 @@ export default function Dang_nhap() {
                                     onChange={handleSignInChange}
                                 />
                             </div>
-                            <input onClick={submitLogin} type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
+                            <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
                             <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
                             <div className="social-media">
                                 <a href="#" className="social-icon">
@@ -116,7 +104,6 @@ export default function Dang_nhap() {
                                 <input
                                     type="text"
                                     name="username"
-
                                     placeholder="Tên đăng nhập"
                                     value={signUpForm.username}
                                     onChange={handleSignUpChange}
