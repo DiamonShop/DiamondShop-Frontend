@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { handleLoginUser } from '../api/LoginAPI';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
     const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
-
+    const navigate = useNavigate();
     useEffect(() => {
         const sign_in_btn = document.querySelector("#sign-in-btn");
         const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -38,10 +38,16 @@ export default function Dang_nhap() {
         setSignUpForm({ ...signUpForm, [name]: value });
     };
 
-    const handleSignInSubmit = (e) => {
+    const handleSignInSubmit = async (e) => {
         e.preventDefault();
-        // Handle sign-in logic
-        console.log('Sign-In:', signInForm);
+        const success = await submitLogin();
+        console.log(success)
+        if (success) {
+            navigate('/Thongtintk');
+        } else {
+            // Handle login failure (e.g., show an error message)
+            console.log('Login failed');
+        }
     };
 
     const handleSignUpSubmit = (e) => {
@@ -50,13 +56,22 @@ export default function Dang_nhap() {
         console.log('Sign-Up:', signUpForm);
     };
 
-    const submitLogin = () => {
-        const user = {
+    const submitLogin = async () => {
+        let user = {
             username: signInForm.username,
             password: signInForm.password
-        }
+        };
         handleLoginUser(user);
-    }
+    };
+
+    // const submitSignUp = () => {
+    //     let user = {
+    //         username: signUpForm.username,
+    //         email: signUpForm.email,
+    //         password: signUpForm.password
+    //     }
+    //     handleSignUpUser(user);
+    // }
 
     return (
         <div>
@@ -70,7 +85,6 @@ export default function Dang_nhap() {
                                 <input
                                     type="text"
                                     name="username"
-                                    id="user"
                                     placeholder="Tên đăng nhập"
                                     value={signInForm.username}
                                     onChange={handleSignInChange}
@@ -81,7 +95,6 @@ export default function Dang_nhap() {
                                 <input
                                     type="password"
                                     name="password"
-                                    id="pass"
                                     placeholder="Mật khẩu"
                                     value={signInForm.password}
                                     onChange={handleSignInChange}
@@ -103,6 +116,7 @@ export default function Dang_nhap() {
                                 <input
                                     type="text"
                                     name="username"
+
                                     placeholder="Tên đăng nhập"
                                     value={signUpForm.username}
                                     onChange={handleSignUpChange}

@@ -1,6 +1,6 @@
 export const handleLoginUser = (user) => {
     // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Login", {
+    fetch("https://localhost:7101/api/Login/Login", {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -21,7 +21,5 @@ export const handleLoginUser = (user) => {
     .catch(error => {
         console.error("Error during login:", error);
         // Handle any errors that occurred during the fetch
-        return false;
     });
 };
-
