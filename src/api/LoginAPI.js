@@ -2,16 +2,28 @@ import React, { useState, useEffect } from 'react';
 
 export const handleLoginUser = (user) => {
     // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Login", {
-        method: "POST",
+    fetch("http://localhost:5075/api/Login/Login", {
+        method: 'POST',
+        mode: 'cors',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            username: user.Username,
-            password: user.Password
-        })
+        body: JSON.stringify(user)
     })
+    .then(response => response.json()) // Parse the JSON response
+    .then(data => {
+        if (data.success) {
+            console.log("Login successful");
+            // Handle successful login here, e.g., redirect to a dashboard
+        } else {
+            console.log("Invalid login attempt");
+            // Handle invalid login attempt here, e.g., show an error message
+        }
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        // Handle any errors that occurred during the fetch
+    });
 };
 
 function LoginDefaultAPI() {
