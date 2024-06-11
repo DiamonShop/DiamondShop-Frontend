@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { handleLoginUser } from '../api/LoginAPI';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
@@ -49,6 +50,15 @@ export default function Dang_nhap() {
         console.log('Sign-Up:', signUpForm);
     };
 
+    const submitLogin = () => {
+        const user = {
+            username: signInForm.username,
+            password: signInForm.password
+        }
+        handleLoginUser(user);
+    }
+
+
     return (
         <div>
             <div className="signin-signup-container">
@@ -61,6 +71,7 @@ export default function Dang_nhap() {
                                 <input
                                     type="text"
                                     name="username"
+                                    id="user"
                                     placeholder="Tên đăng nhập"
                                     value={signInForm.username}
                                     onChange={handleSignInChange}
@@ -71,12 +82,13 @@ export default function Dang_nhap() {
                                 <input
                                     type="password"
                                     name="password"
+                                    id="pass"
                                     placeholder="Mật khẩu"
                                     value={signInForm.password}
                                     onChange={handleSignInChange}
                                 />
                             </div>
-                            <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
+                            <input onClick={submitLogin} type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
                             <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
                             <div className="social-media">
                                 <a href="#" className="social-icon">
@@ -121,7 +133,7 @@ export default function Dang_nhap() {
                             <p className="social-text">Hoặc đăng kí bằng Google</p>
                             <div className="social-media">
                                 <a href="#" className="social-icon">
-                                <i><img src="assets/img/logo/Google.png" alt="" /></i>
+                                    <i><img src="assets/img/logo/Google.png" alt="" /></i>
                                 </a>
                             </div>
                         </form>
@@ -134,7 +146,7 @@ export default function Dang_nhap() {
                             <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
                             <button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button>
                         </div>
-                       
+
                     </div>
                     <div className="panel right-panel">
                         <div className="content">
@@ -142,7 +154,7 @@ export default function Dang_nhap() {
                             <p>Đăng nhập để tiếp tục mua hàng</p>
                             <button className="btn transparent" id="sign-in-btn">Đăng nhập</button>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
