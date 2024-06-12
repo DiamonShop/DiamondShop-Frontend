@@ -40,10 +40,6 @@
 		$(".off-canvas-wrapper").removeClass('open');
 	});
 
-	// offcanvas mobile menu
-    var $offCanvasNav = $('.mobile-menu'),
-        $offCanvasNavSubMenu = $offCanvasNav.find('.dropdown');
-    
     /*Add Toggle Button With Off Canvas Sub Menu*/
     $offCanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i></i></span>');
     
