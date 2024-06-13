@@ -46,7 +46,7 @@ export default function Dang_nhap() {
             password: signInForm.password
         };
         handleLoginUser(user);
-        navigate('/Thongtintk');
+        navigate('/');
     };
 
     const handleSignUpSubmit = (e) => {
