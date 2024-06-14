@@ -393,7 +393,7 @@ export default function Header() {
                             <a href="/Kimcuong">Kim cương</a>
                           </li>
                           <li>
-                            <a href="shop.html">Bảng giá kim cương</a>
+                            <a href="/Banggiakimcuong">Bảng giá kim cương</a>
                           </li>
                           <li>
                             <Link to="/Vechungtoi">Về chúng tôi</Link>
