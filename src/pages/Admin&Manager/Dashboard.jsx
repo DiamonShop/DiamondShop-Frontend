@@ -4,7 +4,9 @@ import Navbar_left_dash from '../../components/Navbar_left_dash'
 export default function Dashboard() {
     return (
         <div>
-            <Navbar_left_dash></Navbar_left_dash>
+            <Navbar_left_dash>
+                
+            </Navbar_left_dash>
 
             <div class="content">
                 <div class="container-fluid p-0">
