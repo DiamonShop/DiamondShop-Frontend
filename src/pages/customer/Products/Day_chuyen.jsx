@@ -70,58 +70,37 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-1.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\1\sp-SD0000W060096-day-chuyen-bac-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-18.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\1\sp-SD0000W060096-day-chuyen-bac-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Platinum</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền Bạc Ý 0000W060096</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">1.995.000đ</span>
+                                                    <span className="price-old"><del>2.215.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,13 +123,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -198,58 +177,37 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-2.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\2\sp-GD0000W000871-day-chuyen-vang-trang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-17.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\2\sp-GD0000W000871-day-chuyen-vang-trang-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Quickiin</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng trắng Ý 18K 0000W000871</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">16.963.000đ</span>
+                                                    <span className="price-old"><del>18.156.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,13 +230,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -326,58 +284,37 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-3.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\3\sp-gd0000y060507-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-16.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\3\sp-gd0000y060507-day-chuyen-vang-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Quickiin</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng Ý 18K 0000Y060507</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">20.534.400đ</span>
+                                                    <span className="price-old"><del>24.165.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,19 +337,19 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
-                                            <div className="product-content-list">
+                                            {/* <div className="product-content-list">
                                                 <div className="manufacturer-name">
                                                     <a href="product-details.html">Quickiin</a>
                                                 </div>
@@ -442,7 +379,7 @@ export default function Day_chuyen() {
                                                     quod numquam, sit fugiat, deserunt ipsa mollitia sunt quam corporis
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
-                                            </div>
+                                            </div> */}
                                         </div>
 
                                     </div>
@@ -454,63 +391,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-4.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\4\sp-gd0000w061242-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-15.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\4\sp-gd0000w061242-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">BDevs</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng trắng Ý 18K 0000W061242</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">11.320.000đ</span>
+                                                    <span className="price-old"><del>13.161.00đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-4.jpg"
@@ -528,13 +444,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -571,7 +487,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -580,63 +496,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-5.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\5\sp-gd0000w061240-day-chuyen-vang-trang-y-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-14.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\5\sp-gd0000w061240-day-chuyen-vang-trang-y-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Hastech</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng trắng Ý 18K 0000W061240</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">33.386.800đ</span>
+                                                    <span className="price-old"><del>34.968.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-5.jpg"
@@ -654,13 +549,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -697,7 +592,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -708,9 +603,9 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-6.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\6\sp-gd0000c000043-day-chuyen-vang-y-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-13.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\6\sp-gd0000c000043-day-chuyen-vang-y-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
@@ -723,47 +618,30 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng Ý 18K PNJ 0000C000043</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">18.077.000đ</span>
+                                                    <span className="price-old"><del>20.999.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-6.jpg"
@@ -781,13 +659,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -824,7 +702,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -833,63 +711,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-7.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\7\gd0000y060509-Day-chuyen-Vang-18K-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-12.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\7\gd0000y060509-Day-chuyen-Vang-18K-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Silver</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng Ý 18K 0000Y060509</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">42.494.800đ</span>
+                                                    <span className="price-old"><del>46.190.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-7.jpg"
@@ -907,13 +764,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -950,7 +807,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -961,62 +818,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-8.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\8\gd0000c060176-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-11.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\8\gd0000c060176-day-chuyen-vang-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Maya</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng Ý 18K 0000C060176</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">73.690.000đ</span>
+                                                    <span className="price-old"><del>75.126.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-8.jpg"
@@ -1034,13 +871,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1077,7 +914,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1088,63 +925,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-9.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\9\gd0000c060177-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-10.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\9\gd0000c060177-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Quickiin</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng Ý 18K 0000C060177</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">31.868.800đ</span>
+                                                    <span className="price-old"><del>34.640.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-9.jpg"
@@ -1162,13 +978,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1205,7 +1021,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1216,62 +1032,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-10.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\10\gd0000c060172-day-chuyen-vang-y-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-9.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\10\gd0000c060172-day-chuyen-vang-y-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Jem</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng Ý 18K PNJ 0000C060172</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">21.220.000đ</span>
+                                                    <span className="price-old"><del>24.165.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-10.jpg"
@@ -1289,13 +1085,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1332,7 +1128,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1343,63 +1139,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-11.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\11\gd0000y060451-day-chuyen-vang-y-18k-01.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-8.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\11\gd0000y060451-day-chuyen-vang-y-18k-02.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Quickiin</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng Ý 18K PNJ 0000Y060451</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">16.182.800đ</span>
+                                                    <span className="price-old"><del>17.590.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-11.jpg"
@@ -1417,13 +1192,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1460,7 +1235,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1470,63 +1245,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-12.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\12\gd0000w000431-day-chuyen-vang-trang-18k-01.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-7.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\12\gd0000w000431-day-chuyen-vang-trang-18k-02.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">HasTech</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền vàng trắng 18K 0000W000431</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">10.654.000đ</span>
+                                                    <span className="price-old"><del>14.012.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-12.jpg"
@@ -1544,13 +1298,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1587,7 +1341,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1598,62 +1352,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-13.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\13\gd0000x000032-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-6.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\13\gd0000x000032-day-chuyen-vang-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng 18K 0000X000032</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">6.659.000đ</span>
+                                                    <span className="price-old"><del>10.145.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-13.jpg"
@@ -1671,13 +1405,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1714,7 +1448,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1723,62 +1457,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-14.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\14\gd0000y060497-day-chuyen-vang-18k-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-5.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\14\gd0000y060497-day-chuyen-vang-18k-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Handmade Golden Necklace</a>
+                                                    <a href="product-details.html">Dây chuyền Vàng Ý 18K PNJ 0000Y060497</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">29.338.800đ</span>
+                                                    <span className="price-old"><del>31.890.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-14.jpg"
@@ -1796,13 +1510,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1839,7 +1553,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1849,63 +1563,42 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-15.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\15\gd0000c060149-day-chuyen-nam-vang-y-18k-01.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-4.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\15\gd0000c060149-day-chuyen-nam-vang-y-18k-02.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Quickiin</a>
-                                                    </p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                                    <a href="product-details.html">Dây chuyền nam Vàng Ý 18K 0000C060149</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">27.050.000đ</span>
+                                                    <span className="price-old"><del>30.999.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-15.jpg"
@@ -1923,13 +1616,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1966,7 +1659,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -1977,57 +1670,37 @@ export default function Day_chuyen() {
                                         <div className="product-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img className="pri-img" src="assets/img/product/product-8.jpg"
+                                                    <img className="pri-img" src="assets\img\product\Day-chuyen\16\sd0000h060002-day-chuyen-bac-y-1.png"
                                                         alt="product" />
-                                                    <img className="sec-img" src="assets/img/product/product-11.jpg"
+                                                    <img className="sec-img" src="assets\img\product\Day-chuyen\16\sd0000h060002-day-chuyen-bac-y-2.png"
                                                         alt="product" />
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
-                                                    </div>
-                                                    <div className="product-label discount">
-                                                        <span>10%</span>
+                                                        <span>Mới</span>
                                                     </div>
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
                                             <div className="product-caption text-center">
-                                                <div className="product-identity">
-                                                    <p className="manufacturer-name"><a href="product-details.html">Maya</a></p>
-                                                </div>
-                                                <ul className="color-categories">
-                                                    <li>
-                                                        <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a className="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
                                                 <h6 className="product-name">
-                                                    <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                        <a href="product-details.html">Dây chuyền bạc Ý PNJSilver 0000H060002</a>
                                                 </h6>
                                                 <div className="price-box">
-                                                    <span className="price-regular">$60.00</span>
-                                                    <span className="price-old"><del>$70.00</del></span>
+                                                    <span className="price-regular">906.500đ</span>
+                                                    <span className="price-old"><del>1.295.000đ</del></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -2050,13 +1723,13 @@ export default function Day_chuyen() {
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
-                                                        data-bs-placement="left" title="Add to wishlist"><i
+                                                        data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
                                                     <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Quick View"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
