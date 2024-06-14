@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { handleLoginUser } from '../api/LoginAPI';
 import { handleSignUpUser } from '../api/SignUpAPI';
 
@@ -7,6 +7,7 @@ export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
     const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
     const navigate = useNavigate();
+
     useEffect(() => {
         const sign_in_btn = document.querySelector("#sign-in-btn");
         const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -46,16 +47,18 @@ export default function Dang_nhap() {
             password: signInForm.password
         };
         handleLoginUser(user);
-        navigate('/Thongtintk');
+        // navigate('/Thongtintk');
     };
-
+        
     const handleSignUpSubmit = (e) => {
         e.preventDefault();
+
         let user = {
             username: signUpForm.username,
             email: signUpForm.email,
             password: signUpForm.password
         }
+
         handleSignUpUser(user);
         // Handle sign-up logic
         console.log('Sign-Up:', signUpForm);

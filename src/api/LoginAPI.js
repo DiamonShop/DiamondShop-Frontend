@@ -1,6 +1,6 @@
 export const handleLoginUser = (user) => {
     // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Login", {
+    fetch("https://localhost:7101/api/Register/Login", {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -12,16 +12,22 @@ export const handleLoginUser = (user) => {
     .then(data => {
         if (data.success) {
             console.log(data.data);
+            let user = {
+                fullName: data.data.fullName,
+                roleName: data.data.roleName
+            };
             // Handle successful login here, e.g., redirect to a dashboard
+            return user;
         } else {
             console.log("Invalid login attempt");
             // Handle invalid login attempt here, e.g., show an error message
+            return null;
         }
     })
     .catch(error => {
         console.error("Error during login:", error);
         // Handle any errors that occurred during the fetch
-        return false;
+        return null;
     });
 };
 

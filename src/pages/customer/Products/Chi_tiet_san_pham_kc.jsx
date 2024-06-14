@@ -4,10 +4,11 @@ import { useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 export default function Chi_tiet_san_pham_kc() {
   const largeSliderRef = useRef(null);
   const navSliderRef = useRef(null);
+  const navigate = useNavigate();
 
   const largeSliderSettings = {
     fade: true,
@@ -56,6 +57,23 @@ export default function Chi_tiet_san_pham_kc() {
   const closeOverlay = () => {
     setIsOverlayVisible(false);
   };
+
+  const addToCart = () => {
+    const colorSelect = document.getElementById('color-select');
+    const selectedColor = colorSelect.value;
+    const claritySelect = document.getElementById('clarity-select');
+    const selectedClarity = claritySelect.value;
+    const cutSelect = document.getElementById('cut-select');
+    const selectedCut = cutSelect.value;
+
+    let diamond = {
+      Color: selectedColor,
+      Clarity: selectedClarity,
+      Cut: selectedCut
+    }
+    
+  }
+  
   return (
     <div>
       <div class="breadcrumb-area">
@@ -142,21 +160,21 @@ export default function Chi_tiet_san_pham_kc() {
                                                 habitasse platea dictumst.</p> */}
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <p className='filter-name'>Nước</p>
-                          <select>
-                            <option>G</option>
+                          <p className='filter-name'>Màu sắc</p>
+                          <select id='color-select'>
+                            <option value="G">G</option>
                           </select>
                         </li>
                         <li class="filter-group">
                           <p className='filter-name'>Độ Tinh Khiết</p>
-                          <select>
-                            <option>VS2</option>
+                          <select id='clarity-select'>
+                            <option value="VS2">VS2</option>
                           </select>
                         </li>
                         <li class="filter-group">
                           <p className='filter-name'>Giác Cắt</p>
-                          <select>
-                            <option>EX</option>
+                          <select id='cut-select'>
+                            <option value="EX">EX</option>
                           </select>
                         </li>
                         <li class="filter-group">
@@ -195,7 +213,7 @@ export default function Chi_tiet_san_pham_kc() {
                                                     <div class="pro-qty"><input type="text" value="1" /></div>
                                                 </div> */}
                         <div class="action_link">
-                          <a class="btn btn-cart2" href="#">Add to cart</a>
+                          <a class="btn btn-cart2" href="#" onClick={addToCart}>Add to cart</a>
                         </div>
                       </div>
                       {/* <div class="pro-size">
@@ -225,8 +243,6 @@ export default function Chi_tiet_san_pham_kc() {
                                                 </ul>
                                             </div> */}
                       <div class="useful-links">
-                        <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                          class="pe-7s-refresh-2"></i>compare</a>
                         <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
                           class="pe-7s-like"></i>wishlist</a>
                       </div>
