@@ -406,6 +406,21 @@ export default function Header() {
 
                 <div className="col-lg-4">
                   <div className="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
+                    <div className="header-search-container">
+                      <button className="search-trigger d-xl-none d-lg-block">
+                        <i className="pe-7s-search"></i>
+                      </button>
+                      <form className="header-search-box d-lg-none d-xl-block">
+                        <input
+                          type="text"
+                          placeholder="Tìm kiếm sản phẩm"
+                          className="header-search-field bg-white"
+                        />
+                        <button className="header-search-btn">
+                          <i className="pe-7s-search"></i>
+                        </button>
+                      </form>
+                    </div>
                     {isLoggedIn ? (
                       <>
                         <div className="header-configure-area">
