@@ -40,7 +40,7 @@ const ProductManagement = () => {
         <div className="content">
             <div className="container">
                 <h2 className="text-center">Quản lý sản phẩm</h2>
-                <table className="table table-striped">
+                <table className="">
                     <thead>
                         <tr>
                             <th>ID</th>

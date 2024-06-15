@@ -40,7 +40,7 @@ export default function Header() {
                               <Link to="/Daychuyen">Dây chuyền</Link>
                             </li>
                             <li>
-                              <Link to="/Daychuyen">Mặt dây chuyền</Link>
+                              <Link to="/Matdaychuyen">Mặt dây chuyền</Link>
                             </li>
                             <li>
                               <a href="/Vongtay">Vòng tay</a>
