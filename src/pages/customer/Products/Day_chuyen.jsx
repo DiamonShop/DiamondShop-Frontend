@@ -36,8 +36,8 @@ export default function Day_chuyen() {
                                                     <a className="active" href="#" data-target="grid-view"
                                                         data-bs-toggle="tooltip" title="Hiển thị lưới"><i
                                                             className="fa fa-th"></i></a>
-                                                    <a href="#" data-target="list-view" data-bs-toggle="tooltip"
-                                                        title="Hiển thị theo danh sách"><i className="fa fa-list"></i></a>
+                                                    {/* <a href="#" data-target="list-view" data-bs-toggle="tooltip"
+                                                        title="Hiển thị theo danh sách"><i className="fa fa-list"></i></a> */}
                                                 </div>
                                                 <div className="product-amount">
                                                     <p>Hiển thị 1–16 trên 21 kết quả</p>
@@ -84,11 +84,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -105,7 +105,7 @@ export default function Day_chuyen() {
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-1.jpg"
@@ -166,7 +166,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -191,11 +191,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -212,7 +212,7 @@ export default function Day_chuyen() {
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-2.jpg"
@@ -273,7 +273,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
@@ -298,11 +298,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -319,7 +319,7 @@ export default function Day_chuyen() {
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-3.jpg"
@@ -349,7 +349,7 @@ export default function Day_chuyen() {
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                 </div>
                                             </figure>
-                                            {/* <div className="product-content-list">
+                                            { <div className="product-content-list">
                                                 <div className="manufacturer-name">
                                                     <a href="product-details.html">Quickiin</a>
                                                 </div>
@@ -379,8 +379,8 @@ export default function Day_chuyen() {
                                                     quod numquam, sit fugiat, deserunt ipsa mollitia sunt quam corporis
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
-                                            </div> */}
-                                        </div>
+                                            </div> }
+                                        </div> */}
 
                                     </div>
 
@@ -405,11 +405,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -510,11 +510,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -610,21 +610,21 @@ export default function Day_chuyen() {
                                                 </a>
                                                 <div className="product-badge">
                                                     <div className="product-label new">
-                                                        <span>new</span>
+                                                        <span>Mới</span>
                                                     </div>
-                                                    <div className="product-label discount">
+                                                    {/* <div className="product-label discount">
                                                         <span>10%</span>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="button-group">
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -725,11 +725,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -832,11 +832,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -939,11 +939,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1046,11 +1046,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1153,11 +1153,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1259,11 +1259,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1366,11 +1366,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1471,11 +1471,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1577,11 +1577,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1684,11 +1684,11 @@ export default function Day_chuyen() {
                                                     <a href="wishlist.html" data-bs-toggle="tooltip"
                                                         data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
                                                             className="pe-7s-like"></i></a>
-                                                    <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
+                                                    {/* <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                        title="Thêm vào so sánh"><i className="pe-7s-refresh-2"></i></a> */}
+                                                    {/* <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span
                                                         data-bs-toggle="tooltip" data-bs-placement="left"
-                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a>
+                                                        title="Xem nhanh"><i className="pe-7s-search"></i></span></a> */}
                                                 </div>
                                                 <div className="cart-hover">
                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -1705,7 +1705,7 @@ export default function Day_chuyen() {
                                             </div>
                                         </div>
 
-                                        <div className="product-list-item">
+                                        {/* <div className="product-list-item">
                                             <figure className="product-thumb">
                                                 <a href="product-details.html">
                                                     <img className="pri-img" src="assets/img/product/product-8.jpg"
@@ -1766,7 +1766,7 @@ export default function Day_chuyen() {
                                                     ullam
                                                     rem, accusantium adipisci officia eaque.</p>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                     </div>
 
