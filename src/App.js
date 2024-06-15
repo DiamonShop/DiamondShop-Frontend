@@ -28,6 +28,7 @@ import Home from './pages/customer/Home';
 import Nhan from './pages/customer/Products/Nhan';
 import Day_chuyen from './pages/customer/Products/Day_chuyen';
 import Vong_tay from './pages/customer/Products/Vong_tay';
+import Mat_day_chuyen from './pages/customer/Products/Mat_day_chuyen';
 import Kim_cuong from './pages/customer/Products/Kim_cuong';
 import About_us from './pages/customer/About_us';
 import Chinh_sach from './pages/customer/Chinh_sach';
@@ -40,15 +41,15 @@ import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
 import Dashboard from './pages/Admin&Manager/Dashboard';
-<<<<<<< HEAD
+
 import Thanh_toan from './pages/cart/Thanh_toan';
-=======
+
 import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
 import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 
->>>>>>> db1b31fdf6fd17d10718d1350a32225c08290e4b
+
 function App() {
   return (
     <div>
@@ -57,6 +58,7 @@ function App() {
           <Route path="/" element={<MainLayout><Home /></MainLayout>} />
           <Route path="/Nhan" element={<MainLayout><Nhan /></MainLayout>} />
           <Route path='/Daychuyen' element={<MainLayout><Day_chuyen /></MainLayout>} />
+          <Route path='/Matdaychuyen' element={<MainLayout><Mat_day_chuyen/></MainLayout>} />
           <Route path='/Vongtay' element={<MainLayout><Vong_tay /></MainLayout>} />
           <Route path='/Kimcuong' element={<MainLayout><Kim_cuong /></MainLayout>} />
           <Route path='/Vechungtoi' element={<MainLayout><About_us /></MainLayout>} />
@@ -70,14 +72,14 @@ function App() {
           <Route path='/Giohang' element={<MainLayout><Gio_hang /></MainLayout>} />
           <Route path='/Banggiakimcuong' element={<MainLayout><Bang_gia_kim_cuong /></MainLayout>} />
           <Route path='/Dashboard' element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-<<<<<<< HEAD
+
           <Route path='/Thanhtoan' element={<MainLayout><Thanh_toan/></MainLayout>} />
-=======
+
           <Route path='/BangDieuKhien' element={<DashboardLayout><Bang_Dieu_Khien /></DashboardLayout>} />
           <Route path='/SanPham' element={<DashboardLayout><San_Pham /></DashboardLayout>} />
           <Route path='/TaiKhoan' element={<DashboardLayout><Tai_Khoan /></DashboardLayout>} />
           <Route path='/DonHang' element={<DashboardLayout><Don_Hang /></DashboardLayout>} />
->>>>>>> db1b31fdf6fd17d10718d1350a32225c08290e4b
+
         </Routes>
       </Router>
     </div>
