@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Filter_product(props) {
+function Filter_product(props, { sortOption, handleSortChange }) {
     return (
         <div>
             <div className="shop-top-bar">
@@ -21,14 +21,13 @@ function Filter_product(props) {
                         <div className="top-bar-right">
                             <div className="product-short">
                                 <p>Liệt kê theo: </p>
-                                <select className="nice-select" name="sortby">
-                                    <option value="trending">Độ liên quan</option>
-                                    <option value="sales">Tên (A - Z)</option>
-                                    <option value="sales">Tên (Z - A)</option>
-                                    <option value="rating">Giá (Thấp &gt; Cao)</option>
-                                    <option value="date">Đánh giá (Thâp nhất)</option>
-                                    <option value="price-asc">Mẫu (A - Z)</option>
-                                    <option value="price-asc">Mẫu (Z - A)</option>
+                                <select className="nice-select" name="sortby" value={sortOption} onChange={handleSortChange}>
+                                    <option value="name-asc">Tên (A - Z)</option>
+                                    <option value="name-desc">Tên (Z - A)</option>
+                                    <option value="price-asc">Giá (Thấp &gt; Cao)</option>
+                                    <option value="price-desc">Giá (Cao &gt; Thấp)</option>
+                                    <option value="model-asc">Mẫu (A - Z)</option>
+                                    <option value="model-desc">Mẫu (Z - A)</option>
                                 </select>
                             </div>
                         </div>
