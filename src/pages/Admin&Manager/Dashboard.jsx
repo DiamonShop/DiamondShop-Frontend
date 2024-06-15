@@ -217,6 +217,7 @@ export default function Dashboard() {
         //     </div> */}
         // </div>
         <div>
+
             <div class="wrapper">
                 <nav id="sidebar" class="sidebar js-sidebar">
                     <div class="sidebar-content js-simplebar">
@@ -238,6 +239,24 @@ export default function Dashboard() {
                                     <span class="align-middle"><Link to="/BangDieuKhien">Bảng điều khiển</Link></span>
                                 </a>
                             </li>
+            
+            <div class="content">
+                <div class="container-fluid p-0">
+
+                    <h1 class="h3 mb-3">Bảng điều khiển <strong> phân tích</strong> </h1>
+
+                    <div class="row">
+                        <div class="col-xl-6 col-xxl-5 d-flex">
+                            <div class="w-100">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col mt-0">
+                                                        <h5 class="card-title">Doanh số</h5>
+                                                    </div>
+
 
                             <li class="sidebar-header">
                                 Quản lý

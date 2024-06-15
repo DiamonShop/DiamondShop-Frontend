@@ -58,7 +58,7 @@
                 $this.parent('li').addClass('active');
                 $this.closest('li').siblings('li').removeClass('active').find('li').removeClass('active');
                 $this.closest('li').siblings('li').find('ul:visible').slideUp();
-                $this.siblings('ul').slideDown();
+                $this.siblings('ul').slideDown(); 
             }
         }
 	});
