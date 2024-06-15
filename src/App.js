@@ -40,6 +40,10 @@ import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
 import Dashboard from './pages/Admin&Manager/Dashboard';
+import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
+import San_Pham from './pages/Admin&Manager/San_Pham';
+import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
+import Don_Hang from './pages/Admin&Manager/Don_Hang';
 
 function App() {
   return (
@@ -62,6 +66,10 @@ function App() {
           <Route path='/Giohang' element={<MainLayout><Gio_hang /></MainLayout>} />
           <Route path='/Banggiakimcuong' element={<MainLayout><Bang_gia_kim_cuong /></MainLayout>} />
           <Route path='/Dashboard' element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+          <Route path='/BangDieuKhien' element={<DashboardLayout><Bang_Dieu_Khien /></DashboardLayout>} />
+          <Route path='/SanPham' element={<DashboardLayout><San_Pham /></DashboardLayout>} />
+          <Route path='/TaiKhoan' element={<DashboardLayout><Tai_Khoan /></DashboardLayout>} />
+          <Route path='/DonHang' element={<DashboardLayout><Don_Hang /></DashboardLayout>} />
         </Routes>
       </Router>
     </div>
