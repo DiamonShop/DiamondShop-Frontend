@@ -1,217 +1,114 @@
-import React from 'react'
-import Navbar_left_dash from '../../components/Navbar_left_dash'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
     return (
         <div>
-            
-            <div class="content">
-                <div class="container-fluid p-0">
-
-                    <h1 class="h3 mb-3">Bảng điều khiển <strong> phân tích</strong> </h1>
-
-                    <div class="row">
-                        <div class="col-xl-6 col-xxl-5 d-flex">
-                            <div class="w-100">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col mt-0">
-                                                        <h5 class="card-title">Doanh số</h5>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <div class="stat text-primary">
-                                                            <i class="align-middle" data-feather="truck"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h1 class="mt-1 mb-3">2.382</h1>
-                                                <div class="mb-0">
-                                                    <span class="text-danger">-3.65%</span>
-                                                    <span class="text-muted">Kể từ tuần trước</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col mt-0">
-                                                        <h5 class="card-title">Người xem</h5>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <div class="stat text-primary">
-                                                            <i class="align-middle" data-feather="users"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h1 class="mt-1 mb-3">14.212</h1>
-                                                <div class="mb-0">
-                                                    <span class="text-success">5.25%</span>
-                                                    <span class="text-muted">Kể từ tuần trước</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col mt-0">
-                                                        <h5 class="card-title">Doanh thu</h5>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <div class="stat text-primary">
-                                                            <i class="align-middle" data-feather="dollar-sign"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h1 class="mt-1 mb-3">$21.300</h1>
-                                                <div class="mb-0">
-                                                    <span class="text-success">6.65%</span>
-                                                    <span class="text-muted">Kể từ tuần trước</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col mt-0">
-                                                        <h5 class="card-title">Đơn hàng</h5>
-                                                    </div>
-
-                                                    <div class="col-auto">
-                                                        <div class="stat text-primary">
-                                                            <i class="align-middle" data-feather="shopping-cart"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h1 class="mt-1 mb-3">64</h1>
-                                                <div class="mb-0">
-                                                    <span class="text-danger">-2.25%</span>
-                                                    <span class="text-muted">Kể từ tuần trước</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6 col-xxl-7">
-                            <div class="card flex-fill w-100">
-                                <div class="card-header">
-
-                                    <h5 class="card-title mb-0">Biến động gần đây</h5>
-                                </div>
-                                <div class="card-body py-3">
-                                    <div class="chart chart-sm">
-                                        <canvas id="chartjs-dashboard-line"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div className="wrapper">
+                <nav id="sidebar" className="sidebar js-sidebar">
+                    <div className="sidebar-content js-simplebar">
+                        <Link to="/" className="sidebar-link">
+                            <span className="align-middle">
+                                <img src="assets/img/logo/logo.png" alt="" />
+                            </span>
+                        </Link>
+                        <ul className="sidebar-nav">
+                            <li className="sidebar-header">
+                                Trang chủ
+                            </li>
+                            <li className="sidebar-item active">
+                                <Link to="/BangDieuKhien" className="sidebar-link">
+                                    <i className="align-middle" data-feather="sliders"></i>
+                                    <span className="align-middle">Bảng điều khiển</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-header">
+                                Quản lý
+                            </li>
+                            <li className="sidebar-item">
+                                <Link to="/SanPham" className="sidebar-link">
+                                    <i className="align-middle" data-feather="sliders"></i>
+                                    <span className="align-middle">Sản phẩm</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-item">
+                                <Link to="/TaiKhoan" className="sidebar-link">
+                                    <i className="align-middle" data-feather="square"></i>
+                                    <span className="align-middle">Tài khoản</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-item">
+                                <Link to="/DonHang" className="sidebar-link">
+                                    <i className="align-middle" data-feather="square"></i>
+                                    <span className="align-middle">Đơn hàng</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-item">
+                                <Link to="/" className="sidebar-link">
+                                    <i className="align-middle" data-feather="check-square"></i>
+                                    <span className="align-middle">Chứng nhận sản phẩm</span>
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="row">
-                        <div class="col-12 col-lg-8 col-xxl-9 d-flex">
-                            <div class="card flex-fill">
-                                <div class="card-header">
-
-                                    <h5 class="card-title mb-0">Dự án mới nhất</h5>
-                                </div>
-                                <table class="table table-hover my-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Tên</th>
-                                            <th class="d-none d-xl-table-cell">Ngày bắt đầu</th>
-                                            <th class="d-none d-xl-table-cell">Ngày kết thúc</th>
-                                            <th>Status</th>
-                                            <th class="d-none d-md-table-cell">Người được giao</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Project Apollo</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                            <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Fireball</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-danger">Bị hủy</span></td>
-                                            <td class="d-none d-md-table-cell">William Harris</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Hades</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                            <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Nitro</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-warning">Trong tiến trình</span></td>
-                                            <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Phoenix</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                            <td class="d-none d-md-table-cell">William Harris</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project X</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                            <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Romeo</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                            <td class="d-none d-md-table-cell">Christina Mason</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Wombat</td>
-                                            <td class="d-none d-xl-table-cell">01/01/2023</td>
-                                            <td class="d-none d-xl-table-cell">31/06/2023</td>
-                                            <td><span class="badge bg-warning">Trong tiến trình</span></td>
-                                            <td class="d-none d-md-table-cell">William Harris</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-                            <div class="card flex-fill w-100">
-                                <div class="card-header">
-
-                                    <h5 class="card-title mb-0">Doanh số hằng tháng</h5>
-                                </div>
-                                <div class="card-body d-flex w-100">
-                                    <div class="align-self-center chart chart-lg">
-                                        <canvas id="chartjs-dashboard-bar"></canvas>
+                </nav>
+                <div className="main">
+<nav className="navbar navbar-expand navbar-light navbar-bg">
+                        <a className="sidebar-toggle js-sidebar-toggle">
+                            <i className="hamburger align-self-center"></i>
+                        </a>
+                        <div className="navbar-collapse collapse">
+                            <ul className="navbar-nav navbar-align">
+                                <li className="nav-item dropdown">
+                                    <a className="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                                        <div className="position-relative">
+                                            <i className="align-middle pe-7s-bell" data-feather="bell"></i>
+                                            <span className="indicator">4</span>
+                                        </div>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+                                        <div className="dropdown-menu-header">
+                                            4 New Notifications
+                                        </div>
+                                        <div className="list-group">
+                                            {/* Notifications list items */}
+                                        </div>
+                                        <div className="dropdown-menu-footer">
+                                            <a href="#" className="text-muted">Show all notifications</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                                        <i className="align-middle" data-feather="settings"></i>
+                                    </a>
+                                    <a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                        <img src="~/image/LeftNavBar/avatars/avatar.jpg" className="avatar img-fluid rounded me-1" alt="Charles Hall" />
+                                        <span className="text-dark">Charles Hall</span>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-end">
+                                        <a className="dropdown-item" href="pages-profile.html">
+                                            <i className="align-middle me-1" data-feather="user"></i>Thông tin cá nhân
+                                        </a>
+                                        <a className="dropdown-item" href="#">
+<i className="align-middle me-1" data-feather="pie-chart"></i> Phân tích
+                                        </a>
+                                        <div className="dropdown-divider"></div>
+                                        <a className="dropdown-item" href="index.html">
+                                            <i className="align-middle me-1" data-feather="settings"></i> Cài đặt và bảo mật
+                                        </a>
+                                        <a className="dropdown-item" href="#">
+                                            <i className="align-middle me-1" data-feather="help-circle"></i> Trung tâm trợ giúp
+                                        </a>
+                                        <div className="dropdown-divider"></div>
+                                        <a className="dropdown-item" href='/'>Đăng xuất</a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-
+                    </nav>
                 </div>
-                    </div>
             </div>
-            )
+        </div>
+    );
 }
