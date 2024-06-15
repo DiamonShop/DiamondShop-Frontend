@@ -124,7 +124,7 @@ export default function Gio_hang() {
                                             </table>
                                         </div>
                                     </div>
-                                    <a href="checkout.html" class="btn btn-sqr d-block">Xác nhận thanh toán</a>
+                                    <Link to="/Thanhtoan" class="btn btn-sqr d-block">Xác nhận thanh toán</Link>
                                 </div>
                             </div>
                         </div>

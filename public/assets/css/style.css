@@ -5785,20 +5785,10 @@ only screen and (max-width: 767.98px) {
   font-size: 14px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .order-summary-details {
-    margin-top: 70px;
-  }
-}
 
-@media only screen and (max-width: 767.98px) {
-  .order-summary-details {
-    margin-top: 52px;
-  }
-}
 
 .order-summary-table {
-  background-color: #f7f7f7;
+  background-color: #f6f6f6;
   margin-top: 34px;
 }
 
@@ -5814,10 +5804,15 @@ only screen and (max-width: 767.98px) {
 .order-summary-table .table tr th,
 .order-summary-table table tr td,
 .order-summary-table table tr th {
-  font-weight: 400;
+  font-weight: 600;
   vertical-align: middle;
   padding: 15px 10px;
   border-width: 1px;
+  
+}
+.order-summary-table .table th{
+  color: #c29958;
+ 
 }
 
 .order-summary-table .table tr td a,
@@ -5854,13 +5849,6 @@ only screen and (max-width: 767.98px) {
 .order-payment-method {
   background-color: #f7f7f7;
   padding: 40px 20px 30px;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px),
-only screen and (max-width: 767.98px) {
-  .order-payment-method {
-    padding: 32px 20px 36px;
-  }
 }
 
 .single-payment-method {

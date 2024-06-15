@@ -40,7 +40,7 @@ import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
 import Dashboard from './pages/Admin&Manager/Dashboard';
-
+import Thanh_toan from './pages/cart/Thanh_toan';
 function App() {
   return (
     <div>
@@ -62,6 +62,7 @@ function App() {
           <Route path='/Giohang' element={<MainLayout><Gio_hang /></MainLayout>} />
           <Route path='/Banggiakimcuong' element={<MainLayout><Bang_gia_kim_cuong /></MainLayout>} />
           <Route path='/Dashboard' element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+          <Route path='/Thanhtoan' element={<MainLayout><Thanh_toan/></MainLayout>} />
         </Routes>
       </Router>
     </div>
