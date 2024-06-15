@@ -623,15 +623,7 @@ textarea:focus {
   margin: 0 13px;
 }
 
-@media only screen and (max-width: 767.98px) {
-  .slick-sm-row-13 .slick-list {
-    margin: 0 -13px !important;
-  }
 
-  .slick-sm-row-13 .slick-list .slick-slide {
-    margin: 0 13px !important;
-  }
-}
 
 .slick-row-14 .slick-list {
   margin: 0 -14px;
@@ -641,32 +633,12 @@ textarea:focus {
   margin: 0 14px;
 }
 
-@media only screen and (max-width: 767.98px) {
-  .slick-sm-row-14 .slick-list {
-    margin: 0 -14px !important;
-  }
-
-  .slick-sm-row-14 .slick-list .slick-slide {
-    margin: 0 14px !important;
-  }
-}
-
 .slick-row-15 .slick-list {
   margin: 0 -15px;
 }
 
 .slick-row-15 .slick-list .slick-slide {
   margin: 0 15px;
-}
-
-@media only screen and (max-width: 767.98px) {
-  .slick-sm-row-15 .slick-list {
-    margin: 0 -15px !important;
-  }
-
-  .slick-sm-row-15 .slick-list .slick-slide {
-    margin: 0 15px !important;
-  }
 }
 
 .slick-slider .slick-slide>div {
@@ -696,27 +668,6 @@ textarea:focus {
   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
-@media only screen and (max-width: 767.98px) {
-  .scroll-top {
-    display: none;
-  }
-}
-
-.scroll-top i {
-  line-height: 50px;
-  color: #fff;
-  font-size: 25px;
-}
-
-.scroll-top.not-visible {
-  bottom: -50px;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.scroll-top:hover {
-  background-color: #222222;
-}
 
 /* ----scroll to top css end ----*/
 .container {
@@ -724,11 +675,7 @@ textarea:focus {
   padding-left: var(--bs-gutter-x, 15px);
 }
 
-@media only screen and (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
+
 
 .container-fluid {
   padding-right: var(--bs-gutter-x, 15px);
