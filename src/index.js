@@ -20,7 +20,8 @@ root.render(
     <UserProvider>
       <App tokenIsValid={tokenIsValid} />
     </UserProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 reportWebVitals();
