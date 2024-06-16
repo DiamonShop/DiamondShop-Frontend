@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useUser } from '../UserContext';
 export default function Thong_tin_tk() {
-    
+    const { user, logout } = useUser();
 
     return (
         <div>
@@ -55,7 +56,7 @@ export default function Thong_tin_tk() {
                                                     <div className="myaccount-content">
                                                         <h5>Dashboard</h5>
                                                         <div className="welcome">
-                                                            <p>Xin chào, <strong>Erik Jhonson</strong> (Không phải <strong>Jhonson
+                                                        <p>Xin chào, <strong>{user ? user.username : 'Khách Hàng'}</strong> (Không phải <strong>{user ? user.username : 'Guest'}
                                                                 !</strong><a href="login-register.html" className="logout"> Đăng xuất</a>)</p>
                                                         </div>
                                                         <p className="mb-0">Từ bảng điều khiển tài khoản của bạn.
