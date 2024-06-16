@@ -1,7 +1,7 @@
 
 // Lưu token vào localStorage
 export const saveTokenToLocalStorage = (token) => {
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem('token', token); // Thay 'accessToken' nếu cần
 };
 
 // Đọc token từ localStorage

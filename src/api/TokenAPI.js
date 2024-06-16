@@ -1,14 +1,17 @@
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
 
-export const sendToken = (apiUrl) => {
+export const sendToken = () => {
     const token = localStorage.getItem('token');
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    };
-    return headers;
-}
+    if (token) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        };
+        return headers;
+    } else {
+        return {}; // Hoặc xử lý khác tùy theo yêu cầu
+    }
+};
 
 export const isTokenExpired = (token) => {
     if (!token) {
@@ -23,8 +26,3 @@ export const isTokenExpired = (token) => {
         return true; // Trả về true nếu token không hợp lệ
     }
 };
-
-export const convertUnixTimestampToDateTime = (tokenLifeTime) => {
-    const date = new Date(tokenLifeTime * 1000); // chuyển đổi sang milliseconds
-    return date;
-}
