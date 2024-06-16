@@ -15,7 +15,11 @@ export const handleLoginUser = (user) => {
             let user = {
                 fullName: data.data.fullName,
                 roleName: data.data.roleName
+              
             };
+              // Refresh the page upon successful login
+            localStorage.setItem('token', data.data.token);
+            window.location.reload();
             // Handle successful login here, e.g., redirect to a dashboard
             return user;
         } else {

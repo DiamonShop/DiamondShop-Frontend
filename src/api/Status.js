@@ -1,21 +1,14 @@
-import { useState } from 'react';
+import { isTokenExpired } from './TokenAPI';
 
 const useStatus = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
-  return {
-    isLoggedIn,
-    handleLogin,
-    handleLogout
-  };
+  const token = localStorage.getItem("token");
+  var validToken = isTokenExpired(token);
+  console.log(validToken);
+  if (validToken) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export default useStatus;

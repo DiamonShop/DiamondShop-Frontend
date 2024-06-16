@@ -48,40 +48,42 @@ import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
 import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
+import { UserProvider } from './UserContext';
+import { useUser } from './UserContext';
 
-
-function App() {
+function App({ tokenIsValid }) {
+  const { user } = useUser();
   return (
     <div>
+       <UserProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-          <Route path="/Nhan" element={<MainLayout><Nhan /></MainLayout>} />
-          <Route path='/Daychuyen' element={<MainLayout><Day_chuyen /></MainLayout>} />
-          <Route path='/Matdaychuyen' element={<MainLayout><Mat_day_chuyen/></MainLayout>} />
-          <Route path='/Vongtay' element={<MainLayout><Vong_tay /></MainLayout>} />
-          <Route path='/Kimcuong' element={<MainLayout><Kim_cuong /></MainLayout>} />
-          <Route path='/Vechungtoi' element={<MainLayout><About_us /></MainLayout>} />
-          <Route path='/Chinhsach' element={<MainLayout><Chinh_sach /></MainLayout>} />
-          <Route path='/Yeuthich' element={<MainLayout><Wishlist /></MainLayout>} />
-          <Route path='/Dangnhap' element={<MainLayout><Dang_nhap /></MainLayout>} />
-          <Route path='/Thongtintk' element={<MainLayout><Thong_tin_tk /></MainLayout>} />
-          <Route path='/Chitietsanpham' element={<MainLayout><Chi_tiet_san_pham /></MainLayout>} />
-          <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout><Chi_tiet_san_pham_kc /></MainLayout>} />
-          <Route path='/Lienhe' element={<MainLayout><Lien_he /></MainLayout>} />
-          <Route path='/Giohang' element={<MainLayout><Gio_hang /></MainLayout>} />
-          <Route path='/Banggiakimcuong' element={<MainLayout><Bang_gia_kim_cuong /></MainLayout>} />
-          <Route path='/Dashboard' element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-
-          <Route path='/Thanhtoan' element={<MainLayout><Thanh_toan/></MainLayout>} />
-
-          <Route path='/BangDieuKhien' element={<DashboardLayout><Bang_Dieu_Khien /></DashboardLayout>} />
-          <Route path='/SanPham' element={<DashboardLayout><San_Pham /></DashboardLayout>} />
-          <Route path='/TaiKhoan' element={<DashboardLayout><Tai_Khoan /></DashboardLayout>} />
-          <Route path='/DonHang' element={<DashboardLayout><Don_Hang /></DashboardLayout>} />
+          <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
+          <Route path="/Nhan" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan /></MainLayout>} />
+          <Route path='/Daychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen /></MainLayout>} />
+          <Route path='/Matdaychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen/></MainLayout>} />
+          <Route path='/Vongtay' element={<MainLayout tokenIsValid={tokenIsValid} ><Vong_tay /></MainLayout>} />
+          <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong /></MainLayout>} />
+          <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
+          <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
+          <Route path='/Yeuthich' element={<MainLayout tokenIsValid={tokenIsValid}><Wishlist /></MainLayout>} />
+          <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
+          <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
+          <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid} ><Chi_tiet_san_pham /></MainLayout>} />
+          <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
+          <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
+          <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
+          <Route path='/Banggiakimcuong' element={<MainLayout tokenIsValid={tokenIsValid} ><Bang_gia_kim_cuong /></MainLayout>} />
+          <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid} ><Dashboard /></DashboardLayout>} />
+          <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan/></MainLayout>} />
+          <Route path='/BangDieuKhien' element={<DashboardLayout tokenIsValid={tokenIsValid} ><Bang_Dieu_Khien /></DashboardLayout>} />
+          <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
+          <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
+          <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
 
         </Routes>
       </Router>
+      </UserProvider>
     </div>
   );
 }
