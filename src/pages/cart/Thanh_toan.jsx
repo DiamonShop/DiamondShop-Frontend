@@ -9,7 +9,7 @@ export default function Thanh_toan() {
         birthday: '',
         email: '',
         streetAddress: '',
-        orderNote: ''
+        orderNote: '',
     });
     const navigate = useNavigate();
 
@@ -45,19 +45,27 @@ export default function Thanh_toan() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleCheckoutSubmit =  (e) => {
+    const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
         let orderModel = {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
             email: formData.email,
-            streetAddress:formData.streetAddress,
-            orderNote:formData.orderNote,
+            streetAddress: formData.streetAddress,
+            orderNote: formData.orderNote,
             price: calculateTotal()
+        };
+
+        try {
+            const paymentUrl = await handleCheckout(orderModel); // Fetch payment URL from backend
+
+            // Redirect to payment page
+            window.location.href = paymentUrl;
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            // Handle error appropriately
         }
-        handleCheckout(orderModel);
-        navigate('/');
     };
 
     return (
@@ -158,7 +166,7 @@ export default function Thanh_toan() {
 
                                         <div class="single-input-item">
                                             <label for="ordernote">Ghi chú</label>
-                                            <textarea name="ordernote" id="orderNote"
+                                            <textarea name="orderNote" id="orderNote"
                                                 cols="30" rows="3" placeholder="Ghi chú khác"
                                                 value={formData.orderNote} onChange={handleCheckoutChange}
                                             ></textarea>

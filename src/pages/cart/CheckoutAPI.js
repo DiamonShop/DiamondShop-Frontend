@@ -1,25 +1,22 @@
-export const handleCheckout = (orderModel) => {
-    fetch("https://localhost:7101/api/orders/Checkout", {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderModel)
-    })
-    const data = handleCheckout.json();
+export const handleCheckout = async (orderModel) => {
     try {
-        if (data.success) {
-            // Handle successful checkout
-            console.log('Order created successfully:', data.data);
-            // Redirect to confirmation page or do other handling
+        const response = await fetch("https://localhost:7101/api/orders/Checkout", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderModel)
+        });
 
+        const data = await response.json();
+
+        if (response.ok) {
+            return data.paymentUrl; // Assuming paymentUrl is returned from backend
         } else {
-            console.error('Error creating order:', data.message);
-            // Handle checkout errors (display error message to user)
+            throw new Error(data.message); // Handle backend errors
         }
     } catch (error) {
         console.error('Error during checkout:', error);
-        // Handle network or other errors
+        throw error; // Rethrow to handle in calling function
     }
 };
