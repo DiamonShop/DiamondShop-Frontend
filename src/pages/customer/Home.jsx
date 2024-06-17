@@ -94,8 +94,8 @@ export default function Home() {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="hero-slider-content slide-1">
-                                                <h2 className="slide-title">Khuyên tai kim cương</h2>
-                                                <h4 className="slide-desc">Giá chỉ từ 999.000đ</h4>
+                                                <h2 className="slide-title">KHUYÊN TAI KIM CƯƠNG</h2>
+                                                <h4 className="slide-desc">Giá chỉ từ 1.999.000đ</h4>
                                                 <a href="shop.html" className="btn btn-hero">KHÁM PHÁ NGAY</a>
                                             </div>
                                         </div>
@@ -113,8 +113,8 @@ export default function Home() {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="hero-slider-content slide-2">
-                                                <h2 className="slide-title">Bộ siêu tập nhẫn cưới</h2>
-                                                <h4 className="slide-desc">Giá chỉ từ <important> 1.999.000đ</important></h4>
+                                                <h2 className="slide-title">BỘ SIÊU TẬP NHẪN </h2>
+                                                <h4 className="slide-desc">Giá chỉ từ <important> 2.990.000đ</important></h4>
                                                 <a href="shop.html" className="btn btn-hero">KHÁM PHÁ NGAY</a>
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@ export default function Home() {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="hero-slider-content slide-3">
-                                                <h2 className="slide-title">Sản phẩm mới</h2>
+                                                <h2 className="slide-title">SẢN PHẨM MỚI</h2>
                                                 <h4 className="slide-desc">Trang sức, kim cương.</h4>
                                                 <a href="shop.html" className="btn btn-hero">KHÁM PHÁ NGAY</a>
                                             </div>
