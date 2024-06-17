@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
@@ -120,12 +119,6 @@ export default function Header({ tokenIsValid }) {
                             </ul>
                           </li>
                           <li>
-                            <Link to="/Yeuthich">
-                              <i className="pe-7s-like"></i>
-                              <div className="notification">0</div>
-                            </Link>
-                          </li>
-                          <li>
                             <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>
                               <i className="pe-7s-shopbag"></i>
                               <div className="notification">2</div>
@@ -144,12 +137,6 @@ export default function Header({ tokenIsValid }) {
                               <li><Link to="/Dangnhap">Đăng Nhập</Link></li>
                               <li><Link to="/Dangnhap">Đăng Kí</Link></li>
                             </ul>
-                          </li>
-                          <li>
-                            <Link to="/Yeuthich">
-                              <i className="pe-7s-like"></i>
-                              <div className="notification">0</div>
-                            </Link>
                           </li>
                           <li>
                             <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>

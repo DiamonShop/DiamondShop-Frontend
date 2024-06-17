@@ -42,7 +42,7 @@ export default function Footer() {
                                 <ul className="info-list">
                                     <li><Link to="/Lienhe">Liên hệ</Link></li><br/>
                                     <li><Link to="/Vechungtoi">Về chúng tôi</Link></li><br/>
-                                    <li><a href="#">Chính sách bảo mật</a></li><br/>
+                                    <li><a href="Chinhsachbaomat">Chính sách bảo mật</a></li><br/>
                                     <li><Link to="/Chinhsach">Điều khoản và chính sách</Link></li><br/>
                                    
                                 </ul>

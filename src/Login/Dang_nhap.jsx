@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleLoginUser } from '../api/LoginAPI';
 import { handleSignUpUser } from '../api/SignUpAPI';
+import GetAllCategory from '../api/CategoryAPI';
+import { HandleGetAll } from '../api/JewelryAPI';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });

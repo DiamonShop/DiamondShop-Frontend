@@ -167,7 +167,7 @@ export default function Dashboard() {
                         </ul>
                     </div>
                 </nav>
-                <div className="main">
+                <div className="main-dashboard">
                     <nav className="navbar navbar-expand navbar-light navbar-bg">
                         <button className="sidebar-toggle js-sidebar-toggle">
                             <i className="hamburger align-self-center"></i>

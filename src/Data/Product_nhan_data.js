@@ -1,147 +1,29 @@
-export const Product_Nhan_Data = [
-    {
-        id: 1,
-        image1:"assets/img/product/Nhan/1/nhan-kim-cuong-vang-14k-ddddc001259-1.png",
-        image2:"assets/img/product/Nhan/1/nhan-kim-cuong-vang-14k-ddddc001259-2.png",
-        label:"Mới",
-        productName:"Nhẫn Kim Cương Vàng 14k Timeless Diamond ",
-        newPrice:"56.419.000đ",
-        oldPrice:"80.234.000đ",
-    },
-    {
-        id: 2,
-        image1:"assets/img/product/Nhan/2/nhan-vang-trang-14k-dinh-da-ecz-1.png",
-        image2:"assets/img/product/Nhan/2/nhan-vang-trang-14k-dinh-da-ecz-2.png",
-        label:"Mới",
-        productName:"Nhẫn Vàng trắng 14K đính đá ECZ ",
-        newPrice:"8.359.000đ",
-        oldPrice:"10.324.000đ",
-    },
-    {
-        id: 3,
-        image1:"assets/img/product/Nhan/3/nhan-kim-cuong-vang-14k-ddddc001224-1.png",
-        image2:"assets/img/product/Nhan/3/nhan-kim-cuong-vang-14k-ddddc001224-2.png",
-        label:"Mới",
-        productName:"Nhẫn Kim Cương Vàng 14k Timeless Diamond",
-        newPrice:"124.398.000đ",
-        oldPrice:"150.125.000đ",
-    },
-    {
-        id: 4,
-        image1:"assets/img/product/Nhan/4/nhan-kim-cuong-vang-trang-14k-dd00w003117-1.png",
-        image2:"assets/img/product/Nhan/4/nhan-kim-cuong-vang-trang-14k-dd00w003117-2.png",
-        label:"Mới",
-        productName:"Nhẫn Kim cương Vàng trắng 14K",
-        newPrice:"43.544.000đ",
-        oldPrice:"46.100.000đ",
-    },
-    {
-        id: 5,
-        image1:"assets/img/product/Nhan/5/nhan-kim-cuong-vang-trang-14k-ddddw006782-1.png",
-        image2:"assets/img/product/Nhan/5/nhan-kim-cuong-vang-trang-14k-ddddw006782-2.png",
-        label:"Mới",
-        productName:"Nhẫn Kim cương Vàng trắng 14K DDDDW006782",
-        newPrice:"92.246.400đ",
-        oldPrice:"96.274.100đ",
-    },
-    {
-        id: 6,
-        image1:"assets/img/product/Nhan/6/nhan-nam-kim-cuong-vang-trang-14k-ddddw000287-1.png",
-        image2:"assets/img/product/Nhan/6/nhan-nam-kim-cuong-vang-trang-14k-ddddw000287-2.png",
-        label:"Mới",
-        productName:"Nhẫn nam Kim cương Vàng trắng 14K DDDDW000287",
-        newPrice:"41.657.000đ",
-        oldPrice:"42.156.000đ",
-    },
-    {
-        id: 7,
-        image1:"assets/img/product/Nhan/7/nhan-nam-kim-cuong-vang-14k-dd00h000294-1.png",
-        image2:"assets/img/product/Nhan/7/nhan-nam-kim-cuong-vang-14k-dd00h000294-2.png",
-        label:"Mới",
-        productName:"Nhẫn nam Kim cương Vàng 14K DD00H000294",
-        newPrice:"78.219.900đ",
-        oldPrice:"80.020.000đ",
-    },
-    {
-        id: 8,
-        image1:"assets/img/product/Nhan/8/han-cuoi-nam-kim-cuong-vang-trang-14k-dd00w000471-1.png",
-        image2:"assets/img/product/Nhan/8/han-cuoi-nam-kim-cuong-vang-trang-14k-dd00w000471-1.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 9,
-        image1:"assets/img/product/Nhan/9/nhan-cuoi-nam-kim-cuong-vang-18k-true-love-19-dd00c000552-1.png",
-        image2:"assets/img/product/Nhan/9/nhan-cuoi-nam-kim-cuong-vang-18k-true-love-19-dd00c000552-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 10,
-        image1:"assets/img/product/Nhan/10/nhan-cuoi-kim-cuong-vang-18k-71564.500-1.png",
-        image2:"assets/img/product/Nhan/10/nhan-cuoi-kim-cuong-vang-18k-71564.500-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 11,
-        image1:"assets/img/product/Nhan/11/nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png",
-        image2:"assets/img/product/Nhan/11/nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 12,
-        image1:"assets/img/product/Nhan/12/nhan-kim-cuong-vang-trang-14k-first-diamond-1.png",
-        image2:"assets/img/product/Nhan/12/nhan-kim-cuong-vang-trang-14k-first-diamond-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 13,
-        image1:"assets/img/product/Nhan/13/nhan-cuoi-kim-cuong-vang-18k-tinh-hong-1.png",
-        image2:"assets/img/product/Nhan/13/nhan-cuoi-kim-cuong-vang-18k-tinh-hong-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 14,
-        image1:"assets/img/product/Nhan/14/nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-1.png",
-        image2:"assets/img/product/Nhan/14/nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 15,
-        image1:"assets/img/product/Nhan/15/nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-1.png",
-        image2:"assets/img/product/Nhan/15/nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    },
-    {
-        id: 16,
-        image1:"assets/img/product/Nhan/16/nhan-cuoi-kim-cuong-vang-18k-chung-doi-dd00y000585-1.png",
-        image2:"assets/img/product/Nhan/16/nhan-cuoi-kim-cuong-vang-18k-chung-doi-dd00y000585-2.png",
-        label:"Mới",
-        productName:"Nhẫn cưới nam Kim cương Vàng trắng 14K DD00W000471",
-        newPrice:"6.185.000đ",
-        oldPrice:"10.150.000đ",
-    }
-    
-];
+import { HandleGetAll } from "../api/JewelryAPI";
+
+const listProduct = await HandleGetAll();
+
+const productData = [];
+
+listProduct
+    .filter(product => product.categoryId === 1)
+    .forEach(product => {
+        const { basePrice, productId, productName, stock, categoryId, description } = product;
+
+        const productInfo = {
+            id: productId,
+            productName: productName,
+            image1: "assets/img/product/Nhan/1/nhan-kim-cuong-vang-14k-ddddc001259-1.png",
+            image2: "assets/img/product/Nhan/1/nhan-kim-cuong-vang-14k-ddddc001259-2.png",
+            label: "Mới",
+            newPrice: basePrice + "đ",
+            oldPrice: basePrice + "đ",
+            categoryId: categoryId,
+            description: description,
+            stock: stock,
+        };
+
+        productData.push(productInfo);
+    });
+
+// Export dữ liệu productData
+export const Product_Nhan_Data = productData;
