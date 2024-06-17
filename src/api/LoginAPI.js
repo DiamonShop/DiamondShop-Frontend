@@ -19,8 +19,7 @@ export const handleLoginUser = (user) => {
             };
               // Refresh the page upon successful login
             localStorage.setItem('token', data.data.token);
-            window.location.reload();
-            console.log(data.data);
+            // window.location.reload();
             // Handle successful login here, e.g., redirect to a dashboard
             return user;
         } else {

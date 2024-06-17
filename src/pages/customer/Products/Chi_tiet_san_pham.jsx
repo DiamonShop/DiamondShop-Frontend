@@ -173,12 +173,6 @@ export default function Chi_tiet_san_pham() {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="useful-links">
-                                                <a href="#" data-bs-toggle="tooltip" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i>compare</a>
-                                                <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                                                    class="pe-7s-like"></i>wishlist</a>
-                                            </div>
                                             <div class="like-icon">
                                                 <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
                                                 <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
@@ -356,11 +350,6 @@ export default function Chi_tiet_san_pham() {
                                             <div class="product-label discount">
                                                 <span>10%</span>
                                             </div>
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                                         </div>
                                         <div class="cart-hover">
                                             <button class="btn btn-cart">add to cart</button>
