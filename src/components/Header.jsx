@@ -34,17 +34,7 @@ export default function Header({ tokenIsValid }) {
       return {};
     }
   };
-   // Hàm để gửi yêu cầu API với token trong header
-   const fetchData = async () => {
-    try {
-      const response = await axios.get('https://localhost:7101/api/someendpoint', sendToken());
-      console.log('Dữ liệu nhận được từ server:', response.data);
-      // Xử lý dữ liệu nhận được (nếu cần)
-    } catch (error) {
-      console.error('Lỗi khi lấy dữ liệu từ server:', error);
-      // Xử lý các trường hợp lỗi khác (nếu cần)
-    }
-  };
+
 
   return (
     <>
@@ -151,7 +141,8 @@ export default function Header({ tokenIsValid }) {
                               <i className="pe-7s-user"></i>
                             </a>
                             <ul className="dropdown-list">
-                              <li><Link to="/Dangnhap">Đăng nhập</Link></li>
+                              <li><Link to="/Dangnhap">Đăng Nhập</Link></li>
+                              <li><Link to="/Dangnhap">Đăng Kí</Link></li>
                             </ul>
                           </li>
                           <li>
