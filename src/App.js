@@ -20,7 +20,7 @@ import Gio_hang from './pages/cart/Gio_hang';
 import Bang_gia_kim_cuong from './pages/customer/Bang_gia_kim_cuong';
 import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc';
 import Dashboard from './pages/Admin&Manager/Dashboard';
-
+import Chinh_sach_bao_mat from './pages/customer/Chinh_sach_bao_mat';
 import Thanh_toan from './pages/cart/Thanh_toan';
 
 import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
@@ -59,7 +59,7 @@ function App({ tokenIsValid }) {
           <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
           <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
           <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
-
+          <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
         </Routes>
       </Router>
       </UserProvider>
