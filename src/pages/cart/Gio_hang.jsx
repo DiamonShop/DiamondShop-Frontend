@@ -11,7 +11,6 @@ export default function Gio_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                                        <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
                                     </ul>
                                 </nav>
