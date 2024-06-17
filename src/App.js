@@ -45,7 +45,6 @@ function App({ tokenIsValid }) {
           <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong /></MainLayout>} />
           <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
           <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
-          <Route path='/Yeuthich' element={<MainLayout tokenIsValid={tokenIsValid}><Wishlist /></MainLayout>} />
           <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
           <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
           <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid} ><Chi_tiet_san_pham /></MainLayout>} />

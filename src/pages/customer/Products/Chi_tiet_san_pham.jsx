@@ -3,7 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
-export default function Chi_tiet_san_pham() {
+
+export default function Chi_tiet_san_pham(props) {
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
 
@@ -34,16 +35,20 @@ export default function Chi_tiet_san_pham() {
     };
     const relatedSliderSettings = {
         speed: 1000,
-		autoplay: true,
+        autoplay: true,
         infinite: true,
-		slidesToShow: 4,
+        slidesToShow: 4,
         slidesToRoll: 1,
-		adaptiveHeight: true,
+        adaptiveHeight: true,
         arrows: true,
-		prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-		
+
     };
+
+    // In ra dữ liệu truyền qua từ props
+    
+
     return (
         <div>
             <div class="breadcrumb-area">
@@ -73,7 +78,7 @@ export default function Chi_tiet_san_pham() {
                             <div class="product-details-inner">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <Slider {...largeSliderSettings}  className="product-large-slider">
+                                        <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
                                                 <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
                                             </div>
@@ -132,7 +137,7 @@ export default function Chi_tiet_san_pham() {
                                             <div class="product-countdown" data-countdown="2022/12/20"></div>
                                             <div class="availability">
                                                 <i class="fa fa-check-circle"></i>
-                                                <span>200 in stock</span>
+                                                <span>sdf</span>
                                             </div>
                                             <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
                                                 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -335,8 +340,8 @@ export default function Chi_tiet_san_pham() {
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            
-                            <Slider {...relatedSliderSettings}  class="product-carousel-4 slick-row-10 slick-arrow-style">
+
+                            <Slider {...relatedSliderSettings} class="product-carousel-4 slick-row-10 slick-arrow-style">
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
@@ -584,7 +589,7 @@ export default function Chi_tiet_san_pham() {
                                     </div>
                                 </div>
                             </Slider>
-                            
+
                         </div>
                     </div>
                 </div>

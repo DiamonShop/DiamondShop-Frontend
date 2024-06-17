@@ -15,19 +15,8 @@ export default function Nhan() {
         return parseFloat(price.replace(/[^\d]/g, '')) || 0;
     };
 
-    const sortedProducts = Product_Nhan_Data.slice().sort((a, b) => {
-        switch (sortOption) {
-            case 'name-asc':
-                return a.productName.localeCompare(b.productName);
-            case 'name-desc':
-                return b.productName.localeCompare(a.productName);
-            case 'price-asc':
-                return parsePrice(a.newPrice) - parsePrice(b.newPrice);
-            case 'price-desc':
-                return parsePrice(b.newPrice) - parsePrice(a.newPrice);
-            default:
-                return 0;
-        }
+    const sortedProducts = Product_Nhan_Data.slice(cate => {
+        
     });
 
     return (
@@ -59,6 +48,7 @@ export default function Nhan() {
                                     {sortedProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
                                             <Du_lieu_san_pham
+                                                productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 label={item.label}

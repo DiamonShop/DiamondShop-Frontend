@@ -7,11 +7,16 @@ function Du_lieu_san_pham(props) {
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to="/Chitietsanpham">
-                        <img className="pri-img" src={props.image1}
-                            alt="product" />
-                        <img className="sec-img" src={props.image2}
-                            alt="product" />
+                    <Link to={{
+                        pathname: "/Chitietsanpham",
+                        state: {
+                            productId: props.productId,
+                            productName: props.productName,
+                            // Thêm các dữ liệu khác bạn muốn truyền qua
+                        }
+                    }}>
+                        <img className="pri-img" src={props.image1} alt="product" />
+                        <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
                     <div className="product-badge">
                         <div className="product-label new">
