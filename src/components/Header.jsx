@@ -71,6 +71,9 @@ export default function Header({ tokenIsValid }) {
                                 <Link to="/Daychuyen">Dây chuyền</Link>
                               </li>
                               <li>
+                                <Link to="/Matdaychuyen">Mặt dây chuyền</Link>
+                              </li>
+                              <li>
                                 <a href="/Vongtay">Vòng tay</a>
                               </li>
                             </ul>
@@ -116,7 +119,7 @@ export default function Header({ tokenIsValid }) {
                             </a>
                             <ul className="dropdown-list">
                               <li><Link to="/Thongtintk">Thông tin tài khoản</Link></li>
-                              <li><a href="#" onClick={handleLogout}>Đăng xuất</a></li>
+                              <li><a href="/" onClick={handleLogout}>Đăng xuất</a></li>
                             </ul>
                           </li>
                           <li>
