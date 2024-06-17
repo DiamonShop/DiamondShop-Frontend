@@ -5,18 +5,6 @@ import axios from 'axios';
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
 
-  const [isMinicartVisible, setMinicartVisible] = React.useState(false);
-
-  const openMinicart = () => {
-    setMinicartVisible(true);
-    document.body.classList.add('fix');
-  };
-
-  const closeMinicart = () => {
-    setMinicartVisible(false);
-    document.body.classList.remove('fix');
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.reload();
@@ -34,10 +22,10 @@ export default function Header({ tokenIsValid }) {
       return {};
     }
   };
-
+  
 
   return (
-    <>
+    
       <div className="header-area header-wide bg-gray">
         <div className="main-header d-none d-lg-block">
           <div className="header-main-area sticky">
@@ -129,7 +117,7 @@ export default function Header({ tokenIsValid }) {
                             </Link>
                           </li>
                           <li>
-                            <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>
+                            <Link to="/Giohang" className="minicart-btn" >
                               <i className="pe-7s-shopbag"></i>
                               <div className="notification">2</div>
                             </Link>
@@ -144,8 +132,7 @@ export default function Header({ tokenIsValid }) {
                               <i className="pe-7s-user"></i>
                             </a>
                             <ul className="dropdown-list">
-                              <li><Link to="/Dangnhap">Đăng Nhập</Link></li>
-                              <li><Link to="/Dangnhap">Đăng Kí</Link></li>
+                              <li><Link to="/Dangnhap">Đăng nhập</Link></li>
                             </ul>
                           </li>
                           <li>
@@ -155,7 +142,7 @@ export default function Header({ tokenIsValid }) {
                             </Link>
                           </li>
                           <li>
-                            <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>
+                            <Link to="/Giohang" className="minicart-btn" >
                               <i className="pe-7s-shopbag"></i>
                               <div className="notification">2</div>
                             </Link>
@@ -170,49 +157,5 @@ export default function Header({ tokenIsValid }) {
           </div>
         </div>
       </div>
-
-      {isMinicartVisible && (
-        <>
-          <div className="minicart-inner show">
-            <div className="minicart-inner-content">
-              <button className="minicart-close" onClick={closeMinicart}>
-                <i className="fa fa-times"></i>
-              </button>
-              <div className="minicart-content-box">
-                <div className="minicart-item-wrapper">
-                  <ul>
-                    <li>
-                      <div className="minicart-item">
-                        <div className="minicart-thumb">
-                          <img src="assets/img/product/1.jpg" alt="product" />
-                        </div>
-                        <div className="minicart-content">
-                          <h4 className="product-name"><Link to="/Product/1">Product Name</Link></h4>
-                          <p className="cart-quantity">Quantity: <strong>1</strong></p>
-                          <p className="cart-price">$100.00</p>
-                        </div>
-                        <div className="minicart-remove">
-                          <a href="#"><i className="fa fa-times"></i></a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div className="minicart-pricing-box">
-                  <ul>
-                    <li><span>Subtotal</span> <span><strong>$100.00</strong></span></li>
-                    <li className="total"><span>Total</span> <span><strong>$100.00</strong></span></li>
-                  </ul>
-                </div>
-                <div className="minicart-button">
-                  <Link to="/Checkout" className="btn btn-custom-color">Checkout</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="minicart-overlay" onClick={closeMinicart}></div>
-        </>
-      )}
-    </>
   );
 }
