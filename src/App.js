@@ -13,6 +13,7 @@ import About_us from './pages/customer/About_us';
 import Chinh_sach from './pages/customer/Chinh_sach';
 import Wishlist from './pages/customer/Wishlist';
 import Dang_nhap from './Login/Dang_nhap';
+import Dang_ki from './Login/Dang_ki';
 import Thong_tin_tk from './Login/Thong_tin_tk';
 import Chi_tiet_san_pham from './pages/customer/Products/Chi_tiet_san_pham';
 import Lien_he from './pages/customer/Lien_he';
@@ -46,6 +47,7 @@ function App({ tokenIsValid }) {
           <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
           <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
           <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
+          <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
           <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
           <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid} ><Chi_tiet_san_pham /></MainLayout>} />
           <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
