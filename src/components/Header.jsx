@@ -135,7 +135,7 @@ export default function Header({ tokenIsValid }) {
                             </a>
                             <ul className="dropdown-list">
                               <li><Link to="/Dangnhap">Đăng Nhập</Link></li>
-                              <li><Link to="/Dangnhap">Đăng Kí</Link></li>
+                              <li><Link to="/Dangki">Đăng Kí</Link></li>
                             </ul>
                           </li>
                           <li>
