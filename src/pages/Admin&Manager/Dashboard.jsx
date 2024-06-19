@@ -144,6 +144,27 @@ export default function Dashboard() {
                                 <Link to="/SanPham" className="sidebar-link">
                                     <i className="align-middle" data-feather="sliders"></i>
                                     <span className="align-middle">Sản phẩm</span>
+                                    <ul className="dropdown">
+                                        <li>
+                                            <Link to="/Uploadimg" className="sidebar-link">
+                                                <i className="align-middle" ></i>
+                                                <span className="align-middle">Nhẫn</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/DonHang" className="sidebar-link">
+                                                <i className="align-middle" ></i>
+                                                <span className="align-middle">Dây chuyền</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/DonHang" className="sidebar-link">
+                                                <i className="align-middle" ></i>
+                                                <span className="align-middle">Mặt dây chuyền</span>
+                                            </Link>
+                                        </li>
+
+                                    </ul>
                                 </Link>
                             </li>
                             <li className="sidebar-item">
@@ -153,10 +174,16 @@ export default function Dashboard() {
                                 </Link>
                             </li>
                             <li className="sidebar-item">
-                                <Link to="/DonHang" className="sidebar-link">
-                                    <i className="align-middle" data-feather="square"></i>
-                                    <span className="align-middle">Đơn hàng</span>
-                                </Link>
+
+                                <li>
+                                    <Link to="/DonHang" className="sidebar-link">
+                                        <i className="align-middle" ></i>
+                                        <span className="align-middle">Đơn hàng</span>
+                                    </Link>
+                                </li>
+
+
+
                             </li>
                             <li className="sidebar-item">
                                 <Link to="/" className="sidebar-link">
