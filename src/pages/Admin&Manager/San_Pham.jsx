@@ -122,7 +122,7 @@ const San_Pham = () => {
                         <li className="sidebar-item">
                             <a className="sidebar-link">
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/BangDieuKhien">Bảng điều khiển</Link></span>
+                                <span className="align-middle"><Link to="/Dashboard">Bảng điều khiển</Link></span>
                             </a>
                         </li>
                         <li className="sidebar-header">Quản lý</li>
