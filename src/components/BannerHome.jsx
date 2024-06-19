@@ -43,7 +43,7 @@ function BannerHome(props) {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="hero-slider-content slide-2">
-                                                <h2 className="slide-title">BỘ SIÊU TẬP NHẪN </h2>
+                                                <h2 className="slide-title">BỘ SƯU TẬP NHẪN </h2>
                                                 <h4 className="slide-desc">Giá chỉ từ <important> 2.990.000đ</important></h4>
                                                 <a href="shop.html" className="btn btn-hero">KHÁM PHÁ NGAY</a>
                                             </div>

@@ -47,7 +47,7 @@ export default function Chi_tiet_san_pham(props) {
     };
 
     // In ra dữ liệu truyền qua từ props
-    
+
 
     return (
         <div>
@@ -80,88 +80,159 @@ export default function Chi_tiet_san_pham(props) {
                                     <div class="col-lg-5">
                                         <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-1.png" alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-2.png" alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-3.png" alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-4.jpg" alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-5.jpg" alt="product-details" />
+                                            </div>
+                                            <div className="pro-large-img img-zoom">
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-6.jpg" alt="product-details" />
                                             </div>
                                         </Slider>
                                         <Slider {...navSliderSettings} className="pro-nav">
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-1.png" alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-2.png" alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-3.png" alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-4.jpg" alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-5.jpg" alt="product-details" />
+                                            </div>
+                                            <div className="pro-nav-thumb">
+                                                <img src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-6.jpg" alt="product-details" />
                                             </div>
                                         </Slider>
                                     </div>
                                     <div class="col-lg-7">
                                         <div class="product-details-des">
-                                            <div class="manufacturer-name">
+                                            {/* <div class="manufacturer-name">
                                                 <a href="product-details.html">HasTech</a>
-                                            </div>
-                                            <h3 class="product-name">Handmade Golden Necklace Full Family Package</h3>
+                                            </div> */}
+                                            <h3 class="product-name">Nhẫn Vàng trắng 14K đính đá ECZ</h3>
                                             <div class="ratings d-flex">
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
                                                 <div class="pro-review">
-                                                    <span>1 Reviews</span>
+                                                    <span>1 Đánh giá</span>
                                                 </div>
                                             </div>
                                             <div class="price-box">
-                                                <span class="price-regular">$70.00</span>
-                                                <span class="price-old"><del>$90.00</del></span>
+                                                <span class="price-regular">8.365.000đ</span>
+                                                <span class="price-old"><del>10.156.160đ</del></span>
                                             </div>
-                                            <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                            <div class="product-countdown" data-countdown="2022/12/20"></div>
-                                            <div class="availability">
+                                            {/* <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
+                                            <div class="product-countdown" data-countdown="2022/12/20"></div> */}
+                                            {/* <div class="availability">
                                                 <i class="fa fa-check-circle"></i>
                                                 <span>sdf</span>
-                                            </div>
-                                            <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                                            </div> */}
+                                            {/* <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
                                                 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
                                                 voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac
-                                                habitasse platea dictumst.</p>
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">qty:</h6>
+                                                habitasse platea dictumst.</p> */}
+                                            <ul class="diamond-filter-container">
+                                                <li class="filter-group">
+                                                    <p className='filter-name'>Chất liệu</p>
+                                                    <select id='color-select'>
+                                                        <option value="G">G</option>
+                                                    </select>
+                                                </li>
+                                                <li class="filter-group">
+                                                    <p className='filter-name'>Kích thước</p>
+                                                    <select id='clarity-select'>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="18">22</option>
+                                                        <option value="19">23</option>
+                                                        <option value="20">24</option>
+                                                        <option value="21">25</option>
+                                                        <option value="19">26</option>
+                                                        <option value="20">27</option>
+                                                        <option value="21">28</option>
+                                                        <option value="20">29</option>
+                                                        <option value="21">30</option>
+                                                        <option value="19">31</option>
+                                                        <option value="20">32</option>
+                                                        <option value="21">33</option>
+                                                    </select>
+                                                </li>
+                                                <li class="filter-group">
+                                                    <p className='filter-name'>Số lượng</p>
+                                                    <select id='cut-select'>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                            {/* <div class="container">
+                                                <strong>Ưu đãi:</strong>
+                                                <img src="assets\img\vnpay48x48.png" alt="VN-PAY" />
+                                                <p>Giảm tới 500K khi thanh toán bằng VNPAY-QR</p>
+                                            </div> */}
+                                            <div class="">
+                                                {/* <div class="action_link">
+                                                    <a class="btn btn-cart2" href="#">Thêm vào danh sách yêu thích</a>
+                                                </div> */}
+                                                <div class="action_link">
+                                                    <a class="btn btn-cart2" href="#">Thêm vào giỏ hàng</a>
+                                                </div>
+                                            </div>
+                                            {/* <div class="quantity-cart-box d-flex align-items-center">
+                                                <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
                                                     <div class="pro-qty"><input type="text" value="1" /></div>
                                                 </div>
                                                 <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
+                                                    <a class="btn btn-cart2" href="#">Thêm vào giỏ hàng</a>
                                                 </div>
-                                            </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">size :</h6>
+                                            </div> */}
+                                            {/* <div class="pro-size">
+                                                <h6 class="option-title">Kích thước :</h6>
                                                 <select class="nice-select">
                                                     <option>S</option>
                                                     <option>M</option>
                                                     <option>L</option>
                                                     <option>XL</option>
                                                 </select>
-                                            </div>
-                                            <div class="color-option">
+                                            </div> */}
+                                            {/* <div class="color-option">
                                                 <h6 class="option-title">color :</h6>
                                                 <ul class="color-categories">
                                                     <li>
@@ -177,7 +248,7 @@ export default function Chi_tiet_san_pham(props) {
                                                         <a class="c-brown" href="#" title="Brown"></a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> */}
                                             <div class="like-icon">
                                                 <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
                                                 <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
@@ -205,34 +276,80 @@ export default function Chi_tiet_san_pham(props) {
                                                     <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
                                                 </li>
                                                 <li>
-                                                    <a data-bs-toggle="tab" href="#tab_four">Chính sách bảo hành</a>
+                                                    <a data-bs-toggle="tab" href="#tab_four">Dịch vụ sau mua</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content reviews-tab">
                                                 <div class="tab-pane fade show active" id="tab_one">
                                                     <div class="tab-one">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                            fringilla augue nec est tristique auctor. Ipsum metus feugiat
-                                                            sem, quis fermentum turpis eros eget velit. Donec ac tempus
-                                                            ante. Fusce ultricies massa massa. Fusce aliquam, purus eget
-                                                            sagittis vulputate, sapien libero hendrerit est, sed commodo
-                                                            augue nisi non neque.Cras neque metus, consequat et blandit et,
-                                                            luctus a nunc. Etiam gravida vehicula tellus, in imperdiet
-                                                            ligula euismod eget. Pellentesque habitant morbi tristique
-                                                            senectus et netus et malesuada fames ac turpis egestas. Nam
-                                                            erat mi, rutrum at sollicitudin rhoncus</p>
+                                                        <p>Kim cương vốn là món trang sức mang đến niềm kiêu hãnh và cảm hứng thời trang bất tận.
+                                                            Sở hữu riêng cho mình món trang sức kim cương chính là điều mà ai cũng mong muốn.
+                                                            Chiếc nhẫn được chế tác từ vàng 14K cùng điểm nhấn kim cương với 57 giác cắt chuẩn xác,
+                                                            tạo nên món trang sức đầy sự sang trọng và đẳng cấp.
+                                                        </p>
+                                                        <p>Kim cương đã đẹp, trang sức kim cương lại càng mang sức hấp dẫn khó cưỡng. Sự kết hợp mới mẻ này chắc chắn sẽ tạo nên dấu ấn thời trang hiện đại và giúp quý cô trở nên nổi bật, tự tin và thu hút sự ngưỡng mộ của mọi người</p>
+
+
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_two">
                                                     <table class="table table-bordered">
                                                         <tbody>
                                                             <tr>
-                                                                <td>color</td>
-                                                                <td>black, blue, red</td>
+                                                                <td>Trọng lượng tham khảo</td>
+                                                                <td>6.87589 phân</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>size</td>
-                                                                <td>L, M, S</td>
+                                                                <td>Loại đá chính</td>
+                                                                <td>Kim cương</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Kích thước đá chính (tham khảo):</td>
+                                                                <td>4.9 li</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Hình dạng đá</td>
+                                                                <td>Tròn</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Loại đá phụ</td>
+                                                                <td>Kim cương</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Số viên đá chính</td>
+                                                                <td>1 viên</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Số viên đá phụ</td>
+                                                                <td>18 viên</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Thương hiệu</td>
+                                                                <td>Eternal Sparkle</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Color (Màu sắc/ Nước kim cương)</td>
+                                                                <td>F</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Clarity (Độ tinh khiết)</td>
+                                                                <td>SI1</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
+                                                                <td>Facet</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Giấy kiểm định</td>
+                                                                <td>Có</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
+                                                                <td>Facet</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Giới tính</td>
+                                                                <td>Nữ</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -253,45 +370,41 @@ export default function Chi_tiet_san_pham(props) {
                                                                     <span><i class="fa fa-star"></i></span>
                                                                 </div>
                                                                 <div class="post-author">
-                                                                    <p><span>admin -</span> 30 Mar, 2019</p>
+                                                                    <p><span>Nguyễn Đăng Khoa </span> 30/4/2024</p>
                                                                 </div>
-                                                                <p>Aliquam fringilla euismod risus ac bibendum. Sed sit
-                                                                    amet sem varius ante feugiat lacinia. Nunc ipsum nulla,
-                                                                    vulputate ut venenatis vitae, malesuada ut mi. Quisque
-                                                                    iaculis, dui congue placerat pretium, augue erat
-                                                                    accumsan lacus</p>
+                                                                <p>Nhẫn đẹp như hình nè, không hề thất vọng khi bóc hộp. Like mạnh, Mình rất hài lòng với cách nhân viên tư vấn trả lời câu hỏi</p>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col">
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
-                                                                    Your Name</label>
+                                                                    Tên của bạn:</label>
                                                                 <input type="text" class="form-control" required />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col">
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
-                                                                    Your Email</label>
+                                                                    Email:</label>
                                                                 <input type="email" class="form-control" required />
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col">
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
-                                                                    Your Review</label>
+                                                                    Tin nhắn của bạn</label>
                                                                 <textarea class="form-control" required></textarea>
-                                                                <div class="help-block pt-10"><span
+                                                                {/* <div class="help-block pt-10"><span
                                                                     class="text-danger">Note:</span>
                                                                     HTML is not translated!
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col">
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
-                                                                    Rating</label>
-                                                                &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                                    Đánh giả</label>
+                                                                &nbsp;&nbsp;&nbsp; Tệ&nbsp;
                                                                 <input type="radio" value="1" name="rating" />
                                                                 &nbsp;
                                                                 <input type="radio" value="2" name="rating" />
@@ -301,7 +414,7 @@ export default function Chi_tiet_san_pham(props) {
                                                                 <input type="radio" value="4" name="rating" />
                                                                 &nbsp;
                                                                 <input type="radio" value="5" name="rating" checked />
-                                                                &nbsp;Good
+                                                                &nbsp;Tốt
                                                             </div>
                                                         </div>
                                                         <div class="buttons">
@@ -311,7 +424,22 @@ export default function Chi_tiet_san_pham(props) {
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_four">
                                                     <form action="#" class="review-form">
-                                                        <h2>Thêm vào sau ...</h2>
+                                                        <p color="blue"><b>Bảo hành miễn phí 6 tháng</b></p>
+                                                        <p>- Bảo hành 6 tháng lỗi kỹ thuật, nước xi.</p>
+                                                        <p><b>Miễn phí siêu âm và đánh bóng bằng máy chuyên dụng trọn đời</b></p>
+                                                        <ul>
+                                                            <li>- Đối với sản phẩm bị oxy hóa, xuống màu, sẽ được siêu âm làm sạch bằng máy chuyên dụng (siêu âm, không xi) miễn phí trọn đời tại cửa hàng.​</li>
+                                                            <li>- Miễn phí đánh bóng trọn đời . Nhẫn cưới sẽ được bảo hành, làm mới, đánh bóng, xi miễn phí trọn đời.​</li>
+                                                        </ul>
+                                                        <p><b>Miễn phí thay đá CZ và đá tổng hợp</b></p>
+                                                        <ul>Không áp dụng bảo hành cho các trường hợp sau:
+                                                            <li>- Dây chuyền, lắc chế tác bị đứt gãy; bị biến dạng hoặc hư hỏng nặng</li>
+                                                            <li>- Khách hàng cung cấp thông tin truy lục hóa đơn không chính xác.​​​​​</li>
+                                                        </ul>
+                                                        <ul><i>Lưu ý:</i>
+                                                            <li><i>- PNJ bảo hành các sản phẩm thuộc hệ thống cửa hàng kênh lẻ và online của PNJ.</i>​​</li>
+                                                            <li><i>- Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của PNJ đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.​</i></li>
+                                                        </ul>
                                                     </form>
                                                 </div>
                                             </div>
@@ -332,8 +460,7 @@ export default function Chi_tiet_san_pham(props) {
                         <div class="col-12">
 
                             <div class="section-title text-center">
-                                <h2 class="title">Related Products</h2>
-                                <p class="sub-title">Add related products to weekly lineup</p>
+                                <h2 class="title">Sản phẩm tương tự</h2>
                             </div>
 
                         </div>
@@ -345,96 +472,28 @@ export default function Chi_tiet_san_pham(props) {
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
-                                            <img class="pri-img" src="assets/img/product/product-11.jpg" alt="product" />
-                                            <img class="sec-img" src="assets/img/product/product-8.jpg" alt="product" />
+                                            <img class="pri-img" src="assets\img\product\Nhan\11\nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png" alt="product" />
+                                            <img class="sec-img" src="assets\img\product\Nhan\11\nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-2.png" alt="product" />
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
-                                                <span>new</span>
-                                            </div>
-                                            <div class="product-label discount">
-                                                <span>10%</span>
-                                            </div>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">add to cart</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <div class="product-identity">
-                                            <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                        </div>
-                                        <ul class="color-categories">
-                                            <li>
-                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-darktan" href="#" title="Darktan"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-grey" href="#" title="Grey"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                        </ul>
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">$60.00</span>
-                                            <span class="price-old"><del>$70.00</del></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets/img/product/product-12.jpg" alt="product" />
-                                            <img class="sec-img" src="assets/img/product/product-7.jpg" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>sale</span>
-                                            </div>
-                                            <div class="product-label discount">
-                                                <span>new</span>
+                                                <span>Mới</span>
                                             </div>
                                         </div>
                                         <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
                                         </div>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">add to cart</button>
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
                                         </div>
                                     </figure>
                                     <div class="product-caption text-center">
-                                        <div class="product-identity">
-                                            <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                        </div>
-                                        <ul class="color-categories">
-                                            <li>
-                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-darktan" href="#" title="Darktan"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-grey" href="#" title="Grey"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                        </ul>
                                         <h6 class="product-name">
-                                            <a href="product-details.html">Handmade Golden Necklace</a>
+                                            <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng 18K Long Phụng</a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular">$50.00</span>
-                                            <span class="price-old"><del>$80.00</del></span>
+                                            <span class="price-regular">16.925.000đ</span>
+                                            <span class="price-old"><del>19.161.000đ</del></span>
                                         </div>
                                     </div>
                                 </div>
@@ -442,47 +501,28 @@ export default function Chi_tiet_san_pham(props) {
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
-                                            <img class="pri-img" src="assets/img/product/product-13.jpg" alt="product" />
-                                            <img class="sec-img" src="assets/img/product/product-6.jpg" alt="product" />
+                                            <img class="pri-img" src="assets\img\product\Nhan\12\nhan-kim-cuong-vang-trang-14k-first-diamond-1.png" alt="product" />
+                                            <img class="sec-img" src="assets\img\product\Nhan\12\nhan-kim-cuong-vang-trang-14k-first-diamond-2.png" alt="product" />
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
-                                                <span>new</span>
+                                                <span>Mới</span>
                                             </div>
                                         </div>
                                         <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
                                         </div>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">add to cart</button>
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
                                         </div>
                                     </figure>
                                     <div class="product-caption text-center">
-                                        <div class="product-identity">
-                                            <p class="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                                        </div>
-                                        <ul class="color-categories">
-                                            <li>
-                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-darktan" href="#" title="Darktan"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-grey" href="#" title="Grey"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                        </ul>
                                         <h6 class="product-name">
-                                            <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                            <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K First Diamond</a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular">$99.00</span>
-                                            <span class="price-old"><del></del></span>
+                                            <span class="price-regular">7.565.000đ</span>
+                                            <span class="price-old"><del>8.115.000đ</del></span>
                                         </div>
                                     </div>
                                 </div>
@@ -490,50 +530,60 @@ export default function Chi_tiet_san_pham(props) {
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
-                                            <img class="pri-img" src="assets/img/product/product-14.jpg" alt="product" />
-                                            <img class="sec-img" src="assets/img/product/product-5.jpg" alt="product" />
+                                            <img class="pri-img" src="assets\img\product\Nhan\13\nhan-cuoi-kim-cuong-vang-18k-tinh-hong-1.png" alt="product" />
+                                            <img class="sec-img" src="assets\img\product\Nhan\13\nhan-cuoi-kim-cuong-vang-18k-tinh-hong-2.png" alt="product" />
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
-                                                <span>sale</span>
+                                                <span>Mới</span>
                                             </div>
-                                            <div class="product-label discount">
+                                        </div>
+                                        <div class="button-group">
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="cart-hover">
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
+                                        </div>
+                                    </figure>
+                                    <div class="product-caption text-center">
+                                        <h6 class="product-name">
+                                            <a href="product-details.html">Nhẫn cưới Kim cương Vàng 18K Tình Hồng</a>
+                                        </h6>
+                                        <div class="price-box">
+                                            <span class="price-regular">7.497.000đ</span>
+                                            <span class="price-old">8.151.000đ<del></del></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="product-item">
+                                    <figure class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img class="pri-img" src="assets\img\product\Nhan\14\nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-1.png" alt="product" />
+                                            <img class="sec-img" src="assets\img\product\Nhan\14\nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-2.png" alt="product" />
+                                        </a>
+                                        <div class="product-badge">
+                                            <div class="product-label new">
+                                                <span>Mới</span>
+                                            </div>
+                                            {/* <div class="product-label discount">
                                                 <span>15%</span>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
                                         </div>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">add to cart</button>
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
                                         </div>
                                     </figure>
                                     <div class="product-caption text-center">
-                                        <div class="product-identity">
-                                            <p class="manufacturer-name"><a href="product-details.html">silver</a></p>
-                                        </div>
-                                        <ul class="color-categories">
-                                            <li>
-                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-darktan" href="#" title="Darktan"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-grey" href="#" title="Grey"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                        </ul>
                                         <h6 class="product-name">
-                                            <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                            <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng 18K Chung Đôi</a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular">$55.00</span>
-                                            <span class="price-old"><del>$75.00</del></span>
+                                            <span class="price-regular">11.485.000đ</span>
+                                            <span class="price-old"><del>13.666.000đ</del></span>
                                         </div>
                                     </div>
                                 </div>
@@ -541,50 +591,29 @@ export default function Chi_tiet_san_pham(props) {
                                 <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.html">
-                                            <img class="pri-img" src="assets/img/product/product-15.jpg" alt="product" />
-                                            <img class="sec-img" src="assets/img/product/product-4.jpg" alt="product" />
+                                            <img class="pri-img" src="assets\img\product\Nhan\15\nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-1.png" alt="product" />
+                                            <img class="sec-img" src="assets\img\product\Nhan\15\nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-2.png" alt="product" />
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
-                                                <span>new</span>
-                                            </div>
-                                            <div class="product-label discount">
-                                                <span>20%</span>
+                                                <span>Mới</span>
                                             </div>
                                         </div>
                                         <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
+                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
+                                            
                                         </div>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">add to cart</button>
+                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
                                         </div>
                                     </figure>
                                     <div class="product-caption text-center">
-                                        <div class="product-identity">
-                                            <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                        </div>
-                                        <ul class="color-categories">
-                                            <li>
-                                                <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-darktan" href="#" title="Darktan"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-grey" href="#" title="Grey"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                        </ul>
                                         <h6 class="product-name">
-                                            <a href="product-details.html">Citygold Exclusive Ring</a>
+                                            <a href="product-details.html">Nhẫn cưới Kim cương Vàng trắng 14K Long Phụng</a>
                                         </h6>
                                         <div class="price-box">
-                                            <span class="price-regular">$60.00</span>
-                                            <span class="price-old"><del>$70.00</del></span>
+                                            <span class="price-regular">8.323.200đ</span>
+                                            <span class="price-old"><del>9.248.000đ</del></span>
                                         </div>
                                     </div>
                                 </div>
