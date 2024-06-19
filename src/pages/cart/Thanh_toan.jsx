@@ -8,20 +8,22 @@ export default function Thanh_toan() {
         birthday: '',
         email: '',
         streetAddress: '',
-        orderNote: '',
+        orderNote: ''
     });
 
     const [orderItems] = useState([
-        { name: 'Suscipit Vestibulum', quantity: 1, price: 4000000 },
-        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 4000000 },
-        { name: 'Vestibulum suscipit', quantity: 2, price: 4000000 },
+        { name: 'Suscipit Vestibulum', quantity: 1, price: 4200000 },
+        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 4200000 },
+        { name: 'Vestibulum suscipit', quantity: 2, price: 4200000 },
     ]);
 
-    /*const calculateTotal = () => {
-        return orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
-    };*/
+    const calculateTotalPrice = () => {
+        return orderItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+    };
 
-    const total = 10000000;
+    
+
+    const total1 = 10000000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
@@ -37,13 +39,11 @@ export default function Thanh_toan() {
         };
     }, []);
 
-    const handleCheckoutChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
     const handleCheckoutSubmit = async (e) => {
+        const totalPrice = calculateTotalPrice();
         e.preventDefault();
+        
         const orderModel = {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
@@ -51,7 +51,7 @@ export default function Thanh_toan() {
             email: formData.email,
             streetAddress: formData.streetAddress,
             orderNote: formData.orderNote,
-            price: total
+            price: total1
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
@@ -59,6 +59,12 @@ export default function Thanh_toan() {
         } catch (error) {
             console.error('Error during checkout:', error);
         }
+    };
+
+    
+    const handleCheckoutChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
 
@@ -174,8 +180,8 @@ export default function Thanh_toan() {
 
                                         </div>
                                         <button type="submit" value="THANH TOÁN"
-                                         className="btn-login solid"
-                                         id="btn_checkout">THANH TOÁN</button>
+                                            className="btn-login solid"
+                                            id="btn_checkout">THANH TOÁN</button>
                                     </form>
                                 </div>
                             </div>
@@ -199,17 +205,17 @@ export default function Thanh_toan() {
                                                 <tr>
                                                     <td><a href="product-details.html">Suscipit Vestibulum <strong> × 1</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                                 <tr>
                                                     <td><a href="product-details.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                                 <tr>
                                                     <td><a href="product-details.html">Vestibulum suscipit <strong> × 2</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
@@ -226,7 +232,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td id="total"><strong>$470</strong></td>
+                                                    <td id="total"><strong>29.400.000 VND</strong></td>
                                                 </tr>
                                             </tfoot>
                                         </table>
