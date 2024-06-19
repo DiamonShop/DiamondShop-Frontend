@@ -12,9 +12,8 @@ function Main_banner() {
                                     <img src="assets/img/banner/img1-top.jpg" alt="product banner" />
                                 </a>
                                 <div className="banner-content text-right">
-                                    <h5 className="banner-text1">BEAUTIFUL</h5>
-                                    <h2 className="banner-text2">Wedding<span>Rings</span></h2>
-                                    <a href="shop.html" className="btn btn-text">Shop Now</a>
+                                    <h2 className="banner-text2">Bộ Sưu Tập <span>Nhẫn Cưới</span></h2>
+                                    <a href="shop.html" className="btn btn-text">Mua Ngay</a>
                                 </div>
                             </figure>
                         </div>
@@ -24,9 +23,8 @@ function Main_banner() {
                                     <img src="assets/img/banner/img2-top.jpg" alt="product banner" />
                                 </a>
                                 <div className="banner-content text-center">
-                                    <h5 className="banner-text1">EARRINGS</h5>
-                                    <h2 className="banner-text2">Tangerine Floral <span>Earring</span></h2>
-                                    <a href="shop.html" className="btn btn-text">Shop Now</a>
+                                    <h2 className="banner-text2">Bộ Sưu Tập <span>Vòng tay</span></h2>
+                                    <a href="shop.html" className="btn btn-text">Mua Ngay</a>
                                 </div>
                             </figure>
                         </div>
@@ -36,9 +34,8 @@ function Main_banner() {
                                     <img src="assets/img/banner/img3-top.jpg" alt="product banner" />
                                 </a>
                                 <div className="banner-content text-center">
-                                    <h5 className="banner-text1">NEW ARRIVALLS</h5>
-                                    <h2 className="banner-text2">Pearl<span>Necklaces</span></h2>
-                                    <a href="shop.html" className="btn btn-text">Shop Now</a>
+                                    <h2 className="banner-text2">Bộ Sưu Tập<span>Dây Chuyền</span></h2>
+                                    <a href="shop.html" className="btn btn-text">Mua Ngay</a>
                                 </div>
                             </figure>
                         </div>
@@ -48,9 +45,8 @@ function Main_banner() {
                                     <img src="assets/img/banner/img4-top.jpg" alt="product banner" />
                                 </a>
                                 <div className="banner-content text-right">
-                                    <h5 className="banner-text1">NEW DESIGN</h5>
-                                    <h2 className="banner-text2">Diamond<span>Jewelry</span></h2>
-                                    <a href="shop.html" className="btn btn-text">Shop Now</a>
+                                    <h2 className="banner-text2">Bộ Sưu Tập<span>Kim Cương</span></h2>
+                                    <a href="shop.html" className="btn btn-text">Mua Ngay</a>
                                 </div>
                             </figure>
                         </div>
