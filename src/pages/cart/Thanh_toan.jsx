@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { handleCheckout } from '../cart/CheckoutAPI';
+import { handleCheckout } from '../../api/CheckoutAPI';
 
 export default function Thanh_toan() {
     const [formData, setFormData] = useState({
@@ -11,23 +10,21 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: '',
     });
-    const navigate = useNavigate();
 
     const [orderItems] = useState([
-        { name: 'Suscipit Vestibulum', quantity: 1, price: 165.00 },
-        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 165.00 },
-        { name: 'Vestibulum suscipit', quantity: 2, price: 165.00 },
+        { name: 'Suscipit Vestibulum', quantity: 1, price: 4000000 },
+        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 4000000 },
+        { name: 'Vestibulum suscipit', quantity: 2, price: 4000000 },
     ]);
 
-    const calculateTotal = () => {
-        let total = 0;
-        orderItems.forEach((item) => (total += item.quantity * item.price));
-        return total;
-    };
+    /*const calculateTotal = () => {
+        return orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
+    };*/
 
+    const total = 10000000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
-        const container = document.querySelector("#createOrder");
+        const container = document.querySelector(".createOrder");
 
         const handleCheckoutClick = () => {
             container.classList.add("checkout-mode");
@@ -47,26 +44,23 @@ export default function Thanh_toan() {
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        let orderModel = {
+        const orderModel = {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
             email: formData.email,
             streetAddress: formData.streetAddress,
             orderNote: formData.orderNote,
-            price: calculateTotal()
+            price: total
         };
-
         try {
-            const paymentUrl = await handleCheckout(orderModel); // Fetch payment URL from backend
-
-            // Redirect to payment page
-            window.location.href = paymentUrl;
+            const url = await handleCheckout(orderModel); // Await the promise
+            window.location.href = url; // Use the resolved URL
         } catch (error) {
             console.error('Error during checkout:', error);
-            // Handle error appropriately
         }
     };
+
 
     return (
         <div>
@@ -100,7 +94,7 @@ export default function Thanh_toan() {
                             <div class="checkout-billing-details-wrap">
                                 <h5 class="checkout-title">Thông tin người mua</h5>
                                 <div class="billing-form-wrap">
-                                    <form action="#" id="createOrder" onSubmit={handleCheckoutSubmit}>
+                                    <form className="createOrder" onSubmit={handleCheckoutSubmit}>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="single-input-item">
@@ -179,7 +173,9 @@ export default function Thanh_toan() {
                                             </div>
 
                                         </div>
-                                        <input type="submit" value="THANH TOÁN" className="btn-login solid" id="btn_checkout" />
+                                        <button type="submit" value="THANH TOÁN"
+                                         className="btn-login solid"
+                                         id="btn_checkout">THANH TOÁN</button>
                                     </form>
                                 </div>
                             </div>
