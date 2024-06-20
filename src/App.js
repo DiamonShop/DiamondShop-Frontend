@@ -23,6 +23,7 @@ import Chi_tiet_san_pham_kc from './pages/customer/Products/Chi_tiet_san_pham_kc
 import Dashboard from './pages/Admin&Manager/Dashboard';
 import Chinh_sach_bao_mat from './pages/customer/Chinh_sach_bao_mat';
 import Thanh_toan from './pages/cart/Thanh_toan';
+import FirebaseImageUpload from './FirebaseImage/FirebaseImageUpload';
 import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
 import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
@@ -39,7 +40,7 @@ function App({ tokenIsValid }) {
 
   return (
     <div>
-      <UserProvider>
+       <UserProvider>
         <Router>
           <Routes>
             <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
@@ -63,6 +64,7 @@ function App({ tokenIsValid }) {
             <Route path='/BangDieuKhien' element={<DashboardLayout tokenIsValid={tokenIsValid}><Bang_Dieu_Khien /></DashboardLayout>} />
             <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
             <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
+            <Route path='/Uploadimg' element={<DashboardLayout tokenIsValid={tokenIsValid}><FirebaseImageUpload /></DashboardLayout>} />
             <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
             <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
           </Routes>

@@ -10,19 +10,8 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
-
-    const [orderItems] = useState([
-        { name: 'Suscipit Vestibulum', quantity: 1, price: 4200000 },
-        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 4200000 },
-        { name: 'Vestibulum suscipit', quantity: 2, price: 4200000 },
-    ]);
-
-    const calculateTotalPrice = () => {
-        return orderItems.reduce((total, item) => total + (item.quantity * item.price), 0);
-    };
-
-    
-
+  
+    const [totalPrice, setTotalPrice] = useState(0);
     const total1 = 10000000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
@@ -34,6 +23,16 @@ export default function Thanh_toan() {
 
         checkout_btn.addEventListener('click', handleCheckoutClick);
 
+        const updateTotalPrice = () => {
+            const totalElement = document.querySelector(".order-summary-table tfoot tr:nth-child(3) td:last-child strong");
+            if (totalElement) {
+                const totalText = totalElement.innerText.replace(/[^0-9]/g, '');
+                setTotalPrice(parseInt(totalText, 10));
+            }
+        };
+
+        updateTotalPrice();
+
         return () => {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
@@ -41,7 +40,6 @@ export default function Thanh_toan() {
 
 
     const handleCheckoutSubmit = async (e) => {
-        const totalPrice = calculateTotalPrice();
         e.preventDefault();
         
         const orderModel = {
@@ -51,7 +49,7 @@ export default function Thanh_toan() {
             email: formData.email,
             streetAddress: formData.streetAddress,
             orderNote: formData.orderNote,
-            price: total1
+            price: totalPrice
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
@@ -232,7 +230,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td id="total"><strong>29.400.000 VND</strong></td>
+                                                    <td><strong>29.400.000 </strong><strong>VND</strong></td>
                                                 </tr>
                                             </tfoot>
                                         </table>

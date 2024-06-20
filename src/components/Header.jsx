@@ -70,6 +70,9 @@ export default function Header({ tokenIsValid }) {
                                 <Link to="/Daychuyen">Dây chuyền</Link>
                               </li>
                               <li>
+                                <Link to="/Matdaychuyen">Mặt dây chuyền </Link>
+                              </li>
+                              <li>
                                 <a href="/Vongtay">Vòng tay</a>
                               </li>
                             </ul>
