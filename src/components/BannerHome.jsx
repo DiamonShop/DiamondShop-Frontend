@@ -8,7 +8,7 @@ function BannerHome(props) {
         infinite: true,
         speed: 1000,
         dots: true,
-        autoplay: true,
+        // autoplay: true,
         arrows: true,
         prevArrow: <button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>,

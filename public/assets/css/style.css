@@ -9187,7 +9187,7 @@ textarea.form-control-lg {
     z-index: 4
 }
 
-.btn {
+/* .btn {
     --bs-btn-padding-x: 0.85rem;
     --bs-btn-padding-y: 0.3rem;
     --bs-btn-font-family: ;
@@ -9220,7 +9220,7 @@ textarea.form-control-lg {
     -moz-user-select: none;
     user-select: none;
     vertical-align: middle
-}
+} */
 
 @media(prefers-reduced-motion:reduce) {
     .btn {
@@ -20677,10 +20677,6 @@ pre.snippet {
     word-wrap: break-word;
     text-align: justify;
     white-space: pre-wrap
-}
-
-a {
-    cursor: pointer
 }
 
 .wrapper {
