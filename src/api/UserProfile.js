@@ -94,7 +94,7 @@ const UserProfile = () => {
                 </div>
                 <div>
                     <label>Email:</label>
-                    <input
+       G             <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

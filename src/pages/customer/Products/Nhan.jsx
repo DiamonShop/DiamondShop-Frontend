@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
+import App from '../../../App';
 
-export default function Nhan() {
+export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
 
     const handleSortChange = (event) => {
@@ -15,9 +16,7 @@ export default function Nhan() {
         return parseFloat(price.replace(/[^\d]/g, '')) || 0;
     };
 
-    const sortedProducts = Product_Nhan_Data.slice(cate => {
-        
-    });
+    const sortedProducts = Product_Nhan_Data;
 
     return (
         <div>
@@ -47,7 +46,7 @@ export default function Nhan() {
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {sortedProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham
+                                            <Du_lieu_san_pham 
                                                 productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
@@ -55,6 +54,7 @@ export default function Nhan() {
                                                 productName={item.productName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
+                                                onProductClick={onProductClick}
                                             />
                                         </div>
                                     ))}
@@ -74,9 +74,7 @@ export default function Nhan() {
                 </div>
             </div>
 
-            <div className="scroll-top not-visible">
-                <i className="fa fa-angle-up"></i>
-            </div>
+            
         </div>
     );
 }

@@ -35,50 +35,28 @@ function Main_product() {
                                             <div className="product-item">
                                                 <figure className="product-thumb">
                                                     <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-6.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-13.jpg" alt="product" />
+                                                        <img className="pri-img" src="assets\img\product\Nhan\1\nhan-kim-cuong-vang-14k-ddddc001259-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\1\nhan-kim-cuong-vang-14k-ddddc001259-2.png" alt="product" />
                                                     </a>
                                                     <div className="product-badge">
                                                         <div className="product-label new">
-                                                            <span>new</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>10%</span>
+                                                            <span>Mới</span>
                                                         </div>
                                                     </div>
                                                     <div className="button-group">
                                                         <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
                                                     </div>
                                                     <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                     </div>
                                                 </figure>
                                                 <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
                                                     <h6 className="product-name">
-                                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                        <a href="product-details.html">Nhẫn Kim cương Vàng 14K Timeless Diamond</a>
                                                     </h6>
                                                     <div className="price-box">
-                                                        <span className="price-regular">$60.00</span>
-                                                        <span className="price-old"><del>$70.00</del></span>
+                                                        <span className="price-regular">56.417.000đ</span>
+                                                        <span className="price-old"><del>60.123.000đ</del></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,50 +64,173 @@ function Main_product() {
                                             <div className="product-item">
                                                 <figure className="product-thumb">
                                                     <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-7.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-9.jpg" alt="product" />
+                                                        <img className="pri-img" src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\2\nhan-vang-trang-14k-dinh-da-ecz-2.png" alt="product" />
                                                     </a>
                                                     <div className="product-badge">
                                                         <div className="product-label new">
-                                                            <span>sale</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>new</span>
+                                                            <span>Mới</span>
                                                         </div>
                                                     </div>
                                                     <div className="button-group">
                                                         <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
                                                     </div>
                                                     <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                     </div>
                                                 </figure>
                                                 <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">mony</a></p>
+                                                    <h6 className="product-name">
+                                                        <a href="product-details.html">Nhẫn Vàng trắng 14K đính đá ECZ</a>
+                                                    </h6>
+                                                    <div className="price-box">
+                                                        <span className="price-regular">8.365.000đ</span>
+                                                        <span className="price-old"><del>10.456.000đ</del></span>
                                                     </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div className="product-item">
+                                                <figure className="product-thumb">
+                                                    <a href="product-details.html">
+                                                        <img className="pri-img" src="assets\img\product\Nhan\3\nhan-kim-cuong-vang-14k-ddddc001224-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\3\nhan-kim-cuong-vang-14k-ddddc001224-2.png" alt="product" />
+                                                    </a>
+                                                    <div className="product-badge">
+                                                        <div className="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="button-group">
+                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
+                                                    </div>
+                                                    <div className="cart-hover">
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                    </div>
+                                                </figure>
+                                                <div className="product-caption text-center">
+                                                    <h6 className="product-name">
+                                                        <a href="product-details.html">Nhẫn Kim cương Vàng 14K Timeless Diamond</a>
+                                                    </h6>
+                                                    <div className="price-box">
+                                                        <span className="price-regular">124.390.000đ</span>
+                                                        <span className="price-old"><del>140.505.000đ</del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="product-item">
+                                                <figure className="product-thumb">
+                                                    <a href="product-details.html">
+                                                        <img className="pri-img" src="assets\img\product\Nhan\4\nhan-kim-cuong-vang-trang-14k-dd00w003117-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\4\nhan-kim-cuong-vang-trang-14k-dd00w003117-2.png" alt="product" />
+                                                    </a>
+                                                    <div className="product-badge">
+                                                        <div className="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="button-group">
+                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
+                                                    </div>
+                                                    <div className="cart-hover">
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                    </div>
+                                                </figure>
+                                                <div className="product-caption text-center">
+                                                    <h6 className="product-name">
+                                                        <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K</a>
+                                                    </h6>
+                                                    <div className="price-box">
+                                                        <span className="price-regular">43.544.000đ</span>
+                                                        <span className="price-old"><del>46.519.000đ</del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="product-item">
+                                                <figure className="product-thumb">
+                                                    <a href="product-details.html">
+                                                        <img className="pri-img" src="assets\img\product\Nhan\5\nhan-kim-cuong-vang-trang-14k-ddddw006782-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\5\nhan-kim-cuong-vang-trang-14k-ddddw006782-2.png" alt="product" />
+                                                    </a>
+                                                    <div className="product-badge">
+                                                        <div className="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="button-group">
+                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
+                                                    </div>
+                                                    <div className="cart-hover">
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                    </div>
+                                                </figure>
+                                                <div className="product-caption text-center">
+                                                    <h6 className="product-name">
+                                                        <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K PNJ</a>
+                                                    </h6>
+                                                    <div className="price-box">
+                                                        <span className="price-regular">92.246.400đ</span>
+                                                        <span className="price-old"><del>102.496.000đ</del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="product-item">
+                                                <figure className="product-thumb">
+                                                    <a href="product-details.html">
+                                                        <img className="pri-img" src="assets\img\product\Nhan\6\nhan-nam-kim-cuong-vang-trang-14k-ddddw000287-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\6\nhan-nam-kim-cuong-vang-trang-14k-ddddw000287-2.png" alt="product" />
+                                                    </a>
+                                                    <div className="product-badge">
+                                                        <div className="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="button-group">
+                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
+                                                    </div>
+                                                    <div className="cart-hover">
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                    </div>
+                                                </figure>
+                                                <div className="product-caption text-center">
+                                                    <h6 className="product-name">
+                                                        <a href="product-details.html">Nhẫn nam Kim cương Vàng trắng 14K</a>
+                                                    </h6>
+                                                    <div className="price-box">
+                                                        <span className="price-regular">41.639.000đ</span>
+                                                        <span className="price-old"><del>44.010.000đ</del></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="product-item">
+                                                <figure className="product-thumb">
+                                                    <a href="product-details.html">
+                                                        <img className="pri-img" src="assets\img\product\Nhan\7\nhan-nam-kim-cuong-vang-14k-dd00h000294-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\7\nhan-nam-kim-cuong-vang-14k-dd00h000294-2.png" alt="product" />
+                                                    </a>
+                                                    <div className="product-badge">
+                                                        <div className="product-label new">
+                                                            <span>Mới</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="button-group">
+                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
+                                                    </div>
+                                                    <div className="cart-hover">
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                                                    </div>
+                                                </figure>
+                                                <div className="product-caption text-center">
                                                     <h6 className="product-name">
                                                         <a href="product-details.html">Handmade Golden Necklace</a>
                                                     </h6>
                                                     <div className="price-box">
-                                                        <span className="price-regular">$50.00</span>
-                                                        <span className="price-old"><del>$80.00</del></span>
+                                                        <span className="price-regular">78.219.900đ</span>
+                                                        <span className="price-old"><del>86.911.000đ</del></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,47 +238,28 @@ function Main_product() {
                                             <div className="product-item">
                                                 <figure className="product-thumb">
                                                     <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-8.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-11.jpg" alt="product" />
+                                                        <img className="pri-img" src="assets\img\product\Nhan\8\han-cuoi-nam-kim-cuong-vang-trang-14k-dd00w000471-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\8\han-cuoi-nam-kim-cuong-vang-trang-14k-dd00w000471-2.png" alt="product" />
                                                     </a>
                                                     <div className="product-badge">
                                                         <div className="product-label new">
-                                                            <span>new</span>
+                                                            <span>Mới</span>
                                                         </div>
                                                     </div>
                                                     <div className="button-group">
                                                         <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
                                                     </div>
                                                     <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                     </div>
                                                 </figure>
                                                 <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
                                                     <h6 className="product-name">
-                                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
+                                                        <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng trắng 14K</a>
                                                     </h6>
                                                     <div className="price-box">
-                                                        <span className="price-regular">$99.00</span>
-                                                        <span className="price-old"><del></del></span>
+                                                        <span className="price-regular">6.186.000đ</span>
+                                                        <span className="price-old"><del>10.836.000đ</del></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,50 +267,28 @@ function Main_product() {
                                             <div className="product-item">
                                                 <figure className="product-thumb">
                                                     <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-16.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-10.jpg" alt="product" />
+                                                        <img className="pri-img" src="assets\img\product\Nhan\9\nhan-cuoi-nam-kim-cuong-vang-18k-true-love-19-dd00c000552-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\9\nhan-cuoi-nam-kim-cuong-vang-18k-true-love-19-dd00c000552-2.png" alt="product" />
                                                     </a>
                                                     <div className="product-badge">
                                                         <div className="product-label new">
-                                                            <span>sale</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>15%</span>
+                                                            <span>Mới</span>
                                                         </div>
                                                     </div>
                                                     <div className="button-group">
                                                         <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
                                                     </div>
                                                     <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                     </div>
                                                 </figure>
                                                 <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">silver</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
                                                     <h6 className="product-name">
-                                                        <a href="product-details.html">Diamond Exclusive Ornament</a>
+                                                        <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng 18K</a>
                                                     </h6>
                                                     <div className="price-box">
-                                                        <span className="price-regular">$55.00</span>
-                                                        <span className="price-old"><del>$75.00</del></span>
+                                                        <span className="price-regular">9.889.000đ</span>
+                                                        <span className="price-old"><del>15.169.000đ</del></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,302 +296,28 @@ function Main_product() {
                                             <div className="product-item">
                                                 <figure className="product-thumb">
                                                     <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-10.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-9.jpg" alt="product" />
+                                                        <img className="pri-img" src="assets\img\product\Nhan\10\nhan-cuoi-kim-cuong-vang-18k-71564.500-1.png" alt="product" />
+                                                        <img className="sec-img" src="assets\img\product\Nhan\10\nhan-cuoi-kim-cuong-vang-18k-71564.500-2.png" alt="product" />
                                                     </a>
                                                     <div className="product-badge">
                                                         <div className="product-label new">
-                                                            <span>new</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>20%</span>
+                                                            <span>Mới</span>
                                                         </div>
                                                     </div>
                                                     <div className="button-group">
                                                         <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
                                                     </div>
                                                     <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
+                                                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                     </div>
                                                 </figure>
                                                 <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
                                                     <h6 className="product-name">
-                                                        <a href="product-details.html">Citygold Exclusive Ring</a>
+                                                        <a href="product-details.html">Nhẫn cưới Kim cương Vàng 18K</a>
                                                     </h6>
                                                     <div className="price-box">
-                                                        <span className="price-regular">$60.00</span>
-                                                        <span className="price-old"><del>$70.00</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-item">
-                                                <figure className="product-thumb">
-                                                    <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-1.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-18.jpg" alt="product" />
-                                                    </a>
-                                                    <div className="product-badge">
-                                                        <div className="product-label new">
-                                                            <span>new</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>10%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="button-group">
-                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
-                                                    </div>
-                                                    <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
-                                                    </div>
-                                                </figure>
-                                                <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="product-name">
-                                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                                    </h6>
-                                                    <div className="price-box">
-                                                        <span className="price-regular">$60.00</span>
-                                                        <span className="price-old"><del>$70.00</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-item">
-                                                <figure className="product-thumb">
-                                                    <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-2.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-17.jpg" alt="product" />
-                                                    </a>
-                                                    <div className="product-badge">
-                                                        <div className="product-label new">
-                                                            <span>sale</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>new</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="button-group">
-                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
-                                                    </div>
-                                                    <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
-                                                    </div>
-                                                </figure>
-                                                <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="product-name">
-                                                        <a href="product-details.html">Handmade Golden Necklace</a>
-                                                    </h6>
-                                                    <div className="price-box">
-                                                        <span className="price-regular">$50.00</span>
-                                                        <span className="price-old"><del>$80.00</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-item">
-                                                <figure className="product-thumb">
-                                                    <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-3.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-16.jpg" alt="product" />
-                                                    </a>
-                                                    <div className="product-badge">
-                                                        <div className="product-label new">
-                                                            <span>new</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="button-group">
-                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
-                                                    </div>
-                                                    <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
-                                                    </div>
-                                                </figure>
-                                                <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="product-name">
-                                                        <a href="product-details.html">Perfect Diamond Jewelry</a>
-                                                    </h6>
-                                                    <div className="price-box">
-                                                        <span className="price-regular">$99.00</span>
-                                                        <span className="price-old"><del></del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-item">
-                                                <figure className="product-thumb">
-                                                    <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-4.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-15.jpg" alt="product" />
-                                                    </a>
-                                                    <div className="product-badge">
-                                                        <div className="product-label new">
-                                                            <span>sale</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>15%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="button-group">
-                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
-                                                    </div>
-                                                    <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
-                                                    </div>
-                                                </figure>
-                                                <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">silver</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="product-name">
-                                                        <a href="product-details.html">Diamond Exclusive Ornament</a>
-                                                    </h6>
-                                                    <div className="price-box">
-                                                        <span className="price-regular">$55.00</span>
-                                                        <span className="price-old"><del>$75.00</del></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="product-item">
-                                                <figure className="product-thumb">
-                                                    <a href="product-details.html">
-                                                        <img className="pri-img" src="assets/img/product/product-5.jpg" alt="product" />
-                                                        <img className="sec-img" src="assets/img/product/product-14.jpg" alt="product" />
-                                                    </a>
-                                                    <div className="product-badge">
-                                                        <div className="product-label new">
-                                                            <span>new</span>
-                                                        </div>
-                                                        <div className="product-label discount">
-                                                            <span>20%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="button-group">
-                                                        <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="pe-7s-like"></i></a>
-                                                        <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i className="pe-7s-refresh-2"></i></a>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i className="pe-7s-search"></i></span></a>
-                                                    </div>
-                                                    <div className="cart-hover">
-                                                        <button className="btn btn-cart">add to cart</button>
-                                                    </div>
-                                                </figure>
-                                                <div className="product-caption text-center">
-                                                    <div className="product-identity">
-                                                        <p className="manufacturer-name"><a href="product-details.html">mony</a></p>
-                                                    </div>
-                                                    <ul className="color-categories">
-                                                        <li>
-                                                            <a className="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-darktan" href="#" title="Darktan"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-grey" href="#" title="Grey"></a>
-                                                        </li>
-                                                        <li>
-                                                            <a className="c-brown" href="#" title="Brown"></a>
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="product-name">
-                                                        <a href="product-details.html">Citygold Exclusive Ring</a>
-                                                    </h6>
-                                                    <div className="price-box">
-                                                        <span className="price-regular">$60.00</span>
-                                                        <span className="price-old"><del>$70.00</del></span>
+                                                        <span className="price-regular">5.874.000đ</span>
+                                                        <span className="price-old"><del>10.999.000đ</del></span>
                                                     </div>
                                                 </div>
                                             </div>

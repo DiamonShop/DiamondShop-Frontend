@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { handleLoginUser } from '../api/LoginAPI';
 import { handleSignUpUser } from '../api/SignUpAPI';
 import { Link } from 'react-router-dom';
-
+import googleLogin from '../api/GoogleLogin';
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
     const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
     const navigate = useNavigate();
-
+    const handleGoogleLogin = async () => {
+        await googleLogin();
+        navigate('/'); // Adjust the navigation route as necessary
+    };
     useEffect(() => {
         const sign_in_btn = document.querySelector("#sign-in-btn");
         const container = document.querySelector(".signin-signup-container");
@@ -71,8 +74,8 @@ export default function Dang_nhap() {
                             <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
                             <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
                             <div className="social-media">
-                                <a href="#" className="social-icon">
-                                    <i ><img src="assets/img/logo/Google.png" alt="" /></i>
+                                <a href="#" className="social-icon" onClick={handleGoogleLogin}>
+                                    <i><img src="assets/img/logo/Google.png" alt="" /></i>
                                 </a>
                             </div>
                         </form>

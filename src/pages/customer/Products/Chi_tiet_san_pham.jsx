@@ -4,7 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 
-export default function Chi_tiet_san_pham(props) {
+export default function Chi_tiet_san_pham({produdtName}) {
+
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
 
@@ -15,7 +16,7 @@ export default function Chi_tiet_san_pham(props) {
         asNavFor: navSliderRef.current,
         ref: largeSliderRef
     };
-
+ 
     const navSliderSettings = {
         slidesToShow: 4,
         asNavFor: largeSliderRef.current,
@@ -33,6 +34,7 @@ export default function Chi_tiet_san_pham(props) {
         }],
         ref: navSliderRef
     };
+
     const relatedSliderSettings = {
         speed: 1000,
         autoplay: true,
@@ -43,11 +45,11 @@ export default function Chi_tiet_san_pham(props) {
         arrows: true,
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-
     };
-
-    // In ra dữ liệu truyền qua từ props
     
+    const handleAddToCart = () =>{
+
+    }
 
     return (
         <div>
@@ -118,7 +120,7 @@ export default function Chi_tiet_san_pham(props) {
                                             <div class="manufacturer-name">
                                                 <a href="product-details.html">HasTech</a>
                                             </div>
-                                            <h3 class="product-name">Handmade Golden Necklace Full Family Package</h3>
+                                            <h3 class="product-name">{produdtName}</h3>
                                             <div class="ratings d-flex">
                                                 <span><i class="fa fa-star-o"></i></span>
                                                 <span><i class="fa fa-star-o"></i></span>
@@ -149,7 +151,7 @@ export default function Chi_tiet_san_pham(props) {
                                                     <div class="pro-qty"><input type="text" value="1" /></div>
                                                 </div>
                                                 <div class="action_link">
-                                                    <a class="btn btn-cart2" href="#">Add to cart</a>
+                                                    <a class="btn btn-cart2" onClick={handleAddToCart}>Add to cart</a>
                                                 </div>
                                             </div>
                                             <div class="pro-size">

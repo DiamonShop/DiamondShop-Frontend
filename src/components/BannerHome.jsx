@@ -8,7 +8,7 @@ function BannerHome(props) {
         infinite: true,
         speed: 1000,
         dots: true,
-        autoplay: true,
+        // autoplay: true,
         arrows: true,
         prevArrow: <button type="button" class="slick-prev pull-left"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next pull-right"><i class="pe-7s-angle-right"></i></button>,
@@ -43,7 +43,7 @@ function BannerHome(props) {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="hero-slider-content slide-2">
-                                                <h2 className="slide-title">BỘ SIÊU TẬP NHẪN </h2>
+                                                <h2 className="slide-title">BỘ SƯU TẬP NHẪN </h2>
                                                 <h4 className="slide-desc">Giá chỉ từ <important> 2.990.000đ</important></h4>
                                                 <a href="shop.html" className="btn btn-hero">KHÁM PHÁ NGAY</a>
                                             </div>

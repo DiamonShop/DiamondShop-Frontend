@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
+
 import { Link, useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Ensure jwt-decode is installed and imported
-import updateProfile from '../api/UpdateProfile'; // Đường dẫn tới file updateProfile
+import {jwtDecode} from 'jwt-decode'; 
+import updateProfile from '../api/UpdateProfile'; 
+
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -26,6 +28,7 @@ export default function Thong_tin_tk() {
 
             setLoading(true);
             const token = localStorage.getItem('token');
+
             if (!token) {
                 console.log("Token not found or expired. Logging out.");
                 userLogout();
@@ -39,6 +42,7 @@ export default function Thong_tin_tk() {
                 if (userRole === 'Admin') {
                     navigate('/BangDieuKhien');
                 }
+
 
                 const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${currentUser.userId}`, {
                     headers: {
@@ -87,6 +91,7 @@ export default function Thong_tin_tk() {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
+
         const userDataToUpdate = {
             fullName: displayName,
             email,
@@ -100,6 +105,26 @@ export default function Thong_tin_tk() {
             setErrorMessage('Update successful');
             // Có thể cập nhật lại dữ liệu người dùng sau khi update thành công nếu cần
             // setUserData(response.data);
+
+        try {
+            const response = await axios.put(
+                `https://localhost:7101/api/User/UpdateUserProfile?id=${currentUser.userId}`, // Ensure this endpoint is correct
+                {
+                    username,
+                    password,
+                    fullName,
+                    email,
+                    address
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
+            console.log('Update response:', response.data);
+            // Update successful, handle accordingly
         } catch (error) {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);
@@ -212,7 +237,7 @@ export default function Thong_tin_tk() {
                                                                         <td><a href="cart.html" className="btn btn-sqr">View</a>
                                                                         </td>
                                                                     </tr>
-                                                                    </tbody>
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>

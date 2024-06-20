@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { handleCheckout } from '../cart/CheckoutAPI';
+import { handleCheckout } from '../../api/CheckoutAPI';
 
 export default function Thanh_toan() {
     const [formData, setFormData] = useState({
@@ -9,25 +8,13 @@ export default function Thanh_toan() {
         birthday: '',
         email: '',
         streetAddress: '',
-        orderNote: '',
+        orderNote: ''
     });
-    const navigate = useNavigate();
-
-    const [orderItems] = useState([
-        { name: 'Suscipit Vestibulum', quantity: 1, price: 165.00 },
-        { name: 'Ami Vestibulum suscipit', quantity: 4, price: 165.00 },
-        { name: 'Vestibulum suscipit', quantity: 2, price: 165.00 },
-    ]);
-
-    const calculateTotal = () => {
-        let total = 0;
-        orderItems.forEach((item) => (total += item.quantity * item.price));
-        return total;
-    };
-
+  
+    const total1 = 29400000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
-        const container = document.querySelector("#createOrder");
+        const container = document.querySelector(".createOrder");
 
         const handleCheckoutClick = () => {
             container.classList.add("checkout-mode");
@@ -40,33 +27,36 @@ export default function Thanh_toan() {
         };
     }, []);
 
-    const handleCheckoutChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        let orderModel = {
+        const totalElement = document.getElementById("total");
+        const totalText = totalElement.textContent.replace(/\D/g, ''); // Remove non-numeric characters
+        const totalPrice = parseInt(totalText, 10); // Convert to integer
+        
+        const orderModel = {
             fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
             email: formData.email,
             streetAddress: formData.streetAddress,
             orderNote: formData.orderNote,
-            price: calculateTotal()
+            price: totalPrice
         };
-
         try {
-            const paymentUrl = await handleCheckout(orderModel); // Fetch payment URL from backend
-
-            // Redirect to payment page
-            window.location.href = paymentUrl;
+            const url = await handleCheckout(orderModel); // Await the promise
+            window.location.href = url; // Use the resolved URL
         } catch (error) {
             console.error('Error during checkout:', error);
-            // Handle error appropriately
         }
     };
+
+    
+    const handleCheckoutChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
 
     return (
         <div>
@@ -100,7 +90,7 @@ export default function Thanh_toan() {
                             <div class="checkout-billing-details-wrap">
                                 <h5 class="checkout-title">Thông tin người mua</h5>
                                 <div class="billing-form-wrap">
-                                    <form action="#" id="createOrder" onSubmit={handleCheckoutSubmit}>
+                                    <form className="createOrder" onSubmit={handleCheckoutSubmit}>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="single-input-item">
@@ -179,7 +169,9 @@ export default function Thanh_toan() {
                                             </div>
 
                                         </div>
-                                        <input type="submit" value="THANH TOÁN" className="btn-login solid" id="btn_checkout" />
+                                        <button type="submit" value="THANH TOÁN"
+                                            className="btn-login solid"
+                                            id="btn_checkout">THANH TOÁN</button>
                                     </form>
                                 </div>
                             </div>
@@ -203,17 +195,17 @@ export default function Thanh_toan() {
                                                 <tr>
                                                     <td><a href="product-details.html">Suscipit Vestibulum <strong> × 1</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                                 <tr>
                                                     <td><a href="product-details.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                                 <tr>
                                                     <td><a href="product-details.html">Vestibulum suscipit <strong> × 2</strong></a>
                                                     </td>
-                                                    <td>$165.00</td>
+                                                    <td>4.200.000 VND</td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
@@ -230,7 +222,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td id="total"><strong>$470</strong></td>
+                                                    <td id="total"><strong>29.400.000 </strong><strong>VND</strong></td>
                                                 </tr>
                                             </tfoot>
                                         </table>
