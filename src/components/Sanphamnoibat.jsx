@@ -15,9 +15,9 @@ function Sanphamnoibat() {
         coloum: 4,
 
     };
-  return (
-    <div>
-      <section className="product-area section-padding">
+    return (
+        <div>
+            <section className="product-area section-padding">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -80,10 +80,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>10%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -93,7 +90,7 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
@@ -120,10 +117,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -133,14 +127,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                            
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Nhẫn Kim cương Bạc 14K</Link>
                                                                 </h6>
@@ -161,7 +155,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -171,14 +165,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Nhẫn Kim cương Vàng 14K</Link>
                                                                 </h6>
@@ -199,10 +193,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>15%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -212,14 +203,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                              
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Nhẫn cưới Kim cương Vàng 18K</Link>
                                                                 </h6>
@@ -240,10 +231,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>20%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -253,14 +241,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K</a>
                                                                 </h6>
@@ -286,9 +274,9 @@ function Sanphamnoibat() {
                                                                         src="assets\img\product\Mat-day-chuyen\ddddw060396-mat-day-chuyen-kim-cuong-vang-trang-kim-cuong-02.png" alt="product" />
                                                                 </Link>
                                                                 <div className="product-badge">
-                                                                  
-                                                                    <div className="product-label discount">
-                                                                        <span>10%</span>
+
+                                                                    <div className="product-label new">
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -298,14 +286,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </a>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                             
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Mặt dây chuyền Kim cương Vàng trắng 14K</a>
                                                                 </h6>
@@ -326,10 +314,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -339,14 +324,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Mặt dây chuyền Kim cương Vàng trắng 14K </Link>
                                                                 </h6>
@@ -367,7 +352,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -377,14 +362,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                    
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Mặt dây chuyền Kim cương Vàng Trắng 14K</Link>
                                                                 </h6>
@@ -404,9 +389,8 @@ function Sanphamnoibat() {
                                                                         src="assets/img/product/Mat-day-chuyen/ddddw001386-mat-day-chuyen-kim-cuong-vang-trang-14k-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
-                                                              
-                                                                    <div className="product-label discount">
-                                                                        <span>15%</span>
+                                                                    <div className="product-label new">
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -416,14 +400,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                  
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                             
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Mặt dây chuyền Kim cương Vàng trắng 14K</a>
                                                                 </h6>
@@ -444,10 +428,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>20%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -457,14 +438,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                  
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                             
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Mặt dây chuyền Kim cương Vàng Trắng 14K</a>
                                                                 </h6>
@@ -490,10 +471,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>10%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -503,14 +481,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                  
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                          
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Dây chuyền Bạc Ý </a>
                                                                 </h6>
@@ -531,10 +509,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -544,14 +519,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                    
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                            
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Dây chuyền Vàng trắng Ý 18K</Link>
                                                                 </h6>
@@ -572,7 +547,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -582,14 +557,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Dây chuyền Bạc Ý</Link>
                                                                 </h6>
@@ -610,10 +585,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>15%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -623,14 +595,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                 
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                              
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Dây chuyền Bạc Ý </a>
                                                                 </h6>
@@ -651,10 +623,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>20%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -664,14 +633,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Dây chuyền Vàng trắng Ý 18K</a>
                                                                 </h6>
@@ -697,10 +666,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>new</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>10%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -710,14 +676,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                    
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                              
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Vòng tay Kim cương Vàng Trắng 14K</a>
                                                                 </h6>
@@ -737,10 +703,10 @@ function Sanphamnoibat() {
                                                                         src="assets/img/product/Vong-tay/0000w000913-vong-tay-vang-trang-y-18k-02.png" alt="product" />
                                                                 </a>
                                                                 <div className="product-badge">
-                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
-                                                                    </div> 
-                                                                  
+                                                                    <div className="product-label new">
+                                                                        <span>Mới</span>
+                                                                    </div>
+
                                                                 </div>
                                                                 <div className="button-group">
                                                                     <Link to="/Yeuthich"
@@ -749,14 +715,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                   
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                           
+
                                                                 <h6 className="product-name">
                                                                     <Link to="/Chitietsanpham">Vòng tay Vàng Trắng Ý 18K</Link>
                                                                 </h6>
@@ -777,7 +743,7 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -787,14 +753,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                  
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Vòng tay Bạc đính đá Họa tiết</a>
                                                                 </h6>
@@ -813,10 +779,7 @@ function Sanphamnoibat() {
                                                                 </a>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Giảm giá</span>
-                                                                    </div>
-                                                                    <div className="product-label discount">
-                                                                        <span>15%</span>
+                                                                        <span>Mới</span>
                                                                     </div>
                                                                 </div>
                                                                 <div className="button-group">
@@ -826,14 +789,14 @@ function Sanphamnoibat() {
                                                                         title="Add to wishlist">
                                                                         <i className="pe-7s-like"></i>
                                                                     </Link>
-                                                                  
+
                                                                 </div>
                                                                 <div className="cart-hover">
                                                                     <button className="btn btn-cart">Thêm vào giỏ hàng</button>
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                              
+
                                                                 <h6 className="product-name">
                                                                     <a href="product-details.html">Vòng tay Charm Bạc</a>
                                                                 </h6>
@@ -854,9 +817,9 @@ function Sanphamnoibat() {
                                                                 </Link>
                                                                 <div className="product-badge">
                                                                     <div className="product-label new">
-                                                                        <span>Sản phẩm mới</span>
+                                                                        <span>Mới</span>
                                                                     </div>
-                                                                 
+
                                                                 </div>
                                                                 <div className="button-group">
                                                                     <Link to="/Yeuthich"
@@ -871,7 +834,7 @@ function Sanphamnoibat() {
                                                                 </div>
                                                             </figure>
                                                             <div className="product-caption text-center">
-                                                               
+
                                                                 <h6 className="product-name">
                                                                     <a href="/Chitietsanpham">Vòng tay Kim cương Vàng 14K Infinity </a>
                                                                 </h6>
@@ -892,8 +855,8 @@ function Sanphamnoibat() {
                     </div>
                 </div>
             </section>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Sanphamnoibat
