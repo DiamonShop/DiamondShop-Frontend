@@ -1,53 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useUser } from '../UserContext';
+
+import { Link, useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'; 
+import updateProfile from '../api/UpdateProfile'; 
+
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
     const [userData, setUserData] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
-    const [newPwd, setNewPassword] = useState('');
-    const [confirmPwd, setConfirmPassword] = useState('');
     const [displayName, setDisplayName] = useState('');
-    const int = 1;
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [newPwd, setNewPassword] = useState('');
+    const [confirmPwd, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchUserData = async () => {
+            if (!currentUser) {
+                console.log("User not logged in. Redirecting to login.");
+                return;
+            }
+
+            setLoading(true);
             const token = localStorage.getItem('token');
 
-            if (token) {
-                try {
-                    const response = await axios.get('https://localhost:7101/api/User/GetUserProfile?id=1', {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-
-                    setUserData(response.data);
-                    setDisplayName(response.data.fullName);
-                    setEmail(response.data.email);
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                    if (error.response && error.response.status === 401) {
-                        console.log('Token hết hạn hoặc không hợp lệ. Đang chuyển hướng đến trang đăng nhập.');
-                        userLogout();
-                    } else {
-                        setErrorMessage('Lỗi khi lấy dữ liệu người dùng.');
-                    }
-                }
-            } else {
-                console.log("Không tìm thấy token hợp lệ hoặc token đã hết hạn");
+            if (!token) {
+                console.log("Token not found or expired. Logging out.");
                 userLogout();
+                return;
+            }
+
+            try {
+                const decodedToken = jwtDecode(token);
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+                if (userRole === 'Admin') {
+                    navigate('/BangDieuKhien');
+                }
+
+
+                const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${currentUser.userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                console.log("Response data:", response.data);
+                setUserData(response.data);
+                setDisplayName(response.data.fullName || '');
+                setEmail(response.data.email || '');
+                setAddress(response.data.address || '');
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                if (error.response && error.response.status === 401) {
+                    console.log('Token expired or invalid. Redirecting to login.');
+                    userLogout();
+                } else {
+                    setErrorMessage('Error fetching user data.');
+                }
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchUserData();
-    }, [userLogout]);
+    }, [currentUser, userLogout, navigate]);
 
     const handlePasswordChange = (event) => {
         const { id, value } = event.target;
@@ -70,9 +91,24 @@ export default function Thong_tin_tk() {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
+
+        const userDataToUpdate = {
+            fullName: displayName,
+            email,
+            address
+        };
+
+        try {
+            setLoading(true);
+            const updatedUser = await updateProfile(currentUser.userId, userDataToUpdate, token);
+            console.log('Update response:', updatedUser);
+            setErrorMessage('Update successful');
+            // Có thể cập nhật lại dữ liệu người dùng sau khi update thành công nếu cần
+            // setUserData(response.data);
+
         try {
             const response = await axios.put(
-                `https://localhost:7101/api/User/UpdateUserProfile?id=1`, // Ensure this endpoint is correct
+                `https://localhost:7101/api/User/UpdateUserProfile?id=${currentUser.userId}`, // Ensure this endpoint is correct
                 {
                     username,
                     password,
@@ -87,27 +123,24 @@ export default function Thong_tin_tk() {
                     }
                 }
             );
-
             console.log('Update response:', response.data);
             // Update successful, handle accordingly
         } catch (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.log('Server responded with error:', error.response.data);
-                setErrorMessage(error.response.data.message || 'Unknown error occurred');
+                console.error('Error details:', error.response.data.errors);
+                setErrorMessage(error.response.data.title || 'Unknown error occurred');
             } else if (error.request) {
-                // The request was made but no response was received
                 console.log('No response received:', error.request);
                 setErrorMessage('No response received from server');
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.log('Error setting up request:', error.message);
                 setErrorMessage('Error setting up request');
             }
+        } finally {
+            setLoading(false);
         }
     };
-
     return (
         <div>
             <div className="breadcrumb-area">
@@ -155,7 +188,7 @@ export default function Thong_tin_tk() {
                                                     <div className="myaccount-content">
                                                         <h5>Dashboard</h5>
                                                         <div className="welcome">
-                                                            <p>Xin chào, <strong>Erik Jhonson</strong> (Không phải <strong>Jhonson
+                                                            <p>Xin chào, <strong>{userData ? userData.fullName : ''}</strong> (Không phải <strong>Jhonson
                                                                 !</strong><a href="login-register.html" className="logout"> Đăng xuất</a>)</p>
                                                         </div>
                                                         <p className="mb-0">Từ bảng điều khiển tài khoản của bạn.

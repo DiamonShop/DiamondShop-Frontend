@@ -27,7 +27,7 @@ import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
-
+import ScrollToTop from './components/ScrollToTop';
 function App({ tokenIsValid }) {
   const [product, setProduct] = useState(null);
 
@@ -68,6 +68,7 @@ function App({ tokenIsValid }) {
           </Routes>
         </Router>
       </UserProvider>
+      <ScrollToTop/>
     </div>
   );
 }

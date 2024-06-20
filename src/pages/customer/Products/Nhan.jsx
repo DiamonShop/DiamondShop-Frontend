@@ -75,9 +75,7 @@ export default function Nhan({ onProductClick }) {
                 </div>
             </div>
 
-            <div className="scroll-top not-visible">
-                <i className="fa fa-angle-up"></i>
-            </div>
+            
         </div>
     );
 }
