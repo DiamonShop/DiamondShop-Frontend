@@ -11,7 +11,7 @@ export default function Thanh_toan() {
         orderNote: ''
     });
   
-
+    const [totalPrice, setTotalPrice] = useState(0);
     const total1 = 10000000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
@@ -40,7 +40,6 @@ export default function Thanh_toan() {
 
 
     const handleCheckoutSubmit = async (e) => {
-        const totalPrice = calculateTotalPrice();
         e.preventDefault();
         
         const orderModel = {
@@ -50,7 +49,7 @@ export default function Thanh_toan() {
             email: formData.email,
             streetAddress: formData.streetAddress,
             orderNote: formData.orderNote,
-            price: total1
+            price: totalPrice
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
