@@ -11,8 +11,7 @@ export default function Thanh_toan() {
         orderNote: ''
     });
   
-    const [totalPrice, setTotalPrice] = useState(0);
-    const total1 = 10000000;
+    const total1 = 29400000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
@@ -23,16 +22,6 @@ export default function Thanh_toan() {
 
         checkout_btn.addEventListener('click', handleCheckoutClick);
 
-        const updateTotalPrice = () => {
-            const totalElement = document.querySelector(".order-summary-table tfoot tr:nth-child(3) td:last-child strong");
-            if (totalElement) {
-                const totalText = totalElement.innerText.replace(/[^0-9]/g, '');
-                setTotalPrice(parseInt(totalText, 10));
-            }
-        };
-
-        updateTotalPrice();
-
         return () => {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
@@ -41,6 +30,9 @@ export default function Thanh_toan() {
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
+        const totalElement = document.getElementById("total");
+        const totalText = totalElement.textContent.replace(/\D/g, ''); // Remove non-numeric characters
+        const totalPrice = parseInt(totalText, 10); // Convert to integer
         
         const orderModel = {
             fullName: formData.fullName,
@@ -230,7 +222,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td><strong>29.400.000 </strong><strong>VND</strong></td>
+                                                    <td id="total"><strong>29.400.000 </strong><strong>VND</strong></td>
                                                 </tr>
                                             </tfoot>
                                         </table>
