@@ -7,14 +7,7 @@ function Du_lieu_san_pham(props) {
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to={{
-                        pathname: "/Chitietsanpham",
-                        state: {
-                            productId: props.productId,
-                            productName: props.productName,
-                            // Thêm các dữ liệu khác bạn muốn truyền qua
-                        }
-                    }}>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productId)}>
                         <img className="pri-img" src={props.image1} alt="product" />
                         <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
@@ -34,7 +27,9 @@ function Du_lieu_san_pham(props) {
                 </figure>
                 <div className="product-caption text-center">
                     <h6 className="product-name">
-                        <a href="product-details.html">{props.productName}</a>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productId)}>
+                        {props.productName}
+                    </Link>
                     </h6>
                     <div className="price-box">
                         <span className="price-regular">{props.newPrice}</span>

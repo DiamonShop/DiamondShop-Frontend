@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 
-export default function Chi_tiet_san_pham(props) {
+export default function Chi_tiet_san_pham({productId}) {
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
 
@@ -15,7 +15,7 @@ export default function Chi_tiet_san_pham(props) {
         asNavFor: navSliderRef.current,
         ref: largeSliderRef
     };
-
+ 
     const navSliderSettings = {
         slidesToShow: 4,
         asNavFor: largeSliderRef.current,
@@ -33,6 +33,7 @@ export default function Chi_tiet_san_pham(props) {
         }],
         ref: navSliderRef
     };
+
     const relatedSliderSettings = {
         speed: 1000,
         autoplay: true,
@@ -43,11 +44,10 @@ export default function Chi_tiet_san_pham(props) {
         arrows: true,
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-
     };
-
-    // In ra dữ liệu truyền qua từ props
     
+    // In ra dữ liệu truyền qua từ props
+
 
     return (
         <div>

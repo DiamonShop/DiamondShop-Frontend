@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useUser } from '../UserContext';
-import UserProfile, { updateUserProfile } from '../api/UserProfile'; // Correct import statement
-import { error } from 'jquery';
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -12,7 +10,7 @@ export default function Thong_tin_tk() {
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [displayName, setDisplayName] = useState('');
-
+    const int = 1;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [fullName, setFullName] = useState('');
@@ -21,6 +19,7 @@ export default function Thong_tin_tk() {
     useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem('token');
+
             if (token) {
                 try {
                     const response = await axios.get('https://localhost:7101/api/User/GetUserProfile?id=1', {
@@ -70,10 +69,7 @@ export default function Thong_tin_tk() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
-      
-    
-        
-    
+
         try {
             const response = await axios.put(
                 `https://localhost:7101/api/User/UpdateUserProfile?id=1`, // Ensure this endpoint is correct
@@ -91,7 +87,7 @@ export default function Thong_tin_tk() {
                     }
                 }
             );
-    
+
             console.log('Update response:', response.data);
             // Update successful, handle accordingly
         } catch (error) {
@@ -208,7 +204,7 @@ export default function Thong_tin_tk() {
                                                                         <td><a href="cart.html" className="btn btn-sqr">View</a>
                                                                         </td>
                                                                     </tr>
-                                                                    </tbody>
+                                                                </tbody>
                                                             </table>
                                                         </div>
                                                     </div>
