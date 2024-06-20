@@ -39,8 +39,8 @@ const productData = await Promise.all(listProduct
             image1: image1Url ? image1Url : "default_image_url_1.png", // URL thay thế nếu ảnh không tồn tại
             image2: image2Url ? image2Url : "default_image_url_2.png", // URL thay thế nếu ảnh không tồn tại
             label: "Mới",
-            newPrice: basePrice + "đ",
-            oldPrice: basePrice + "đ",
+            newPrice: basePrice,
+            oldPrice: basePrice,
             categoryId: categoryId,
             description: description,
             stock: stock,

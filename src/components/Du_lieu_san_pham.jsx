@@ -7,7 +7,7 @@ function Du_lieu_san_pham(props) {
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productName)}>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                         <img className="pri-img" src={props.image1} alt="product" />
                         <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
@@ -32,8 +32,8 @@ function Du_lieu_san_pham(props) {
                     </Link>
                     </h6>
                     <div className="price-box">
-                        <span className="price-regular">{props.newPrice}</span>
-                        <span className="price-old"><del>{props.oldPrice}</del></span>
+                        <span className="price-regular">{props.newPrice}đ</span>
+                        <span className="price-old"><del>{props.oldPrice}đ</del></span>
                     </div>
                 </div>
             </div>

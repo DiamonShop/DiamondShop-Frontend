@@ -1,0 +1,37 @@
+export const s = (user) => {
+    // Perform POST request to create a new user
+    fetch("https://localhost:7101/api/Register/Login", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => response.json()) // Parse the JSON response
+    .then(data => {
+        if (data.success) {
+            console.log(data.data);
+            let user = {
+                fullName: data.data.fullName,
+                roleName: data.data.roleName
+              
+            };
+              // Refresh the page upon successful login
+            localStorage.setItem('token', data.data.token);
+            // window.location.reload();
+            // Handle successful login here, e.g., redirect to a dashboard
+            return user;
+        } else {
+            console.log("Invalid login attempt");
+            // Handle invalid login attempt here, e.g., show an error message
+            return null;
+        }
+    })
+    .catch(error => {
+        console.error("Error during login:", error);
+        // Handle any errors that occurred during the fetch
+        return null;
+    });
+};
+

@@ -54,6 +54,7 @@ export default function Nhan({ onProductClick }) {
                                                 productName={item.productName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
+                                                description={item.description}
                                                 onProductClick={onProductClick}
                                             />
                                         </div>

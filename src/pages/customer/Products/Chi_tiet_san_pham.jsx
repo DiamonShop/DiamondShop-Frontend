@@ -3,8 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
+import { formatCurrency } from '../../../utils/NumberFormat';
 
-export default function Chi_tiet_san_pham({produdtName}) {
+export default function Chi_tiet_san_pham(productObj) {
 
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
@@ -16,7 +17,7 @@ export default function Chi_tiet_san_pham({produdtName}) {
         asNavFor: navSliderRef.current,
         ref: largeSliderRef
     };
- 
+
     const navSliderSettings = {
         slidesToShow: 4,
         asNavFor: largeSliderRef.current,
@@ -46,8 +47,8 @@ export default function Chi_tiet_san_pham({produdtName}) {
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
     };
-    
-    const handleAddToCart = () =>{
+
+    const handleAddToCart = () => {
 
     }
 
@@ -120,7 +121,7 @@ export default function Chi_tiet_san_pham({produdtName}) {
                                             <div class="manufacturer-name">
                                                 <a href="product-details.html">HasTech</a>
                                             </div>
-                                            <h3 class="product-name">{produdtName}</h3>
+                                            <h3 class="product-name">{productObj.productObj.productName}</h3>
                                             <div class="ratings d-flex">
                                                 <span><i class="fa fa-star-o"></i></span>
                                                 <span><i class="fa fa-star-o"></i></span>
@@ -132,8 +133,8 @@ export default function Chi_tiet_san_pham({produdtName}) {
                                                 </div>
                                             </div>
                                             <div class="price-box">
-                                                <span class="price-regular">$70.00</span>
-                                                <span class="price-old"><del>$90.00</del></span>
+                                                <span class="price-regular">{formatCurrency(productObj.productObj.newPrice)}đ</span>
+                                                <span class="price-old"><del>{formatCurrency(productObj.productObj.oldPrice)}đ</del></span>
                                             </div>
                                             <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                             <div class="product-countdown" data-countdown="2022/12/20"></div>
