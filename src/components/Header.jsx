@@ -157,49 +157,6 @@ export default function Header({ tokenIsValid }) {
           </div>
         </div>
       </div>
-
-      {isMinicartVisible && (
-        <>
-          <div className="minicart-inner show">
-            <div className="minicart-inner-content">
-              <button className="minicart-close" onClick={closeMinicart}>
-                <i className="fa fa-times"></i>
-              </button>
-              <div className="minicart-content-box">
-                <div className="minicart-item-wrapper">
-                  <ul>
-                    <li>
-                      <div className="minicart-item">
-                        <div className="minicart-thumb">
-                          <img src="assets/img/product/1.jpg" alt="product" />
-                        </div>
-                        <div className="minicart-content">
-                          <h4 className="product-name"><Link to="/Product/1">Product Name</Link></h4>
-                          <p className="cart-quantity">Quantity: <strong>1</strong></p>
-                          <p className="cart-price">$100.00</p>
-                        </div>
-                        <div className="minicart-remove">
-                          <a href="#"><i className="fa fa-times"></i></a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div className="minicart-pricing-box">
-                  <ul>
-                    <li><span>Subtotal</span> <span><strong>$100.00</strong></span></li>
-                    <li className="total"><span>Total</span> <span><strong>$100.00</strong></span></li>
-                  </ul>
-                </div>
-                <div className="minicart-button">
-                  <Link to="/Checkout" className="btn btn-custom-color">Checkout</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="minicart-overlay" onClick={closeMinicart}></div>
-        </>
-      )}
     </>
   );
 }
