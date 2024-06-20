@@ -143,13 +143,17 @@ const San_Pham = () => {
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
-                            <a class="sidebar-link">
-                                    <i class="align-middle"
-                                        data-feather="check-square">
-                                    </i>
-                                    <span class="align-middle">Chứng nhận sản phẩm</span>
-                                </a>
+
                         </li>
+                        <li className="sidebar-item">
+                            <a class="sidebar-link">
+                                <i class="align-middle"
+                                    data-feather="check-square">
+                                </i>
+                                <span class="align-middle">Chứng nhận sản phẩm</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </nav>

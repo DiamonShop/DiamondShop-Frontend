@@ -29,7 +29,7 @@ import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 import { useUser } from './UserContext';
-
+import ScrollToTop from './components/ScrollToTop';
 function App({ tokenIsValid }) {
   const { user } = useUser();
   return (
@@ -63,6 +63,7 @@ function App({ tokenIsValid }) {
         </Routes>
       </Router>
       </UserProvider>
+      <ScrollToTop />
     </div>
   );
 }

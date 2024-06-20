@@ -50,7 +50,7 @@ const AccountManagement = () => {
         <div className="content">
             <div className="container">
                 <h2 className="text-center">Quản lý sản phẩm</h2>
-                <table className="table table-striped">
+                <table className="">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -58,6 +58,7 @@ const AccountManagement = () => {
                             <th>Email</th>
                             <th>Chức vụ</th>
                             <th>Tình trạng</th>
+                            <th>Hành động</th>
 
                         </tr>
                     </thead>
@@ -159,6 +160,9 @@ const Tai_Khoan = () => {
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
+
+                        </li>
+                        <li className="sidebar-item">
                             <a class="sidebar-link">
                                 <i class="align-middle"
                                     data-feather="check-square">
@@ -166,6 +170,7 @@ const Tai_Khoan = () => {
                                 <span class="align-middle">Chứng nhận sản phẩm</span>
                             </a>
                         </li>
+
                     </ul>
                 </div>
             </nav>

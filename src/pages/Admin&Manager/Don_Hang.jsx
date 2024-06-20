@@ -17,268 +17,268 @@ const OrderManagement = () => {
 
     return (
         <div className="content">
-                <div class="container mt-5">
-                    <h2 class="text-center mb-4">Order Management</h2>
-                    <div class="table-responsive table-wrapper">
-                        <table class="table table-bordered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1001</td>
-                                    <td>Diamond Ring</td>
-                                    <td>2024-05-01</td>
-                                    <td>Nguyen Van A</td>
-                                    <td>$5000</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1002</td>
-                                    <td>Diamond Necklace</td>
-                                    <td>2024-05-02</td>
-                                    <td>Tran Thi B</td>
-                                    <td>$7000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1003</td>
-                                    <td>Diamond Earrings</td>
-                                    <td>2024-05-03</td>
-                                    <td>Le Van C</td>
-                                    <td>$3000</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1004</td>
-                                    <td>Diamond Bracelet</td>
-                                    <td>2024-05-04</td>
-                                    <td>Pham Thi D</td>
-                                    <td>$4000</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1005</td>
-                                    <td>Diamond Pendant</td>
-                                    <td>2024-05-05</td>
-                                    <td>Nguyen Van E</td>
-                                    <td>$3500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1006</td>
-                                    <td>Diamond Watch</td>
-                                    <td>2024-05-06</td>
-                                    <td>Tran Thi F</td>
-                                    <td>$8000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1007</td>
-                                    <td>Diamond Brooch</td>
-                                    <td>2024-05-07</td>
-                                    <td>Le Van G</td>
-                                    <td>$4500</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1008</td>
-                                    <td>Diamond Cufflinks</td>
-                                    <td>2024-05-08</td>
-                                    <td>Pham Thi H</td>
-                                    <td>$5000</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1009</td>
-                                    <td>Diamond Anklet</td>
-                                    <td>2024-05-09</td>
-                                    <td>Nguyen Van I</td>
-                                    <td>$2500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1010</td>
-                                    <td>Diamond Tiara</td>
-                                    <td>2024-05-10</td>
-                                    <td>Tran Thi J</td>
-                                    <td>$10000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1011</td>
-                                    <td>Diamond Ring</td>
-                                    <td>2024-05-11</td>
-                                    <td>Nguyen Van K</td>
-                                    <td>$5500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1012</td>
-                                    <td>Diamond Necklace</td>
-                                    <td>2024-05-12</td>
-                                    <td>Tran Thi L</td>
-                                    <td>$7200</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1013</td>
-                                    <td>Diamond Earrings</td>
-                                    <td>2024-05-13</td>
-                                    <td>Le Van M</td>
-                                    <td>$3100</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1014</td>
-                                    <td>Diamond Bracelet</td>
-                                    <td>2024-05-14</td>
-                                    <td>Pham Thi N</td>
-                                    <td>$4300</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1015</td>
-                                    <td>Diamond Pendant</td>
-                                    <td>2024-05-15</td>
-                                    <td>Nguyen Van O</td>
-                                    <td>$3600</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1016</td>
-                                    <td>Diamond Watch</td>
-                                    <td>2024-05-16</td>
-                                    <td>Tran Thi P</td>
-                                    <td>$8300</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1017</td>
-                                    <td>Diamond Brooch</td>
-                                    <td>2024-05-17</td>
-                                    <td>Le Van Q</td>
-                                    <td>$4700</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1018</td>
-                                    <td>Diamond Cufflinks</td>
-                                    <td>2024-05-18</td>
-                                    <td>Pham Thi R</td>
-                                    <td>$5200</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1019</td>
-                                    <td>Diamond Anklet</td>
-                                    <td>2024-05-19</td>
-                                    <td>Nguyen Van S</td>
-                                    <td>$2600</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1020</td>
-                                    <td>Diamond Tiara</td>
-                                    <td>2024-05-20</td>
-                                    <td>Tran Thi T</td>
-                                    <td>$10300</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="container mt-5">
+                <h2 class="text-center mb-4">Order Management</h2>
+                <div class="table-responsive table-wrapper">
+                    <table class="">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Item</th>
+                                <th>Date</th>
+                                <th>Customer Name</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1001</td>
+                                <td>Diamond Ring</td>
+                                <td>2024-05-01</td>
+                                <td>Nguyen Van A</td>
+                                <td>$5000</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1002</td>
+                                <td>Diamond Necklace</td>
+                                <td>2024-05-02</td>
+                                <td>Tran Thi B</td>
+                                <td>$7000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1003</td>
+                                <td>Diamond Earrings</td>
+                                <td>2024-05-03</td>
+                                <td>Le Van C</td>
+                                <td>$3000</td>
+                                <td>Cancelled</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1004</td>
+                                <td>Diamond Bracelet</td>
+                                <td>2024-05-04</td>
+                                <td>Pham Thi D</td>
+                                <td>$4000</td>
+                                <td>Shipped</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1005</td>
+                                <td>Diamond Pendant</td>
+                                <td>2024-05-05</td>
+                                <td>Nguyen Van E</td>
+                                <td>$3500</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1006</td>
+                                <td>Diamond Watch</td>
+                                <td>2024-05-06</td>
+                                <td>Tran Thi F</td>
+                                <td>$8000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1007</td>
+                                <td>Diamond Brooch</td>
+                                <td>2024-05-07</td>
+                                <td>Le Van G</td>
+                                <td>$4500</td>
+                                <td>Cancelled</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1008</td>
+                                <td>Diamond Cufflinks</td>
+                                <td>2024-05-08</td>
+                                <td>Pham Thi H</td>
+                                <td>$5000</td>
+                                <td>Shipped</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1009</td>
+                                <td>Diamond Anklet</td>
+                                <td>2024-05-09</td>
+                                <td>Nguyen Van I</td>
+                                <td>$2500</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1010</td>
+                                <td>Diamond Tiara</td>
+                                <td>2024-05-10</td>
+                                <td>Tran Thi J</td>
+                                <td>$10000</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1011</td>
+                                <td>Diamond Ring</td>
+                                <td>2024-05-11</td>
+                                <td>Nguyen Van K</td>
+                                <td>$5500</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1012</td>
+                                <td>Diamond Necklace</td>
+                                <td>2024-05-12</td>
+                                <td>Tran Thi L</td>
+                                <td>$7200</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1013</td>
+                                <td>Diamond Earrings</td>
+                                <td>2024-05-13</td>
+                                <td>Le Van M</td>
+                                <td>$3100</td>
+                                <td>Cancelled</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1014</td>
+                                <td>Diamond Bracelet</td>
+                                <td>2024-05-14</td>
+                                <td>Pham Thi N</td>
+                                <td>$4300</td>
+                                <td>Shipped</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1015</td>
+                                <td>Diamond Pendant</td>
+                                <td>2024-05-15</td>
+                                <td>Nguyen Van O</td>
+                                <td>$3600</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1016</td>
+                                <td>Diamond Watch</td>
+                                <td>2024-05-16</td>
+                                <td>Tran Thi P</td>
+                                <td>$8300</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1017</td>
+                                <td>Diamond Brooch</td>
+                                <td>2024-05-17</td>
+                                <td>Le Van Q</td>
+                                <td>$4700</td>
+                                <td>Cancelled</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1018</td>
+                                <td>Diamond Cufflinks</td>
+                                <td>2024-05-18</td>
+                                <td>Pham Thi R</td>
+                                <td>$5200</td>
+                                <td>Shipped</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1019</td>
+                                <td>Diamond Anklet</td>
+                                <td>2024-05-19</td>
+                                <td>Nguyen Van S</td>
+                                <td>$2600</td>
+                                <td>Delivered</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1020</td>
+                                <td>Diamond Tiara</td>
+                                <td>2024-05-20</td>
+                                <td>Tran Thi T</td>
+                                <td>$10300</td>
+                                <td>Pending</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
-           
+
         </div>
 
 
@@ -319,6 +319,9 @@ const Don_Hang = () => {
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
+
+                        </li>
+                        <li className="sidebar-item">
                             <a class="sidebar-link">
                                 <i class="align-middle"
                                     data-feather="check-square">
@@ -326,6 +329,7 @@ const Don_Hang = () => {
                                 <span class="align-middle">Chứng nhận sản phẩm</span>
                             </a>
                         </li>
+
                     </ul>
                 </div>
             </nav>

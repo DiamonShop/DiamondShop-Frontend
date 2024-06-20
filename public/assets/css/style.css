@@ -658,15 +658,24 @@ textarea:focus {
   text-align: center;
   width: 50px;
   z-index: 9999;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
   background-color: #c29958;
-  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  color: white;
 }
-
+.scroll-top i {
+  font-size: 24px; /* Tăng kích thước của biểu tượng mũi tên */
+}
+.scroll-top.not-visible {
+  opacity: 0;
+  visibility: hidden;
+}
 
 /* ----scroll to top css end ----*/
 .container {
