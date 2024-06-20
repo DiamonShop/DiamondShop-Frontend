@@ -11,7 +11,6 @@ import Mat_day_chuyen from './pages/customer/Products/Mat_day_chuyen';
 import Kim_cuong from './pages/customer/Products/Kim_cuong';
 import About_us from './pages/customer/About_us';
 import Chinh_sach from './pages/customer/Chinh_sach';
-import Wishlist from './pages/customer/Wishlist';
 import Dang_nhap from './Login/Dang_nhap';
 import Dang_ki from './Login/Dang_ki';
 import Thong_tin_tk from './Login/Thong_tin_tk';
@@ -24,18 +23,18 @@ import Dashboard from './pages/Admin&Manager/Dashboard';
 import Chinh_sach_bao_mat from './pages/customer/Chinh_sach_bao_mat';
 import Thanh_toan from './pages/cart/Thanh_toan';
 import FirebaseImageUpload from './FirebaseImage/FirebaseImageUpload';
-import Bang_Dieu_Khien from './pages/Admin&Manager/Bang_Dieu_Khien';
 import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 
 function App({ tokenIsValid }) {
-  const [productId, setProductId] = useState(null);
+  const [productName, setProductName] = useState(null);
 
+  
   //Chuyển id từ Nhan qua App
-  const handleProductClick = (id) => {
-    setProductId(id);
+  const handleProductClick = (name) => {
+    setProductName(name);
   }
 
   return (
@@ -54,14 +53,14 @@ function App({ tokenIsValid }) {
             <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
             <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
             <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
-            <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham productId={productId} /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
+            <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham produdtName={productName} /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
             <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
             <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
             <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
             <Route path='/Banggiakimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Bang_gia_kim_cuong /></MainLayout>} />
             <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
             <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan /></MainLayout>} />
-            <Route path='/BangDieuKhien' element={<DashboardLayout tokenIsValid={tokenIsValid}><Bang_Dieu_Khien /></DashboardLayout>} />
+            <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
             <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
             <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
             <Route path='/Uploadimg' element={<DashboardLayout tokenIsValid={tokenIsValid}><FirebaseImageUpload /></DashboardLayout>} />

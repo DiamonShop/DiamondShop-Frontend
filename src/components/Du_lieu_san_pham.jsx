@@ -7,7 +7,7 @@ function Du_lieu_san_pham(props) {
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productId)}>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productName)}>
                         <img className="pri-img" src={props.image1} alt="product" />
                         <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
