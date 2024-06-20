@@ -21965,3 +21965,74 @@ footer.footer p {
     padding: 0;
     transform: none;
 }
+/* end dashboard */
+
+/* Start huong dan do ni */
+.container-do-ni {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.do-ni-title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #000;
+  margin: 20px;
+  
+}
+.quy-chieu-size-title{
+  font-size: 40px;
+  font-weight: bold;
+  color: #000;
+  margin: 40px;
+}
+
+.instructions {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.instructions li {
+  margin-bottom: 10px;
+}
+
+.images-do-ni {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-do-ni {
+  text-align: center;
+}
+
+.image-do-ni img {
+  vertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+}
+
+.note {
+  text-align: left;
+}
+
+.note ul {
+  
+  padding: 0;
+}
+
+.note ul li {
+  margin-bottom: 10px;
+}
+
+.size-for {
+text-align: left;
+}
+
+
+/* end huong dan do ni */
