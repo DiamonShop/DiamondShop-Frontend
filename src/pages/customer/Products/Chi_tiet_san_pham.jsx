@@ -147,8 +147,8 @@ export default function Chi_tiet_san_pham() {
                                                 <div class="quantity">
                                                     <div class="pro-qty">
                                                         <input type="number"
-                                                            value={value}
-                                                            onChange={handleChange}
+                                                            defaultValue="1"
+                                                            // onChange={handleChange}
                                                             min="1" />
                                                     </div>
                                                 </div>
@@ -305,7 +305,7 @@ export default function Chi_tiet_san_pham() {
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_three">
                                                     <form action="#" class="review-form">
-                                                        <h5>1 review for <span>Chaz Kangeroo</span></h5>
+                                                        <h5>1 review </h5>
                                                         <div class="total-reviews">
                                                             <div class="rev-avatar">
                                                                 <img src="assets/img/about/avatar.jpg" alt="" />
