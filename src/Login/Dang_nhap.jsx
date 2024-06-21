@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 import { handleLoginUser } from '../api/LoginAPI';
-import { handleSignUpUser } from '../api/SignUpAPI';
 import { Link } from 'react-router-dom';
-import googleLogin from '../api/GoogleLogin';
+
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
-    const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
     const navigate = useNavigate();
-    const handleGoogleLogin = async () => {
-        await googleLogin();
-        navigate('/'); // Adjust the navigation route as necessary
-    };
+
     useEffect(() => {
         const sign_in_btn = document.querySelector("#sign-in-btn");
         const container = document.querySelector(".signin-signup-container");
-
 
         const handleSignInClick = () => {
             container.classList.remove("sign-up-mode");
@@ -33,15 +28,33 @@ export default function Dang_nhap() {
         setSignInForm({ ...signInForm, [name]: value });
     };
 
-
     const handleSignInSubmit = async (e) => {
         e.preventDefault();
         let user = {
             username: signInForm.username,
             password: signInForm.password
         };
-        handleLoginUser(user);
-        navigate('/');
+
+        try {
+            const response = await handleLoginUser(user);
+            console.log('Response from login API:', response); // Log the response
+
+            if (response && response.token) { // Ensure response and token are defined
+                const decodedToken = jwtDecode(response.token);
+                const roleName = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                console.log('Role Name:', roleName); // Log the role name
+
+                if (roleName === 'Admin') {
+                    navigate('/BangDieuKhien');
+                } else {
+                    navigate('/');
+                }
+            } else {
+                console.error('Token is not available in the response');
+            }
+        } catch (error) {
+            console.error('Login failed', error);
+        }
     };
 
     return (
@@ -74,13 +87,11 @@ export default function Dang_nhap() {
                             <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
                             <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
                             <div className="social-media">
-                                <a href="#" className="social-icon" onClick={handleGoogleLogin}>
+                                <a href="#" className="social-icon">
                                     <i><img src="assets/img/logo/Google.png" alt="" /></i>
                                 </a>
                             </div>
                         </form>
-
-                        
                     </div>
                 </div>
                 <div className="panels-container">
@@ -89,22 +100,17 @@ export default function Dang_nhap() {
                             <h3>Bạn chưa có tài khoản?</h3>
                             <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
                             <Link to="/Dangki"><button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button></Link>
-                            
                         </div>
-
                     </div>
                     <div className="panel right-panel">
                         <div className="content">
                             <h3></h3>
                             <p></p>
                             <button className="btn transparent" id="sign-in-btn"></button>
-                            
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-        
     );
 }
