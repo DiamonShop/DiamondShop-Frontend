@@ -49,40 +49,7 @@ export default function Gio_hang() {
                                                 <td class="pro-subtotal"><span>193.256.000đ</span></td>
                                                 <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                             </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/15/nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn cưới Kim cương Vàng trắng 14K Long Phụng DD00W000641</a></td>
-                                                <td class="pro-price"><span>8.316.000đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty"><input type="text" value="2" /></div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>16.632.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/2/nhan-vang-trang-14k-dinh-da-ecz-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn Vàng trắng 14K đính đá ECZ XMXMW004696</a></td>
-                                                <td class="pro-price"><span>8.359.000đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="1" />
-                                                    </div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>8.359.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/7/nhan-nam-kim-cuong-vang-14k-dd00h000294-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn nam Kim cương Vàng 14K DD00H000294</a></td>
-                                                <td class="pro-price"><span>78.219.900đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="3" />
-                                                    </div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>234.657.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>

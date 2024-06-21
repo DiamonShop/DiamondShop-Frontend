@@ -14,7 +14,6 @@ export function UserProvider({ children }) {
         if (token) {
             try {
                 const decodedToken = JSON.parse(atob(token.split('.')[1]));
-                console.log("Decoded Token:", decodedToken); // Log decoded token để kiểm tra
                 setUser({
                     userId: decodedToken.sid,
                     email: decodedToken.email,

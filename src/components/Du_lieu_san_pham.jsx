@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
 
 function Du_lieu_san_pham(props) {
-
     return (
         <div>
             <div className="product-item">
@@ -28,7 +27,7 @@ function Du_lieu_san_pham(props) {
                 </figure>
                 <div className="product-caption text-center">
                     <h6 className="product-name">
-                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props.productId)}>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                         {props.productName}
                     </Link>
                     </h6>

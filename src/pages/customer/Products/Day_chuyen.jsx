@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Filter_product from '../../../components/Filter_product';
 import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
-export default function Day_chuyen() {
+export default function Day_chuyen({onDayChuyenClick}) {
     const [sortOption, setSortOption] = useState('');
 
     const handleSortChange = (event) => {
@@ -28,6 +28,7 @@ export default function Day_chuyen() {
                 return 0;
         }
     });
+
     return (
         <div>
             <div className="breadcrumb-area">
@@ -58,13 +59,17 @@ export default function Day_chuyen() {
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {sortedProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham
+                                            <Du_lieu_san_pham 
+                                                productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 label={item.label}
                                                 productName={item.productName}
+                                                categoryName={item.categoryName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
+                                                description={item.description}
+                                                onProductClick={onDayChuyenClick}
                                             />
                                         </div>
                                     ))}

@@ -52,6 +52,7 @@ export default function Nhan({ onProductClick }) {
                                                 image2={item.image2}
                                                 label={item.label}
                                                 productName={item.productName}
+                                                categoryName={item.categoryName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
                                                 description={item.description}

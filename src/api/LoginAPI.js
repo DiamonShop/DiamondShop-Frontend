@@ -1,3 +1,5 @@
+// import {GoogleLogin} from 'react-google-login'
+
 export const handleLoginUser = async (user) => {
     try {
         const response = await fetch("https://localhost:7101/api/Register/Login", {
@@ -8,9 +10,9 @@ export const handleLoginUser = async (user) => {
             },
             body: JSON.stringify(user)
         });
-        
+
         const data = await response.json();
-        
+
         if (data.success) {
             console.log(data.data);
             let user = {
@@ -18,7 +20,7 @@ export const handleLoginUser = async (user) => {
                 roleName: data.data.roleName,
                 token: data.data.token // Include the token
             };
-            
+
             // Save the token in local storage
             localStorage.setItem('token', data.data.token);
             return user; // Return the user object
@@ -31,5 +33,28 @@ export const handleLoginUser = async (user) => {
         return null; // Return null on error
     }
 };
+
+// export function GoogleLogin() {
+//     const onSuccess = (res) => {
+//         console.log('[Login Success] currentUser:', res.profileObj);
+//     }
+
+//     const onFailure = (res) => {
+//         console.log('[Login Failure] res:', res);
+//     }
+
+//     return (
+//         <div id="signInButton">
+//             <GoogleLogin
+//                 clientId="YOUR_CLIENT_ID"
+//                 buttonText="Login with Google"
+//                 onSuccess={onSuccess}
+//                 onFailure={onFailure}
+//                 cookiePolicy={'single_host_origin'}
+//                 isSignIn={true}
+//             />
+//         </div>
+//     )
+// }
 
 

@@ -1,37 +1,26 @@
-export const s = (user) => {
-    // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Register/Login", {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => response.json()) // Parse the JSON response
-    .then(data => {
-        if (data.success) {
-            console.log(data.data);
-            let user = {
-                fullName: data.data.fullName,
-                roleName: data.data.roleName
-              
-            };
-              // Refresh the page upon successful login
-            localStorage.setItem('token', data.data.token);
-            // window.location.reload();
-            // Handle successful login here, e.g., redirect to a dashboard
-            return user;
-        } else {
-            console.log("Invalid login attempt");
-            // Handle invalid login attempt here, e.g., show an error message
-            return null;
-        }
-    })
-    .catch(error => {
-        console.error("Error during login:", error);
-        // Handle any errors that occurred during the fetch
-        return null;
-    });
+export const handleCreateOrder = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/CreatOrder?userId=${userId}`, {
+            method: 'POST',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        return data.data;
+    } catch (error) {
+        console.error("Error during create order:", error);
+        return null; // Return null on error
+    }
 };
 
+export const handleAddProductToOrder = async (orderId, productId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/CreateOrderDetail?orderId=${orderId}&productId=${productId}`, {
+            method: 'POST',
+            mode: 'cors',
+        });
+
+    } catch (error) {
+        console.error("Error during add product to order:", error);
+        return null; // Return null on error
+    }
+}

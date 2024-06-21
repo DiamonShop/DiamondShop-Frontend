@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
-import { handleLoginUser } from '../api/LoginAPI';
+import { jwtDecode } from 'jwt-decode';
+import { GoogleLogin, handleLoginUser } from '../api/LoginAPI';
 import { Link } from 'react-router-dom';
+import { gapi } from 'gapi-script'
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
@@ -45,7 +46,7 @@ export default function Dang_nhap() {
                 console.log('Role Name:', roleName); // Log the role name
 
                 if (roleName === 'Admin') {
-                    navigate('/BangDieuKhien');
+                    navigate('/Dashboard');
                 } else {
                     navigate('/');
                 }
@@ -56,6 +57,15 @@ export default function Dang_nhap() {
             console.error('Login failed', error);
         }
     };
+
+
+    // useEffect(() => {
+    //     function start() {
+    //         gapi.clientId.init({
+    //             clientId: cl
+    //         })
+    //     }
+    // })
 
     return (
         <div>
@@ -85,11 +95,9 @@ export default function Dang_nhap() {
                                 />
                             </div>
                             <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
-                            <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
+                            <p className="social-text">Hoặc đăng nhập bằng Google</p>
                             <div className="social-media">
-                                <a href="#" className="social-icon">
-                                    <i><img src="assets/img/logo/Google.png" alt="" /></i>
-                                </a>
+                                
                             </div>
                         </form>
                     </div>
