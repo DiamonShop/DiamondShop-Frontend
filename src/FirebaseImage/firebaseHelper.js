@@ -1,8 +1,9 @@
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { imageDb } from './Config'; // Đảm bảo import cấu hình Firebase
 
-export const getImageUrls = async (productId) => {
-    const productRef = ref(imageDb, `files/Nhan/${productId}/`);
+export const getImageUrls = async (productId,categoryId) => {
+    
+    const productRef = ref(imageDb, `files/${categoryId}/${productId}/`);
 
     try {
         const list = await listAll(productRef);
@@ -12,7 +13,7 @@ export const getImageUrls = async (productId) => {
             imageRefs.map(async (imageRef) => {
                 try {
                     return await getDownloadURL(imageRef);
-                } catch (error) {
+                } catch (error) {   
                     if (error.code === 'storage/object-not-found') {
                         console.error(`File not found: ${imageRef.fullPath}`);
                         return null; // hoặc cung cấp một URL thay thế
