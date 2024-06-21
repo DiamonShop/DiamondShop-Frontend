@@ -5138,12 +5138,15 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .quantity .pro-qty {
-  width: 90px;
+  width: 60px;
   height: 40px;
   border: 1px solid #ddd;
   padding: 0 15px;
   border-radius: 40px;
   float: left;
+}
+.product-details-des .quantity .pro-qty{
+  margin: 2px;
 }
 
 .product-details-des .quantity .pro-qty .qtybtn {
@@ -5335,10 +5338,19 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .pro-size .nice-select {
-  width: 100px;
+  width: 50px;
   height: 40px;
   line-height: 40px;
   border-radius: 40px;
+}
+.product-details-des .pro-size .nice-select-chatlieu{
+  width: 70px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 40px;
+  padding: 0;
+  border: solid 1px #e8e8e8;
+  text-align: center;
 }
 
 .product-details-des .group-product-table {
@@ -21973,3 +21985,73 @@ footer.footer p {
     padding: 0;
     transform: none;
 }
+/* end dashboard */
+
+/* Start huong dan do ni */
+
+.container-do-ni {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.do-ni-title {
+  
+  font-weight: bold;
+  color: #000;
+  margin: 20px;
+}
+
+.instructions {
+ 
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.instructions li {
+  margin: 10px;
+  font-size: medium;
+}
+
+.images-do-ni {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-do-ni {
+  text-align: center;
+}
+
+.image-do-ni img {
+  
+  margin-bottom: 10px;
+}
+.quy-chieu-size-title{
+  margin: 20px;
+}
+.note {
+  text-align: left;
+}
+
+.note p {
+  
+  padding: 0;
+  font-size: medium;
+}
+
+.note li {
+  margin-bottom: 10px;
+  font-size: medium;
+}
+
+.size-for {
+text-align: left;
+}
+
+
+/* end huong dan do ni  */
