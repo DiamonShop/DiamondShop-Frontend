@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { formatCurrency } from '../utils/NumberFormat';
 
 function Du_lieu_san_pham(props) {
 
@@ -32,8 +33,8 @@ function Du_lieu_san_pham(props) {
                     </Link>
                     </h6>
                     <div className="price-box">
-                        <span className="price-regular">{props.newPrice}đ</span>
-                        <span className="price-old"><del>{props.oldPrice}đ</del></span>
+                        <span className="price-regular">{formatCurrency(props.newPrice)}đ</span>
+                        <span className="price-old"><del>{formatCurrency(props.oldPrice)}đ</del></span>
                     </div>
                 </div>
             </div>

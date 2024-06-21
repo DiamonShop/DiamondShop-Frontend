@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 
-export default function Chi_tiet_san_pham(productObj) {
-
+export default function Chi_tiet_san_pham() {
+    //Get product when reload
+    const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
 
@@ -121,7 +122,7 @@ export default function Chi_tiet_san_pham(productObj) {
                                             <div class="manufacturer-name">
                                                 <a href="product-details.html">HasTech</a>
                                             </div>
-                                            <h3 class="product-name">{productObj.productObj.productName}</h3>
+                                            <h3 class="product-name">{productObj.productName}</h3>
                                             <div class="ratings d-flex">
                                                 <span><i class="fa fa-star-o"></i></span>
                                                 <span><i class="fa fa-star-o"></i></span>
@@ -133,8 +134,8 @@ export default function Chi_tiet_san_pham(productObj) {
                                                 </div>
                                             </div>
                                             <div class="price-box">
-                                                <span class="price-regular">{formatCurrency(productObj.productObj.newPrice)}đ</span>
-                                                <span class="price-old"><del>{formatCurrency(productObj.productObj.oldPrice)}đ</del></span>
+                                                <span class="price-regular">{formatCurrency(productObj.newPrice)}đ</span>
+                                                <span class="price-old"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
                                             </div>
                                             <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                             <div class="product-countdown" data-countdown="2022/12/20"></div>
@@ -142,10 +143,7 @@ export default function Chi_tiet_san_pham(productObj) {
                                                 <i class="fa fa-check-circle"></i>
                                                 <span>sdf</span>
                                             </div>
-                                            <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                                eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                                voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac
-                                                habitasse platea dictumst.</p>
+                                            <p class="pro-desc">{productObj.description}</p>
                                             <div class="quantity-cart-box d-flex align-items-center">
                                                 <h6 class="option-title">qty:</h6>
                                                 <div class="quantity">
@@ -214,16 +212,7 @@ export default function Chi_tiet_san_pham(productObj) {
                                             <div class="tab-content reviews-tab">
                                                 <div class="tab-pane fade show active" id="tab_one">
                                                     <div class="tab-one">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                            fringilla augue nec est tristique auctor. Ipsum metus feugiat
-                                                            sem, quis fermentum turpis eros eget velit. Donec ac tempus
-                                                            ante. Fusce ultricies massa massa. Fusce aliquam, purus eget
-                                                            sagittis vulputate, sapien libero hendrerit est, sed commodo
-                                                            augue nisi non neque.Cras neque metus, consequat et blandit et,
-                                                            luctus a nunc. Etiam gravida vehicula tellus, in imperdiet
-                                                            ligula euismod eget. Pellentesque habitant morbi tristique
-                                                            senectus et netus et malesuada fames ac turpis egestas. Nam
-                                                            erat mi, rutrum at sollicitudin rhoncus</p>
+                                                        <p>{productObj.description}</p>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab_two">

@@ -29,11 +29,10 @@ import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 import ScrollToTop from './components/ScrollToTop';
 function App({ tokenIsValid }) {
-  const [product, setProduct] = useState(null);
 
   //Chuyển id từ Nhan qua App
   const handleProductClick = (product) => {
-    setProduct(product);
+    localStorage.setItem('product', JSON.stringify(product));
   }
 
   return (
@@ -52,7 +51,7 @@ function App({ tokenIsValid }) {
             <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
             <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
             <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
-            <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham productObj={product} /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
+            <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
             <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
             <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
             <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
