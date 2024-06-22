@@ -35,16 +35,7 @@ export default function Header({ tokenIsValid }) {
     }
   };
    // Hàm để gửi yêu cầu API với token trong header
-   const fetchData = async () => {
-    try {
-      const response = await axios.get('https://localhost:7101/api/someendpoint', sendToken());
-      console.log('Dữ liệu nhận được từ server:', response.data);
-      // Xử lý dữ liệu nhận được (nếu cần)
-    } catch (error) {
-      console.error('Lỗi khi lấy dữ liệu từ server:', error);
-      // Xử lý các trường hợp lỗi khác (nếu cần)
-    }
-  };
+ 
 
   return (
     <>

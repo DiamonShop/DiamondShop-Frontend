@@ -69,13 +69,10 @@ export default function Thong_tin_tk() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const token = localStorage.getItem('token');
+      
     
-        const token = localStorage.getItem('token'); // Dynamically retrieve the token
     
-        if (!token) {
-            setErrorMessage('No authorization token found.');
-            return;
-        }
     
         try {
             const response = await axios.put(
@@ -90,7 +87,7 @@ export default function Thong_tin_tk() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Use the dynamically retrieved token
+                        'Authorization': `Bearer ${token}`
                     }
                 }
             );
