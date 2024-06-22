@@ -29,6 +29,7 @@ import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 import ScrollToTop from './components/ScrollToTop';
 import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
+import Chinh_sach_giao_hang from './pages/customer/Chinh_sach_giao_hang';
 function App({ tokenIsValid }) {
 
   //Chuyển id từ Nhan qua App
@@ -66,6 +67,8 @@ function App({ tokenIsValid }) {
             <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
             <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
             <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
+            <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
+
           </Routes>
         </Router>
       </UserProvider>

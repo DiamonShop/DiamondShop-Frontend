@@ -43,6 +43,7 @@ export default function Footer() {
                                     <li><Link to="/Lienhe">Liên hệ</Link></li><br/>
                                     <li><Link to="/Vechungtoi">Về chúng tôi</Link></li><br/>
                                     <li><a href="Chinhsachbaomat">Chính sách bảo mật</a></li><br/>
+                                    <li><Link to="/Chinhsachgiaohang">Chính Sách Giao Hàng</Link></li><br/>
                                     <li><Link to="/Chinhsach">Điều khoản và chính sách</Link></li><br/>
                                    
                                 </ul>
