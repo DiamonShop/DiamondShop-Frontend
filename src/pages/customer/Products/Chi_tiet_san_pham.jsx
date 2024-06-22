@@ -4,8 +4,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
-import { handleAddProductToOrder, handleCreateOrder } from '../../../api/OrderAPI';
+import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
+import { color } from 'chart.js/helpers';
 
 export default function Chi_tiet_san_pham() {
     //Get product when reload
@@ -50,17 +51,26 @@ export default function Chi_tiet_san_pham() {
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
     };
-    const [value, setValue] = useState(1);
-    const handleChange = (event) => {
-        setValue(Number(event.target.value));
+    const [quantity, setQuantity] = useState(1);
+    const handleQuantity = (event) => {
+        setQuantity(Number(event.target.value));
     };
 
     const handleAddToCart = async () => {
         //Lấy userId để tạo order
         const userId = decodeToken(localStorage.getItem('token')).sid;
         //Gọi API để tạo order
-        const orderData = await handleCreateOrder(parseInt(userId,10));
-        console.log(orderData)
+        const order = await handleGetOrderByUserId(parseInt(userId, 10))
+        for (const item of order) {
+            if (item.status == 'Ordering') {
+                handleAddProductToOrder(item.orderId,productObj.productId, quantity);
+                break;
+            }else if(item.status == 'Completed' || item.status == 'Shipped'){
+                const orderId = await handleCreateOrder(userId);
+                handleAddProductToOrder(orderId,productObj.productId, quantity);
+                break;
+            }
+        }
     }
 
     return (
@@ -155,8 +165,8 @@ export default function Chi_tiet_san_pham() {
                                                 <div class="quantity">
                                                     <div class="pro-qty">
                                                         <input name='txtQuantity' type="number"
-                                                            value={value}
-                                                            onChange={handleChange}
+                                                            value={quantity}
+                                                            onChange={handleQuantity}
                                                             min="1" />
                                                     </div>
                                                 </div>
@@ -199,6 +209,10 @@ export default function Chi_tiet_san_pham() {
                                                 <div class="action_link">
                                                     <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
                                                 </div>
+                                            </div>
+
+                                            <div class="message-add-to-cart-success">
+                                                <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
                                             </div>
                                         </div>
                                     </div>

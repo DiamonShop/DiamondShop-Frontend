@@ -49,7 +49,7 @@ export default function Gio_hang() {
                                                 <td class="pro-subtotal"><span>193.256.000đ</span></td>
                                                 <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                             </tr>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>

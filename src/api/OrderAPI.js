@@ -5,22 +5,37 @@ export const handleCreateOrder = async (userId) => {
             mode: 'cors',
         });
         const data = await response.json();
-        return data.data;
+        return data;
     } catch (error) {
         console.error("Error during create order:", error);
         return null; // Return null on error
     }
 };
 
-export const handleAddProductToOrder = async (orderId, productId) => {
+export const handleAddProductToOrder = (orderId, productId, quantity) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/orders/CreateOrderDetail?orderId=${orderId}&productId=${productId}`, {
+        
+        fetch(`https://localhost:7101/api/orders/AddProductToOrderDetail?orderId=${orderId}&productId=${productId}&quantity=${quantity}`, {
             method: 'POST',
             mode: 'cors',
         });
 
     } catch (error) {
         console.error("Error during add product to order:", error);
+        return null; // Return null on error
+    }
+}
+
+export const handleGetOrderByUserId = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/GetOrderByUserId?userId=${userId}`, {
+            method: 'GET',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error during get order:", error);
         return null; // Return null on error
     }
 }

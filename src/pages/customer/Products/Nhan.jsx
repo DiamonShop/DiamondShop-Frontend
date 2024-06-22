@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
-import App from '../../../App';
 
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
-    };
-
-    const parsePrice = (price) => {
-        return parseFloat(price.replace(/[^\d]/g, '')) || 0;
     };
 
     const sortedProducts = Product_Nhan_Data;

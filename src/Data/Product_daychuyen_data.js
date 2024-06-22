@@ -9,7 +9,6 @@ const productData = await Promise.all(listProduct
     .map(async product => {
         const { basePrice, productId, productName, stock, categoryId , description,isActive } = product;
         const { image1Url, image2Url } = await getImageUrls(productId,categoryId);
-        console.log(product)
         return {
             id: productId,
             productName: productName,
