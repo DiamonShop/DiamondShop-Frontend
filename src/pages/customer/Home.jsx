@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,22 +16,26 @@ import Logo_brand from '../../components/Logo_brand';
 
 
 export default function Home() {
-   
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const message = params.get('message');
+        if (message) {
+            toast.info(message);
+        }
+    }, [location]);
+
     return (
         <div>
-
-        <BannerHome/>
-        <Service_policy/>
-        <Sanphamnoibat/>
-        
-            
-        <Main_banner/>
-        <Main_product/>
-        <Main_bestseller_product/>
-        <Logo_brand/>
-
-           
-
+            <ToastContainer />
+            <BannerHome />
+            <Service_policy />
+            <Sanphamnoibat />
+            <Main_banner />
+            <Main_product />
+            <Main_bestseller_product />
+            <Logo_brand />
         </div>
-    )
+    );
 }
