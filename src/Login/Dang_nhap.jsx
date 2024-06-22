@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { GoogleLogin, handleLoginUser } from '../api/LoginAPI';
 import { Link } from 'react-router-dom';
-import { gapi } from 'gapi-script'
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
