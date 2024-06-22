@@ -104,37 +104,33 @@ export default function Chi_tiet_san_pham() {
                                     <div class="col-lg-6">
                                         <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src={productObj.image1} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src={productObj.image2} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src={productObj.image3} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                            <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div>
+                                            
                                         </Slider>
                                         <Slider {...navSliderSettings} className="pro-nav">
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src={productObj.image1} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src={productObj.image2} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src={productObj.image3} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                            <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div>
+                                           
                                         </Slider>
                                     </div>
                                     <div class="col-lg-6">

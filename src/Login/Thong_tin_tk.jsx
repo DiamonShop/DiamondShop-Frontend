@@ -406,6 +406,7 @@ export default function Thong_tin_tk() {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
+
         const userDataToUpdate = {
             username,
             fullName: displayName,
@@ -420,6 +421,7 @@ export default function Thong_tin_tk() {
             console.log('Update response:', updatedUser);
             setErrorMessage('Update successful');
             setUserData(updatedUser);
+
         } catch (error) {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);

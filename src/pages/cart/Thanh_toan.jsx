@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { handleCheckout } from '../../api/CheckoutAPI';
+import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { Link, useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'; // Ensure jwt-decode is installed and imported
+import updateProfile from '../../api/UpdateProfile'; // Adjust path as needed
 
 export default function Thanh_toan() {
+    const { user: currentUser, logout: userLogout } = useUser();
+    const [userData, setUserData] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [displayName, setDisplayName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [username, setUsername] = useState('');
+    const [newPwd, setNewPassword] = useState('');
+    const [confirmPwd, setConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNumber: '',
@@ -15,6 +31,52 @@ export default function Thanh_toan() {
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
+        const fetchUserData = async () => {
+            if (!currentUser) {
+                console.log("User not logged in. Redirecting to login.");
+                return;
+            }
+
+            setLoading(true);
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.log("Token not found or expired. Logging out.");
+                userLogout();
+                return;
+            }
+
+            try {
+                const decodedToken = jwtDecode(token);
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+                if (userRole === 'Admin') {
+                    navigate('/BangDieuKhien');
+                }
+
+                const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                console.log("Response data:", response.data);
+                setUserData(response.data);
+                setUsername(response.data.username || '');
+                setDisplayName(response.data.fullName || '');
+                setEmail(response.data.email || '');
+                setAddress(response.data.address || '');
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                if (error.response && error.response.status === 401) {
+                    console.log('Token expired or invalid. Redirecting to login.');
+                    userLogout();
+                } else {
+                    setErrorMessage('Error fetching user data.');
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUserData();
 
         const handleCheckoutClick = () => {
             container.classList.add("checkout-mode");
@@ -25,7 +87,9 @@ export default function Thanh_toan() {
         return () => {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
-    }, []);
+
+        
+    },[currentUser, userLogout, navigate]);
 
 
     const handleCheckoutSubmit = async (e) => {
@@ -35,11 +99,11 @@ export default function Thanh_toan() {
         const totalPrice = parseInt(totalText, 10); // Convert to integer
         
         const orderModel = {
-            fullName: formData.fullName,
+            fullName: displayName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
             email: formData.email,
-            streetAddress: formData.streetAddress,
+            streetAddress: address,
             orderNote: formData.orderNote,
             price: totalPrice
         };
@@ -51,6 +115,13 @@ export default function Thanh_toan() {
         }
     };
 
+    const handleDisplayNameChange = (event) => {
+        setDisplayName(event.target.value);
+    };
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+    };
     
     const handleCheckoutChange = (e) => {
         const { name, value } = e.target;
@@ -99,11 +170,11 @@ export default function Thanh_toan() {
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        name="fullName"
+                                                        name="displayName"
                                                         placeholder="Họ tên"
                                                         required
-                                                        value={formData.fullName}
-                                                        onChange={handleCheckoutChange}
+                                                        value={displayName}
+                                                        onChange={handleDisplayNameChange}
                                                     />
                                                 </div>
                                             </div>
@@ -148,8 +219,8 @@ export default function Thanh_toan() {
 
                                         <div class="single-input-item">
                                             <label for="street-address" class="required mt-20">Địa chỉ</label>
-                                            <input type="text" name="streetAddress" placeholder="Địa chỉ nhận hàng"
-                                                value={formData.streetAddress} onChange={handleCheckoutChange}
+                                            <input type="text" name="address" placeholder="Địa chỉ nhận hàng"
+                                                value={address} onChange={handleAddressChange}
                                                 required />
                                         </div>
 
