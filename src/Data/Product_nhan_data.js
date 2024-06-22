@@ -7,9 +7,9 @@
 //     .filter(product => product.categoryId === 1 && product.isActive === true)
 //     .map(async product => {
 //         const { basePrice, productId, productName,categoryId, stock, description,isActive } = product;
-       
+
 //         const { image1Url, image2Url } = await getImageUrls(productId,categoryId);
-        
+
 //         return {
 //             id: productId,
 //             productName: productName,
@@ -39,14 +39,13 @@ const productData = await Promise.all(listProduct
     .map(async product => {
 
         const { basePrice, productId, productName, categoryId, stock, description, isActive } = product;
-       
+
         const { image1Url, image2Url, image3Url, image4Url } = await getImageUrls(productId, categoryId);
 
-        const { basePrice, productId, productName, categoryId,stock, description,isActive } = product;
 
-        const { image1Url, image2Url } = await getImageUrls(productId,categoryId);
 
-        
+
+
         return {
             id: productId,
             productName: productName,
