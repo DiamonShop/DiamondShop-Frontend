@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Filter_product from '../../../components/Filter_product';
 import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
-export default function Day_chuyen() {
+export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
 
     const handleSortChange = (event) => {
@@ -28,6 +28,7 @@ export default function Day_chuyen() {
                 return 0;
         }
     });
+
     return (
         <div>
             <div className="breadcrumb-area">
@@ -59,15 +60,28 @@ export default function Day_chuyen() {
                                     {sortedProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
                                             <Du_lieu_san_pham
+                                                productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 label={item.label}
                                                 productName={item.productName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
+                                                categoryName={item.categoryName}
+                                                description={item.description}
+                                                onProductClick={onProductClick}
                                             />
                                         </div>
                                     ))}
+                                </div>
+                                <div className="paginatoin-area text-center">
+                                    <ul className="pagination-box">
+                                        <li><a className="previous" href="#"><i className="pe-7s-angle-left"></i></a></li>
+                                        <li className="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a className="next" href="#"><i className="pe-7s-angle-right"></i></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

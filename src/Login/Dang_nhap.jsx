@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleLoginUser } from '../api/LoginAPI';
-import { handleSignUpUser } from '../api/SignUpAPI';
+import { jwtDecode } from 'jwt-decode';
+import { GoogleLogin, handleLoginUser } from '../api/LoginAPI';
+import { Link } from 'react-router-dom';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
-    const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
     const navigate = useNavigate();
 
     useEffect(() => {
         const sign_in_btn = document.querySelector("#sign-in-btn");
-        const sign_up_btn = document.querySelector("#sign-up-btn");
         const container = document.querySelector(".signin-signup-container");
-
-        const handleSignUpClick = () => {
-            container.classList.add("sign-up-mode");
-        };
 
         const handleSignInClick = () => {
             container.classList.remove("sign-up-mode");
         };
 
-        sign_up_btn.addEventListener('click', handleSignUpClick);
         sign_in_btn.addEventListener('click', handleSignInClick);
 
         return () => {
-            sign_up_btn.removeEventListener('click', handleSignUpClick);
             sign_in_btn.removeEventListener('click', handleSignInClick);
         };
     }, []);
@@ -35,34 +28,43 @@ export default function Dang_nhap() {
         setSignInForm({ ...signInForm, [name]: value });
     };
 
-    const handleSignUpChange = (e) => {
-        const { name, value } = e.target;
-        setSignUpForm({ ...signUpForm, [name]: value });
-    };
-
     const handleSignInSubmit = async (e) => {
         e.preventDefault();
         let user = {
             username: signInForm.username,
             password: signInForm.password
         };
-        handleLoginUser(user);
-        navigate('/');
-    };
-        
-    const handleSignUpSubmit = (e) => {
-        e.preventDefault();
 
-        let user = {
-            username: signUpForm.username,
-            email: signUpForm.email,
-            password: signUpForm.password
+        try {
+            const response = await handleLoginUser(user);
+            console.log('Response from login API:', response); // Log the response
+
+            if (response && response.token) { // Ensure response and token are defined
+                const decodedToken = jwtDecode(response.token);
+                const roleName = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                console.log('Role Name:', roleName); // Log the role name
+
+                if (roleName === 'Admin') {
+                    navigate('/Dashboard');
+                } else {
+                    navigate('/');
+                }
+            } else {
+                console.error('Token is not available in the response');
+            }
+        } catch (error) {
+            console.error('Login failed', error);
         }
-
-        handleSignUpUser(user);
-        // Handle sign-up logic
-        console.log('Sign-Up:', signUpForm);
     };
+
+
+    // useEffect(() => {
+    //     function start() {
+    //         gapi.clientId.init({
+    //             clientId: cl
+    //         })
+    //     }
+    // })
 
     return (
         <div>
@@ -92,52 +94,9 @@ export default function Dang_nhap() {
                                 />
                             </div>
                             <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
-                            <p className="social-text">Hoặc đăng nhập bằng Gmail</p>
+                            <p className="social-text">Hoặc đăng nhập bằng Google</p>
                             <div className="social-media">
-                                <a href="#" className="social-icon">
-                                    <i ><img src="assets/img/logo/Google.png" alt="" /></i>
-                                </a>
-                            </div>
-                        </form>
-
-                        <form onSubmit={handleSignUpSubmit} className="sign-up-form">
-                            <h2 className="sign-up-form-title">Đăng kí</h2>
-                            <div className="input-field">
-                                <i className="pe-7s-users"></i>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    placeholder="Tên đăng nhập"
-                                    value={signUpForm.username}
-                                    onChange={handleSignUpChange}
-                                />
-                            </div>
-                            <div className="input-field">
-                                <i className="pe-7s-mail"></i>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    value={signUpForm.email}
-                                    onChange={handleSignUpChange}
-                                />
-                            </div>
-                            <div className="input-field">
-                                <i className="pe-7s-door-lock"></i>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Mật khẩu"
-                                    value={signUpForm.password}
-                                    onChange={handleSignUpChange}
-                                />
-                            </div>
-                            <input type="submit" value="ĐĂNG KÍ" className="btn-signup solid" />
-                            <p className="social-text">Hoặc đăng kí bằng Google</p>
-                            <div className="social-media">
-                                <a href="#" className="social-icon">
-                                    <i><img src="assets/img/logo/Google.png" alt="" /></i>
-                                </a>
+                                
                             </div>
                         </form>
                     </div>
@@ -147,21 +106,18 @@ export default function Dang_nhap() {
                         <div className="content">
                             <h3>Bạn chưa có tài khoản?</h3>
                             <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
-                            <button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button>
+                            <Link to="/Dangki"><button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button></Link>
                         </div>
-
                     </div>
                     <div className="panel right-panel">
                         <div className="content">
-                            <h3>Đã có tài khoản ?</h3>
-                            <p>Đăng nhập để tiếp tục mua hàng</p>
-                            <button className="btn transparent" id="sign-in-btn">Đăng nhập</button>
+                            <h3></h3>
+                            <p></p>
+                            <button className="btn transparent" id="sign-in-btn"></button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-        
     );
 }

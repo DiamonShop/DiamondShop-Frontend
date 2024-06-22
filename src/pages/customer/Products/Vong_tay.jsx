@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-export default function Vong_tay() {
+export default function Vong_tay({ onProductClick }) {
     return (
         <div>
             <div className="breadcrumb-area">

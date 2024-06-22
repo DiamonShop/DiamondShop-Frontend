@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { formatCurrency } from '../utils/NumberFormat';
+
 function Du_lieu_san_pham(props) {
     return (
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to="/Chitietsanpham">
-                        <img className="pri-img" src={props.image1}
-                            alt="product" />
-                        <img className="sec-img" src={props.image2}
-                            alt="product" />
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
+                        <img className="pri-img" src={props.image1} alt="product" />
+                        <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
                     <div className="product-badge">
                         <div className="product-label new">
@@ -27,11 +27,13 @@ function Du_lieu_san_pham(props) {
                 </figure>
                 <div className="product-caption text-center">
                     <h6 className="product-name">
-                        <a href="product-details.html">{props.productName}</a>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
+                        {props.productName}
+                    </Link>
                     </h6>
                     <div className="price-box">
-                        <span className="price-regular">{props.newPrice}</span>
-                        <span className="price-old"><del>{props.oldPrice}</del></span>
+                        <span className="price-regular">{formatCurrency(props.newPrice)}đ</span>
+                        <span className="price-old"><del>{formatCurrency(props.oldPrice)}đ</del></span>
                     </div>
                 </div>
             </div>

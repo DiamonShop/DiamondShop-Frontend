@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Matdaychuyen_Data } from '../../../Data/Product_matdaychuyen_data';
 import Filter_product from '../../../components/Filter_product';
-export default function Mat_day_chuyen() {
+export default function Mat_day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
 
     const handleSortChange = (event) => {
@@ -57,13 +57,17 @@ export default function Mat_day_chuyen() {
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {sortedProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham
+                                            <Du_lieu_san_pham 
+                                                productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 label={item.label}
                                                 productName={item.productName}
+                                                categoryName={item.categoryName}
                                                 newPrice={item.newPrice}
                                                 oldPrice={item.oldPrice}
+                                                description={item.description}
+                                                onProductClick={onProductClick}
                                             />
                                         </div>
                                     ))}

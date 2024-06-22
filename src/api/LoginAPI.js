@@ -1,38 +1,60 @@
-export const handleLoginUser = (user) => {
-    // Perform POST request to create a new user
-    fetch("https://localhost:7101/api/Register/Login", {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => response.json()) // Parse the JSON response
-    .then(data => {
+// import {GoogleLogin} from 'react-google-login'
+
+export const handleLoginUser = async (user) => {
+    try {
+        const response = await fetch("https://localhost:7101/api/Register/Login", {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        const data = await response.json();
+
         if (data.success) {
             console.log(data.data);
             let user = {
                 fullName: data.data.fullName,
-                roleName: data.data.roleName
-              
+                roleName: data.data.roleName,
+                token: data.data.token // Include the token
             };
-              // Refresh the page upon successful login
+
+            // Save the token in local storage
             localStorage.setItem('token', data.data.token);
-            window.location.reload();
-            console.log(data.data);
-            // Handle successful login here, e.g., redirect to a dashboard
-            return user;
+            return user; // Return the user object
         } else {
             console.log("Invalid login attempt");
-            // Handle invalid login attempt here, e.g., show an error message
-            return null;
+            return null; // Return null on invalid login attempt
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error("Error during login:", error);
-        // Handle any errors that occurred during the fetch
-        return null;
-    });
+        return null; // Return null on error
+    }
 };
+
+// export function GoogleLogin() {
+//     const onSuccess = (res) => {
+//         console.log('[Login Success] currentUser:', res.profileObj);
+//     }
+
+//     const onFailure = (res) => {
+//         console.log('[Login Failure] res:', res);
+//     }
+
+//     return (
+//         <div id="signInButton">
+//             <GoogleLogin
+//                 clientId="YOUR_CLIENT_ID"
+//                 buttonText="Login with Google"
+//                 onSuccess={onSuccess}
+//                 onFailure={onFailure}
+//                 cookiePolicy={'single_host_origin'}
+//                 isSignIn={true}
+//             />
+//         </div>
+//     )
+// }
+
 

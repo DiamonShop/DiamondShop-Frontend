@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Gio_hang() {
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const message = params.get('message');
+        if (message) {
+            toast.info(message);
+        }
+    }, [location]);
+
     return (
         <div>
-            <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="breadcrumb-wrap">
+            <ToastContainer />
+            <div className="breadcrumb-area">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="breadcrumb-wrap">
                                 <nav aria-label="breadcrumb">
-                                    <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                                        <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -20,95 +34,56 @@ export default function Gio_hang() {
                     </div>
                 </div>
             </div>
-
-            <div class="cart-main-wrapper section-padding">
-                <div class="container">
-                    <div class="section-bg-color">
-                        <div class="row">
-                            <div class="col-lg-12">
-
-                                <div class="cart-table table-responsive">
-                                    <table class="table table-bordered">
+            <div className="cart-main-wrapper section-padding">
+                <div className="container">
+                    <div className="section-bg-color">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="cart-table table-responsive">
+                                    <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th class="pro-thumbnail">Hình ảnh</th>
-                                                <th class="pro-title">Sản phẩm</th>
-                                                <th class="pro-price">Đơn giá</th>
-                                                <th class="pro-quantity">Số lượng</th>
-                                                <th class="pro-subtotal">Thành tiền</th>
-                                                <th class="pro-remove">Xóa</th>
+                                                <th className="pro-thumbnail">Hình ảnh</th>
+                                                <th className="pro-title">Sản phẩm</th>
+                                                <th className="pro-price">Đơn giá</th>
+                                                <th className="pro-quantity">Số lượng</th>
+                                                <th className="pro-subtotal">Thành tiền</th>
+                                                <th className="pro-remove">Xóa</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/11/nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn cưới nam Kim cương Vàng 18K Long Phụng DD00Y000995</a></td>
-                                                <td class="pro-price"><span>16.946.000đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty"><input type="text" value="1" /></div>
+                                                <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src="assets/img/product/Nhan/11/nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png" alt="Product" /></a></td>
+                                                <td className="pro-title"><a href="#">Nhẫn cưới nam Kim cương Vàng 18K Long Phụng DD00Y000995</a></td>
+                                                <td className="pro-price"><span>16.946.000đ</span></td>
+                                                <td className="pro-quantity">
+                                                    <div className="pro-qty"><input type="text" value="1" /></div>
                                                 </td>
-                                                <td class="pro-subtotal"><span>193.256.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/15/nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn cưới Kim cương Vàng trắng 14K Long Phụng DD00W000641</a></td>
-                                                <td class="pro-price"><span>8.316.000đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty"><input type="text" value="2" /></div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>16.632.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/2/nhan-vang-trang-14k-dinh-da-ecz-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn Vàng trắng 14K đính đá ECZ XMXMW004696</a></td>
-                                                <td class="pro-price"><span>8.359.000đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="1" />
-                                                    </div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>8.359.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/Nhan/7/nhan-nam-kim-cuong-vang-14k-dd00h000294-1.png" alt="Product" /></a></td>
-                                                <td class="pro-title"><a href="#">Nhẫn nam Kim cương Vàng 14K DD00H000294</a></td>
-                                                <td class="pro-price"><span>78.219.900đ</span></td>
-                                                <td class="pro-quantity">
-                                                    <div class="pro-qty">
-                                                        <input type="text" value="3" />
-                                                    </div>
-                                                </td>
-                                                <td class="pro-subtotal"><span>234.657.000đ</span></td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                <td className="pro-subtotal"><span>193.256.000đ</span></td>
+                                                <td className="pro-remove"><a href="#"><i className="fa fa-trash-o"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <div class="cart-update-option d-block d-md-flex justify-content-between">
-                                    <div class="apply-coupon-wrapper">
-                                        <form action="#" method="post" class=" d-block d-md-flex">
+                                <div className="cart-update-option d-block d-md-flex justify-content-between">
+                                    <div className="apply-coupon-wrapper">
+                                        <form action="#" method="post" className="d-block d-md-flex">
                                             <input type="text" placeholder="Nhập mã khuyến mãi" required />
-                                            <button class="btn btn-sqr">Áp dụng voucher</button>
+                                            <button className="btn btn-sqr">Áp dụng voucher</button>
                                         </form>
                                     </div>
-                                    <div class="cart-update">
-                                        <a href="#" class="btn btn-sqr">Cập nhật giỏ hàng</a>
+                                    <div className="cart-update">
+                                        <a href="#" className="btn btn-sqr">Cập nhật giỏ hàng</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-5 ml-auto">
-
-                                <div class="cart-calculator-wrapper">
-                                    <div class="cart-calculate-items">
-                                        {/* <h6>Cart Totals</h6> */}
-                                        <div class="table-responsive">
-                                            <table class="table">
+                        <div className="row">
+                            <div className="col-lg-5 ml-auto">
+                                <div className="cart-calculator-wrapper">
+                                    <div className="cart-calculate-items">
+                                        <div className="table-responsive">
+                                            <table className="table">
                                                 <tr>
                                                     <td>Tổng tiền hàng</td>
                                                     <td>452.904.000đ</td>
@@ -117,22 +92,20 @@ export default function Gio_hang() {
                                                     <td>Phí vận chuyển</td>
                                                     <td>Miễn phí</td>
                                                 </tr>
-                                                <tr class="total">
+                                                <tr className="total">
                                                     <td>Tổng thanh toán</td>
-                                                    <td class="total-amount">452.904.000đ</td>
+                                                    <td className="total-amount">452.904.000đ</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
-                                    <Link to="/Thanhtoan" class="btn btn-sqr d-block">Xác nhận thanh toán</Link>
+                                    <Link to="/Thanhtoan" className="btn btn-sqr d-block">Xác nhận thanh toán</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
-    )
+    );
 }

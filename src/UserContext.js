@@ -1,23 +1,44 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export function useUser() {
+    return useContext(UserContext);
+}
 
-  const login = (userData) => {
-    setUser(userData);
-  };
+export function UserProvider({ children }) {
+    const [user, setUser] = useState(null);
 
-  const logout = () => {
-    setUser(null);
-  };
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decodedToken = JSON.parse(atob(token.split('.')[1]));
+                setUser({
+                    userId: decodedToken.sid,
+                    email: decodedToken.email,
+                    role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+                });
+            } catch (error) {
+                console.error("Invalid token:", error);
+                localStorage.removeItem('token');
+            }
+        }
+    }, []);
 
-  return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+    const login = (userData) => {
+        setUser(userData);
+        localStorage.setItem('token', userData.token);
+    };
 
-export const useUser = () => useContext(UserContext);
+    const logout = () => {
+        localStorage.removeItem('token');
+        setUser(null);
+    };
+
+    return (
+        <UserContext.Provider value={{ user, login, logout }}>
+            {children}
+        </UserContext.Provider>
+    );
+}
