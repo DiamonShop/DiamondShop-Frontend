@@ -2469,27 +2469,9 @@ only screen and (max-width: 767.98px) {
   }
 }
 
-.hero-slider-content {
-  position: relative;
-}
 
-@media only screen and (max-width: 767.98px) {
-  .hero-slider-content {
-    padding-right: 150px;
-  }
-}
 
-@media only screen and (max-width: 575.98px) {
-  .hero-slider-content {
-    padding-right: 90px;
-  }
-}
 
-@media only screen and (max-width: 479.98px) {
-  .hero-slider-content {
-    padding-right: 0;
-  }
-}
 
 .hero-slider-content .slide-title {
   font-size: 60px;
@@ -5061,7 +5043,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .pro-large-img img {
-  width: 100%;
+  width: 100%;  
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
