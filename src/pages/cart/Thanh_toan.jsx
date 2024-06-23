@@ -13,9 +13,6 @@ export default function Thanh_toan() {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
-    const [username, setUsername] = useState('');
-    const [newPwd, setNewPassword] = useState('');
-    const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -27,13 +24,13 @@ export default function Thanh_toan() {
         orderNote: ''
     });
   
-    const total1 = 29400000;
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
             if (!currentUser) {
                 console.log("User not logged in. Redirecting to login.");
+                navigate('/Dangnhap');
                 return;
             }
 
@@ -42,6 +39,7 @@ export default function Thanh_toan() {
             if (!token) {
                 console.log("Token not found or expired. Logging out.");
                 userLogout();
+                navigate('/Dang_nhap');
                 return;
             }
 
@@ -60,7 +58,6 @@ export default function Thanh_toan() {
                 });
                 console.log("Response data:", response.data);
                 setUserData(response.data);
-                setUsername(response.data.username || '');
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
                 setAddress(response.data.address || '');
@@ -69,6 +66,7 @@ export default function Thanh_toan() {
                 if (error.response && error.response.status === 401) {
                     console.log('Token expired or invalid. Redirecting to login.');
                     userLogout();
+                    navigate('/Dang_nhap');
                 } else {
                     setErrorMessage('Error fetching user data.');
                 }
@@ -102,7 +100,7 @@ export default function Thanh_toan() {
             fullName: displayName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
-            email: formData.email,
+            email: email,
             streetAddress: address,
             orderNote: formData.orderNote,
             price: totalPrice
@@ -121,6 +119,10 @@ export default function Thanh_toan() {
 
     const handleAddressChange = (event) => {
         setAddress(event.target.value);
+    };
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
     };
     
     const handleCheckoutChange = (e) => {
@@ -210,8 +212,8 @@ export default function Thanh_toan() {
                                                     <label for="email" class="required">Email</label>
                                                     <input type="email" name="email" placeholder="Email"
                                                         required
-                                                        value={formData.email}
-                                                        onChange={handleCheckoutChange} />
+                                                        value={email}
+                                                        onChange={handleEmailChange} />
                                                 </div>
                                             </div>
                                         </div>

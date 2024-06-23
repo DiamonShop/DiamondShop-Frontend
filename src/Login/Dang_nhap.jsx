@@ -48,6 +48,7 @@ export default function Dang_nhap() {
                     navigate('/Dashboard');
                 } else {
                     navigate('/');
+                    window.location.reload();
                 }
             } else {
                 console.error('Token is not available in the response');
