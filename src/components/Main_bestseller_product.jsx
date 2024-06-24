@@ -22,13 +22,8 @@ function Main_bestseller_product() {
                             <div className="group-product-banner">
                                 <figure className="banner-statistics">
                                     <a href="#">
-                                        <img src="assets/img/banner/img-bottom-banner.jpg" alt="product banner" />
+                                        <img src="assets/img/banner/z5567897593865_9e3161a46de6a674988b6133feee7fb3.jpg" alt="product banner" />
                                     </a>
-                                    <div className="banner-content banner-content_style3 text-center">
-                                        {/* <h6 className="banner-text1">BEAUTIFUL</h6> */}
-                                        <h2 className="banner-text2">Bộ Sưu Tập <span>Độc Đáo</span></h2>
-                                        <a href="shop.html" className="btn btn-text">Mua ngay</a>
-                                    </div>
                                 </figure>
                             </div>
                         </div>

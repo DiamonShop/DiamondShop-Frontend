@@ -6,7 +6,7 @@ const ScrollToTop = () => {
 
   const {pathname} =useLocation();
 
-  const { pathname } = useLocation();
+ 
 
 
   // Hàm để kiểm tra vị trí cuộn của trang
