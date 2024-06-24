@@ -32,7 +32,7 @@ function Main_banner() {
                         <div className="col-sm-6">
                             <figure className="banner-statistics mt-20">
                                 <a href="#">
-                                    <img src="assets/img/banner/z5567897593865_9e3161a46de6a674988b6133feee7fb3.jpg" alt="product banner" />
+                                    <img src="assets/img/banner/banner-right-2.png" alt="product banner" />
                                 </a>
                                 
                             </figure>
