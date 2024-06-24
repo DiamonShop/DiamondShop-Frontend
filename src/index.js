@@ -12,7 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Check token from localStorage
 const token = localStorage.getItem("token");
 const tokenIsValid = token && !isTokenExpired(token); // Check if token exists and is not expired
-console.log(tokenIsValid);
 
 // Render the app with UserProvider
 root.render(

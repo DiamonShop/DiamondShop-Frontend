@@ -41,6 +41,7 @@ function App({ tokenIsValid }) {
     <div>
       <UserProvider>      
         <Router>
+
         <ScrollToTop/>
             <Routes>
               <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />

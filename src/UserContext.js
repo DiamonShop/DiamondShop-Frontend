@@ -14,13 +14,20 @@ export function UserProvider({ children }) {
         if (token) {
             try {
                 const decodedToken = JSON.parse(atob(token.split('.')[1]));
-                setUser({
-                    userId: decodedToken.sid,
-                    email: decodedToken.email,
-                    role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
-                });
+                const currentTime = Math.floor(Date.now() / 1000); // Thời gian hiện tại tính bằng giây
+
+                if (decodedToken.exp < currentTime) {
+                    localStorage.removeItem('token');
+                    console.log("Token đã hết hạn và bị xóa.");
+                } else {
+                    setUser({
+                        userId: decodedToken.sid,
+                        email: decodedToken.email,
+                        role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+                    });
+                }
             } catch (error) {
-                console.error("Invalid token:", error);
+                console.error("Token không hợp lệ:", error);
                 localStorage.removeItem('token');
             }
         }

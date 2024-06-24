@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { handleGetOrderByUserId } from '../../api/OrderAPI';
+import { decodeToken } from '../../api/TokenAPI';
+// import 'react-toastify/dist/ReactToastify.css';
 
 export default function Gio_hang() {
     const location = useLocation();
+    const [orderDetailLists, setOrderDetailLists] = useState([]);
+    const [token, setToken] = useState();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -13,7 +17,29 @@ export default function Gio_hang() {
         if (message) {
             toast.info(message);
         }
+        getAllAvailableProducts();
+
     }, [location]);
+
+    const getAllAvailableProducts = async () => {
+        setToken(localStorage.getItem('token'));
+        
+        if (token) {
+            const userId = decodeToken(token).sid;
+            const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+            if (orders != null) {
+                for (const item of orders) {
+                    //Check order nếu có status là 'Ordering' thì mới được hiển thị
+                    if(item.status == 'Ordering'){
+                        console.log(item.orderDetails)
+                        setOrderDetailLists(item.orderDetails);
+                    }
+                }
+            } else {
+                setOrderDetailLists(null);
+            }
+        }
+    }
 
     return (
         <div>
@@ -52,16 +78,22 @@ export default function Gio_hang() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src="assets/img/product/Nhan/11/nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png" alt="Product" /></a></td>
-                                                <td className="pro-title"><a href="#">Nhẫn cưới nam Kim cương Vàng 18K Long Phụng DD00Y000995</a></td>
-                                                <td className="pro-price"><span>16.946.000đ</span></td>
-                                                <td className="pro-quantity">
-                                                    <div className="pro-qty"><input type="text" value="1" /></div>
-                                                </td>
-                                                <td className="pro-subtotal"><span>193.256.000đ</span></td>
-                                                <td className="pro-remove"><a href="#"><i className="fa fa-trash-o"></i></a></td>
-                                            </tr>
+                                            {orderDetailLists === null || !token? (
+                                                <div className="text-center" style={{ paddingLeft: '20px', fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</div>
+                                            ) : (
+                                                orderDetailLists.map((order, index) => (
+                                                    <tr key={index}>
+                                                        <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src={order.imageUrl} alt="Product" /></a></td>
+                                                        <td className="pro-title"><a href="#">{order.productName}</a></td>
+                                                        <td className="pro-price"><span>{order.unitPrice}</span></td>
+                                                        <td className="pro-quantity">
+                                                            <div className="pro-qty"><input type="text" value={order.quantity} readOnly /></div>
+                                                        </td>
+                                                        <td className="pro-subtotal"><span>{order.totalPrice}</span></td>
+                                                        <td className="pro-remove"><a href="#"><i className="fa fa-trash-o"></i></a></td>
+                                                    </tr>
+                                                ))
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
