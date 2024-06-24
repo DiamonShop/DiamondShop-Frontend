@@ -100,7 +100,7 @@ export default function Thanh_toan() {
             fullName: displayName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
-            email: email,
+            email: formData.email,
             streetAddress: address,
             orderNote: formData.orderNote,
             price: totalPrice
