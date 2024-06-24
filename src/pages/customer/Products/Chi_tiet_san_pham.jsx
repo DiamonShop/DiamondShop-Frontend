@@ -13,6 +13,7 @@ export default function Chi_tiet_san_pham() {
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
+    const [token, setToken] = useState();
 
     const largeSliderSettings = {
         fade: true,
@@ -56,19 +57,47 @@ export default function Chi_tiet_san_pham() {
         setQuantity(Number(event.target.value));
     };
 
+    const [showMessage, setShowMessage] = useState(false);
+
+    const successAddMessage = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 5000); // 5000 milliseconds = 5 seconds
+    }
+
     const handleAddToCart = async () => {
         //Lấy userId để tạo order
-        const userId = decodeToken(localStorage.getItem('token')).sid;
-        //Gọi API để tạo order
-        const order = await handleGetOrderByUserId(parseInt(userId, 10))
-        for (const item of order) {
-            if (item.status == 'Ordering') {
-                handleAddProductToOrder(item.orderId,productObj.productId, quantity);
-                break;
-            }else if(item.status == 'Completed' || item.status == 'Shipped'){
+        const token = localStorage.getItem('token')
+        if (token) {
+            const userId = decodeToken(token).sid;
+            //Gọi API để tạo order
+            const order = await handleGetOrderByUserId(parseInt(userId, 10));
+            //Nếu Order bằng null thì tạo Order mới
+            if (order != null) {
+                for (const item of order) {
+                    if (item.status == 'Ordering') {
+                        handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    } else if (item.status == 'Completed' || item.status == 'Shipped') {
+                        const orderId = await handleCreateOrder(userId);
+                        console.log(orderId)
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    }
+                }
+            } else {
                 const orderId = await handleCreateOrder(userId);
-                handleAddProductToOrder(orderId,productObj.productId, quantity);
-                break;
+                const order = await handleGetOrderByUserId(parseInt(userId, 10));
+                for (const item of order) {
+                    if (item.status == 'Ordering' && item.orderId == orderId) {
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    }
+                }
             }
         }
     }
@@ -115,7 +144,7 @@ export default function Chi_tiet_san_pham() {
                                             <div className="pro-large-img img-zoom">
                                                 <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                            
+
                                         </Slider>
                                         <Slider {...navSliderSettings} className="pro-nav">
                                             <div className="pro-nav-thumb">
@@ -130,7 +159,7 @@ export default function Chi_tiet_san_pham() {
                                             <div className="pro-nav-thumb">
                                                 <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                           
+
                                         </Slider>
                                     </div>
                                     <div class="col-lg-6">
@@ -207,9 +236,11 @@ export default function Chi_tiet_san_pham() {
                                                 </div>
                                             </div>
 
-                                            <div class="message-add-to-cart-success">
-                                                <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
-                                            </div>
+                                            {showMessage && (
+                                                <div class="message-add-to-cart-success">
+                                                    <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

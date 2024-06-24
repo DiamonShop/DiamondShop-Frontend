@@ -66,8 +66,7 @@ function Sanphamnoibat() {
                                     <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                                         <div className="tab-content">
 
-                                            <div className="tab-pane fade show active"
-                                                id="tab1">
+                                            <div className="tab-pane fade show active" id="tab1">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
                                                     <Slider {...SecondSliderSettings}>
                                                         <div className="product-item">
