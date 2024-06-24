@@ -37,7 +37,7 @@ function BannerHome() {
                             </div>
                         </div>
                         <div className="hero-single-slide hero-overlay">
-                            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-3.jpg)` }}>
+                            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-4.png)` }}>
 
                             </div>
                         </div>

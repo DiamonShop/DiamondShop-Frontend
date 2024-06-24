@@ -54,7 +54,7 @@ export default function Chinh_sach() {
                         <div class="policy-list">
                             <h3 class="policy-title">Liên Hệ:</h3>
                             <p>Nếu có bất kỳ thắc mắc nào về chính sách của chúng tôi, 
-                                vui lòng liên hệ qua email passswp159753@gmail.com hoặc gọi đến hotline 0123456789. 
+                                vui lòng liên hệ qua email passswp159753@gmail.com hoặc gọi đến hotline 0123456789.
                                 Chúng tôi luôn sẵn sàng hỗ trợ và giải đáp mọi câu hỏi của bạn.</p>
                         </div> 
                     </div>

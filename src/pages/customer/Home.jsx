@@ -12,7 +12,7 @@ import Sanphamnoibat from '../../components/Sanphamnoibat';
 import Main_banner from '../../components/Main_banner';
 import Main_product from '../../components/Main_product';
 import Main_bestseller_product from '../../components/Main_bestseller_product';
-import Logo_brand from '../../components/Logo_brand';
+
 
 
 export default function Home() {
@@ -38,7 +38,7 @@ export default function Home() {
             <Main_banner />
             <Main_product />
             <Main_bestseller_product />
-            <Logo_brand />
+            
         </div>
     );
 }
