@@ -73,6 +73,7 @@ function App({ tokenIsValid }) {
             </Routes>
             
         </Router>
+        
       </UserProvider>
 
     </div>
