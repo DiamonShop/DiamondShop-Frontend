@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
-function Sanphamnoibat() {
+import Du_lieu_san_pham_nb from './Du_lieu_san_pham_nb';
+import { Product_Nhan_Data } from '../Data/Product_nhan_data';
+import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
+import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
+function Sanphamnoibat({ onProductClick }) {
+    const [randomProductsNhan, setRandomProductsNhan] = useState([]);
+    const [randomProductsDaychuyen, setRandomProductsDaychuyen] = useState([]);
+    const [randomProductsMatdaychuyen, setRandomProductsMatdaychuyen] = useState([]);
+    useEffect(() => {
+        function getRandomProductsNhan(products, count) {
+            const shuffled = products.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        setRandomProductsNhan(getRandomProductsNhan(Product_Nhan_Data, 5));
+        function getRandomProductsDaychuyen(products, count) {
+            const shuffled = products.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        setRandomProductsDaychuyen(getRandomProductsNhan(Product_Daychuyen_Data, 5));
+        function getRandomProductsMatdaychuyen(products, count) {
+            const shuffled = products.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        setRandomProductsMatdaychuyen(getRandomProductsMatdaychuyen(Product_Matdaychuyen_Data, 5));
+
+    }, []); // Chỉ chạy một lần khi component được mount
     const SecondSliderSettings = {
         speed: 1000,
         autoplay: true,
@@ -21,19 +46,16 @@ function Sanphamnoibat() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-
                             <div className="section-title text-center">
                                 <h2 className="title">Trang sức nổi bật</h2>
                                 <p className="sub-title">Trang sức bán chạy trong tháng</p>
                             </div>
-
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-12">
                             <div className="product-container">
-
                                 <div className="product-tab-menu">
                                     <ul className="nav justify-content-center">
                                         <li>
@@ -65,590 +87,77 @@ function Sanphamnoibat() {
                                 <section className="slider-area">
                                     <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                                         <div className="tab-content">
-
                                             <div className="tab-pane fade show active" id="tab1">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
                                                     <Slider {...SecondSliderSettings}>
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Nhan/dd00h000361-nhan-kim-cuong-vang-18k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Nhan/dd00h000361-nhan-kim-cuong-vang-18k-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Nhẫn Kim cương vàng 18K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">10.500.000đ</span>
-                                                                    <span className="price-old"><del>10.815.000đ </del></span>
-                                                                </div>
+                                                        {randomProductsNhan.map((item) => (
+                                                            <div key={item.id} >
+                                                                <Du_lieu_san_pham_nb
+                                                                    productId={item.id}
+                                                                    image1={item.image1}
+                                                                    image2={item.image2}
+                                                                    image3={item.image3}
+                                                                    image4={item.image4}
+                                                                    label={item.label}
+                                                                    productName={item.productName}
+                                                                    categoryName={item.categoryName}
+                                                                    newPrice={item.newPrice}
+                                                                    oldPrice={item.oldPrice}
+                                                                    description={item.description}
+                                                                    onProductClick={onProductClick}
+                                                                />
                                                             </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Nhan/dd00W003598-Nhan-Kim-Cuong-Vang-Trang-14K-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Nhan/dd00w003598-nhan-kim-cuong-vang-trang-14k-disney-mickey-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Nhẫn Kim cương Bạc 14K</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">7.266.000đ</span>
-                                                                    <span className="price-old"><del>7.966.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Nhan/ddddc001259-nhan-kim-cuong-vang-14k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Nhan/ddddc001259-nhan-kim-cuong-vang-14k-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Nhẫn Kim cương Vàng 14K</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">56.419.000đ</span>
-                                                                    <span className="price-old"><del></del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Nhan/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Nhan/dd00c000923-nhan-cuoi-kim-cuong-vang-18k-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Nhẫn cưới Kim cương Vàng 18K</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">9.508.500đ</span>
-                                                                    <span className="price-old"><del>10.565.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Nhan/ddddw001827-nhan-kim-cuong-vang-trang-14k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Nhan/ddddw001827-nhan-kim-cuong-vang-trang-14k-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">102.097.000đ</span>
-                                                                    <span className="price-old"><del>103.997.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </Slider>
-                                                </div>
-                                            </div>
-
-                                            <div className="tab-pane fade" id="tab3">
-                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets\img\product\Mat-day-chuyen\ddddw060396-mat-day-chuyen-kim-cuong-vang-trang-kim-cuong-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets\img\product\Mat-day-chuyen\ddddw060396-mat-day-chuyen-kim-cuong-vang-trang-kim-cuong-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <a href="/Chitietsanpham"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </a>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Mặt dây chuyền Kim cương Vàng trắng 14K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">13.580.000đ</span>
-                                                                    <span className="price-old"><del>14.680.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/ddddw060395-mat-day-chuyen-kim-cuong-vang-trang-kim-cuong-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/ddddw060395-mat-day-chuyen-kim-cuong-vang-trang-kim-cuong-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Mặt dây chuyền Kim cương Vàng trắng 14K </Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">14.110.000đ</span>
-                                                                    <span className="price-old"><del>15.110.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/dd00w000639-mat-day-chuyen-kim-cuong-vang-trang-14k-chu-h-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/dd00w000639-mat-day-chuyen-kim-cuong-vang-trang-14k-chu-h-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Mặt dây chuyền Kim cương Vàng Trắng 14K</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">7.896.000đ</span>
-                                                                    <span className="price-old"><del></del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/ddddw001386-mat-day-chuyen-kim-cuong-vang-trang-14k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/ddddw001386-mat-day-chuyen-kim-cuong-vang-trang-14k-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Mặt dây chuyền Kim cương Vàng trắng 14K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">113.204.000đ</span>
-                                                                    <span className="price-old"><del></del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/DDDDW002334-mat-day-chuyen-kim-cuong-vang-trang-14k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Mat-day-chuyen/DDDDW002334-mat-day-chuyen-kim-cuong-vang-trang-14k-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Mặt dây chuyền Kim cương Vàng Trắng 14K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">35.708.000đ</span>
-                                                                    <span className="price-old"><del>38.708.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        ))}
                                                     </Slider>
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="tab2">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
                                                     <Slider {...SecondSliderSettings}>
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Day-chuyen/0000w060104-day-chuyen-bac-y-silver-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Day-chuyen/0000w060104-day-chuyen-bac-y-silver-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Chitietsanpham"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Dây chuyền Bạc Ý </a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">575.000đ</span>
-                                                                    <span className="price-old"><del>650.000đ</del></span>
-                                                                </div>
+                                                        {randomProductsDaychuyen.map((item) => (
+                                                            <div key={item.id} >
+                                                                <Du_lieu_san_pham_nb
+                                                                    productId={item.id}
+                                                                    image1={item.image1}
+                                                                    image2={item.image2}
+                                                                    image3={item.image3}
+                                                                    image4={item.image4}
+                                                                    label={item.label}
+                                                                    productName={item.productName}
+                                                                    categoryName={item.categoryName}
+                                                                    newPrice={item.newPrice}
+                                                                    oldPrice={item.oldPrice}
+                                                                    description={item.description}
+                                                                    onProductClick={onProductClick}
+                                                                />
                                                             </div>
-                                                        </div>
+                                                        ))}
+                                                    </Slider>
+                                                </div>
+                                            </div>
 
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Day-chuyen/0000w000949-day-chuyen-vang-trang-y-18k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Day-chuyen/0000w000949-day-chuyen-vang-trang-y-18k-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Dây chuyền Vàng trắng Ý 18K</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">36.144.000đ</span>
-                                                                    <span className="price-old"><del>38.144.000đ</del></span>
-                                                                </div>
+                                            <div className="tab-pane fade " id="tab3">
+                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">
+                                                    <Slider {...SecondSliderSettings}>
+                                                        {randomProductsMatdaychuyen.map((item) => (
+                                                            <div key={item.id} >
+                                                                <Du_lieu_san_pham_nb
+                                                                    productId={item.id}
+                                                                    image1={item.image1}
+                                                                    image2={item.image2}
+                                                                    image3={item.image3}
+                                                                    image4={item.image4}
+                                                                    label={item.label}
+                                                                    productName={item.productName}
+                                                                    categoryName={item.categoryName}
+                                                                    newPrice={item.newPrice}
+                                                                    oldPrice={item.oldPrice}
+                                                                    description={item.description}
+                                                                    onProductClick={onProductClick}
+                                                                />
                                                             </div>
-                                                        </div>
+                                                        ))}
 
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Day-chuyen/0000W060094-day-chuyen-bac-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Day-chuyen/0000W060094-day-chuyen-bac-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <Link to="/Chitietsanpham">Dây chuyền Bạc Ý</Link>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">1.795.000đ</span>
-                                                                    <span className="price-old"><del></del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <a href="product-details.html">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Day-chuyen/0000W060096-day-chuyen-bac-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Day-chuyen/0000W060096-day-chuyen-bac-02.png" alt="product" />
-                                                                </a>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Dây chuyền Bạc Ý </a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">1.850.000đ</span>
-                                                                    <span className="price-old"><del>1.995.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="product-item">
-                                                            <figure className="product-thumb">
-                                                                <Link to="/Chitietsanpham">
-                                                                    <img className="pri-img"
-                                                                        src="assets/img/product/Day-chuyen/gd0000w061234-day-chuyen-vang-trang-18k-01.png" alt="product" />
-                                                                    <img className="sec-img"
-                                                                        src="assets/img/product/Day-chuyen/gd0000w061234-day-chuyen-vang-trang-18k-02.png" alt="product" />
-                                                                </Link>
-                                                                <div className="product-badge">
-                                                                    <div className="product-label new">
-                                                                        <span>Mới</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="button-group">
-                                                                    <Link to="/Yeuthich"
-                                                                        data-bs-toggle="tooltip"
-                                                                        data-bs-placement="left"
-                                                                        title="Add to wishlist">
-                                                                        <i className="pe-7s-like"></i>
-                                                                    </Link>
-
-                                                                </div>
-                                                                <div className="cart-hover">
-                                                                    <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                                                                </div>
-                                                            </figure>
-                                                            <div className="product-caption text-center">
-
-                                                                <h6 className="product-name">
-                                                                    <a href="product-details.html">Dây chuyền Vàng trắng Ý 18K</a>
-                                                                </h6>
-                                                                <div className="price-box">
-                                                                    <span className="price-regular">9.890.000đ</span>
-                                                                    <span className="price-old"><del>10.890.000đ</del></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </Slider>
                                                 </div>
                                             </div>
@@ -846,6 +355,7 @@ function Sanphamnoibat() {
                                                     </Slider>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </section>

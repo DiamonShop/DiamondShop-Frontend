@@ -56,7 +56,7 @@ export default function Chinh_sach_giao_hang() {
                         <table className="faq-table">
                             <tr>
                                 <th className="th-faq">Khoảng cách</th>
-                                <th className="th-faq">Thời gian dự kiến giao hàng (08:00 - 18:00)</th>
+                                <th className="th-faq">Thời gian dự kiến giao hàng (08:00 - 17:00)</th>
                             </tr>
                             <tr>
                                 <td>Dưới 20km tại HCM, Hà Nội</td>

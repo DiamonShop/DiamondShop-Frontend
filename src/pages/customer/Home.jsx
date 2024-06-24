@@ -17,6 +17,9 @@ import Logo_brand from '../../components/Logo_brand';
 
 export default function Home() {
     const location = useLocation();
+    const handleProductClick = (product) => {
+        localStorage.setItem('product', JSON.stringify(product));
+      }
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -31,7 +34,7 @@ export default function Home() {
             <ToastContainer />
             <BannerHome />
             <Service_policy />
-            <Sanphamnoibat />
+            <Sanphamnoibat onProductClick={handleProductClick}/>
             <Main_banner />
             <Main_product />
             <Main_bestseller_product />
