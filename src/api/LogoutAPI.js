@@ -1,7 +1,17 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+// logoutAPI.js
+import {jwtDecode} from 'jwt-decode';
 
 export const checkToken = () => {
-    var token = localStorage.getItem("token");
-    const decodedToken = jwtDecode(token); // Use jwt_decode here
-    console.log(decodedToken);
-}
+    const token = localStorage.getItem("token");
+    if (token) {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+    } else {
+        console.log("No token found.");
+    }
+};
+
+export const logout = () => {
+    localStorage.removeItem('token');
+    console.log("Logged out and token removed.");
+};

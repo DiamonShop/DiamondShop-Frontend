@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout as apilogout } from '../api/LogoutAPI';
 
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
@@ -11,27 +12,12 @@ export default function Header({ tokenIsValid }) {
     document.body.classList.add('fix');
   };
 
-  const closeMinicart = () => {
-    setMinicartVisible(false);
-    document.body.classList.remove('fix');
-  };
+
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.reload();
-  };
-
-  const sendToken = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      return {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
-    } else {
-      return {};
-    }
+    apilogout(); 
+    localStorage.removeItem('token'); 
+    window.location.reload(); 
   };
 
 
