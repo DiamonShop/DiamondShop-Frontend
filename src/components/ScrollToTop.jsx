@@ -3,7 +3,11 @@ import { useLocation } from 'react-router-dom';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+
+  const {pathname} =useLocation();
+
   const { pathname } = useLocation();
+
 
   // Hàm để kiểm tra vị trí cuộn của trang
   const toggleVisibility = () => {
@@ -23,7 +27,11 @@ const ScrollToTop = () => {
   };
 
   useEffect(() => {
+
+    window.scrollTo(0,0);
+
     window.scrollTo(0, 0);
+
     window.addEventListener('scroll', toggleVisibility);
     return () => {
       window.removeEventListener('scroll', toggleVisibility);
