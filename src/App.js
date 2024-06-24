@@ -27,9 +27,9 @@ import San_Pham from './pages/Admin&Manager/San_Pham';
 import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
-import ScrollToTop from './components/ScrollToTop';
 import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
 import Chinh_sach_giao_hang from './pages/customer/Chinh_sach_giao_hang';
+import ScrollToTop from './components/ScrollToTop';
 function App({ tokenIsValid }) {
 
   //Chuyển id từ Nhan qua App
@@ -39,40 +39,42 @@ function App({ tokenIsValid }) {
 
   return (
     <div>
-       <UserProvider>
+      <UserProvider>      
         <Router>
-          <Routes>
-            <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
-            <Route path="/Nhan" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan onProductClick={handleProductClick} /></MainLayout>} />
-            <Route path='/Daychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
-            <Route path='/Matdaychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen onProductClick={handleProductClick}/></MainLayout>} />
-            <Route path='/Vongtay' element={<MainLayout tokenIsValid={tokenIsValid}><Vong_tay /></MainLayout>} />
-            <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong /></MainLayout>} />
-            <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
-            <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
-            <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
-            <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
-            <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
-            <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
-            <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
-            <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
-            <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
-            <Route path='/Banggiakimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Bang_gia_kim_cuong /></MainLayout>} />
-            <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
-            <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan /></MainLayout>} />
-            <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
-            <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
-            <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
-            <Route path='/Uploadimg' element={<DashboardLayout tokenIsValid={tokenIsValid}><FirebaseImageUpload /></DashboardLayout>} />
-            <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
-            <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
-            <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
-            <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
+        <ScrollToTop/>
+            <Routes>
+              <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
+              <Route path="/Nhan" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Daychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Matdaychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Vongtay' element={<MainLayout tokenIsValid={tokenIsValid}><Vong_tay /></MainLayout>} />
+              <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong /></MainLayout>} />
+              <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
+              <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
+              <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
+              <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
+              <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
+              <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
+              <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
+              <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
+              <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
+              <Route path='/Banggiakimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Bang_gia_kim_cuong /></MainLayout>} />
+              <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
+              <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan /></MainLayout>} />
+              <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
+              <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
+              <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
+              <Route path='/Uploadimg' element={<DashboardLayout tokenIsValid={tokenIsValid}><FirebaseImageUpload /></DashboardLayout>} />
+              <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />
+              <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
+              <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
+              <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
 
-          </Routes>
+            </Routes>
+            
         </Router>
       </UserProvider>
-      <ScrollToTop/>
+
     </div>
   );
 }
