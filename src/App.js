@@ -41,6 +41,7 @@ function App({ tokenIsValid }) {
     <div>
        <UserProvider>
         <Router>
+          <ScrollToTop/>
           <Routes>
             <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
             <Route path="/Nhan" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan onProductClick={handleProductClick} /></MainLayout>} />
@@ -72,7 +73,6 @@ function App({ tokenIsValid }) {
           </Routes>
         </Router>
       </UserProvider>
-      <ScrollToTop/>
     </div>
   );
 }

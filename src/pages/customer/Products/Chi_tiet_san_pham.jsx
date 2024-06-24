@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import Slider from "react-slick";
+import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
@@ -30,8 +30,6 @@ export default function Chi_tiet_san_pham() {
         speed: 1000,
         centerPadding: '0',
         focusOnSelect: true,
-        //prevArrow: <button type="button" className="slick-prev"><i className="lnr lnr-chevron-left"></i></button>,
-        //nextArrow: <button type="button" className="slick-next"><i className="lnr lnr-chevron-right"></i></button>,
         responsive: [{
             breakpoint: 576,
             settings: {
