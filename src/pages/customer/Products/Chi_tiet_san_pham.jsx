@@ -210,9 +210,7 @@ export default function Chi_tiet_san_pham() {
                                                 <li>
                                                     <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
                                                 </li>
-                                                <li>
-                                                    <a data-bs-toggle="tab" href="#tab_two">Thông số</a>
-                                                </li>
+                                                
                                                 <li>
                                                     <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
                                                 </li>
@@ -233,68 +231,7 @@ export default function Chi_tiet_san_pham() {
 
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane fade" id="tab_two">
-                                                    <table class="table table-bordered">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Trọng lượng tham khảo</td>
-                                                                <td>6.87589 phân</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Loại đá chính</td>
-                                                                <td>Kim cương</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Kích thước đá chính (tham khảo):</td>
-                                                                <td>4.9 li</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Hình dạng đá</td>
-                                                                <td>Tròn</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Loại đá phụ</td>
-                                                                <td>Kim cương</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Số viên đá chính</td>
-                                                                <td>1 viên</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Số viên đá phụ</td>
-                                                                <td>18 viên</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Thương hiệu</td>
-                                                                <td>Eternal Sparkle</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Color (Màu sắc/ Nước kim cương)</td>
-                                                                <td>F</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Clarity (Độ tinh khiết)</td>
-                                                                <td>SI1</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
-                                                                <td>Facet</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Giấy kiểm định</td>
-                                                                <td>Có</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
-                                                                <td>Facet</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Giới tính</td>
-                                                                <td>Nữ</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                               
                                                 <div class="tab-pane fade" id="tab_three">
                                                     <form action="#" class="review-form">
                                                         <h5>1 review for <span>Chaz Kangeroo</span></h5>
