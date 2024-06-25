@@ -25,16 +25,16 @@ function BannerHome() {
                                 <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-1.jpg)` }} />
                             </Link>
                         </div>
-
                         <div className="hero-single-slide hero-overlay">
-                            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-2.jpg)` }}>
-
-                            </div>
+                            <Link to="/Matdaychuyen">
+                                <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-2.jpg)` }} />
+                            </Link>
                         </div>
-                        <div className="hero-single-slide hero-overlay">
-                            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-3.jpg)` }}>
 
-                            </div>
+                        <div className="hero-single-slide hero-overlay">
+                            <Link to="/Vongtay">
+                                <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-3.jpg)` }} />
+                            </Link>
                         </div>
                         <div className="hero-single-slide hero-overlay">
                             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-4.png)` }}>
@@ -43,8 +43,8 @@ function BannerHome() {
                         </div>
                     </Slider>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     )
 }
 

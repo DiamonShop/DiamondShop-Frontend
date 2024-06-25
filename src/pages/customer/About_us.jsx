@@ -78,6 +78,7 @@ export default function About_us() {
                 </div>
             </div>
 
+
             <div class="team-area section-padding">
                 <div class="container">
                     <div class="row">
