@@ -4,34 +4,49 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { handleGetOrderByUserId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
+import { formatCurrency } from '../../utils/NumberFormat';
 // import 'react-toastify/dist/ReactToastify.css';
 
 export default function Gio_hang() {
     const location = useLocation();
+    const [orders, setOrders] = useState([]);
     const [orderDetailLists, setOrderDetailLists] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [token, setToken] = useState();
 
     useEffect(() => {
+        const runAllOrderData = () => {
+            getAllAvailableProducts();
+            totalPriceSum()
+        }
+        runAllOrderData()
         const params = new URLSearchParams(location.search);
         const message = params.get('message');
         if (message) {
             toast.info(message);
         }
-        getAllAvailableProducts();
 
     }, [location]);
 
+    const totalPriceSum = () => {
+        if (orderDetailLists) {
+            for (const item of orderDetailLists) {
+                setTotalPrice(totalPrice + item.unitPrice * item.quantity);
+            }
+            console.log(orders)
+        }
+    }
+
     const getAllAvailableProducts = async () => {
         setToken(localStorage.getItem('token'));
-        
+
         if (token) {
             const userId = decodeToken(token).sid;
-            const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+            setOrders(await handleGetOrderByUserId(parseInt(userId, 10)));
             if (orders != null) {
                 for (const item of orders) {
                     //Check order nếu có status là 'Ordering' thì mới được hiển thị
-                    if(item.status == 'Ordering'){
-                        console.log(item.orderDetails)
+                    if (item.status == 'Ordering') {
                         setOrderDetailLists(item.orderDetails);
                     }
                 }
@@ -78,18 +93,18 @@ export default function Gio_hang() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {orderDetailLists === null || !token? (
+                                            {orderDetailLists === null ? (
                                                 <div className="text-center" style={{ paddingLeft: '20px', fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</div>
                                             ) : (
-                                                orderDetailLists.map((order, index) => (
+                                                orderDetailLists.map((orderDetail, index) => (
                                                     <tr key={index}>
-                                                        <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src={order.imageUrl} alt="Product" /></a></td>
-                                                        <td className="pro-title"><a href="#">{order.productName}</a></td>
-                                                        <td className="pro-price"><span>{order.unitPrice}</span></td>
+                                                        <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></a></td>
+                                                        <td className="pro-title"><a href="#">{orderDetail.productName}</a></td>
+                                                        <td className="pro-price"><span>{formatCurrency(orderDetail.unitPrice)}đ</span></td>
                                                         <td className="pro-quantity">
-                                                            <div className="pro-qty"><input type="text" value={order.quantity} readOnly /></div>
+                                                            <div className="pro-qty"><input type="text" value={orderDetail.quantity} readOnly /></div>
                                                         </td>
-                                                        <td className="pro-subtotal"><span>{order.totalPrice}</span></td>
+                                                        <td className="pro-subtotal"><span>{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)}đ</span></td>
                                                         <td className="pro-remove"><a href="#"><i className="fa fa-trash-o"></i></a></td>
                                                     </tr>
                                                 ))
@@ -99,10 +114,6 @@ export default function Gio_hang() {
                                 </div>
                                 <div className="cart-update-option d-block d-md-flex justify-content-between">
                                     <div className="apply-coupon-wrapper">
-                                        <form action="#" method="post" className="d-block d-md-flex">
-                                            <input type="text" placeholder="Nhập mã khuyến mãi" required />
-                                            <button className="btn btn-sqr">Áp dụng voucher</button>
-                                        </form>
                                     </div>
                                     <div className="cart-update">
                                         <a href="#" className="btn btn-sqr">Cập nhật giỏ hàng</a>
@@ -118,7 +129,7 @@ export default function Gio_hang() {
                                             <table className="table">
                                                 <tr>
                                                     <td>Tổng tiền hàng</td>
-                                                    <td>452.904.000đ</td>
+                                                    <td>{formatCurrency(totalPrice)}đ</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Phí vận chuyển</td>
@@ -126,7 +137,7 @@ export default function Gio_hang() {
                                                 </tr>
                                                 <tr className="total">
                                                     <td>Tổng thanh toán</td>
-                                                    <td className="total-amount">452.904.000đ</td>
+                                                    <td className="total-amount">{formatCurrency(totalPrice)}đ</td>
                                                 </tr>
                                             </table>
                                         </div>

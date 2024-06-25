@@ -71,9 +71,9 @@ export default function Chi_tiet_san_pham_kc() {
       Clarity: selectedClarity,
       Cut: selectedCut
     }
-    
+
   }
-  
+
   return (
     <div>
       <div class="breadcrumb-area">
@@ -242,16 +242,6 @@ export default function Chi_tiet_san_pham_kc() {
                                                     </li>
                                                 </ul>
                                             </div> */}
-                      <div class="useful-links">
-                        <a href="#" data-bs-toggle="tooltip" title="Wishlist"><i
-                          class="pe-7s-like"></i>wishlist</a>
-                      </div>
-                      <div class="like-icon">
-                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                      </div>
                     </div>
                   </div>
                 </div>

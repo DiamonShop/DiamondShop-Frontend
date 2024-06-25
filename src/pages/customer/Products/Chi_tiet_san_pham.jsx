@@ -246,7 +246,13 @@ export default function Chi_tiet_san_pham() {
                                                     <option >29</option>
                                                 </select>
 
+
                                                 <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+
+                                                {productObj.categoryName == 'Nhẫn' ? (
+                                                    <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+                                                ) : (<></>)}
+
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
