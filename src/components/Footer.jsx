@@ -50,17 +50,7 @@ export default function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-3 col-md-6">
-                        <div className="widget-item">
-                            <h6 className="widget-title">Kết nối với chúng tôi</h6>
-                            <div className="widget-body social-link">
-                                <a href="#"><i className="fa fa-facebook"></i></a>
-                                <a href="#"><i className="fa fa-twitter"></i></a>
-                                <a href="#"><i className="fa fa-instagram"></i></a>
-                                <a href="#"><i className="fa fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div className="row align-items-center mt-20">
                     <div className="col-md-6">

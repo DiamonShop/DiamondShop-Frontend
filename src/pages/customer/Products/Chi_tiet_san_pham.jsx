@@ -224,8 +224,9 @@ export default function Chi_tiet_san_pham() {
                                                     <option value="20">32</option>
                                                     <option value="21">33</option>
                                                 </select>
-
-                                                <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+                                                {productObj.categoryName == 'Nhẫn' ? (
+                                                    <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+                                                ) : (<></>)}
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
@@ -253,7 +254,7 @@ export default function Chi_tiet_san_pham() {
                                                 <li>
                                                     <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
                                                 </li>
-                                                
+
                                                 <li>
                                                     <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
                                                 </li>
@@ -274,7 +275,7 @@ export default function Chi_tiet_san_pham() {
 
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="tab-pane fade" id="tab_three">
                                                     <form action="#" class="review-form">
                                                         <h5>1 review for <span>Chaz Kangeroo</span></h5>
