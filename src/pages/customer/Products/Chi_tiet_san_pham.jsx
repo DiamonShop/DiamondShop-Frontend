@@ -1,14 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
-import { color } from 'chart.js/helpers';
-
+import '../../../nice-select'
+import '../../../image-zoom'
 export default function Chi_tiet_san_pham() {
+    useEffect(() => {
+        // Khởi tạo plugin nice-select sau khi component đã được render
+        $('select').niceSelect();
+        $('.img-zoom').zoom();
+        // Cleanup khi component unmount
+        return () => {
+            $('select').niceSelect('destroy');
+            $('.img-zoom').zoom('destroy');
+        };
+    }, []);
+
+
     //Get product when reload
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
@@ -51,8 +62,12 @@ export default function Chi_tiet_san_pham() {
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
     };
     const [quantity, setQuantity] = useState(1);
-    const handleQuantity = (event) => {
-        setQuantity(Number(event.target.value));
+    const handleIncrement = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    const handleDecrement = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
     const [showMessage, setShowMessage] = useState(false);
@@ -128,7 +143,7 @@ export default function Chi_tiet_san_pham() {
 
                             <div class="product-details-inner">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-5">
                                         <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
                                                 <img src={productObj.image1} alt="product-details" />
@@ -160,7 +175,7 @@ export default function Chi_tiet_san_pham() {
 
                                         </Slider>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-7">
                                         <div class="product-details-des">
                                             <h3 class="product-name">{productObj.productName}</h3>
                                             <div class="ratings d-flex">
@@ -174,11 +189,11 @@ export default function Chi_tiet_san_pham() {
                                                 </div>
                                             </div>
                                             <div class="price-box">
-                                                <span class="price-regular">{formatCurrency(productObj.newPrice)}đ</span>
-                                                <span class="price-old"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
+                                                <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
+                                                <span class="price-old-detail"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
                                             </div>
                                             <div class="pro-size">
-                                                <h6 class="option-title">Chất liệu :</h6>
+                                                <h6 class="option-title">Chất liệu:</h6>
                                                 <input class="nice-select-chatlieu" value='Vàng' type='text' readOnly>
                                                 </input>
                                             </div>
@@ -187,45 +202,51 @@ export default function Chi_tiet_san_pham() {
                                                 <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input name='txtQuantity' type="number"
+                                                        <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                                        <input
+                                                            name='txtQuantity'
+                                                            type="text"
                                                             value={quantity}
-                                                            onChange={handleQuantity}
-                                                            min="1" />
+                                                            readOnly
+                                                        />
+                                                        <span className=" qtybtn" onClick={handleIncrement}>+</span>
+
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="pro-size">
                                                 <h6 class="option-title">Size :</h6>
                                                 <select class="nice-select">
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="18">22</option>
-                                                    <option value="19">23</option>
-                                                    <option value="20">24</option>
-                                                    <option value="21">25</option>
-                                                    <option value="19">26</option>
-                                                    <option value="20">27</option>
-                                                    <option value="21">28</option>
-                                                    <option value="20">29</option>
-                                                    <option value="21">30</option>
-                                                    <option value="19">31</option>
-                                                    <option value="20">32</option>
-                                                    <option value="21">33</option>
+                                                    <option >8</option>
+                                                    <option >9</option>
+                                                    <option >10</option>
+                                                    <option >11</option>
+                                                    <option >12</option>
+                                                    <option >13</option>
+                                                    <option >14</option>
+                                                    <option >15</option>
+                                                    <option >16</option>
+                                                    <option >17</option>
+                                                    <option >18</option>
+                                                    <option >19</option>
+                                                    <option >20</option>
+                                                    <option >21</option>
+                                                    <option >22</option>
+                                                    <option >23</option>
+                                                    <option >24</option>
+                                                    <option >25</option>
+                                                    <option >26</option>
+                                                    <option >27</option>
+                                                    <option >28</option>
+                                                    <option >30</option>
+                                                    <option >32</option>
+                                                    <option >31</option>
+                                                    <option >33</option>
+                                                    <option >29</option>
                                                 </select>
 
-                                                <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+                                                <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
@@ -253,7 +274,7 @@ export default function Chi_tiet_san_pham() {
                                                 <li>
                                                     <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
                                                 </li>
-                                                
+
                                                 <li>
                                                     <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
                                                 </li>
@@ -274,10 +295,10 @@ export default function Chi_tiet_san_pham() {
 
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="tab-pane fade" id="tab_three">
                                                     <form action="#" class="review-form">
-                                                        <h5>1 review for <span>Chaz Kangeroo</span></h5>
+                                                        <h5>1 review for <span>Nguyễn Đăng Khoa</span></h5>
                                                         <div class="total-reviews">
                                                             <div class="rev-avatar">
                                                                 <img src="assets/img/about/avatar.jpg" alt="" />

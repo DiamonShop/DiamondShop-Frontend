@@ -21,7 +21,7 @@ export default function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 ">
+                    <div className="col-lg-4 ">
                         <div className="widget-item">
                             <h6 className="widget-title">Liên hệ</h6>
                             <div className="widget-body">
@@ -35,7 +35,7 @@ export default function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-2 ">
+                    <div className="col-lg-3 ">
                         <div className="widget-item">
                             <h6 className="widget-title">Thông tin</h6>
                             <div className="widget-body">
