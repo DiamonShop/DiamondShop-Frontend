@@ -3,8 +3,10 @@
     width: 50px; /* Điều chỉnh kích thước biểu tượng chat */
     height: 50px; /* Điều chỉnh kích thước biểu tượng chat */
     position: fixed;
+
     bottom: 10px;
     left: 10px;
+
     cursor: pointer;
     z-index: 1000; /* Đảm bảo biểu tượng nằm trên cùng */
   }
@@ -14,7 +16,9 @@
     height: 400px;
     position: fixed;
     bottom: 80px; /* Điều chỉnh vị trí của khung chat */
+
     left: 20px;
+
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;

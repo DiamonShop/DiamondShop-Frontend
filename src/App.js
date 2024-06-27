@@ -28,8 +28,11 @@ import Tai_Khoan from './pages/Admin&Manager/Tai_Khoan';
 import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
+
+
 import Chinh_sach_giao_hang from './pages/customer/Chinh_sach_giao_hang';
 import ScrollToTop from './components/ScrollToTop';
+
 function App({ tokenIsValid }) {
 
   //Chuyển id từ Nhan qua App
@@ -73,7 +76,7 @@ function App({ tokenIsValid }) {
             </Routes>
             
         </Router>
-        
+
       </UserProvider>
 
     </div>

@@ -11,10 +11,11 @@ const ChatWindow = () => {
 
   return (
     <div className="chat-window">
+
       Quét mã QR
       <img src="assets/img/zalo-qr.jpg"></img>
     </div>
-    
+
   );
 };
 
