@@ -45,10 +45,11 @@ export default function Dang_nhap() {
                 const roleName = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                 console.log('Role Name:', roleName); // Log the role name
 
-                if (roleName === 'Admin') {
+                if (roleName === 'Admin' || roleName === 'Manager') {
                     navigate('/Dashboard');
                 } else {
                     navigate('/');
+                    window.location.reload();
                 }
             } else {
                 console.error('Token is not available in the response');

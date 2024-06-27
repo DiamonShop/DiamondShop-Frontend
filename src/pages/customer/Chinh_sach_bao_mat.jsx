@@ -4,39 +4,39 @@ import { Link } from 'react-router-dom';
 export default function ChinhSachBaoMat() {
     useEffect(() => {
         const sectionHeaders = document.querySelectorAll('.faq-section-header');
-        sectionHeaders.forEach((header) => {
-            header.addEventListener('click', function () {
-                const content = this.nextElementSibling;
-                if (content.style.display === 'block') {
-                    content.style.display = 'none';
-                } else {
-                    content.style.display = 'block';
-                }
-            });
-        });
-
         const questions = document.querySelectorAll('.faq-question');
-        questions.forEach((question) => {
-            question.addEventListener('click', function () {
-                const answer = this.nextElementSibling;
-                if (answer.style.display === 'block') {
-                    answer.style.display = 'none';
-                } else {
-                    answer.style.display = 'block';
-                }
-            });
+
+        const toggleDisplay = (element) => {
+            const content = element.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        };
+
+        const headerClickListener = function () {
+            toggleDisplay(this);
+        };
+
+        const questionClickListener = function () {
+            toggleDisplay(this);
+        };
+
+        sectionHeaders.forEach((header) => {
+            header.addEventListener('click', headerClickListener);
         });
 
-        // Clean up the event listeners on component unmount
+        questions.forEach((question) => {
+            question.addEventListener('click', questionClickListener);
+        });
+
         return () => {
             sectionHeaders.forEach((header) => {
-                header.removeEventListener('click', () => { });
+                header.removeEventListener('click', headerClickListener);
             });
             questions.forEach((question) => {
-                question.removeEventListener('click', () => { });
+                question.removeEventListener('click', questionClickListener);
             });
         };
     }, []);
+
 
     return (
         <div className="faq-container">
@@ -94,7 +94,7 @@ export default function ChinhSachBaoMat() {
                     </ul>
                 </div>
             </div>
-            <Link to="/">Quay về trang chủ</Link>
+
         </div>
     );
 }

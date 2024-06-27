@@ -1,131 +1,169 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
+import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { Link } from 'react-router-dom';
 
+const Taikhoan = () => {
+    const { user: currentUser, logout: userLogout } = useUser();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const [showAddOverlay, setShowAddOverlay] = useState(false);
 
-// State và hàm xử lý tài khoản
-const accountDatas = [
-    { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Quản trị viên', status: 'Hoạt động' },
-    { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Người dùng', status: 'Ngừng hoạt động' },
-    { id: 3, name: 'Charlie Brown', email: 'charlie@example.com', role: 'Người dùng', status: 'Hoạt động' }
-];
+    const fetchUserData = async () => {
+        if (!currentUser) {
+            console.log("User not logged in. Redirecting to login.");
+            return;
+        }
 
-// State và hàm xử lý modal chỉnh sửa tài khoản
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
 
+        try {
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-// Hàm render danh sách tài khoản
-const AccountManagement = () => {
-    const [accounts, setAccounts] = useState(accountDatas);
-    const [currentAccount, setCurrentAccount] = useState({ id: '', name: '', email: '', role: '', status: '' });
+            if (userRole !== 'Admin') {
+                console.log("User is not an admin. Redirecting to home.");
+                navigate('/');
+                return;
+            }
 
-    // State for controlling modal visibility
-    const [showModal, setShowModal] = useState(false);
-    // Hàm xử lý khi người dùng click chỉnh sửa tài khoản
+            setLoading(true);
+            const headers = sendToken(); // Get headers with Authorization token
 
-    const editAccount = (id) => {
-        const account = accounts.find(a => a.id === id);
-        setCurrentAccount(account);
-        setShowModal(true);
+            const response = await axios.get('https://localhost:7101/api/User/GetAllUsers', {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log("All Users:", response.data);
+            // Extracting only necessary fields: ID, username, email, roleName, isActive
+            const formattedUsers = response.data.map((user, index) => ({
+                id: index + 1,
+                fullname: user.fullName,
+                username: user.username,
+                email: user.email,
+                roleName: user.roleName,
+                isActive: user.isActive,
+            }));
+            setUsers(formattedUsers);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            if (error.response && error.response.status === 401) {
+                console.log('Token expired or invalid. Redirecting to login.');
+                userLogout();
+            } else {
+                setErrorMessage('Error fetching user data.');
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
-    // Hàm xử lý khi người dùng submit form chỉnh sửa tài khoản
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        const { id, name, email, role, status } = currentAccount;
-        const updatedAccounts = accounts.map((account) =>
-            account.id === id ? currentAccount : account
-        );
-        setAccounts(updatedAccounts);
-        setShowModal(false);
-    };
+    useEffect(() => {
+        fetchUserData();
+    }, [currentUser, userLogout, navigate]);
 
-    // Hàm xử lý thay đổi giá trị các input trong form chỉnh sửa
-    const handleInputChange = (e) => {
+    const [newAccount, setNewAccount] = useState({
+        fullname: '',
+        username: '',
+        password: '', // Add password field
+        email: '',
+        isActive: true,
+        roleId: 0,
+        address: '', // Add address field
+    });
+
+    const handleAddInputChange = (e) => {
         const { name, value } = e.target;
-        setCurrentAccount((prevAccount) => ({
-            ...prevAccount,
+        setNewAccount(prevState => ({
+            ...prevState,
             [name]: value
         }));
     };
-    return (
-        <div className="content">
-            <div className="container">
-                <h2 className="text-center">Quản lý sản phẩm</h2>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tên tài khoản</th>
-                            <th>Email</th>
-                            <th>Chức vụ</th>
-                            <th>Tình trạng</th>
 
-                        </tr>
-                    </thead>
-                    <tbody id="account-list">
-                        {accounts.map(account => (
-                            <tr key={account.id}>
-                                <td>{account.id}</td>
-                                <td>{account.name}</td>
-                                <td>{account.email}</td>
-                                <td>{account.role}</td>
-                                <td className={account.status === 'Hoạt động' ? 'status-active' : 'status-inactive'}>{account.status}</td>
-                                <td>
-                                    <button className="btn btn-sm btn-primary" onClick={() => editAccount(account.id)}>Chỉnh sửa</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            {showModal && (
-                <div className="modal fade show" id="editAccountModal" tabIndex="-1" role="dialog" aria-labelledby="editAccountModalLabel" aria-hidden="true" style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="editAccountModalLabel">Chỉnh sửa tài khoản</h5>
-                                <button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <form id="edit-account-form" onSubmit={handleFormSubmit}>
-                                    <input type="hidden" id="edit-account-id" value={currentAccount.id} />
-                                    <div className="form-group">
-                                        <label htmlFor="edit-account-name">Tên tài khoản</label>
-                                        <input type="text" className="form-control" id="edit-account-name" name="name" value={currentAccount.name} onChange={handleInputChange} required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="edit-account-email">Email</label>
-                                        <input type="email" className="form-control" id="edit-account-email" name="email" value={currentAccount.email} onChange={handleInputChange} required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="edit-account-role">Vai trò</label>
-                                        <select className="form-control" id="edit-account-role" name="role" value={currentAccount.role} onChange={handleInputChange} required>
-                                            <option value="Quản trị viên">Quản trị viên</option>
-                                            <option value="Người dùng">Người dùng</option>
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="edit-account-status">Tình trạng</label>
-                                        <select className="form-control" id="edit-account-status" name="status" value={currentAccount.status} onChange={handleInputChange} required>
-                                            <option value="Hoạt động">Hoạt động</option>
-                                            <option value="Ngừng hoạt động">Ngừng hoạt động</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">Lưu thay đổi</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
+    const handleAddAccount = async () => {
+        try {
+            const headers = sendToken(); // Get headers with Authorization token
+            const response = await axios.post('https://localhost:7101/api/User/CreateUser', {
+                fullname: newAccount.fullname,
+                username: newAccount.username,
+                password: newAccount.password,
+                email: newAccount.email,
+                isActive: newAccount.isActive,
+                roleId: newAccount.roleId,
+                address: newAccount.address,
+            }, {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
 
+            console.log('New Account added:', response.data);
+            // Refresh user list
+            fetchUserData();
+            // Clear input fields
+            setNewAccount({
+                fullname: '',
+                username: '',
+                password: '',
+                email: '',
+                isActive: true,
+                roleId: 0,
+                address: '',
+            });
+            setShowAddOverlay(false);
+        } catch (error) {
+            console.error('Error adding new account:', error);
+            if (error.response) {
+                setErrorMessage(error.response.data.message || 'Unknown error occurred');
+            } else {
+                setErrorMessage('Error adding new account.');
+            }
+        }
+    };
 
-    );
-};
+    const [roleFilter, setRoleFilter] = useState('Tất cả');
+    const [statusFilter, setStatusFilter] = useState('Tất cả');
 
-const Tai_Khoan = () => {
+    const handleRoleFilterChange = (e) => {
+        setRoleFilter(e.target.value);
+    };
+
+    const handleStatusFilterChange = (e) => {
+        setStatusFilter(e.target.value);
+    };
+
+    // Filtered accounts based on role and status
+    let filteredAccounts = users; // Use users state for filtering
+
+    if (roleFilter !== 'Tất cả') {
+        filteredAccounts = filteredAccounts.filter(account => account.roleName === roleFilter);
+    }
+
+    if (statusFilter !== 'Tất cả') {
+        filteredAccounts = filteredAccounts.filter(account => (account.isActive ? 'Hoạt động' : 'Ngừng hoạt động') === statusFilter);
+    }
+    const handleOpenAddButtonClick = () => {
+        setShowAddOverlay(true);
+    };
+
+    const handleCloseAddButtonClick = () => {
+        setShowAddOverlay(false);
+    };
+
     return (
         <div className="wrapper">
             <nav id="sidebar" className="sidebar js-sidebar">
@@ -142,7 +180,7 @@ const Tai_Khoan = () => {
                             </a>
                         </li>
                         <li className="sidebar-header">Quản lý</li>
-                        <li className="sidebar-item">
+                        <li className="sidebar-item ">
                             <a className="sidebar-link">
                                 <i className="align-middle" data-feather="sliders"></i>
                                 <span className="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
@@ -150,7 +188,7 @@ const Tai_Khoan = () => {
                         </li>
                         <li className="sidebar-item active">
                             <a className="sidebar-link">
-                                <i className="align-middle" data-feather="sliders"></i>
+                                <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
                             </a>
                         </li>
@@ -159,11 +197,11 @@ const Tai_Khoan = () => {
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
-                            <a class="sidebar-link">
-                                <i class="align-middle"
+                            <a className="sidebar-link">
+                                <i className="align-middle"
                                     data-feather="check-square">
                                 </i>
-                                <span class="align-middle">Chứng nhận sản phẩm</span>
+                                <span className="align-middle">Chứng nhận sản phẩm</span>
                             </a>
                         </li>
                     </ul>
@@ -261,10 +299,150 @@ const Tai_Khoan = () => {
                         </ul>
                     </div>
                 </nav>
-                <AccountManagement />
+                <div className="content">
+                    <div className="container">
+                        <h2 className="text-center">Quản lí tài khoản</h2>
+
+                        {/* <div className="filters">
+                            <label>Chọn theo chức vụ:</label>
+                            <select value={roleFilter} onChange={handleRoleFilterChange}>
+                                <option value="Tất cả">Tất cả</option>
+                                <option value="Admin">Quản trị viên</option>
+                                <option value="Member">Người dùng</option>
+                                <option value="Manager">Quản lí</option>
+                                <option value="Staff">Nhân viên</option>
+                                <option value="Delivery">Vận chuyển</option>
+                            </select>
+                            <label>Chọn theo trạng thái:</label>
+                            <select value={statusFilter} onChange={handleStatusFilterChange}>
+                                <option value="Tất cả">Tất cả</option>
+                                <option value="Hoạt động">Hoạt động</option>
+                                <option value="Ngừng hoạt động">Ngừng hoạt động</option>
+                            </select>
+                        </div> */}
+                        {/* Button to open add account overlay */}
+                        <button onClick={handleOpenAddButtonClick} className="btn-add-account ">Thêm tài khoản</button>
+
+                        {/* Overlay for adding new account */}
+                        {showAddOverlay && (
+                            <div className=" add-account-overlay">
+                                <div className="add-account">
+                                    <h3>Thêm tài khoản mới</h3>
+                                    <div>
+                                        <label>Họ và tên:</label>
+                                        <input
+                                            type="text"
+                                            name="fullname"
+                                            value={newAccount.fullname}
+                                            onChange={handleAddInputChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Tên tài khoản:</label>
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            value={newAccount.username}
+                                            onChange={handleAddInputChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Mật khẩu:</label>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            value={newAccount.password}
+                                            onChange={handleAddInputChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Email:</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={newAccount.email}
+                                            onChange={handleAddInputChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>Trạng thái:</label>
+                                        <select
+                                            name="isActive"
+                                            value={newAccount.isActive}
+                                            onChange={handleAddInputChange}
+                                        >
+                                            <option value={true}>Hoạt động</option>
+                                            <option value={false}>Ngừng hoạt động</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Chức vụ:</label>
+                                        <select
+                                            name="roleId"
+                                            value={newAccount.roleId}
+                                            onChange={handleAddInputChange}
+                                        >
+                                            <option value={0}>Admin</option>
+                                            <option value={1}>Member</option>
+                                            <option value={2}>Manager</option>
+                                            <option value={3}>Staff</option>
+                                            <option value={4}>Delivery</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Địa chỉ:</label>
+                                        <input
+                                            type="text"
+                                            name="address"
+                                            value={newAccount.address}
+                                            onChange={handleAddInputChange}
+                                        />
+                                    </div>
+                                    <button onClick={handleAddAccount}>Thêm tài khoản</button>
+                                    <button onClick={handleCloseAddButtonClick}>Đóng</button>
+                                </div>
+                            </div>
+                        )}
+
+
+                        <table className="">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Họ và tên</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Email</th>
+                                    <th>Chức vụ</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredAccounts.map(user => (
+                                    <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.fullname}</td>
+                                        <td>{user.username}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.roleName}</td>
+                                        <td>{user.isActive ? 'Hoạt động' : 'Ngừng hoạt động'}</td>
+                                        <td>
+                                            <button className="btn-add-account ">Chỉnh sửa</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
             </div>
+
         </div>
     );
-}
+};
 
-export default Tai_Khoan;
+export default Taikhoan;
+

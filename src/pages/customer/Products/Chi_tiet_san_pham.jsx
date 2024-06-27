@@ -1,17 +1,30 @@
-import React, { useRef, useState } from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useEffect, useRef, useState } from 'react';
+import Slider from 'react-slick';
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
-import { handleAddProductToOrder, handleCreateOrder } from '../../../api/OrderAPI';
+import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
-
+import '../../../nice-select'
+import '../../../image-zoom'
 export default function Chi_tiet_san_pham() {
+    useEffect(() => {
+        // Khởi tạo plugin nice-select sau khi component đã được render
+        $('select').niceSelect();
+        $('.img-zoom').zoom();
+        // Cleanup khi component unmount
+        return () => {
+            $('select').niceSelect('destroy');
+            $('.img-zoom').zoom('destroy');
+        };
+    }, []);
+
+
     //Get product when reload
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
+    const [token, setToken] = useState();
 
     const largeSliderSettings = {
         fade: true,
@@ -28,8 +41,6 @@ export default function Chi_tiet_san_pham() {
         speed: 1000,
         centerPadding: '0',
         focusOnSelect: true,
-        //prevArrow: <button type="button" className="slick-prev"><i className="lnr lnr-chevron-left"></i></button>,
-        //nextArrow: <button type="button" className="slick-next"><i className="lnr lnr-chevron-right"></i></button>,
         responsive: [{
             breakpoint: 576,
             settings: {
@@ -50,17 +61,58 @@ export default function Chi_tiet_san_pham() {
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
     };
-    const [value, setValue] = useState(1);
-    const handleChange = (event) => {
-        setValue(Number(event.target.value));
+    const [quantity, setQuantity] = useState(1);
+    const handleIncrement = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
     };
+
+    const handleDecrement = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
+
+    const [showMessage, setShowMessage] = useState(false);
+
+    const successAddMessage = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 5000); // 5000 milliseconds = 5 seconds
+    }
 
     const handleAddToCart = async () => {
         //Lấy userId để tạo order
-        const userId = decodeToken(localStorage.getItem('token')).sid;
-        //Gọi API để tạo order
-        const orderData = await handleCreateOrder(parseInt(userId,10));
-        console.log(orderData)
+        const token = localStorage.getItem('token')
+        if (token) {
+            const userId = decodeToken(token).sid;
+            //Gọi API để tạo order
+            const order = await handleGetOrderByUserId(parseInt(userId, 10));
+            //Nếu Order bằng null thì tạo Order mới
+            if (order != null) {
+                for (const item of order) {
+                    if (item.status == 'Ordering') {
+                        handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    } else if (item.status == 'Completed' || item.status == 'Shipped') {
+                        const orderId = await handleCreateOrder(userId);
+                        console.log(orderId)
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    }
+                }
+            } else {
+                const orderId = await handleCreateOrder(userId);
+                const order = await handleGetOrderByUserId(parseInt(userId, 10));
+                for (const item of order) {
+                    if (item.status == 'Ordering' && item.orderId == orderId) {
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     return (
@@ -91,43 +143,39 @@ export default function Chi_tiet_san_pham() {
 
                             <div class="product-details-inner">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-5">
                                         <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src={productObj.image1} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src={productObj.image2} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src={productObj.image3} alt="product-details" />
                                             </div>
                                             <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                            <div className="pro-large-img img-zoom">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div>
+
                                         </Slider>
                                         <Slider {...navSliderSettings} className="pro-nav">
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                                <img src={productObj.image1} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                                <img src={productObj.image2} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                                <img src={productObj.image3} alt="product-details" />
                                             </div>
                                             <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                                <img src={productObj.image4} alt="product-details" />
                                             </div>
-                                            <div className="pro-nav-thumb">
-                                                <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                            </div>
+
                                         </Slider>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-7">
                                         <div class="product-details-des">
                                             <h3 class="product-name">{productObj.productName}</h3>
                                             <div class="ratings d-flex">
@@ -141,11 +189,11 @@ export default function Chi_tiet_san_pham() {
                                                 </div>
                                             </div>
                                             <div class="price-box">
-                                                <span class="price-regular">{formatCurrency(productObj.newPrice)}đ</span>
-                                                <span class="price-old"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
+                                                <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
+                                                <span class="price-old-detail"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
                                             </div>
                                             <div class="pro-size">
-                                                <h6 class="option-title">Chất liệu :</h6>
+                                                <h6 class="option-title">Chất liệu:</h6>
                                                 <input class="nice-select-chatlieu" value='Vàng' type='text' readOnly>
                                                 </input>
                                             </div>
@@ -154,45 +202,57 @@ export default function Chi_tiet_san_pham() {
                                                 <h6 class="option-title">Số lượng:</h6>
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input name='txtQuantity' type="number"
-                                                            value={value}
-                                                            onChange={handleChange}
-                                                            min="1" />
+                                                        <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                                        <input
+                                                            name='txtQuantity'
+                                                            type="text"
+                                                            value={quantity}
+                                                            readOnly
+                                                        />
+                                                        <span className=" qtybtn" onClick={handleIncrement}>+</span>
+
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="pro-size">
                                                 <h6 class="option-title">Size :</h6>
                                                 <select class="nice-select">
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="18">22</option>
-                                                    <option value="19">23</option>
-                                                    <option value="20">24</option>
-                                                    <option value="21">25</option>
-                                                    <option value="19">26</option>
-                                                    <option value="20">27</option>
-                                                    <option value="21">28</option>
-                                                    <option value="20">29</option>
-                                                    <option value="21">30</option>
-                                                    <option value="19">31</option>
-                                                    <option value="20">32</option>
-                                                    <option value="21">33</option>
+                                                    <option >8</option>
+                                                    <option >9</option>
+                                                    <option >10</option>
+                                                    <option >11</option>
+                                                    <option >12</option>
+                                                    <option >13</option>
+                                                    <option >14</option>
+                                                    <option >15</option>
+                                                    <option >16</option>
+                                                    <option >17</option>
+                                                    <option >18</option>
+                                                    <option >19</option>
+                                                    <option >20</option>
+                                                    <option >21</option>
+                                                    <option >22</option>
+                                                    <option >23</option>
+                                                    <option >24</option>
+                                                    <option >25</option>
+                                                    <option >26</option>
+                                                    <option >27</option>
+                                                    <option >28</option>
+                                                    <option >30</option>
+                                                    <option >32</option>
+                                                    <option >31</option>
+                                                    <option >33</option>
+                                                    <option >29</option>
                                                 </select>
 
-                                                <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+
+                                                <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+
+                                                {productObj.categoryName == 'Nhẫn' ? (
+                                                    <Link to='/Huongdandoni' class="option-title">Hướng dẫn đo ni</Link>
+                                                ) : (<></>)}
+
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
@@ -200,6 +260,12 @@ export default function Chi_tiet_san_pham() {
                                                     <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
                                                 </div>
                                             </div>
+
+                                            {showMessage && (
+                                                <div class="message-add-to-cart-success">
+                                                    <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -214,9 +280,7 @@ export default function Chi_tiet_san_pham() {
                                                 <li>
                                                     <a class="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
                                                 </li>
-                                                <li>
-                                                    <a data-bs-toggle="tab" href="#tab_two">Thông số</a>
-                                                </li>
+
                                                 <li>
                                                     <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
                                                 </li>
@@ -237,71 +301,10 @@ export default function Chi_tiet_san_pham() {
 
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane fade" id="tab_two">
-                                                    <table class="table table-bordered">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Trọng lượng tham khảo</td>
-                                                                <td>6.87589 phân</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Loại đá chính</td>
-                                                                <td>Kim cương</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Kích thước đá chính (tham khảo):</td>
-                                                                <td>4.9 li</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Hình dạng đá</td>
-                                                                <td>Tròn</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Loại đá phụ</td>
-                                                                <td>Kim cương</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Số viên đá chính</td>
-                                                                <td>1 viên</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Số viên đá phụ</td>
-                                                                <td>18 viên</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Thương hiệu</td>
-                                                                <td>Eternal Sparkle</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Color (Màu sắc/ Nước kim cương)</td>
-                                                                <td>F</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Clarity (Độ tinh khiết)</td>
-                                                                <td>SI1</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
-                                                                <td>Facet</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Giấy kiểm định</td>
-                                                                <td>Có</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Cut (Giác cắt/ Hình dạng kim cương)</td>
-                                                                <td>Facet</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Giới tính</td>
-                                                                <td>Nữ</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+
                                                 <div class="tab-pane fade" id="tab_three">
                                                     <form action="#" class="review-form">
-                                                        <h5>1 review for <span>Chaz Kangeroo</span></h5>
+                                                        <h5>1 review for <span>Nguyễn Đăng Khoa</span></h5>
                                                         <div class="total-reviews">
                                                             <div class="rev-avatar">
                                                                 <img src="assets/img/about/avatar.jpg" alt="" />

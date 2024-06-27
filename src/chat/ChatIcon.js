@@ -13,7 +13,9 @@ const ChatIcon = () => {
   return (
     <div>
       <img
-        src="assets/img/mess.jpg" // Đường dẫn tới hình ảnh của bạn
+
+        src="assets/img/zalo-seeklogo.jpg" // Đường dẫn tới hình ảnh của bạn
+
         alt="Chat Icon"
         className="chat-icon"
         onClick={toggleChat}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
-import App from '../../../App';
+
 
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
@@ -50,6 +50,8 @@ export default function Nhan({ onProductClick }) {
                                                 productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
+                                                image3={item.image3}
+                                                image4={item.image4}
                                                 label={item.label}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}

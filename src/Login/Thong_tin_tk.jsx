@@ -1,12 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import addAddress from '../api/addAddress'; // Adjust path as needed
 import getAllShipAddresses from '../api/getAllShipAddresses'; // Import the API function
 import ShippingAddresses from '../components/ShippingAddresses';
+
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -151,6 +154,7 @@ export default function Thong_tin_tk() {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
+
         const userDataToUpdate = {
             username,
             fullName: displayName,
@@ -165,6 +169,7 @@ export default function Thong_tin_tk() {
             console.log('Update response:', updatedUser);
             setErrorMessage('Update successful');
             setUserData(updatedUser);
+
         } catch (error) {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);
@@ -180,6 +185,12 @@ export default function Thong_tin_tk() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleLogout = () => {
+        apilogout(); // Call the logout function from logoutAPI.js
+        userLogout(); // Call the logout function from UserContext
+        navigate('/'); // Redirect to homepage after logout
     };
 
     return (
@@ -219,7 +230,7 @@ export default function Thong_tin_tk() {
                                                 <a href="#address-edit" data-bs-toggle="tab"><i className="fa fa-map-marker"></i>
                                                     Địa chỉ</a>
                                                 <a href="#account-info" data-bs-toggle="tab"><i className="fa fa-user"></i> Thông tin cá nhân</a>
-                                                <Link to="/"><i className="fa fa-sign-out"></i> Logout</Link>
+                                                <Link to="/" onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</Link>
                                             </div>
                                         </div>
                                         <div className="col-lg-9 col-md-8">

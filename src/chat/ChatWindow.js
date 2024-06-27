@@ -11,9 +11,11 @@ const ChatWindow = () => {
 
   return (
     <div className="chat-window">
-      <MessageList messages={messages} />
-      <ChatInput onSendMessage={handleSendMessage} />
+
+      Quét mã QR
+      <img src="assets/img/zalo-qr.jpg"></img>
     </div>
+
   );
 };
 

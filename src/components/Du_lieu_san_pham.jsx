@@ -17,9 +17,9 @@ function Du_lieu_san_pham(props) {
                         </div>
                     </div>
                     <div className="button-group">
-                        <a href="wishlist.html" data-bs-toggle="tooltip"
+                        <Link to="/Yeuthich" data-bs-toggle="tooltip"
                             data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i
-                                className="pe-7s-like"></i></a>
+                                className="pe-7s-like"></i></Link>
                     </div>
                     <div className="cart-hover">
                         <button className="btn btn-cart">Thêm vào giỏ hàng</button>

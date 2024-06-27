@@ -14,7 +14,6 @@ export const handleLoginUser = async (user) => {
         const data = await response.json();
 
         if (data.success) {
-            console.log(data.data);
             let user = {
                 fullName: data.data.fullName,
                 roleName: data.data.roleName,
