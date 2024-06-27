@@ -29,6 +29,10 @@ import Don_Hang from './pages/Admin&Manager/Don_Hang';
 import { UserProvider } from './UserContext';
 import ScrollToTop from './components/ScrollToTop';
 import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
+import ChatWindow from './chat/ChatWindow';
+import ChatIcon from './chat/ChatIcon';
+import ChatInput from './chat/ChatInput';
+
 function App({ tokenIsValid }) {
 
   //Chuyển id từ Nhan qua App
@@ -68,6 +72,7 @@ function App({ tokenIsValid }) {
             <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
           </Routes>
         </Router>
+        <ChatIcon />
       </UserProvider>
       <ScrollToTop/>
     </div>
