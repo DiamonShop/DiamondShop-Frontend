@@ -13,6 +13,7 @@ export default function Thanh_toan() {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const [userId, setUserId] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -61,6 +62,7 @@ export default function Thanh_toan() {
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
                 setAddress(response.data.address || '');
+                setUserId(response.data.userId || '');
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -97,10 +99,11 @@ export default function Thanh_toan() {
         const totalPrice = parseInt(totalText, 10); // Convert to integer
         
         const orderModel = {
+            userId:userId,
             fullName: displayName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
-            email: formData.email,
+            email: email,
             streetAddress: address,
             orderNote: formData.orderNote,
             price: totalPrice
@@ -129,7 +132,10 @@ export default function Thanh_toan() {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    
+    const handleUserIdChange = (event) => {
+        setUserId(event.target.value);
+    };
 
     return (
         <div>
