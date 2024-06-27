@@ -1,0 +1,103 @@
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
+import Filter_product from '../../../components/Filter_product';
+import GetProductByName from '../../../Data/Product_all_data';
+
+export default function Ket_qua_tim_kiem({ onProductClick }) {
+    const [sortOption, setSortOption] = useState('');
+    const [productList, setProductList] = useState([]);
+
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
+
+    const query = useQuery();
+    const searchValue = query.get('search');
+
+    const handleSortChange = (event) => {
+        setSortOption(event.target.value);
+    };
+
+    useEffect(() => {
+        // Giả sử GetProductByName là một hàm bất đồng bộ trả về danh sách sản phẩm dựa trên searchValue
+        const fetchProducts = async () => {
+            const products = await GetProductByName(searchValue);
+            setProductList(products);
+        };
+
+        if (searchValue) {
+            fetchProducts();
+        }
+    }, [searchValue]);
+
+    return (
+        <div>
+            <div className="breadcrumb-area">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="breadcrumb-wrap">
+                                <nav aria-label="breadcrumb">
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Kết quả tìm kiếm</li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="shop-main-wrapper section-padding">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="shop-product-wrapper">
+                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                                <div className="shop-product-wrap grid-view row mbn-30">
+                                    {productList && productList.length > 0 ? (
+                                        productList.map((item) => (
+                                            <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
+                                                <Du_lieu_san_pham
+                                                    productId={item.id}
+                                                    image1={item.image1}
+                                                    image2={item.image2}
+                                                    image3={item.image3}
+                                                    image4={item.image4}
+                                                    label={item.label}
+                                                    productName={item.productName}
+                                                    categoryName={item.categoryName}
+                                                    newPrice={item.newPrice}
+                                                    oldPrice={item.oldPrice}
+                                                    description={item.description}
+                                                    onProductClick={onProductClick}
+                                                />
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="col-12">
+                                            <p>Không có sản phẩm nào được tìm thấy.</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="paginatoin-area text-center">
+                                    <ul className="pagination-box">
+                                        <li><a className="previous" href="#"><i className="pe-7s-angle-left"></i></a></li>
+                                        <li className="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a className="next" href="#"><i className="pe-7s-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    );
+}

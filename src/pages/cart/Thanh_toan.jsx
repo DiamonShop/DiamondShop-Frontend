@@ -3,8 +3,10 @@ import { handleCheckout } from '../../api/CheckoutAPI';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Ensure jwt-decode is installed and imported
-import updateProfile from '../../api/UpdateProfile'; // Adjust path as needed
+import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is installed and imported
+import { formatCurrency } from '../../utils/NumberFormat';
+import { decodeToken } from '../../api/TokenAPI';
+import { handleGetOrderByUserId } from '../../api/OrderAPI';
 
 export default function Thanh_toan() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -14,7 +16,9 @@ export default function Thanh_toan() {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [loading, setLoading] = useState(false);
+    const [orderDetail, setOrderDetail] = useState('');
     const navigate = useNavigate();
+    const [totalPrice, setTotalPrice] = useState(0);
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNumber: '',
@@ -23,7 +27,7 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
-  
+
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
@@ -40,7 +44,6 @@ export default function Thanh_toan() {
                 console.log("Token not found or expired. Logging out.");
                 userLogout();
                 navigate('/Dang_nhap');
-                return;
             }
 
             try {
@@ -56,7 +59,6 @@ export default function Thanh_toan() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log("Response data:", response.data);
                 setUserData(response.data);
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
@@ -82,20 +84,36 @@ export default function Thanh_toan() {
 
         checkout_btn.addEventListener('click', handleCheckoutClick);
 
+        //Lấy Total Price khi vào trang Thanh Toán
+        const getTotalPrice = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userId = decodeToken(token).sid;
+                const orders = await handleGetOrderByUserId(userId);
+                for (const item of orders) {
+                    if (item.status == 'Ordering') {
+                        setTotalPrice(item.totalPrice);
+                        setOrderDetail(item.orderDetails);
+                    }
+                }
+            }
+        }
+
+        getTotalPrice();
+
         return () => {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
 
-        
-    },[currentUser, userLogout, navigate]);
+    }, [currentUser, userLogout, navigate]);
 
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
         const totalElement = document.getElementById("total");
         const totalText = totalElement.textContent.replace(/\D/g, ''); // Remove non-numeric characters
-        const totalPrice = parseInt(totalText, 10); // Convert to integer
-        
+        const totalPrices = totalPrice; // Convert to integer
+
         const orderModel = {
             fullName: displayName,
             phoneNumber: formData.phoneNumber,
@@ -103,7 +121,7 @@ export default function Thanh_toan() {
             email: formData.email,
             streetAddress: address,
             orderNote: formData.orderNote,
-            price: totalPrice
+            price: totalPrices
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
@@ -124,7 +142,7 @@ export default function Thanh_toan() {
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
-    
+
     const handleCheckoutChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -142,7 +160,7 @@ export default function Thanh_toan() {
                                 <nav aria-label="breadcrumb">
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                        <li class="breadcrumb-item"><a href="shop.html">shop</a></li>
+                                        <li class="breadcrumb-item"><Link to="/Giohang">Giỏ hàng</Link></li>
                                         <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
                                     </ul>
                                 </nav>
@@ -265,21 +283,12 @@ export default function Thanh_toan() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><a href="product-details.html">Suscipit Vestibulum <strong> × 1</strong></a>
-                                                    </td>
-                                                    <td>4.200.000 VND</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="product-details.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
-                                                    </td>
-                                                    <td>4.200.000 VND</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="product-details.html">Vestibulum suscipit <strong> × 2</strong></a>
-                                                    </td>
-                                                    <td>4.200.000 VND</td>
-                                                </tr>
+                                                {orderDetail ? (orderDetail.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td><a href="product-details.html">{item.productName} <strong> × {item.quantity}</strong></a></td>
+                                                        <td>{formatCurrency(item.unitPrice)} VND</td>
+                                                    </tr>
+                                                ))) : (<></>)}
                                             </tbody>
                                             <tfoot>
                                                 {/* <tr>
@@ -295,17 +304,12 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td id="total"><strong>29.400.000 </strong><strong>VND</strong></td>
+                                                    <td><strong>{formatCurrency(totalPrice)}</strong><strong> VND</strong></td>
+                                                    <input id="total" type="hidden" value={totalPrice} />
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
-
-                                    {/* <!-- Order Payment Method --> */}
-                                    <div class="order-payment-method">
-
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

@@ -42,10 +42,6 @@ const productData = await Promise.all(listProduct
 
         const { image1Url, image2Url, image3Url, image4Url } = await getImageUrls(productId, categoryId);
 
-
-
-
-
         return {
             id: productId,
             productName: productName,

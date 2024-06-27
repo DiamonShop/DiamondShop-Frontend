@@ -13211,7 +13211,8 @@ fieldset:disabled .btn {
 }
 
 .text-center {
-  text-align: center !important
+  text-align: center !important;
+  width: fit-content;
 }
 
 .text-decoration-none {

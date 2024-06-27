@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
+import { handleGetOrderByUserId } from '../api/OrderAPI';
+import { decodeToken } from '../api/TokenAPI';
 
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
-
+  const [searchValue, setSearchValue] = useState();
+  const [orderCount, setOrderCount] = useState(0);
   const [isMinicartVisible, setMinicartVisible] = React.useState(false);
 
   const openMinicart = () => {
@@ -12,14 +15,41 @@ export default function Header({ tokenIsValid }) {
     document.body.classList.add('fix');
   };
 
-
+  const handleSearch = () => {
+    // if (searchValue.length > 0) {
+    //   window.location.href = `/search/${searchValue}`
+    // }
+  }
 
   const handleLogout = () => {
-    apilogout(); 
-    localStorage.removeItem('token'); 
-    window.location.reload(); 
+    apilogout();
+    localStorage.removeItem('token');
+    window.location.reload();
   };
 
+  const countOrder = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userId = decodeToken(token).sid;
+      const orders = await handleGetOrderByUserId(userId);
+      if (orders == null) {
+        return 0;
+      } else {
+        return orders.length;
+      }
+    } else {
+      return 0;
+    }
+  }
+
+  useEffect(() => {
+    const fetchOrderCount = async () => {
+      const count = await countOrder();
+      setOrderCount(count);
+    };
+    console.log(orderCount)
+    fetchOrderCount();
+  }, []);
 
   return (
     <>
@@ -84,13 +114,14 @@ export default function Header({ tokenIsValid }) {
                       <button className="search-trigger d-xl-none d-lg-block">
                         <i className="pe-7s-search"></i>
                       </button>
-                      <form className="header-search-box d-lg-none d-xl-block">
+                      <form className="header-search-box d-lg-none d-xl-block" onSubmit={handleSearch}>
                         <input
                           type="text"
                           placeholder="Tìm kiếm sản phẩm"
+                          value={searchValue}
                           className="header-search-field bg-white"
                         />
-                        <button className="header-search-btn">
+                        <button className="header-search-btn" type='submit'>
                           <i className="pe-7s-search"></i>
                         </button>
                       </form>
@@ -110,7 +141,7 @@ export default function Header({ tokenIsValid }) {
                           <li>
                             <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>
                               <i className="pe-7s-shopbag"></i>
-                              <div className="notification">2</div>
+                              <div className="notification">{orderCount}</div>
                             </Link>
                           </li>
                         </ul>
@@ -130,7 +161,7 @@ export default function Header({ tokenIsValid }) {
                           <li>
                             <Link to="/Giohang" className="minicart-btn" onClick={openMinicart}>
                               <i className="pe-7s-shopbag"></i>
-                              <div className="notification">2</div>
+                              <div className="notification">0</div>
                             </Link>
                           </li>
                         </ul>
