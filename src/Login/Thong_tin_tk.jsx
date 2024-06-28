@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-
+import{logout as apilogout} from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import addAddress from '../api/addAddress'; // Adjust path as needed
@@ -220,116 +220,18 @@ export default function Thong_tin_tk() {
                                     <div className="row">
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
-
+                                            <a class="active" href="#account-info" data-bs-toggle="tab">
+                                                <i className="fa fa-user"></i> Thông tin cá nhân</a>
                                                 <a href="#orders" data-bs-toggle="tab"><i className="fa fa-cart-arrow-down"></i>
                                                     Đơn hàng</a>
-                                                <a href="#download" data-bs-toggle="tab"><i className="fa fa-cloud-download"></i>
-                                                    Tải về</a>
                                                 <a href="#payment-method" data-bs-toggle="tab"><i className="fa fa-credit-card"></i>
-                                                    Phương thức thanh toán</a>
-                                                <a href="#address-edit" data-bs-toggle="tab"><i className="fa fa-map-marker"></i>
-                                                    Địa chỉ</a>
-                                                <a href="#account-info" data-bs-toggle="tab"><i className="fa fa-user"></i> Thông tin cá nhân</a>
-                                                <Link to="/" onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</Link>
+                                                    Phương thức thanh toán</a>     
                                             </div>
                                         </div>
+                                        
                                         <div className="col-lg-9 col-md-8">
-                                            <div className="tab-content" id="myaccountContent">
-                                                <div className="tab-pane fade show active" id="dashboad" role="tabpanel">
-
-                                                </div>
-                                                <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Orders</h5>
-                                                        <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table table-bordered">
-                                                                <thead className="thead-light">
-                                                                    <tr>
-                                                                        <th>Order</th>
-                                                                        <th>Date</th>
-                                                                        <th>Status</th>
-                                                                        <th>Total</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>10/6/2024</td>
-                                                                        <td>Đang thanh toán</td>
-                                                                        <td>$3000</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>1/6/2024</td>
-                                                                        <td>Thành công</td>
-                                                                        <td>$200</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td>5/6/2024</td>
-                                                                        <td>Tạm dừng</td>
-                                                                        <td>$990</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="download" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Tải về</h5>
-                                                        <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table table-bordered">
-                                                                <thead className="thead-light">
-                                                                    <tr>
-                                                                        <th>Product</th>
-                                                                        <th>Date</th>
-                                                                        <th>Expires</th>
-                                                                        <th>Download</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Gold 123</td>
-                                                                        <td>12/9/2024</td>
-                                                                        <td>Yes</td>
-                                                                        <td><a
-                                                                            href="#" className="btn btn-sqr"><i className="fa fa-cloud-download"></i> Download</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Vàng 9999</td>
-                                                                        <td>12/9/2024</td>
-                                                                        <td>Yes</td>
-                                                                        <td><a href="#" className="btn btn-sqr"><i className="fa fa-cloud-download"></i> Download</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Phương thức thanh toán</h5>
-                                                        <p className="saved-message">You have no saved payment method</p>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="address-edit" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Địa chỉ giao hàng</h5>
-                                                        {/* Render ShippingAddresses component */}
-                                                        <ShippingAddresses shipAddresses={shipAddresses} />
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="account-info" role="tabpanel">
+                                            <div className="tab-content" id="myaccountContent">  
+                                            <div className="tab-pane fade show active" id="account-info" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Thông tin cá nhân</h5>
                                                         <div className="account-details-form">
@@ -343,19 +245,11 @@ export default function Thong_tin_tk() {
                                                                     <input type="email" id="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="address" className="required">Địa chỉ</label>
-                                                                    {addresses.map((address, index) => (
-                                                                        <input
-                                                                            key={index}
-                                                                            type="text"
-                                                                            value={address}
-                                                                            onChange={(e) => handleAddressChange(index, e)}
-                                                                            placeholder="Địa chỉ"
-                                                                        />
-                                                                    ))}
+                                                                    <label htmlFor="address" >Địa chỉ</label>
+                                                                    <input type="address" id="address" placeholder="Địa chỉ" />
                                                                 </div>
                                                                 <fieldset>
-                                                                    <legend>Thay đổi mật khẩu</legend>
+                                                                    <h5>Thay đổi mật khẩu</h5>
                                                                     <div className="single-input-item">
                                                                         <label htmlFor="new-pwd" className="required">Mật khẩu mới</label>
                                                                         <input type="password" id="new-pwd" placeholder="Mật khẩu mới" value={newPwd} onChange={handlePasswordChange} />
@@ -376,7 +270,58 @@ export default function Thong_tin_tk() {
                                                             )}
                                                         </div>
                                                     </div>
+                                                </div>                                         
+                                                <div className="tab-pane fade" id="orders" role="tabpanel">
+                                                    <div className="myaccount-content">
+                                                        <h5>Đơn hàng</h5>
+                                                        <div className="myaccount-table table-responsive text-center">
+                                                            <table className="table table-bordered"> 
+                                                                <thead className="thead-light">
+                                                                    <tr>
+                                                                        <th>Đơn hàng</th>
+                                                                        <th>Ngày đặt hàng</th>
+                                                                        <th>Tổng tiền</th>
+                                                                        <th>Trạng thái</th>
+                                                                        <th>Chi tiết</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>10/6/2024</td>
+                                                                        <td>30.000.000đ</td>
+                                                                        <td>Đang thanh toán</td>                                                                  
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>2</td>
+                                                                        <td>1/6/2024</td>                                                                     
+                                                                        <td>25.000.000đ</td>
+                                                                        <td>Thành công</td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>3</td>
+                                                                        <td>5/6/2024</td>
+                                                                        <td>3.000.000đ</td>
+                                                                        <td>Đã hủy</td>                                                                      
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
+                                                    <div className="myaccount-content">
+                                                        <h5>Phương thức thanh toán</h5>
+                                                        <p className="saved-message">You have no saved payment method</p>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
