@@ -42,3 +42,21 @@ export const handleGetOrderByUserId = async (userId) => {
         return null; // Return null on error
     }
 }
+
+export const handleUpdateTotalPrice = async (orderId, totalPrice) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateTotalPrice?orderId=${orderId}&totalPrice=${totalPrice}`, {
+            method: 'PUT',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error("Error during get order:", error);
+        return false;
+    }
+}

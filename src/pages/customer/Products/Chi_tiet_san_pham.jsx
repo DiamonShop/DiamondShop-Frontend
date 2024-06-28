@@ -223,8 +223,10 @@ export default function Chi_tiet_san_pham() {
                                                     <option >15</option>
 
 
+
                                                 </select>
 
+                                               
                                                 {productObj.categoryName == 'Nhẫn' ? (
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
 
@@ -276,8 +278,6 @@ export default function Chi_tiet_san_pham() {
                                                             tạo nên món trang sức đầy sự sang trọng và đẳng cấp.
                                                         </p>
                                                         <p>Kim cương đã đẹp, trang sức kim cương lại càng mang sức hấp dẫn khó cưỡng. Sự kết hợp mới mẻ này chắc chắn sẽ tạo nên dấu ấn thời trang hiện đại và giúp quý cô trở nên nổi bật, tự tin và thu hút sự ngưỡng mộ của mọi người</p>
-
-
                                                     </div>
                                                 </div>
 

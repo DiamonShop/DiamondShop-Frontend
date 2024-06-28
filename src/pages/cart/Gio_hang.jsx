@@ -1,60 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { handleGetOrderByUserId } from '../../api/OrderAPI';
+import { ToastContainer } from 'react-toastify';
+import { handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
-// import 'react-toastify/dist/ReactToastify.css';
 
 export default function Gio_hang() {
-    const location = useLocation();
-    const [orders, setOrders] = useState([]);
     const [orderDetailLists, setOrderDetailLists] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [token, setToken] = useState();
 
     useEffect(() => {
-        const runAllOrderData = () => {
-            getAllAvailableProducts();
-            totalPriceSum()
-        }
-        runAllOrderData()
-        const params = new URLSearchParams(location.search);
-        const message = params.get('message');
-        if (message) {
-            toast.info(message);
-        }
-
-    }, [location]);
-
-    const totalPriceSum = () => {
-        if (orderDetailLists) {
-            for (const item of orderDetailLists) {
-                setTotalPrice(totalPrice + item.unitPrice * item.quantity);
-            }
-            console.log(orders)
-        }
-    }
-
-    const getAllAvailableProducts = async () => {
-        setToken(localStorage.getItem('token'));
-
+        const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
-            setOrders(await handleGetOrderByUserId(parseInt(userId, 10)));
-            if (orders != null) {
-                for (const item of orders) {
-                    //Check order nếu có status là 'Ordering' thì mới được hiển thị
-                    if (item.status == 'Ordering') {
-                        setOrderDetailLists(item.orderDetails);
+            handleGetOrderByUserId(parseInt(userId, 10))
+                .then((data) => {
+                    const orderingOrder = data.find(order => order.status === 'Ordering');
+                    if (orderingOrder) {
+                        setOrderDetailLists(orderingOrder.orderDetails);
+                        calculateTotalPrice(orderingOrder.orderDetails);
+                        //Cập nhật total price
+                        console.log(totalPrice)
+                        handleUpdateTotalPrice(orderingOrder.orderId, totalPrice);
                     }
-                }
-            } else {
-                setOrderDetailLists(null);
-            }
+                });
+        } else {
+            setOrderDetailLists([]);
+            setTotalPrice(0);
         }
-    }
+    }, []);
+
+    const calculateTotalPrice = (orderDetails) => {
+        let total = 0;
+        for (const item of orderDetails) {
+            total += item.unitPrice * item.quantity;
+        }
+        setTotalPrice(total);
+    };
 
     return (
         <div>
@@ -93,19 +75,19 @@ export default function Gio_hang() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {orderDetailLists === null ? (
-                                                <div className="text-center" style={{ paddingLeft: '20px', fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</div>
+                                            {orderDetailLists.length === 0 ? (
+                                                <tr>
+                                                    <td colSpan="6" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</td>
+                                                </tr>
                                             ) : (
                                                 orderDetailLists.map((orderDetail, index) => (
                                                     <tr key={index}>
-                                                        <td className="pro-thumbnail"><a href="#"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></a></td>
-                                                        <td className="pro-title"><a href="#">{orderDetail.productName}</a></td>
-                                                        <td className="pro-price"><span>{formatCurrency(orderDetail.unitPrice)}đ</span></td>
-                                                        <td className="pro-quantity">
-                                                            <div className="pro-qty"><input type="text" value={orderDetail.quantity} readOnly /></div>
-                                                        </td>
-                                                        <td className="pro-subtotal"><span>{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)}đ</span></td>
-                                                        <td className="pro-remove"><a href="#"><i className="fa fa-trash-o"></i></a></td>
+                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+                                                        <td className="pro-title">{orderDetail.productName}</td>
+                                                        <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
+                                                        <td className="pro-quantity">{orderDetail.quantity}</td>
+                                                        <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
+                                                        <td className="pro-remove"><i className="fa fa-trash-o"></i></td>
                                                     </tr>
                                                 ))
                                             )}
@@ -116,7 +98,7 @@ export default function Gio_hang() {
                                     <div className="apply-coupon-wrapper">
                                     </div>
                                     <div className="cart-update">
-                                        <a href="#" className="btn btn-sqr">Cập nhật giỏ hàng</a>
+                                        <button className="btn btn-sqr">Cập nhật giỏ hàng</button>
                                     </div>
                                 </div>
                             </div>
@@ -127,18 +109,20 @@ export default function Gio_hang() {
                                     <div className="cart-calculate-items">
                                         <div className="table-responsive">
                                             <table className="table">
-                                                <tr>
-                                                    <td>Tổng tiền hàng</td>
-                                                    <td>{formatCurrency(totalPrice)}đ</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phí vận chuyển</td>
-                                                    <td>Miễn phí</td>
-                                                </tr>
-                                                <tr className="total">
-                                                    <td>Tổng thanh toán</td>
-                                                    <td className="total-amount">{formatCurrency(totalPrice)}đ</td>
-                                                </tr>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tổng tiền hàng</td>
+                                                        <td>{formatCurrency(totalPrice)} VND</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phí vận chuyển</td>
+                                                        <td>Miễn phí</td>
+                                                    </tr>
+                                                    <tr className="total">
+                                                        <td>Tổng thanh toán</td>
+                                                        <td className="total-amount">{formatCurrency(totalPrice)} VND</td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

@@ -30,9 +30,10 @@ import { UserProvider } from './UserContext';
 import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
 import Chinh_sach_giao_hang from './pages/customer/Chinh_sach_giao_hang';
 import ScrollToTop from './components/ScrollToTop';
+import Ket_qua_tim_kiem from './pages/customer/Products/Ket_qua_tim_kiem';
 function App({ tokenIsValid }) {
 
-  //Chuyển id từ Nhan qua App
+  //Lưu product để khi reload sẽ không bị lỗi
   const handleProductClick = (product) => {
     localStorage.setItem('product', JSON.stringify(product));
   }
@@ -54,7 +55,7 @@ function App({ tokenIsValid }) {
               <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
               <Route path='/Dangki' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_ki /></MainLayout>} />
               <Route path='/Thongtintk' element={<MainLayout tokenIsValid={tokenIsValid}><Thong_tin_tk /></MainLayout>} />
-              <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham /></MainLayout>} /> {/*Chuyển id qua chi-tiet-san-pham để add vào giỏ hàng*/}
+              <Route path='/Chitietsanpham' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham /></MainLayout>} /> 
               <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
               <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
               <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
@@ -69,7 +70,7 @@ function App({ tokenIsValid }) {
               <Route path='/Chinhsachbaomat' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_bao_mat /></MainLayout>} />
               <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
               <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
-
+              <Route path='/Ketquatimkiem' element={<MainLayout tokenIsValid={tokenIsValid}><Ket_qua_tim_kiem onProductClick={handleProductClick}/></MainLayout>} />
             </Routes>
             
         </Router>
