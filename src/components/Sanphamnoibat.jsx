@@ -19,7 +19,7 @@ function Sanphamnoibat({ onProductClick }) {
             const shuffled = products.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
-        setRandomProductsDaychuyen(getRandomProductsNhan(Product_Daychuyen_Data, 5));
+        setRandomProductsDaychuyen(getRandomProductsDaychuyen(Product_Daychuyen_Data, 5));
         function getRandomProductsMatdaychuyen(products, count) {
             const shuffled = products.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);

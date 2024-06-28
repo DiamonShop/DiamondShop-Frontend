@@ -7,8 +7,13 @@ import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } fr
 import { decodeToken } from '../../../api/TokenAPI';
 import '../../../nice-select'
 import '../../../image-zoom'
+
+
+import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 export default function Chi_tiet_san_pham() {
+    
     useEffect(() => {
+       
         // Khởi tạo plugin nice-select sau khi component đã được render
         $('select').niceSelect();
         $('.img-zoom').zoom();
@@ -50,17 +55,7 @@ export default function Chi_tiet_san_pham() {
         ref: navSliderRef
     };
 
-    const relatedSliderSettings = {
-        speed: 1000,
-        autoplay: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToRoll: 1,
-        adaptiveHeight: true,
-        arrows: true,
-        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-    };
+    
     const [quantity, setQuantity] = useState(1);
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -226,32 +221,18 @@ export default function Chi_tiet_san_pham() {
                                                     <option >13</option>
                                                     <option >14</option>
                                                     <option >15</option>
-                                                    <option >16</option>
-                                                    <option >17</option>
-                                                    <option >18</option>
-                                                    <option >19</option>
-                                                    <option >20</option>
-                                                    <option >21</option>
-                                                    <option >22</option>
-                                                    <option >23</option>
-                                                    <option >24</option>
-                                                    <option >25</option>
-                                                    <option >26</option>
-                                                    <option >27</option>
-                                                    <option >28</option>
-                                                    <option >30</option>
-                                                    <option >32</option>
-                                                    <option >31</option>
-                                                    <option >33</option>
-                                                    <option >29</option>
+
+
+
                                                 </select>
 
-
-                                                
-
+                                               
                                                 {productObj.categoryName == 'Nhẫn' ? (
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+
                                                 ) : (<></>)}
+
+
 
                                             </div>
 
@@ -401,175 +382,7 @@ export default function Chi_tiet_san_pham() {
                 </div>
             </div>
 
-            <section class="related-products section-padding">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-
-                            <div class="section-title text-center">
-                                <h2 class="title">Sản phẩm tương tự</h2>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-
-                            <Slider {...relatedSliderSettings} class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets\img\product\Nhan\11\nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-1.png" alt="product" />
-                                            <img class="sec-img" src="assets\img\product\Nhan\11\nhan-cuoi-kim-cuong-nam-pnj-long-phung-vang-18k-2.png" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>Mới</span>
-                                            </div>
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng 18K Long Phụng</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">16.925.000đ</span>
-                                            <span class="price-old"><del>19.161.000đ</del></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets\img\product\Nhan\12\nhan-kim-cuong-vang-trang-14k-first-diamond-1.png" alt="product" />
-                                            <img class="sec-img" src="assets\img\product\Nhan\12\nhan-kim-cuong-vang-trang-14k-first-diamond-2.png" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>Mới</span>
-                                            </div>
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Nhẫn Kim cương Vàng trắng 14K First Diamond</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">7.565.000đ</span>
-                                            <span class="price-old"><del>8.115.000đ</del></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets\img\product\Nhan\13\nhan-cuoi-kim-cuong-vang-18k-tinh-hong-1.png" alt="product" />
-                                            <img class="sec-img" src="assets\img\product\Nhan\13\nhan-cuoi-kim-cuong-vang-18k-tinh-hong-2.png" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>Mới</span>
-                                            </div>
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Nhẫn cưới Kim cương Vàng 18K Tình Hồng</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">7.497.000đ</span>
-                                            <span class="price-old">8.151.000đ<del></del></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets\img\product\Nhan\14\nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-1.png" alt="product" />
-                                            <img class="sec-img" src="assets\img\product\Nhan\14\nhan-cuoi-nam-kim-cuong-vang-18k-chung-doi-2.png" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>Mới</span>
-                                            </div>
-                                            {/* <div class="product-label discount">
-                                                <span>15%</span>
-                                            </div> */}
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Nhẫn cưới nam Kim cương Vàng 18K Chung Đôi</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">11.485.000đ</span>
-                                            <span class="price-old"><del>13.666.000đ</del></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="product-item">
-                                    <figure class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img class="pri-img" src="assets\img\product\Nhan\15\nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-1.png" alt="product" />
-                                            <img class="sec-img" src="assets\img\product\Nhan\15\nhan-cuoi-kim-cuong-vang-trang-14k-long-phung-2.png" alt="product" />
-                                        </a>
-                                        <div class="product-badge">
-                                            <div class="product-label new">
-                                                <span>Mới</span>
-                                            </div>
-                                        </div>
-                                        <div class="button-group">
-                                            <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào danh sách yêu thích"><i class="pe-7s-like"></i></a>
-
-                                        </div>
-                                        <div class="cart-hover">
-                                            <button class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                        </div>
-                                    </figure>
-                                    <div class="product-caption text-center">
-                                        <h6 class="product-name">
-                                            <a href="product-details.html">Nhẫn cưới Kim cương Vàng trắng 14K Long Phụng</a>
-                                        </h6>
-                                        <div class="price-box">
-                                            <span class="price-regular">8.323.200đ</span>
-                                            <span class="price-old"><del>9.248.000đ</del></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Slider>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
+           <Sanphamtuongtu ></Sanphamtuongtu>
 
             <div class="scroll-top not-visible">
                 <i class="fa fa-angle-up"></i>
