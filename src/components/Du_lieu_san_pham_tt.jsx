@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
-function Du_lieu_san_pham_nb(props) {
-  
-    return (
-        <div>
-                    <div className="product-item">
+function Du_lieu_san_pham_tt(props) {
+    
+  return (
+    <div>
+      <div className="product-item">
                         <figure className="product-thumb">
                             <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                                 <img className="pri-img"
@@ -43,11 +43,8 @@ function Du_lieu_san_pham_nb(props) {
                             </div>
                         </div>
                     </div>
-                    
-               
-            </div>
-       
-    )
+    </div>
+  )
 }
 
-export default Du_lieu_san_pham_nb
+export default Du_lieu_san_pham_tt
