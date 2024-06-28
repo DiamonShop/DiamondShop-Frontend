@@ -221,9 +221,6 @@ export default function Chi_tiet_san_pham() {
                                                     <option >13</option>
                                                     <option >14</option>
                                                     <option >15</option>
-
-
-
                                                 </select>
 
                                                
@@ -231,8 +228,6 @@ export default function Chi_tiet_san_pham() {
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
 
                                                 ) : (<></>)}
-
-
 
                                             </div>
 
@@ -321,10 +316,7 @@ export default function Chi_tiet_san_pham() {
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
                                                                     Tin nhắn của bạn</label>
                                                                 <textarea class="form-control" required></textarea>
-                                                                {/* <div class="help-block pt-10"><span
-                                                                    class="text-danger">Note:</span>
-                                                                    HTML is not translated!
-                                                                </div> */}
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -364,8 +356,8 @@ export default function Chi_tiet_san_pham() {
                                                             <li>- Khách hàng cung cấp thông tin truy lục hóa đơn không chính xác.​​​​​</li>
                                                         </ul>
                                                         <ul><i>Lưu ý:</i>
-                                                            <li><i>- PNJ bảo hành các sản phẩm thuộc hệ thống cửa hàng kênh lẻ và online của PNJ.</i>​​</li>
-                                                            <li><i>- Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của PNJ đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.​</i></li>
+                                                            <li><i>- PNJ bảo hành các sản phẩm thuộc hệ thống cửa hàng online của ES.</i>​​</li>
+                                                            <li><i>- Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của ES đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.​</i></li>
                                                         </ul>
                                                     </form>
                                                 </div>

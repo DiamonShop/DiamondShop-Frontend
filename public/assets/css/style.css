@@ -3254,6 +3254,7 @@ only screen and (max-width: 479.98px) {
 .product-tab-menu {
   margin-top: -6px;
   margin-bottom: 35px;
+  
 }
 
 .product-tab-menu ul li {
@@ -10075,7 +10076,7 @@ fieldset:disabled .btn {
   align-items: center;
   display: flex;
   flex-wrap: inherit;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .navbar-brand {
@@ -13210,10 +13211,7 @@ fieldset:disabled .btn {
   text-align: right !important
 }
 
-.text-center {
-  text-align: center !important;
-  width: fit-content;
-}
+
 
 .text-decoration-none {
   text-decoration: none !important
