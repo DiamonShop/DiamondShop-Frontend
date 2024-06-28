@@ -8,6 +8,7 @@ export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
   const [searchValue, setSearchValue] = useState();
   const [orderCount, setOrderCount] = useState(0);
+  const [orderDetail,setOrderDetails] = useState([]);
   const [isMinicartVisible, setMinicartVisible] = React.useState(false);
 
   const openMinicart = () => {
@@ -35,7 +36,10 @@ export default function Header({ tokenIsValid }) {
       if (orders == null) {
         return 0;
       } else {
-        return orders.length;
+        for (const item of orders) {
+          setOrderDetails(item.orderDetails);
+        }
+        return orderDetail.length;
       }
     } else {
       return 0;
@@ -47,9 +51,8 @@ export default function Header({ tokenIsValid }) {
       const count = await countOrder();
       setOrderCount(count);
     };
-    console.log(orderCount)
     fetchOrderCount();
-  }, []);
+  }, [orderDetail]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-
+import {logout as apilogout} from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import addAddress from '../api/addAddress'; // Adjust path as needed

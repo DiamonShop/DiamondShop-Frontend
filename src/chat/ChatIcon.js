@@ -12,15 +12,15 @@ const ChatIcon = () => {
 
   return (
     <div>
+      <a href="https://m.me/337606799444520">
       <img
-
-        src="assets/img/zalo-seeklogo.jpg" // Đường dẫn tới hình ảnh của bạn
+        src="assets/img/messenger.jpg" // Đường dẫn tới hình ảnh của bạn
 
         alt="Chat Icon"
         className="chat-icon"
         onClick={toggleChat}
       />
-      {isOpen && <ChatWindow />}
+      </a>
     </div>
   );
 };

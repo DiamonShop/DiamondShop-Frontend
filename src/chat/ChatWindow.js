@@ -11,9 +11,7 @@ const ChatWindow = () => {
 
   return (
     <div className="chat-window">
-
-      Quét mã QR
-      <img src="assets/img/zalo-qr.jpg"></img>
+      <a href="https://m.me/337606799444520">mess</a>
     </div>
 
   );

@@ -19,7 +19,7 @@ export const handleLoginUser = async (user) => {
                 roleName: data.data.roleName,
                 token: data.data.token // Include the token
             };
-
+            console.log(data.data.token)
             // Save the token in local storage
             localStorage.setItem('token', data.data.token);
             return user; // Return the user object

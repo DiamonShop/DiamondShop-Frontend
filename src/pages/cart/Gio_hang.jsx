@@ -7,21 +7,21 @@ import { formatCurrency } from '../../utils/NumberFormat';
 
 export default function Gio_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
+    // const [order, setOrder] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
+    //useEffect để set list của orderDetail
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
             handleGetOrderByUserId(parseInt(userId, 10))
                 .then((data) => {
-                    const orderingOrder = data.find(order => order.status === 'Ordering');
-                    if (orderingOrder) {
-                        setOrderDetailLists(orderingOrder.orderDetails);
-                        calculateTotalPrice(orderingOrder.orderDetails);
-                        //Cập nhật total price
-                        console.log(totalPrice)
-                        handleUpdateTotalPrice(orderingOrder.orderId, totalPrice);
+                    if (data) {
+                        const orderingOrder = data.find(order => order.status === 'Ordering');
+                        if (orderingOrder) {
+                            setOrderDetailLists(orderingOrder.orderDetails);
+                        }
                     }
                 });
         } else {
@@ -30,13 +30,39 @@ export default function Gio_hang() {
         }
     }, []);
 
+    //useEffect để cập nhật total price
+    useEffect(() => {
+        if (orderDetailLists.length > 0) {
+            const total = calculateTotalPrice(orderDetailLists);
+            setTotalPrice(total);
+            // Cập nhật total price
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userId = decodeToken(token).sid;
+                handleGetOrderByUserId(parseInt(userId, 10))
+                    .then((data) => {
+                        if (data) {
+                            const orderingOrder = data.find(order => order.status === 'Ordering');
+                            if (orderingOrder) {
+                                handleUpdateTotalPrice(orderingOrder.orderId, total);
+                            }
+                        }
+                    });
+            }
+        }
+    }, [orderDetailLists]);
+
     const calculateTotalPrice = (orderDetails) => {
         let total = 0;
         for (const item of orderDetails) {
             total += item.unitPrice * item.quantity;
         }
-        setTotalPrice(total);
+        return total;
     };
+
+    const removeProduct = (productId) => {
+        console.log(productId)
+    }
 
     return (
         <div>
@@ -87,7 +113,9 @@ export default function Gio_hang() {
                                                         <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
                                                         <td className="pro-quantity">{orderDetail.quantity}</td>
                                                         <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
-                                                        <td className="pro-remove"><i className="fa fa-trash-o"></i></td>
+                                                        <td className="pro-remove">
+                                                            <a style={{ cursor: 'pointer' }} onClick={() => removeProduct(orderDetail.productId)}><i className="fa fa-trash-o"></i></a>
+                                                        </td>
                                                     </tr>
                                                 ))
                                             )}
