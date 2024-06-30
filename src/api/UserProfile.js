@@ -20,7 +20,6 @@ const UserProfile = () => {
     const [password, setPassword] = useState('');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (event) => {
@@ -33,8 +32,7 @@ const UserProfile = () => {
                     username,
                     password,
                     fullName,
-                    email,
-                    address
+                    email   
                 },
                 {
                     headers: {
@@ -98,14 +96,6 @@ const UserProfile = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Address:</label>
-                    <input
-                        type="text"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
                     />
                 </div>
                 <button type="submit">Update Profile</button>
