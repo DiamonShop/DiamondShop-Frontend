@@ -15,13 +15,11 @@ export default function Gio_hang() {
             const userId = decodeToken(token).sid;
             handleGetOrderByUserId(parseInt(userId, 10))
                 .then((data) => {
-                    const orderingOrder = data.find(order => order.status === 'Ordering');
-                    if (orderingOrder) {
-                        setOrderDetailLists(orderingOrder.orderDetails);
-                        calculateTotalPrice(orderingOrder.orderDetails);
-                        //Cập nhật total price
-                        console.log(totalPrice)
-                        handleUpdateTotalPrice(orderingOrder.orderId, totalPrice);
+                    if (data) {
+                        const orderingOrder = data.find(order => order.status === 'Ordering');
+                        if (orderingOrder) {
+                            setOrderDetailLists(orderingOrder.orderDetails);
+                        }
                     }
                 });
         } else {
@@ -58,10 +56,10 @@ export default function Gio_hang() {
                 </div>
             </div>
             <div className="cart-main-wrapper section-padding">
-                <div className="container">
+                <div className="container-thanhtoan">
                     <div className="section-bg-color">
                         <div className="row">
-                            <div className="col-lg-12">
+                            <div className="col-lg-9 ">
                                 <div className="cart-table table-responsive">
                                     <table className="table table-bordered">
                                         <thead>
@@ -94,17 +92,8 @@ export default function Gio_hang() {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div className="cart-update-option d-block d-md-flex justify-content-between">
-                                    <div className="apply-coupon-wrapper">
-                                    </div>
-                                    <div className="cart-update">
-                                        <button className="btn btn-sqr">Cập nhật giỏ hàng</button>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-5 ml-auto">
+                            <div className="col-lg-3">
                                 <div className="cart-calculator-wrapper">
                                     <div className="cart-calculate-items">
                                         <div className="table-responsive">
@@ -125,11 +114,19 @@ export default function Gio_hang() {
                                                 </tbody>
                                             </table>
                                         </div>
+                                       
                                     </div>
-                                    <Link to="/Thanhtoan" className="btn btn-sqr d-block">Xác nhận thanh toán</Link>
+                                 
                                 </div>
+                                <div >
+                                            <Link to="/Thanhtoan" className=" btn-sqr d-block">Xác nhận thanh toán</Link>
+                                       </div>
+
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
