@@ -10,9 +10,7 @@ export default function Day_chuyen({ onProductClick }) {
         setSortOption(event.target.value);
     };
 
-    const parsePrice = (price) => {
-        return parseFloat(price.replace(/[^\d]/g, '')) || 0;
-    };
+   
 
     const sortedProducts = Product_Daychuyen_Data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -21,9 +19,9 @@ export default function Day_chuyen({ onProductClick }) {
             case 'name-desc':
                 return b.productName.localeCompare(a.productName);
             case 'price-asc':
-                return parsePrice(a.newPrice) - parsePrice(b.newPrice);
+                return a.newPrice - b.newPrice;
             case 'price-desc':
-                return parsePrice(b.newPrice) - parsePrice(a.newPrice);
+                return b.newPrice - a.newPrice;
             default:
                 return 0;
         }

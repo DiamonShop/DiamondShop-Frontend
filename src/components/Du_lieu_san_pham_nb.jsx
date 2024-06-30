@@ -16,7 +16,7 @@ function Du_lieu_san_pham_nb(props) {
                             <div className="product-badge">
                                 <div className="product-label new">
                                     <span>{props.label}</span>
-                                </div>
+                                                                      </div>
                             </div>
                             <div className="button-group">
                                 <Link to="/Yeuthich"
