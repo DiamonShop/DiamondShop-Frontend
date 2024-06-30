@@ -5612,9 +5612,9 @@ table {
   border-collapse: collapse;
   margin-top: 10px;
   margin-bottom: 10px;
+  
 }
 
-table,
 th,
 td {
   border: 1px solid #ddd;
@@ -5623,13 +5623,12 @@ td {
 th,
 td {
   padding: 8px;
-  text-align: left;
+ 
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #c29958;
 }
-
 .faq-answer {
   display: none;
   padding: 10px;
@@ -6347,10 +6346,11 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 
 .myaccount-table table th,
 .myaccount-table .table th {
-  color: #222222;
+  color: white;
+  font-size: medium;
   padding: 10px;
-  font-weight: 400;
-  background-color: #f8f8f8;
+  font-weight: 600;
+  background-color: #c29958;
   border-color: #ccc;
   border-bottom: 0;
 }
@@ -13210,7 +13210,6 @@ fieldset:disabled .btn {
 .text-end {
   text-align: right !important
 }
-
 
 
 .text-decoration-none {
@@ -21800,3 +21799,11 @@ footer.footer p {
 }
 
 /* end add account in dashboard */
+
+/* css don hang */
+.table-don-hang th{
+ background-color: #c29958;
+}
+/* end cc don hang */
+
+

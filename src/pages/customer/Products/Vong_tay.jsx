@@ -11,11 +11,21 @@ export default function Vongtay({ onProductClick }) {
         setSortOption(event.target.value);
     };
 
-    const parsePrice = (price) => {
-        return parseFloat(price.replace(/[^\d]/g, '')) || 0;
-    };
 
-    const sortedProducts = Product_Vongtay_Data;
+    const sortedProducts = Product_Vongtay_Data.slice().sort((a, b) => {
+        switch (sortOption) {
+            case 'name-asc':
+                return a.productName.localeCompare(b.productName);
+            case 'name-desc':
+                return b.productName.localeCompare(a.productName);
+            case 'price-asc':
+                return a.newPrice - b.newPrice;
+            case 'price-desc':
+                return b.newPrice - a.newPrice;
+            default:
+                return 0;
+        }
+    });
 
     return (
         <div>

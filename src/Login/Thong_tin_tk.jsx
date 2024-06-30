@@ -275,7 +275,7 @@ export default function Thong_tin_tk() {
                                                     <div className="myaccount-content">
                                                         <h5>Đơn hàng</h5>
                                                         <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table table-bordered"> 
+                                                            <table className="table-don-hang"> 
                                                                 <thead className="thead-light">
                                                                     <tr>
                                                                         <th>Đơn hàng</th>
