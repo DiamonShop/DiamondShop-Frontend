@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import{logout as apilogout} from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
-import addAddress from '../api/addAddress'; // Adjust path as needed
+
 
 
 
@@ -16,9 +16,7 @@ export default function Thong_tin_tk() {
     const [errorMessage, setErrorMessage] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
-    const [addresses, setAddresses] = useState([]);
-    const [newAddress, setNewAddress] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
+    
     const [username, setUsername] = useState('');
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
@@ -59,7 +57,7 @@ export default function Thong_tin_tk() {
                 setUsername(response.data.username || '');
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
-                setAddresses(response.data.address ? [response.data.address] : []);
+              
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -95,38 +93,6 @@ export default function Thong_tin_tk() {
         setEmail(event.target.value);
     };
 
-    const handleAddressChange = (index, event) => {
-        const newAddresses = [...addresses];
-        newAddresses[index] = event.target.value;
-        setAddresses(newAddresses);
-    };
-
-    const handleNewAddressChange = (event) => {
-        setNewAddress(event.target.value);
-    };
-
-    const addNewAddress = async () => {
-        if (newAddress.trim() !== '') {
-            const token = localStorage.getItem('token');
-            const userId = userData ? userData.userId : '';
-
-            if (!token || !userId) {
-                console.log("Token or user ID not available.");
-                return;
-            }
-
-            try {
-                const updatedUser = await addAddress(token, userId, { address: newAddress });
-                console.log('Updated user:', updatedUser);
-               
-                setNewAddress('');
-                setIsEditing(false);
-            } catch (error) {
-                console.error('Error adding new address:', error);
-                setErrorMessage('Error adding new address');
-            }
-        }
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -137,7 +103,6 @@ export default function Thong_tin_tk() {
             username,
             fullName: displayName,
             email,
-            address: addresses.join('; '), // Convert addresses array back to a string
             password: newPwd
         };
 
