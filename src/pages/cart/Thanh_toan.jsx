@@ -124,7 +124,7 @@ export default function Thanh_toan() {
             email: email,
             streetAddress: address,
             orderNote: formData.orderNote,
-            price: totalPrices
+            price: totalPrice
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
