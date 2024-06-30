@@ -237,7 +237,7 @@ export default function Thong_tin_tk() {
                                                         <div className="account-details-form">
                                                             <form onSubmit={handleSubmit}>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="display-name" className="required">Tên hiển thị</label>
+                                                                    <label htmlFor="display-name" >Tên hiển thị</label>
                                                                     <input type="text" id="display-name" placeholder="Tên hiển thị" value={displayName} onChange={handleDisplayNameChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
@@ -251,7 +251,7 @@ export default function Thong_tin_tk() {
                                                                 <fieldset>
                                                                     <h5>Thay đổi mật khẩu</h5>
                                                                     <div className="single-input-item">
-                                                                        <label htmlFor="new-pwd" className="required">Mật khẩu mới</label>
+                                                                        <label htmlFor="new-pwd" >Mật khẩu mới</label>
                                                                         <input type="password" id="new-pwd" placeholder="Mật khẩu mới" value={newPwd} onChange={handlePasswordChange} />
                                                                     </div>
                                                                     <div className="single-input-item">
