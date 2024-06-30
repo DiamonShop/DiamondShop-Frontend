@@ -11,11 +11,40 @@ const formatCurrency = (value) => {
 };
 const SanPham = () => {
     const { user: currentUser, logout: userLogout } = useUser();
+
     const [errorMessage, setErrorMessage] = useState('');
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [jewelrySettings, setJewelrySettings] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [categoryFilter, setCategoryFilter] = useState('Tất cả');
+    const [statusFilter, setStatusFilter] = useState('Tất cả');
+    const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+
+    const toggleCategoryDropdown = () => {
+        setShowCategoryDropdown(!showCategoryDropdown);
+    };
+    const [activeCategory, setActiveCategory] = useState('');
+
+    const handleCategoryClick = (category) => {
+        setActiveCategory(category);
+        setCategoryFilter(category); // Update the category filter
+    };
+    const [isActiveMatDayChuyen, setIsActiveMatDayChuyen] = useState(false);
+
+    const toggleActiveMatDayChuyen = () => {
+        setIsActiveMatDayChuyen(!isActiveMatDayChuyen);
+    };
+    const [isActiveVongTay, setIsActiveVongTay] = useState(false);
+
+    const toggleActiveVongTay = () => {
+        setIsActiveVongTay(!isActiveVongTay);
+    };
+    const [isActiveKimCuong, setIsActiveKimCuong] = useState(false);
+
+    const toggleActiveKimCuong = () => {
+        setIsActiveKimCuong(!isActiveKimCuong);
+    };
     const navigate = useNavigate();
     const [newProduct, setNewProduct] = useState({
         productId: '',
@@ -28,7 +57,7 @@ const SanPham = () => {
         markupRate: 0,
         isActive: true,
     });
-    const fetchProductData = async () => {
+    const fetchProductData = async (categoryId = '') => {
         if (!currentUser) {
             console.log("User not logged in. Redirecting to login.");
             return;
@@ -72,7 +101,13 @@ const SanPham = () => {
                 };
             }));
             console.log("All Products:", productResponse.data);
-            setProducts(formattedProducts);
+
+            if (categoryId) {
+                setProducts(formattedProducts.filter(product => product.categoryId.toString() === categoryId));
+            } else {
+                setProducts(formattedProducts);
+            }
+
             // Map data of categories
             const categoriesResponse = await axios.get('https://localhost:7101/api/Category/GetAllCategories', {
                 headers: {
@@ -105,9 +140,11 @@ const SanPham = () => {
         }
     };
 
+
     useEffect(() => {
-        fetchProductData();
-    }, [currentUser, userLogout, navigate]);
+        fetchProductData(categoryFilter);
+    }, [currentUser, userLogout, navigate, categoryFilter]);
+
 
     const handleAddProductInputChange = (e) => {
         const { name, value } = e.target;
@@ -138,7 +175,7 @@ const SanPham = () => {
 
             console.log('New Product added:', response.data);
             // Refresh product list
-            fetchProductData(); // Implement fetchProductData similar to fetchUserData
+            fetchProductData(categoryFilter); // Implement fetchProductData similar to fetchUserData
             // Clear input fields
             setNewProduct({
                 productId: '',
@@ -170,22 +207,12 @@ const SanPham = () => {
     const handleCloseAddProductButtonClick = () => {
         setShowAddProductOverlay(false);
     };
-    const [categoryFilter, setCategoryFilter] = useState('Tất cả');
-    const [statusFilter, setStatusFilter] = useState('Tất cả');
-
-    const handleCategoryFilterChange = (e) => {
-        setCategoryFilter(e.target.value);
-    };
 
     const handleStatusFilterChange = (e) => {
         setStatusFilter(e.target.value);
     };
 
     let filteredProducts = [...products]; // Copy products state for filtering
-
-    if (categoryFilter !== 'Tất cả') {
-        filteredProducts = filteredProducts.filter(product => product.categoryId.toString() === categoryFilter);
-    }
 
     if (statusFilter !== 'Tất cả') {
         filteredProducts = filteredProducts.filter(product => (product.isActive ? 'Còn hàng' : 'Hết hàng') === statusFilter);
@@ -229,28 +256,70 @@ const SanPham = () => {
                     <ul className="sidebar-nav">
                         <li className="sidebar-header">Trang chủ</li>
                         <li className="sidebar-item">
-                            <a className="sidebar-link">
+                            <a className="sidebar-link nav-link" href="/Dashboard">
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                <span className="align-middle">Dashboard</span>
                             </a>
                         </li>
                         <li className="sidebar-header">Quản lý</li>
-                        <li className="sidebar-item active">
+                        {/* <li className="sidebar-item active">
                             <a className="sidebar-link">
                                 <i className="align-middle" data-feather="sliders"></i>
                                 <span className="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
                             </a>
+                        </li> */}
+                        <li className={`sidebar-item ${showCategoryDropdown ? 'active' : ''}`}>
+                            <a className="sidebar-link " onClick={toggleCategoryDropdown} >
+                                <i className="align-middle" data-feather="sliders"></i>
+                                <span className="align-middle">Sản phẩm</span>
+                            </a>
+                            {showCategoryDropdown && (
+                                <ul className="sidebar-nav dropdown-menu">
+                                    <li className={`sidebar-item ${activeCategory === '1' ? 'active' : ''}`} onClick={() => handleCategoryClick('1')}>
+                                        <a className="sidebar-link">
+                                            <i className="align-middle" data-feather="square"></i>
+                                            <span className="align-middle">Nhẫn</span>
+                                        </a>
+                                    </li>
+                                    <li className={`sidebar-item ${activeCategory === '2' ? 'active' : ''}`} onClick={() => handleCategoryClick('2')}>
+                                        <a className="sidebar-link">
+                                            <i className="align-middle" data-feather="square"></i>
+                                            <span className="align-middle">Dây chuyền</span>
+                                        </a>
+                                    </li>
+                                    <li className={`sidebar-item ${activeCategory === '3' ? 'active' : ''}`} onClick={() => handleCategoryClick('3')}>
+                                        <a className="sidebar-link">
+                                            <i className="align-middle" data-feather="square"></i>
+                                            <span className="align-middle">Mặt dây chuyền</span>
+                                        </a>
+                                    </li>
+                                    <li className={`sidebar-item ${activeCategory === '4' ? 'active' : ''}`} onClick={() => handleCategoryClick('4')}>
+                                        <a className="sidebar-link">
+                                            <i className="align-middle" data-feather="square"></i>
+                                            <span className="align-middle">Vòng tay</span>
+                                        </a>
+                                    </li>
+                                    <li className={`sidebar-item ${activeCategory === '5' ? 'active' : ''}`} onClick={() => handleCategoryClick('5')}>
+                                        <a className="sidebar-link">
+                                            <i className="align-middle" data-feather="square"></i>
+                                            <span className="align-middle">Kim cương</span>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            )}
                         </li>
                         <li className="sidebar-item ">
-                            <a className="sidebar-link">
+                            <a className="sidebar-link" href="/TaiKhoan">
                                 <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                                <span className="align-middle">Tài khoản</span>
                             </a>
                         </li>
                         <li className="sidebar-item">
-                            <a className="sidebar-link">
+                            <a className="sidebar-link" href='/DonHang'>
                                 <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                                <span className="align-middle">Đơn hàng</span>
                             </a>
                             <a className="sidebar-link">
                                 <i className="align-middle"
@@ -359,15 +428,6 @@ const SanPham = () => {
                         <h2 className="text-center">Quản lí sản phẩm</h2>
 
                         {/* <div className="filters">
-                            <label>Chọn theo loại:</label>
-                            <select value={categoryFilter} onChange={handleCategoryFilterChange}>
-                                <option value="Tất cả">Tất cả</option>
-                                <option value="1">Nhẫn</option>
-                                <option value="2">Dây chuyền</option>
-                                <option value="3">Mặt dây chuyền</option>
-                                <option value="4">Vòng tay</option>
-                                <option value="5">Kim cương</option>
-                            </select>
                             <label>Chọn theo trạng thái:</label>
                             <select value={statusFilter} onChange={handleStatusFilterChange}>
                                 <option value="Tất cả">Tất cả</option>
@@ -392,7 +452,7 @@ const SanPham = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label>Loại:</label>                                   
+                                        <label>Loại:</label>
                                         <select
                                             name="categoryId"
                                             value={newProduct.categoryId}
@@ -406,7 +466,7 @@ const SanPham = () => {
                                         </select>
                                     </div>
                                     <div>
-                                        <label>Thiết lập trang sức:</label>                                        
+                                        <label>Thiết lập trang sức:</label>
                                         <select
                                             name="jewelrySettingID"
                                             value={newProduct.jewelrySettingID}
@@ -558,14 +618,35 @@ const SanPham = () => {
                     )}
 
                     <style jsx>{`
-                .details-grid {
-                    display: flex;
-                }
-                .details-grid .column {
-                    flex: 1;
-                    padding: 10px;
-                }
-            `}</style>
+    .sidebar-nav {
+        position: relative;
+        background-color: transparent;
+        
+    }
+
+    .sidebar-item {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        left: 30px;
+        max-width: 200px;
+        margin: 0px 0px;
+        padding: 0px 0px;
+    }
+
+    .sidebar-item.active .dropdown-menu {
+        display: block;
+    }
+    .sidebar-nav:hover{
+        background-color: transparent;
+    }
+
+    .dropdown-item {
+        padding: 12px 16px;
+        cursor: pointer;
+    }
+`}</style>
 
                 </div>
             </div >
