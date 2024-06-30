@@ -7,8 +7,7 @@ import{logout as apilogout} from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import addAddress from '../api/addAddress'; // Adjust path as needed
-import getAllShipAddresses from '../api/getAllShipAddresses'; // Import the API function
-import ShippingAddresses from '../components/ShippingAddresses';
+
 
 
 export default function Thong_tin_tk() {
@@ -25,7 +24,7 @@ export default function Thong_tin_tk() {
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [shipAddresses, setShipAddresses] = useState([]);
+
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -77,28 +76,7 @@ export default function Thong_tin_tk() {
         fetchUserData();
     }, [currentUser, userLogout, navigate]);
 
-    useEffect(() => {
-        const fetchShipAddresses = async () => {
-            const token = localStorage.getItem('token');
-            const userId = userData ? userData.userId : '';
 
-            if (!token || !userId) {
-                console.log("Token or user ID not available.");
-                return;
-            }
-
-            try {
-                const addressesData = await getAllShipAddresses(token, userId);
-                console.log('Ship addresses:', addressesData);
-                setShipAddresses(addressesData || []);
-            } catch (error) {
-                console.error('Error fetching ship addresses:', error);
-                setErrorMessage('Error fetching ship addresses');
-            }
-        };
-
-        fetchShipAddresses();
-    }, [userData]);
 
     const handlePasswordChange = (event) => {
         const { id, value } = event.target;
@@ -140,7 +118,7 @@ export default function Thong_tin_tk() {
             try {
                 const updatedUser = await addAddress(token, userId, { address: newAddress });
                 console.log('Updated user:', updatedUser);
-                setShipAddresses(updatedUser.data.shipAddresses || []);
+               
                 setNewAddress('');
                 setIsEditing(false);
             } catch (error) {
