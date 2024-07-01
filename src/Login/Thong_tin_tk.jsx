@@ -1,15 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-import {logout as apilogout} from '../api/LogoutAPI';
-import { jwtDecode } from 'jwt-decode';
+import { logout as apilogout } from '../api/LogoutAPI';
+import {jwtDecode} from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
-import addAddress from '../api/addAddress'; // Adjust path as needed
-import getAllShipAddresses from '../api/getAllShipAddresses'; // Import the API function
-import ShippingAddresses from '../components/ShippingAddresses';
-
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -17,15 +12,12 @@ export default function Thong_tin_tk() {
     const [errorMessage, setErrorMessage] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
-    const [addresses, setAddresses] = useState([]);
-    const [newAddress, setNewAddress] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
     const [username, setUsername] = useState('');
+    const [numberPhone, setNumberPhone] = useState('');
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [shipAddresses, setShipAddresses] = useState([]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -60,7 +52,7 @@ export default function Thong_tin_tk() {
                 setUsername(response.data.username || '');
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
-                setAddresses(response.data.address ? [response.data.address] : []);
+                setNumberPhone(response.data.numberPhone || '');
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -76,29 +68,6 @@ export default function Thong_tin_tk() {
 
         fetchUserData();
     }, [currentUser, userLogout, navigate]);
-
-    useEffect(() => {
-        const fetchShipAddresses = async () => {
-            const token = localStorage.getItem('token');
-            const userId = userData ? userData.userId : '';
-
-            if (!token || !userId) {
-                console.log("Token or user ID not available.");
-                return;
-            }
-
-            try {
-                const addressesData = await getAllShipAddresses(token, userId);
-                console.log('Ship addresses:', addressesData);
-                setShipAddresses(addressesData || []);
-            } catch (error) {
-                console.error('Error fetching ship addresses:', error);
-                setErrorMessage('Error fetching ship addresses');
-            }
-        };
-
-        fetchShipAddresses();
-    }, [userData]);
 
     const handlePasswordChange = (event) => {
         const { id, value } = event.target;
@@ -117,49 +86,19 @@ export default function Thong_tin_tk() {
         setEmail(event.target.value);
     };
 
-    const handleAddressChange = (index, event) => {
-        const newAddresses = [...addresses];
-        newAddresses[index] = event.target.value;
-        setAddresses(newAddresses);
-    };
-
-    const handleNewAddressChange = (event) => {
-        setNewAddress(event.target.value);
-    };
-
-    const addNewAddress = async () => {
-        if (newAddress.trim() !== '') {
-            const token = localStorage.getItem('token');
-            const userId = userData ? userData.userId : '';
-
-            if (!token || !userId) {
-                console.log("Token or user ID not available.");
-                return;
-            }
-
-            try {
-                const updatedUser = await addAddress(token, userId, { address: newAddress });
-                console.log('Updated user:', updatedUser);
-                setShipAddresses(updatedUser.data.shipAddresses || []);
-                setNewAddress('');
-                setIsEditing(false);
-            } catch (error) {
-                console.error('Error adding new address:', error);
-                setErrorMessage('Error adding new address');
-            }
-        }
+    const handleNumberPhoneChange = (event) => {
+        setNumberPhone(event.target.value);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
 
-
         const userDataToUpdate = {
             username,
             fullName: displayName,
             email,
-            address: addresses.join('; '), // Convert addresses array back to a string
+            numberPhone,
             password: newPwd
         };
 
@@ -169,7 +108,6 @@ export default function Thong_tin_tk() {
             console.log('Update response:', updatedUser);
             setErrorMessage('Update successful');
             setUserData(updatedUser);
-
         } catch (error) {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);
@@ -220,122 +158,26 @@ export default function Thong_tin_tk() {
                                     <div className="row">
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
-
-                                                <a href="#orders" data-bs-toggle="tab"><i className="fa fa-cart-arrow-down"></i>
-                                                    Đơn hàng</a>
-                                                <a href="#download" data-bs-toggle="tab"><i className="fa fa-cloud-download"></i>
-                                                    Tải về</a>
-                                                <a href="#payment-method" data-bs-toggle="tab"><i className="fa fa-credit-card"></i>
-                                                    Phương thức thanh toán</a>
-                                                <a href="#address-edit" data-bs-toggle="tab"><i className="fa fa-map-marker"></i>
-                                                    Địa chỉ</a>
-                                                <a href="#account-info" data-bs-toggle="tab"><i className="fa fa-user"></i> Thông tin cá nhân</a>
-                                                <Link to="/" onClick={handleLogout}><i className="fa fa-sign-out"></i> Logout</Link>
+                                                <a className="active" href="#account-info" data-bs-toggle="tab">
+                                                    <i className="fa fa-user"></i> Thông tin cá nhân
+                                                </a>
+                                                <a href="#orders" data-bs-toggle="tab">
+                                                    <i className="fa fa-cart-arrow-down"></i> Đơn hàng
+                                                </a>
+                                                <a href="#payment-method" data-bs-toggle="tab">
+                                                    <i className="fa fa-credit-card"></i> Phương thức thanh toán
+                                                </a>
                                             </div>
                                         </div>
                                         <div className="col-lg-9 col-md-8">
                                             <div className="tab-content" id="myaccountContent">
-                                                <div className="tab-pane fade show active" id="dashboad" role="tabpanel">
-
-                                                </div>
-                                                <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Orders</h5>
-                                                        <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table table-bordered">
-                                                                <thead className="thead-light">
-                                                                    <tr>
-                                                                        <th>Order</th>
-                                                                        <th>Date</th>
-                                                                        <th>Status</th>
-                                                                        <th>Total</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>10/6/2024</td>
-                                                                        <td>Đang thanh toán</td>
-                                                                        <td>$3000</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>1/6/2024</td>
-                                                                        <td>Thành công</td>
-                                                                        <td>$200</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td>5/6/2024</td>
-                                                                        <td>Tạm dừng</td>
-                                                                        <td>$990</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">View</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="download" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Tải về</h5>
-                                                        <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table table-bordered">
-                                                                <thead className="thead-light">
-                                                                    <tr>
-                                                                        <th>Product</th>
-                                                                        <th>Date</th>
-                                                                        <th>Expires</th>
-                                                                        <th>Download</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Gold 123</td>
-                                                                        <td>12/9/2024</td>
-                                                                        <td>Yes</td>
-                                                                        <td><a
-                                                                            href="#" className="btn btn-sqr"><i className="fa fa-cloud-download"></i> Download</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Vàng 9999</td>
-                                                                        <td>12/9/2024</td>
-                                                                        <td>Yes</td>
-                                                                        <td><a href="#" className="btn btn-sqr"><i className="fa fa-cloud-download"></i> Download</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Phương thức thanh toán</h5>
-                                                        <p className="saved-message">You have no saved payment method</p>
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="address-edit" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Địa chỉ giao hàng</h5>
-                                                        {/* Render ShippingAddresses component */}
-                                                        <ShippingAddresses shipAddresses={shipAddresses} />
-                                                    </div>
-                                                </div>
-                                                <div className="tab-pane fade" id="account-info" role="tabpanel">
+                                                <div className="tab-pane fade show active" id="account-info" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Thông tin cá nhân</h5>
                                                         <div className="account-details-form">
                                                             <form onSubmit={handleSubmit}>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="display-name" className="required">Tên hiển thị</label>
+                                                                    <label htmlFor="display-name">Tên hiển thị</label>
                                                                     <input type="text" id="display-name" placeholder="Tên hiển thị" value={displayName} onChange={handleDisplayNameChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
@@ -343,21 +185,13 @@ export default function Thong_tin_tk() {
                                                                     <input type="email" id="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="address" className="required">Địa chỉ</label>
-                                                                    {addresses.map((address, index) => (
-                                                                        <input
-                                                                            key={index}
-                                                                            type="text"
-                                                                            value={address}
-                                                                            onChange={(e) => handleAddressChange(index, e)}
-                                                                            placeholder="Địa chỉ"
-                                                                        />
-                                                                    ))}
+                                                                    <label htmlFor="number-phone">Số điện thoại</label>
+                                                                    <input type="text" id="number-phone" placeholder="Số điện thoại" value={numberPhone} onChange={handleNumberPhoneChange} />
                                                                 </div>
                                                                 <fieldset>
-                                                                    <legend>Thay đổi mật khẩu</legend>
+                                                                    <h5>Thay đổi mật khẩu</h5>
                                                                     <div className="single-input-item">
-                                                                        <label htmlFor="new-pwd" className="required">Mật khẩu mới</label>
+                                                                        <label htmlFor="new-pwd">Mật khẩu mới</label>
                                                                         <input type="password" id="new-pwd" placeholder="Mật khẩu mới" value={newPwd} onChange={handlePasswordChange} />
                                                                     </div>
                                                                     <div className="single-input-item">
@@ -375,6 +209,53 @@ export default function Thong_tin_tk() {
                                                                 </div>
                                                             )}
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div className="tab-pane fade" id="orders" role="tabpanel">
+                                                    <div className="myaccount-content">
+                                                        <h5>Đơn hàng</h5>
+                                                        <div className="myaccount-table table-responsive text-center">
+                                                            <table className="table-don-hang">
+                                                                <thead className="thead-light">
+                                                                    <tr>
+                                                                        <th>Đơn hàng</th>
+                                                                        <th>Ngày đặt hàng</th>
+                                                                        <th>Tổng tiền</th>
+                                                                        <th>Trạng thái</th>
+                                                                        <th>Chi tiết</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>10/6/2024</td>
+                                                                        <td>30.000.000đ</td>
+                                                                        <td>Đang thanh toán</td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>2</td>
+                                                                        <td>1/6/2024</td>
+                                                                        <td>25.000.000đ</td>
+                                                                        <td>Thành công</td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>3</td>
+                                                                        <td>5/6/2024</td>
+                                                                        <td>3.000.000đ</td>
+                                                                        <td>Đã hủy</td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
+                                                    <div className="myaccount-content">
+                                                        <h5>Phương thức thanh toán</h5>
+                                                        <p className="saved-message">You have no saved payment method</p>
                                                     </div>
                                                 </div>
                                             </div>

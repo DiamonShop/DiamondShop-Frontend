@@ -117,7 +117,7 @@ export default function Thanh_toan() {
         const totalPrices = totalPrice; // Convert to integer
 
         const orderModel = {
-            userId:userId,
+            userId: userId,
             fullName: displayName,
             phoneNumber: formData.phoneNumber,
             birthday: formData.birthday,
@@ -150,7 +150,7 @@ export default function Thanh_toan() {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
+
     const handleUserIdChange = (event) => {
         setUserId(event.target.value);
     };
@@ -219,32 +219,18 @@ export default function Thanh_toan() {
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="birthday">Ngày sinh</label>
-                                                    <input
-                                                        type="text"
-                                                        name="birthday"
-                                                        placeholder="Ngày sinh(dd-mm-yyyy)"
-                                                        value={formData.birthday}
-                                                        onChange={handleCheckoutChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="email" class="required">Email</label>
-                                                    <input type="email" name="email" placeholder="Email"
-                                                        required
-                                                        value={email}
-                                                        onChange={handleEmailChange} />
-                                                </div>
-                                            </div>
+                                        
                                         </div>
-
+                                        <div class="single-input-item">
+                                                <label for="email" class="required">Email</label>
+                                                <input type="email" name="email" placeholder="Email"
+                                                    required
+                                                    value={email}
+                                                    onChange={handleEmailChange} />
+                                            </div>
 
                                         <div class="single-input-item">
-                                            <label for="street-address" class="required mt-20">Địa chỉ</label>
+                                            <label for="street-address" class="required ">Địa chỉ</label>
                                             <input type="text" name="address" placeholder="Địa chỉ nhận hàng"
                                                 value={address} onChange={handleAddressChange}
                                                 required />

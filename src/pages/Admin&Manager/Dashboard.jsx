@@ -20,11 +20,11 @@ export default function Dashboard() {
                             </li>
 
                             <li class="sidebar-item active">
-                                <a class="sidebar-link" >
+                                <a class="sidebar-link" href="/Dashboard">
                                     <i class="align-middle"
                                         data-feather="sliders">
                                     </i>
-                                    <span class="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                    <span class="align-middle">Dashboard</span>
                                 </a>
                             </li>
 
@@ -33,30 +33,30 @@ export default function Dashboard() {
                             </li>
 
                             <li class="sidebar-item">
-                                <a class="sidebar-link" >
+                                <a class="sidebar-link" href="/SanPham">
                                     <i class="align-middle"
                                         data-feather="square">
                                     </i>
-                                    <span class="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
+                                    <span class="align-middle">Sản phẩm</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item">
-                                <a class="sidebar-link">
+                                <a class="sidebar-link" href="/TaiKhoan">
                                     <i class="align-middle"
                                         data-feather="square">
                                     </i>
-                                    <span class="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                                    <span class="align-middle">Tài khoản</span>
                                 </a>
                             </li>
 
                             <li class="sidebar-item">
 
-                                <a class="sidebar-link" >
+                                <a class="sidebar-link" href="/DonHang">
                                     <i class="align-middle"
                                         data-feather="square">
                                     </i>
-                                    <span class="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                                    <span class="align-middle">Đơn hàng</span>
                                 </a>
                                 <a class="sidebar-link">
                                     <i class="align-middle"
