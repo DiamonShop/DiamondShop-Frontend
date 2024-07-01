@@ -11,9 +11,9 @@ import '../../../image-zoom'
 
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 export default function Chi_tiet_san_pham() {
-    
+
     useEffect(() => {
-       
+
         // Khởi tạo plugin nice-select sau khi component đã được render
         $('select').niceSelect();
         $('.img-zoom').zoom();
@@ -55,7 +55,7 @@ export default function Chi_tiet_san_pham() {
         ref: navSliderRef
     };
 
-    
+
     const [quantity, setQuantity] = useState(1);
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -80,17 +80,16 @@ export default function Chi_tiet_san_pham() {
         if (token) {
             const userId = decodeToken(token).sid;
             //Gọi API để tạo order
-            const order = await handleGetOrderByUserId(parseInt(userId, 10));
+            const orders = await handleGetOrderByUserId(parseInt(userId, 10));
             //Nếu Order bằng null thì tạo Order mới
-            if (order != null) {
-                for (const item of order) {
+            if (orders != null) {
+                for (const item of orders) {
                     if (item.status == 'Ordering') {
                         handleAddProductToOrder(item.orderId, productObj.productId, quantity);
                         successAddMessage();
                         break;
                     } else if (item.status == 'Completed' || item.status == 'Shipped') {
                         const orderId = await handleCreateOrder(userId);
-                        console.log(orderId)
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
                         successAddMessage();
                         break;
@@ -98,9 +97,11 @@ export default function Chi_tiet_san_pham() {
                 }
             } else {
                 const orderId = await handleCreateOrder(userId);
+                console.log(orderId);
                 const order = await handleGetOrderByUserId(parseInt(userId, 10));
+                console.log(order)
                 for (const item of order) {
-                    if (item.status == 'Ordering' && item.orderId == orderId) {
+                    if (item.status === 'Ordering' && item.orderId === orderId) {
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
                         successAddMessage();
                         break;
@@ -225,15 +226,10 @@ export default function Chi_tiet_san_pham() {
 
 
                                                 </select>
-
-                                               
                                                 {productObj.categoryName == 'Nhẫn' ? (
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
 
                                                 ) : (<></>)}
-
-
-
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
@@ -382,7 +378,7 @@ export default function Chi_tiet_san_pham() {
                 </div>
             </div>
 
-           <Sanphamtuongtu ></Sanphamtuongtu>
+            <Sanphamtuongtu ></Sanphamtuongtu>
 
             <div class="scroll-top not-visible">
                 <i class="fa fa-angle-up"></i>

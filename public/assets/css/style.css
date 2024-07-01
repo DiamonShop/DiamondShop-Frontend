@@ -4158,13 +4158,13 @@ only screen and (max-width: 767.98px) {
 /*------ shop categories area end ------*/
 /*----- shop Sidebar end -----*/
 /*------ pagination area style start ------*/
-.paginatoin-area {
+.pagination-area {
   margin-top: 30px;
   padding: 20px;
   border: 1px solid #efefef;
 }
 
-.paginatoin-area .pagination-box {
+.pagination-area .pagination-box {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4175,16 +4175,16 @@ only screen and (max-width: 767.98px) {
   justify-content: center;
 }
 
-.paginatoin-area .pagination-box li {
+.pagination-area .pagination-box li {
   margin-right: 5px;
   display: inline-block;
 }
 
-.paginatoin-area .pagination-box li:last-child {
+.pagination-area .pagination-box li:last-child {
   margin-right: 0;
 }
 
-.paginatoin-area .pagination-box li a {
+.pagination-area .pagination-box li a {
   color: #222222;
   height: 36px;
   width: 36px;
@@ -4196,18 +4196,18 @@ only screen and (max-width: 767.98px) {
   border-radius: 50%;
 }
 
-.paginatoin-area .pagination-box li a i {
+.pagination-area .pagination-box li a i {
   font-size: 30px;
   line-height: 36px;
 }
 
-.paginatoin-area .pagination-box li a:hover {
+.pagination-area .pagination-box li a:hover {
   color: #fff;
   border-color: #c29958;
   background-color: #c29958;
 }
 
-.paginatoin-area .pagination-box li.active a {
+.pagination-area .pagination-box li.active a {
   color: #fff;
   background-color: #c29958;
 }
@@ -6144,7 +6144,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 .cart-calculator-wrapper .cart-calculate-items .table tr td.total-amount {
-  color: #c29958;
+  color: #000;
   font-weight: 700;
 }
 

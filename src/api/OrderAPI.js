@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const handleCreateOrder = async (userId) => {
     try {
         const response = await fetch(`https://localhost:7101/api/orders/CreatOrder?userId=${userId}`, {
@@ -5,7 +7,7 @@ export const handleCreateOrder = async (userId) => {
             mode: 'cors',
         });
         const data = await response.json();
-        return data;
+        return data.data;
     } catch (error) {
         console.error("Error during create order:", error);
         return null; // Return null on error
@@ -60,3 +62,27 @@ export const handleUpdateTotalPrice = async (orderId, totalPrice) => {
         return false;
     }
 }
+
+export const handleDeleteOrderDetail = async (orderDetailId) => {
+    const response = await fetch(`https://localhost:7101/api/orders/DeleteOrderDetail?orderDetailId=${orderDetailId}`, {
+        method: 'DELETE',
+        mode: 'cors',
+    });
+    const data = await response.json();
+        if (data == null) {
+            return null;
+        } else {
+            return data;
+        }
+}
+
+export const handleGetAllOrderDetail = async () => {
+    // Perform POST request to create a new user
+    const response = axios.get("https://localhost:7101/api/orders/GetAllOrderDetail",
+        {
+            'Content-Type': 'application/json'
+        })
+    var arr = (await response).data;
+    return arr;
+}
+

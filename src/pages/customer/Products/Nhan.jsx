@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
 
-
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -17,6 +18,22 @@ export default function Nhan({ onProductClick }) {
     };
 
     const sortedProducts = Product_Nhan_Data;
+
+    // Calculate the products to be displayed on the current page
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const handleClick = (event, pageNumber) => {
+        event.preventDefault();
+        setCurrentPage(pageNumber);
+    };
+
+    // Create pagination items
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(sortedProducts.length / itemsPerPage); i++) {
+        pageNumbers.push(i);
+    }
 
     return (
         <div>
@@ -42,11 +59,11 @@ export default function Nhan({ onProductClick }) {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="shop-product-wrapper">
-                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                            <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
-                                    {sortedProducts.map((item) => (
+                                    {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham 
+                                            <Du_lieu_san_pham
                                                 productId={item.id}
                                                 image1={item.image1}
                                                 image2={item.image2}
@@ -63,13 +80,25 @@ export default function Nhan({ onProductClick }) {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="paginatoin-area text-center">
+                                <div className="pagination-area text-center">
                                     <ul className="pagination-box">
-                                        <li><a className="previous" href="#"><i className="pe-7s-angle-left"></i></a></li>
-                                        <li className="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a className="next" href="#"><i className="pe-7s-angle-right"></i></a></li>
+                                        <li>
+                                            <a href="#" onClick={(e) => handleClick(e, 1)}>
+                                                Trước
+                                            </a>
+                                        </li>
+                                        {pageNumbers.map(number => (
+                                            <li key={number} className={currentPage === number ? 'active' : ''}>
+                                                <a href="#" onClick={(e) => handleClick(e, number)}>
+                                                    {number}
+                                                </a>
+                                            </li>
+                                        ))}
+                                        <li>
+                                            <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
+                                                Sau
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

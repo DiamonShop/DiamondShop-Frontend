@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
+import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
 
 export default function Gio_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
-    // const [order, setOrder] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
     //useEffect để set list của orderDetail
@@ -28,7 +27,7 @@ export default function Gio_hang() {
             setOrderDetailLists([]);
             setTotalPrice(0);
         }
-    }, []);
+    }, [orderDetailLists]);
 
     //useEffect để cập nhật total price
     useEffect(() => {
@@ -60,8 +59,15 @@ export default function Gio_hang() {
         return total;
     };
 
-    const removeProduct = (productId) => {
-        console.log(productId)
+    const removeProduct = async () => {
+        var orderDetailAll = await handleGetAllOrderDetail();
+        for (const od of orderDetailLists) {
+            for (const item of orderDetailAll) {
+                if (item.orderDetailId === od.orderDetailId) {
+                    await handleDeleteOrderDetail(od.orderDetailId);
+                }
+            }
+        }
     }
 
     return (
@@ -114,7 +120,7 @@ export default function Gio_hang() {
                                                         <td className="pro-quantity">{orderDetail.quantity}</td>
                                                         <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
                                                         <td className="pro-remove">
-                                                            <a style={{ cursor: 'pointer' }} onClick={() => removeProduct(orderDetail.productId)}><i className="fa fa-trash-o"></i></a>
+                                                            <a style={{ cursor: 'pointer' }} onClick={() => removeProduct()}><i className="fa fa-trash-o"></i></a>
                                                         </td>
                                                     </tr>
                                                 ))

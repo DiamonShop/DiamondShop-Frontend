@@ -16,10 +16,11 @@ export default function Header({ tokenIsValid }) {
     document.body.classList.add('fix');
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
     // if (searchValue.length > 0) {
     //   window.location.href = `/search/${searchValue}`
     // }
+    
   }
 
   const handleLogout = () => {
@@ -117,16 +118,17 @@ export default function Header({ tokenIsValid }) {
                       <button className="search-trigger d-xl-none d-lg-block">
                         <i className="pe-7s-search"></i>
                       </button>
-                      <form className="header-search-box d-lg-none d-xl-block" onSubmit={handleSearch}>
+                      <form className="header-search-box d-lg-none d-xl-block" action='/Ketquatimkiem' onSubmit={handleSearch}>
                         <input
                           type="text"
+                          name='txtSearchValue'
                           placeholder="Tìm kiếm sản phẩm"
                           value={searchValue}
                           className="header-search-field bg-white"
                         />
                         <button className="header-search-btn" type='submit'>
                           <i className="pe-7s-search"></i>
-                        </button>
+                        </button> 
                       </form>
                     </div>
                     {isLoggedIn ? (
