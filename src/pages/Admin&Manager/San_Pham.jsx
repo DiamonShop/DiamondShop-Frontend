@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { getImageUrls } from '../../FirebaseImage/firebaseHelper';
+import ReactPaginate from 'react-paginate';
 
 const formatCurrency = (value) => {
     return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');
@@ -24,38 +25,26 @@ const SanPham = () => {
     const toggleCategoryDropdown = () => {
         setShowCategoryDropdown(!showCategoryDropdown);
     };
+
     const [activeCategory, setActiveCategory] = useState('');
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category);
         setCategoryFilter(category); // Update the category filter
     };
-    const [isActiveMatDayChuyen, setIsActiveMatDayChuyen] = useState(false);
 
-    const toggleActiveMatDayChuyen = () => {
-        setIsActiveMatDayChuyen(!isActiveMatDayChuyen);
-    };
-    const [isActiveVongTay, setIsActiveVongTay] = useState(false);
-
-    const toggleActiveVongTay = () => {
-        setIsActiveVongTay(!isActiveVongTay);
-    };
-    const [isActiveKimCuong, setIsActiveKimCuong] = useState(false);
-
-    const toggleActiveKimCuong = () => {
-        setIsActiveKimCuong(!isActiveKimCuong);
-    };
     const navigate = useNavigate();
+
     const [newProduct, setNewProduct] = useState({
         productId: '',
-        categoryId: '',
-        jewelrySettingID: '',
+        categoryId: 1, // Giá trị mặc định, bạn có thể thay đổi tùy thuộc vào yêu cầu
+        jewelrySettingID: 1, // Giá trị mặc định, bạn có thể thay đổi tùy thuộc vào yêu cầu
         productName: '',
         description: '',
         stock: 0,
         basePrice: 0,
         markupRate: 0,
-        isActive: true,
+        isActive: true
     });
     const fetchProductData = async (categoryId = '') => {
         if (!currentUser) {
@@ -146,19 +135,19 @@ const SanPham = () => {
     }, [currentUser, userLogout, navigate, categoryFilter]);
 
 
-    const handleAddProductInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewProduct(prevState => ({
-            ...prevState,
-            [name]: value
+    const handleAddProductInputChange = (event) => {
+        const { name, value } = event.target;
+        setNewProduct(prevProduct => ({
+            ...prevProduct,
+            [name]: name === 'categoryId' || name === 'jewelrySettingID' ? parseInt(value, 10) : value
         }));
     };
-    const handleAddProduct = async () => {
+    const handleAddProduct = async (categoryFilter) => {
         try {
             const headers = sendToken(); // Get headers with Authorization token
             const response = await axios.post('https://localhost:7101/api/products/CreateProduct', {
                 productId: newProduct.productId,
-                categoryId: newProduct.categoryId,
+                categoryId: categoryFilter,
                 jewelrySettingID: newProduct.jewelrySettingID,
                 productName: newProduct.productName,
                 description: newProduct.description,
@@ -425,17 +414,12 @@ const SanPham = () => {
                 </nav>
                 <div className="content">
                     <div className="container">
+                        {/* <input type="text" className="form-control" placeholder="Tìm kiếm..." aria-label="Search" value={searchTerm} onChange={handleSearchInputChange} />
+                        <button className="btn" type="button" style={{ marginLeft: '15px', marginRight: '10px' }}>
+                            <i className="align-middle" data-feather="search">Search</i>
+                        </button> */}
                         <h2 className="text-center">Quản lí sản phẩm</h2>
 
-                        {/* <div className="filters">
-                            <label>Chọn theo trạng thái:</label>
-                            <select value={statusFilter} onChange={handleStatusFilterChange}>
-                                <option value="Tất cả">Tất cả</option>
-                                <option value="Còn hàng">Còn hàng</option>
-                                <option value="Hết hàng">Hết hàng</option>
-
-                            </select>
-                        </div> */}
                         <button onClick={handleOpenAddProductButtonClick} className="btn-add-account">Thêm sản phẩm</button>
 
                         {showAddProductOverlay && (
@@ -449,21 +433,8 @@ const SanPham = () => {
                                             name="productId"
                                             value={newProduct.productId}
                                             onChange={handleAddProductInputChange}
+
                                         />
-                                    </div>
-                                    <div>
-                                        <label>Loại:</label>
-                                        <select
-                                            name="categoryId"
-                                            value={newProduct.categoryId}
-                                            onChange={handleAddProductInputChange}
-                                        >
-                                            <option value={1}>Nhẫn</option>
-                                            <option value={2}>Dây chuyền</option>
-                                            <option value={3}>Mặt dây chuyền</option>
-                                            <option value={4}>Vòng tay</option>
-                                            <option value={5}>Kim cương</option>
-                                        </select>
                                     </div>
                                     <div>
                                         <label>Thiết lập trang sức:</label>
@@ -534,7 +505,7 @@ const SanPham = () => {
                                             <option value={false}>Inactive</option>
                                         </select>
                                     </div>
-                                    <button onClick={handleAddProduct}>Thêm sản phẩm</button>
+                                    <button onClick={() => handleAddProduct(categoryFilter)}>Thêm sản phẩm</button>
                                     <button onClick={handleCloseAddProductButtonClick}>Đóng</button>
                                 </div>
                             </div>
@@ -545,7 +516,6 @@ const SanPham = () => {
                                     <th>ID</th>
                                     <th>Hình ảnh</th>
                                     <th>Tên</th>
-                                    <th>Loại</th>
                                     <th>Số lượng</th>
                                     <th>Giá gốc</th>
                                     {/* <th>Tỉ lệ áp giá</th> */}
@@ -561,7 +531,6 @@ const SanPham = () => {
                                             <img src={product.imageUrl} alt={product.productName} style={{ width: '50px', height: '50px' }} />
                                         </td>
                                         <td>{product.productName}</td>
-                                        <td>{getCategoryName(product.categoryId)}</td>
                                         <td>{product.stock}</td>
                                         <td>{formatCurrency(product.basePrice)}đ</td> {/* Định dạng tiền tệ */}
                                         {/* <td>{product.markupRate}</td> */}
@@ -629,7 +598,7 @@ const SanPham = () => {
     }
 
     .dropdown-menu {
-        left: 30px;
+            left: 30px;
         max-width: 200px;
         margin: 0px 0px;
         padding: 0px 0px;
