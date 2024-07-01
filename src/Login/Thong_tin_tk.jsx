@@ -13,6 +13,7 @@ export default function Thong_tin_tk() {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [numberPhone, setNumberPhone] = useState('');
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -51,6 +52,7 @@ export default function Thong_tin_tk() {
                 setUsername(response.data.username || '');
                 setDisplayName(response.data.fullName || '');
                 setEmail(response.data.email || '');
+                setNumberPhone(response.data.numberPhone || '');
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -84,6 +86,10 @@ export default function Thong_tin_tk() {
         setEmail(event.target.value);
     };
 
+    const handleNumberPhoneChange = (event) => {
+        setNumberPhone(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
@@ -92,6 +98,7 @@ export default function Thong_tin_tk() {
             username,
             fullName: displayName,
             email,
+            numberPhone,
             password: newPwd
         };
 
@@ -152,14 +159,16 @@ export default function Thong_tin_tk() {
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
                                                 <a className="active" href="#account-info" data-bs-toggle="tab">
-                                                    <i className="fa fa-user"></i> Thông tin cá nhân</a>
-                                                <a href="#orders" data-bs-toggle="tab"><i className="fa fa-cart-arrow-down"></i>
-                                                    Đơn hàng</a>
-                                                <a href="#payment-method" data-bs-toggle="tab"><i className="fa fa-credit-card"></i>
-                                                    Phương thức thanh toán</a>
+                                                    <i className="fa fa-user"></i> Thông tin cá nhân
+                                                </a>
+                                                <a href="#orders" data-bs-toggle="tab">
+                                                    <i className="fa fa-cart-arrow-down"></i> Đơn hàng
+                                                </a>
+                                                <a href="#payment-method" data-bs-toggle="tab">
+                                                    <i className="fa fa-credit-card"></i> Phương thức thanh toán
+                                                </a>
                                             </div>
                                         </div>
-
                                         <div className="col-lg-9 col-md-8">
                                             <div className="tab-content" id="myaccountContent">
                                                 <div className="tab-pane fade show active" id="account-info" role="tabpanel">
@@ -174,6 +183,10 @@ export default function Thong_tin_tk() {
                                                                 <div className="single-input-item">
                                                                     <label htmlFor="email" className="required">Email</label>
                                                                     <input type="email" id="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+                                                                </div>
+                                                                <div className="single-input-item">
+                                                                    <label htmlFor="number-phone">Số điện thoại</label>
+                                                                    <input type="text" id="number-phone" placeholder="Số điện thoại" value={numberPhone} onChange={handleNumberPhoneChange} />
                                                                 </div>
                                                                 <fieldset>
                                                                     <h5>Thay đổi mật khẩu</h5>
@@ -218,24 +231,21 @@ export default function Thong_tin_tk() {
                                                                         <td>10/6/2024</td>
                                                                         <td>30.000.000đ</td>
                                                                         <td>Đang thanh toán</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
-                                                                        </td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>2</td>
                                                                         <td>1/6/2024</td>
                                                                         <td>25.000.000đ</td>
                                                                         <td>Thành công</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
-                                                                        </td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>3</td>
                                                                         <td>5/6/2024</td>
                                                                         <td>3.000.000đ</td>
                                                                         <td>Đã hủy</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a>
-                                                                        </td>
+                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -248,7 +258,6 @@ export default function Thong_tin_tk() {
                                                         <p className="saved-message">You have no saved payment method</p>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
