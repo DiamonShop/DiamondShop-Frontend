@@ -90,7 +90,7 @@ export default function Gio_hang() {
                 </div>
             </div>
             <div className="cart-main-wrapper section-padding">
-                <div className="container-thanhtoan">
+                <div className="container-giohang">
                     <div className="section-bg-color">
                         <div className="row">
                             <div className="col-lg-9 ">

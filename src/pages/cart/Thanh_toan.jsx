@@ -179,87 +179,9 @@ export default function Thanh_toan() {
 
               <!-- checkout main wrapper start --> */}
             <div class="checkout-page-wrapper section-padding">
-                <div class="container">
+                <div class="container-thanhtoan">
 
                     <div class="row">
-                        {/* <!-- Checkout Billing Details --> */}
-                        <div class="col-lg-6">
-                            <div class="checkout-billing-details-wrap">
-                                <h5 class="checkout-title">Thông tin người mua</h5>
-                                <div class="billing-form-wrap">
-                                    <form className="createOrder" onSubmit={handleCheckoutSubmit}>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="f_name" class="required">
-                                                        Họ tên
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        name="displayName"
-                                                        placeholder="Họ tên"
-                                                        required
-                                                        value={displayName}
-                                                        onChange={handleDisplayNameChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="single-input-item">
-                                                    <label for="phone-number" class="required">
-                                                        Số điện thoại
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        name="phoneNumber"
-                                                        placeholder="Số điện thoại"
-                                                        required
-                                                        value={formData.phoneNumber}
-                                                        onChange={handleCheckoutChange}
-                                                    />
-                                                </div>
-                                            </div>
-                                        
-                                        </div>
-                                        <div class="single-input-item">
-                                                <label for="email" class="required">Email</label>
-                                                <input type="email" name="email" placeholder="Email"
-                                                    required
-                                                    value={email}
-                                                    onChange={handleEmailChange} />
-                                            </div>
-
-                                        <div class="single-input-item">
-                                            <label for="street-address" class="required ">Địa chỉ</label>
-                                            <input type="text" name="address" placeholder="Địa chỉ nhận hàng"
-                                                value={address} onChange={handleAddressChange}
-                                                required />
-                                        </div>
-
-
-                                        <div class="single-input-item">
-                                            <label for="ordernote">Ghi chú</label>
-                                            <textarea name="orderNote" id="orderNote"
-                                                cols="30" rows="3" placeholder="Ghi chú khác"
-                                                value={formData.orderNote} onChange={handleCheckoutChange}
-                                            ></textarea>
-                                        </div>
-
-                                        <div class="summary-footer-area">
-                                            <div class="custom-control custom-checkbox mb-20">
-                                                <input type="checkbox" class="custom-control-input" id="terms" required />
-                                                <label class="custom-control-label" for="terms">Tôi đã đọc và đồng ý với các <a href="index.html">điều khoản và chính sách</a> của Enternal Sparkle.</label>
-                                            </div>
-
-                                        </div>
-                                        <button type="submit" value="THANH TOÁN"
-                                            className="btn-login solid"
-                                            id="btn_checkout">THANH TOÁN</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                         {/* <!-- Order Summary Details --> */}
                         <div class="col-lg-6">
                             <div class="order-summary-details">
@@ -302,6 +224,83 @@ export default function Thanh_toan() {
                                             </tfoot>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* <!-- Checkout Billing Details --> */}
+                        <div class="col-lg-6">
+                            <div class="checkout-billing-details-wrap">
+                                <h5 class="checkout-title">Thông tin người mua</h5>
+                                <div class="billing-form-wrap">
+                                    <form className="createOrder" onSubmit={handleCheckoutSubmit}>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="single-input-item">
+                                                    <label for="f_name" class="required">
+                                                        Họ tên
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="displayName"
+                                                        placeholder="Họ tên"
+                                                        required
+                                                        value={displayName}
+                                                        onChange={handleDisplayNameChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="single-input-item">
+                                                    <label for="phone-number" class="required">
+                                                        Số điện thoại
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        name="phoneNumber"
+                                                        placeholder="Số điện thoại"
+                                                        required
+                                                        value={formData.phoneNumber}
+                                                        onChange={handleCheckoutChange}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="single-input-item">
+                                            <label for="email" class="required">Email</label>
+                                            <input type="email" name="email" placeholder="Email"
+                                                required
+                                                value={email}
+                                                onChange={handleEmailChange} />
+                                        </div>
+
+                                        <div class="single-input-item">
+                                            <label for="street-address" class="required ">Địa chỉ</label>
+                                            <input type="text" name="address" placeholder="Địa chỉ nhận hàng"
+                                                value={address} onChange={handleAddressChange}
+                                                required />
+                                        </div>
+
+
+                                        <div class="single-input-item">
+                                            <label for="ordernote">Ghi chú</label>
+                                            <textarea name="orderNote" id="orderNote"
+                                                cols="30" rows="3" placeholder="Ghi chú khác"
+                                                value={formData.orderNote} onChange={handleCheckoutChange}
+                                            ></textarea>
+                                        </div>
+
+                                        <div class="summary-footer-area">
+                                            <div class="custom-control custom-checkbox mb-20">
+                                                <input type="checkbox" class="custom-control-input" id="terms" required />
+                                                <label class="custom-control-label" for="terms">Tôi đã đọc và đồng ý với các <a href="index.html">điều khoản và chính sách</a> của Enternal Sparkle.</label>
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" value="THANH TOÁN"
+                                            className="btn-login solid"
+                                            id="btn_checkout">THANH TOÁN</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

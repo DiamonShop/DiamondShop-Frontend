@@ -1057,8 +1057,8 @@ only screen and (max-width: 767.98px) {
 
 /*------- short classes start -------*/
 .section-padding {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .mb-30 {
@@ -5609,27 +5609,7 @@ only screen and (max-width: 767.98px) {
   outline: none;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 10px;
-  
-}
 
-th,
-td {
-  border: 1px solid #ddd;
-}
-
-th,
-td {
-  padding: 8px;
- 
-}
-
-th {
-  background-color: #c29958;
-}
 .faq-answer {
   display: none;
   padding: 10px;
@@ -5792,8 +5772,8 @@ only screen and (max-width: 767.98px) {
 }
 
 .order-summary-table .table th {
-  color: #c29958;
-
+  background-color: #c29958;
+color: white;
 }
 
 .order-summary-table .table tr td a,
@@ -5808,7 +5788,8 @@ only screen and (max-width: 767.98px) {
 .order-summary-table .table tr th strong,
 .order-summary-table table tr td strong,
 .order-summary-table table tr th strong {
-  font-weight: 400;
+  font-weight: 600;
+  color: #c29958;
 }
 
 .order-summary-table .shipping-type {
@@ -7063,6 +7044,7 @@ select {
   font-weight: 600;
   font-size: 0.8rem;
   color: #ffff;
+  border-radius: 50px;
 }
 
 .right-panel .image,
@@ -19049,27 +19031,6 @@ textarea.form-control-lg {
   max-width: 100%
 }
 
-.content {
-  direction: ltr;
-  flex: 1;
-  max-width: 100vw;
-  padding: 1.5rem 1.5rem .75rem;
-  width: 100vw
-}
-
-@media(min-width:768px) {
-  .content {
-    max-width: auto;
-    width: auto
-  }
-}
-
-@media(min-width:992px) {
-  .content {
-    padding: 3rem 3rem 1.5rem
-  }
-}
-
 .navbar-nav .dropdown-menu {
   box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .05)
 }
@@ -21039,12 +21000,18 @@ footer.footer p {
 .table-don-hang th{
  background-color: #c29958;
 }
-/* end cc don hang */
 
+/* end cc don hang */
+/* start gio hang */
+.container-giohang {
+  padding-right: var(--bs-gutter-x, 70px);
+  padding-left: var(--bs-gutter-x, 70px);
+}
+/* end gio hang */
 /* start thanh toan */
 .container-thanhtoan {
-  padding-right: var(--bs-gutter-x, 50px);
-  padding-left: var(--bs-gutter-x, 50px);
+  padding-right: var(--bs-gutter-x, 120px);
+  padding-left: var(--bs-gutter-x, 120px);
 }
 
 /* end thanh toan */
