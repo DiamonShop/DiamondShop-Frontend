@@ -12,7 +12,6 @@ export default function Mat_day_chuyen({ onProductClick }) {
         setSortOption(event.target.value);
     };
 
-
     const sortedProducts = Product_Matdaychuyen_Data.slice().sort((a, b) => {
         switch (sortOption) {
             case 'name-asc':
@@ -27,23 +26,19 @@ export default function Mat_day_chuyen({ onProductClick }) {
                 return 0;
         }
     });
-    
     // Calculate the products to be displayed on the current page
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
     };
-
     // Create pagination items
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(sortedProducts.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
-
     return (
         <div>
             <div className="breadcrumb-area">
@@ -63,13 +58,12 @@ export default function Mat_day_chuyen({ onProductClick }) {
                     </div>
                 </div>
             </div>
-
             <div className="shop-main-wrapper section-padding">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="shop-product-wrapper">
-                            <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">

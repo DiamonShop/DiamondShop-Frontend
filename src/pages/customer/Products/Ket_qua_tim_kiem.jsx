@@ -87,8 +87,8 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                        <div className="shop-product-wrapper">
-                            <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                            <div className="shop-product-wrapper">
+                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">

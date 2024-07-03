@@ -7,13 +7,13 @@ import Filter_product from '../../../components/Filter_product';
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
+    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
 
-  
+
 
     const sortedProducts = Product_Nhan_Data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -34,7 +34,7 @@ export default function Nhan({ onProductClick }) {
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
+    
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
@@ -64,13 +64,12 @@ export default function Nhan({ onProductClick }) {
                     </div>
                 </div>
             </div>
-
             <div className="shop-main-wrapper section-padding">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="shop-product-wrapper">
-                            <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
@@ -118,7 +117,7 @@ export default function Nhan({ onProductClick }) {
                 </div>
             </div>
 
-            
+
         </div>
     );
 }

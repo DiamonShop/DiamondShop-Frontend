@@ -6,7 +6,7 @@ import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
 export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
+    const itemsPerPage = 8;
     
     const handleSortChange = (event) => {
         setSortOption(event.target.value);

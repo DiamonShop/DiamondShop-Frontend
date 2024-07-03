@@ -7,7 +7,7 @@ import Filter_product from '../../../components/Filter_product';
 export default function Vongtay({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
+    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
