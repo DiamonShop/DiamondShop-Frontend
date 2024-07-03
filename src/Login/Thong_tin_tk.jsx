@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
 import {jwtDecode} from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
+import Don_hang from '../pages/cart/Don_hang';
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -212,45 +213,7 @@ export default function Thong_tin_tk() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Đơn hàng</h5>
-                                                        <div className="myaccount-table table-responsive text-center">
-                                                            <table className="table-don-hang">
-                                                                <thead className="thead-light">
-                                                                    <tr>
-                                                                        <th>Đơn hàng</th>
-                                                                        <th>Ngày đặt hàng</th>
-                                                                        <th>Tổng tiền</th>
-                                                                        <th>Trạng thái</th>
-                                                                        <th>Chi tiết</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>10/6/2024</td>
-                                                                        <td>30.000.000đ</td>
-                                                                        <td>Đang thanh toán</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>1/6/2024</td>
-                                                                        <td>25.000.000đ</td>
-                                                                        <td>Thành công</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td>5/6/2024</td>
-                                                                        <td>3.000.000đ</td>
-                                                                        <td>Đã hủy</td>
-                                                                        <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+                                                   <Don_hang/>
                                                 </div>
                                                 <div className="tab-pane fade" id="payment-method" role="tabpanel">
                                                     <div className="myaccount-content">

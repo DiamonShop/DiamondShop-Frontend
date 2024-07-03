@@ -5,7 +5,7 @@ import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserI
 import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
 
-export default function Gio_hang() {
+function Chi_tiet_don_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -81,7 +81,7 @@ export default function Gio_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -93,7 +93,7 @@ export default function Gio_hang() {
                 <div className="container-giohang">
                     <div className="section-bg-color">
                         <div className="row">
-                            <div className="col-lg-9 ">
+                            <div className="col-lg-12 ">
                                 <div className="cart-table table-responsive">
                                     <table className="table table-bordered">
                                         <thead>
@@ -102,64 +102,39 @@ export default function Gio_hang() {
                                                 <th className="pro-title">Sản phẩm</th>
                                                 <th className="pro-price">Đơn giá</th>
                                                 <th className="pro-quantity">Số lượng</th>
-                                                <th className="pro-subtotal">Thành tiền</th>
-                                                <th className="pro-remove">Xóa</th>
+                                                <th className="pro-subtotal">Giá</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {orderDetailLists.length === 0 ? (
-                                                <tr>
-                                                    <td colSpan="6" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</td>
+
+                                            {orderDetailLists.map((orderDetail, index) => (
+                                                <tr key={index}>
+                                                    <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+                                                    <td className="pro-title">{orderDetail.productName}</td>
+                                                    <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
+                                                    <td className="pro-quantity">{orderDetail.quantity}</td>
+                                                    <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
+                                                    <td className="pro-remove">
+                                                        <a style={{ cursor: 'pointer' }} onClick={() => removeProduct()}><i className="fa fa-trash-o"></i></a>
+                                                    </td>
                                                 </tr>
-                                            ) : (
-                                                orderDetailLists.map((orderDetail, index) => (
-                                                    <tr key={index}>
-                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
-                                                        <td className="pro-title">{orderDetail.productName}</td>
-                                                        <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
-                                                        <td className="pro-quantity">{orderDetail.quantity}</td>
-                                                        <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
-                                                        <td className="pro-remove">
-                                                            <a style={{ cursor: 'pointer' }} onClick={() => removeProduct()}><i className="fa fa-trash-o"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            )}
+                                            ))
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div className="col-lg-3">
-                                <div className="cart-calculator-wrapper">
-                                    <div className="cart-calculate-items">
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Tổng tiền hàng</td>
-                                                        <td>{formatCurrency(totalPrice)} VND</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Phí vận chuyển</td>
-                                                        <td>Miễn phí</td>
-                                                    </tr>
-                                                    <tr className="total">
-                                                        <td>Tổng thanh toán</td>
-                                                        <td className="total-amount">{formatCurrency(totalPrice)} VND</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
+                            <div className="Chitietdonhang-giatien">
+                                <div className="row">
+                                    <div className="col-lg-5 ms-auto text-end">
+                                        <h5>Thành tiền: <span className="pro-price"> 000.000.000đ</span></h5>
                                     </div>
-
                                 </div>
-                                <div >
-                                    <Link to="/Thanhtoan" className=" btn-sqr d-block">Xác nhận thanh toán</Link>
-                                </div>
-
                             </div>
+
+
                         </div>
+
 
 
 
@@ -169,3 +144,6 @@ export default function Gio_hang() {
         </div>
     );
 }
+
+
+export default Chi_tiet_don_hang

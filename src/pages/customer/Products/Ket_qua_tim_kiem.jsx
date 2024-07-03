@@ -8,6 +8,8 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [productCount,setproductCount] =useState(0);
+    const [productCountInPage,setproductCountInPage] = useState(0);
     const itemsPerPage = 8;
 
     // Hàm để lấy query từ URL
@@ -20,7 +22,19 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
 
     useEffect(() => {
         const fetchProducts = async () => {
+            
             const filtered = await GetProductByName(txtSearchValue);
+            
+            let count = 0;
+            for (const item of filtered) {              
+                count++;
+            }
+            let countProInPage =0;
+            for (const item of currentProducts) {
+                countProInPage++;
+            }
+            setproductCountInPage(countProInPage);
+            setproductCount(count);
             setFilteredProducts(filtered);
         };
 
@@ -49,7 +63,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
+   
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
@@ -87,8 +101,8 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="shop-product-wrapper">
-                                <Filter_product sortOption={sortOption} handleSortChange={handleSortChange} />
+                        <div className="shop-product-wrapper">
+                            <Filter_product countInPage={productCountInPage} count={productCount} sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">

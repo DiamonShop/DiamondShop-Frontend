@@ -11,7 +11,7 @@ const ChatWindow = () => {
 
   return (
     <div className="chat-window">
-      <a href="https://m.me/337606799444520">mess</a>
+      <a href="https://m.me/337606799444520" target="_blank">mess</a>
     </div>
 
   );
