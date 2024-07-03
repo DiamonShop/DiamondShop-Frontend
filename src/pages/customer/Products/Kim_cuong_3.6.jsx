@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Filter_product from '../../../components/Filter_product';
 import { Product_kimcuong3_6_data } from '../../../Data/Product_kimcuong3.6_data';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
-export default function Kim_cuong({ onProductClick }) {
+export default function Kim_cuong_3_6({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
@@ -46,32 +46,12 @@ export default function Kim_cuong({ onProductClick }) {
 
     return (
         <div>
-
-            {/* <div className="breadcrumb-area">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="breadcrumb-wrap">
-                                    <nav aria-label="breadcrumb">
-                                        <ul className="breadcrumb">
-                                            <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link>
-                                            </li>
-                                            <li className="breadcrumb-item active" aria-current="page">Kim Cương</li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 */}
             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong.png)` }}>
 
             </div>
             <div className="shop-main-wrapper section-padding">
                 <div className="container">
                     <div className="row">
-
                         <div className="col-lg-12">
                             <div className="shop-product-wrapper">
                                 <div className="shop-product-wrapper">
