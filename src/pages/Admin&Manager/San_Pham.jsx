@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { getImageUrls } from '../../FirebaseImage/firebaseHelper';
-import ReactPaginate from 'react-paginate';
+
 
 const formatCurrency = (value) => {
     return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');

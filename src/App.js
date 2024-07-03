@@ -9,6 +9,7 @@ import Day_chuyen from './pages/customer/Products/Day_chuyen';
 import Vong_tay from './pages/customer/Products/Vong_tay';
 import Mat_day_chuyen from './pages/customer/Products/Mat_day_chuyen';
 import Kim_cuong from './pages/customer/Products/Kim_cuong';
+import Kim_cuong_3_6 from './pages/customer/Products/Kim_cuong_3.6';
 import About_us from './pages/customer/About_us';
 import Chinh_sach from './pages/customer/Chinh_sach';
 import Dang_nhap from './Login/Dang_nhap';
@@ -31,6 +32,10 @@ import Huong_dan_do_ni from './pages/customer/Products/Huong_dan_do_ni';
 import Chinh_sach_giao_hang from './pages/customer/Chinh_sach_giao_hang';
 import ScrollToTop from './components/ScrollToTop';
 import Ket_qua_tim_kiem from './pages/customer/Products/Ket_qua_tim_kiem';
+import Kim_cuong_4_1 from './pages/customer/Products/Kim_cuong_4.1';
+import Kim_cuong_4_5 from './pages/customer/Products/Kim_cuong_4.5';
+import Kim_cuong_5_4 from './pages/customer/Products/Kim_cuong_5.4';
+import Chi_tiet_don_hang from './pages/cart/Chi_tiet_don_hang';
 function App({ tokenIsValid }) {
 
   //Lưu product để khi reload sẽ không bị lỗi
@@ -49,7 +54,11 @@ function App({ tokenIsValid }) {
               <Route path='/Daychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
               <Route path='/Matdaychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
               <Route path='/Vongtay' element={<MainLayout tokenIsValid={tokenIsValid}><Vong_tay onProductClick={handleProductClick}/></MainLayout>} />
-              <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong /></MainLayout>} />
+              <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Kimcuong3.6' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_3_6 onProductClick={handleProductClick}/></MainLayout>} />
+              <Route path='/Kimcuong4.1' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_4_1 onProductClick={handleProductClick}/></MainLayout>} />
+              <Route path='/Kimcuong4.5' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_4_5 onProductClick={handleProductClick}/></MainLayout>} />
+              <Route path='/Kimcuong5.4' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_5_4 onProductClick={handleProductClick}/></MainLayout>} />
               <Route path='/Vechungtoi' element={<MainLayout tokenIsValid={tokenIsValid}><About_us /></MainLayout>} />
               <Route path='/Chinhsach' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach /></MainLayout>} />
               <Route path='/Dangnhap' element={<MainLayout tokenIsValid={tokenIsValid}><Dang_nhap /></MainLayout>} />
@@ -59,6 +68,7 @@ function App({ tokenIsValid }) {
               <Route path='/Chitietsanpham-kim-cuong' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_san_pham_kc /></MainLayout>} />
               <Route path='/Lienhe' element={<MainLayout tokenIsValid={tokenIsValid}><Lien_he /></MainLayout>} />
               <Route path='/Giohang' element={<MainLayout tokenIsValid={tokenIsValid}><Gio_hang /></MainLayout>} />
+              <Route path='/Chitietdonhang' element={<MainLayout tokenIsValid={tokenIsValid}><Chi_tiet_don_hang/></MainLayout>} />
               <Route path='/Banggiakimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Bang_gia_kim_cuong /></MainLayout>} />
               <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
               <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan /></MainLayout>} />

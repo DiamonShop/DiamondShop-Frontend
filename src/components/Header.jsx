@@ -8,7 +8,7 @@ export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
   const [searchValue, setSearchValue] = useState();
   const [orderCount, setOrderCount] = useState(0);
-  const [orderDetail,setOrderDetails] = useState([]);
+  const [orderDetail, setOrderDetails] = useState([]);
   const [isMinicartVisible, setMinicartVisible] = React.useState(false);
 
   const openMinicart = () => {
@@ -20,7 +20,7 @@ export default function Header({ tokenIsValid }) {
     // if (searchValue.length > 0) {
     //   window.location.href = `/search/${searchValue}`
     // }
-    
+
   }
 
   const handleLogout = () => {
@@ -98,7 +98,22 @@ export default function Header({ tokenIsValid }) {
                             </ul>
                           </li>
                           <li>
-                            <a href="/Kimcuong">Kim cương</a>
+                            <a href="/Kimcuong">Kim cương  <i className="fa fa-angle-down"></i>
+                            </a>
+                            <ul className="dropdown">
+                              <li>
+                                <Link to="/Kimcuong3.6">Kim cương 3.6 ly</Link>
+                              </li>
+                              <li>
+                                <Link to="/Kimcuong4.1">Kim cương 4.1 ly</Link>
+                              </li>
+                              <li>
+                                <Link to="/Kimcuong4.5">Kim cương 4.5 ly</Link>
+                              </li>
+                              <li>
+                                <Link to="/Kimcuong5.4">Kim cương 5.4 ly</Link>
+                              </li>
+                            </ul>
                           </li>
                           <li>
                             <a href="/Banggiakimcuong">Bảng giá kim cương</a>
@@ -128,7 +143,7 @@ export default function Header({ tokenIsValid }) {
                         />
                         <button className="header-search-btn" type='submit'>
                           <i className="pe-7s-search"></i>
-                        </button> 
+                        </button>
                       </form>
                     </div>
                     {isLoggedIn ? (

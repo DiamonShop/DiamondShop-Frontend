@@ -1,6 +1,7 @@
 /*------ Typography Style Start ------*/
 .logo img {
   width: 60%;
+  background-color: #fff;
 }
 
 body {
@@ -2451,7 +2452,7 @@ only screen and (max-width: 767.98px) {
  02. Slider area
  --------------------------*/
 .hero-slider-item {
-  height: 530px;
+  height: 540px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6440,14 +6441,10 @@ only screen and (max-width: 767.98px) {
 
 .footer-top {
   background-color: #f7f7f7;
+  padding-top: 50px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px),
-only screen and (max-width: 767.98px) {
-  .footer-top [class*=col-] .widget-item {
-    margin-bottom: 30px;
-  }
-}
+
 
 .footer-top [class*=col-]:last-child .widget-item {
   margin-bottom: 0;
@@ -6506,29 +6503,11 @@ only screen and (max-width: 767.98px) {
   margin-top: 30px;
 }
 
-.social-link a {
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  line-height: 40px;
-  margin-right: 10px;
-  color: #777777;
-  display: inline-block;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 1px solid #dedede;
-}
 
-.social-link a:last-child {
-  margin-right: 0;
-}
 
-.social-link a:hover {
-  color: #fff;
-  background-color: #c29958;
-  border-color: #c29958;
-}
+
+
+
 
 @media only screen and (max-width: 767.98px) {
   .newsletter-wrapper {
@@ -6541,47 +6520,6 @@ only screen and (max-width: 767.98px) {
   margin-top: 16px;
 }
 
-@media only screen and (max-width: 767.98px) {
-  .newsletter-inner {
-    margin-top: 5px;
-  }
-}
-
-.newsletter-inner .news-field {
-  width: 100%;
-  height: 40px;
-  border: none;
-  padding: 10px 0;
-  color: #777777;
-  padding-right: 80px;
-  background-color: transparent;
-  border-bottom: 1px solid #bcbcbc;
-}
-
-.newsletter-inner .news-btn {
-  top: 0;
-  right: 10px;
-  line-height: 40px;
-  position: absolute;
-  font-size: 14px;
-  font-weight: 700;
-  color: #c29958;
-}
-
-.newsletter-inner .news-btn:hover {
-  color: #222222;
-}
-
-.footer-payment {
-  text-align: right;
-}
-
-@media only screen and (max-width: 767.98px) {
-  .footer-payment {
-    text-align: center;
-    margin-top: 30px;
-  }
-}
 
 .footer-bottom {
   padding: 20px 0;
@@ -21015,3 +20953,8 @@ footer.footer p {
 }
 
 /* end thanh toan */
+/* Start chi tiet don hang */
+.Chitietdonhang-giatien{
+  margin-top: 20px;
+}
+/* End chi tiet don hang */

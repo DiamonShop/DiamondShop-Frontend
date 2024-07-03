@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import Filter_product from '../../../components/Filter_product';
-import { Product_kimcuong3_6_data } from '../../../Data/Product_kimcuong3.6_data';
+import { Product_kimcuong4_1_data } from '../../../Data/Product_kimcuong4.1_data';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
-export default function Kim_cuong({ onProductClick }) {
+import Filter_product from '../../../components/Filter_product';
+
+function Kim_cuong_4_1({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
@@ -13,7 +14,7 @@ export default function Kim_cuong({ onProductClick }) {
 
   
 
-    const sortedProducts = Product_kimcuong3_6_data.slice().sort((a, b) => {
+    const sortedProducts = Product_kimcuong4_1_data.slice().sort((a, b) => {
         switch (sortOption) {
             case 'name-asc':
                 return a.productName.localeCompare(b.productName);
@@ -44,34 +45,14 @@ export default function Kim_cuong({ onProductClick }) {
         pageNumbers.push(i);
     }
 
+   
     return (
         <div>
-
-            {/* <div className="breadcrumb-area">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="breadcrumb-wrap">
-                                    <nav aria-label="breadcrumb">
-                                        <ul className="breadcrumb">
-                                            <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link>
-                                            </li>
-                                            <li className="breadcrumb-item active" aria-current="page">Kim Cương</li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 */}
-            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong.png)` }}>
-
+            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong-2.png)` }}>
             </div>
             <div className="shop-main-wrapper section-padding">
                 <div className="container">
                     <div className="row">
-
                         <div className="col-lg-12">
                             <div className="shop-product-wrapper">
                                 <div className="shop-product-wrapper">
@@ -133,5 +114,7 @@ export default function Kim_cuong({ onProductClick }) {
 
 
         </div>
-    )
+  )
 }
+
+export default Kim_cuong_4_1

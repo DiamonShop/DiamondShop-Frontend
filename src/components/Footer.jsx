@@ -4,20 +4,17 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
     <div className="footer-widget-area">
-        <div className="footer-top section-padding">
+        <div className="footer-top ">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-3 ">
+                    <div className="col-lg-4">
                         <div className="widget-item">
                             <div className="widget-title">
                                 <div className="widget-logo">
-                                    <a href="index.html">
+                                    <a href="/">
                                         <img src="assets/img/logo/logo.png" alt="brand logo"/>
                                     </a>
                                 </div>
-                            </div>
-                            <div className="widget-body">
-                                <p>Chúng tôi là một nhóm gồm các nhà thiết kế và phát triển tạo ra wordpress, shopify, Opencart chất lượng cao </p>
                             </div>
                         </div>
                     </div>
@@ -35,7 +32,7 @@ export default function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-3 ">
+                    <div className="col-lg-4">
                         <div className="widget-item">
                             <h6 className="widget-title">Thông tin</h6>
                             <div className="widget-body">
@@ -51,29 +48,6 @@ export default function Footer() {
                         </div>
                     </div>
                   
-                </div>
-                <div className="row align-items-center mt-20">
-                    <div className="col-md-6">
-                        {/* <div className="newsletter-wrapper">
-                            <h6 className="widget-title-text">Signup for newsletter</h6>
-                            <form className="newsletter-inner" id="mc-form">
-                                <input type="email" className="news-field" id="mc-email" autocomplete="off" placeholder="Enter your email address"/>
-                                <button className="news-btn" id="mc-submit">Subscribe</button>
-                            </form>
-                            
-                            <div className="mailchimp-alerts">
-                                <div className="mailchimp-submitting"></div>
-                                <div className="mailchimp-success"></div>
-                                <div className="mailchimp-error"></div>
-                            </div>
-                           
-                        </div> */}
-                    </div>
-                    <div className="col-md-6">
-                        <div className="footer-payment">
-                            <img src="assets/img/payment.png" alt="payment method"/>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
