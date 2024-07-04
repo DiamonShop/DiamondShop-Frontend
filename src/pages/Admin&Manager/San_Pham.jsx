@@ -5,6 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { getImageUrls } from '../../FirebaseImage/firebaseHelper';
+import { imageDb } from '../../FirebaseImage/Config';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import ReactPaginate from 'react-paginate';
 
 const formatCurrency = (value) => {
@@ -22,6 +24,11 @@ const SanPham = () => {
     const [statusFilter, setStatusFilter] = useState('Tất cả');
     const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
+    const [filteredProductCount, setFilteredProductCount] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const productsPerPage = 6; // Số lượng sản phẩm trên mỗi trang
     const toggleCategoryDropdown = () => {
         setShowCategoryDropdown(!showCategoryDropdown);
     };
@@ -30,7 +37,7 @@ const SanPham = () => {
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category);
-        setCategoryFilter(category); // Update the category filter
+        setCategoryFilter(category);
     };
 
     const navigate = useNavigate();
@@ -44,9 +51,11 @@ const SanPham = () => {
         stock: 0,
         basePrice: 0,
         markupRate: 0,
-        isActive: true
+        isActive: true,
+        imageUrls: [], // New field for multiple image URLs
+        imageFiles: [] // New field for multiple image files
     });
-    const fetchProductData = async (categoryId = '') => {
+    const fetchProductData = async (categoryId = '', page = 1) => {
         if (!currentUser) {
             console.log("User not logged in. Redirecting to login.");
             return;
@@ -72,30 +81,40 @@ const SanPham = () => {
             setLoading(true);
             const headers = sendToken(); // Get headers with Authorization token
 
+            const limit = productsPerPage; // Số lượng sản phẩm trên mỗi trang
+            const offset = (page - 1) * limit;
+            const categoryFilterId = categoryId === 'Tất cả' ? '' : categoryId;
             const productResponse = await axios.get('https://localhost:7101/api/products/GetAllProduct', {
+                params: {
+                    page: page, // Truyền số trang vào params của request
+                    limit: limit,
+                    offset: offset,
+                    categoryId: categoryFilterId
+                },
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json'
                 }
             });
+            console.log("All Products:", productResponse.data);
             // Fetching images for each product
             const formattedProducts = await Promise.all(productResponse.data.map(async (product) => {
-                // Assuming you have a function to fetch images based on productId and categoryId
-                const { image1Url, image2Url } = await getImageUrls(product.productId, product.categoryId);
+                const { image1Url } = await getImageUrls(product.productId, product.categoryId);
 
                 return {
                     ...product,
-                    imageUrl: image1Url || "default_image_url.png", // Use default image if not found
-                    image2Url: image2Url || "default_image_url.png" // Use default image if not found
+                    imageUrl: image1Url || "default_image_url.png" // Use default image if not found
                 };
             }));
-            console.log("All Products:", productResponse.data);
 
-            if (categoryId) {
-                setProducts(formattedProducts.filter(product => product.categoryId.toString() === categoryId));
-            } else {
-                setProducts(formattedProducts);
-            }
+            const filteredProducts = categoryId
+                ? formattedProducts.filter(product => product.categoryId.toString() === categoryId)
+                : formattedProducts;
+
+            setProducts(filteredProducts);
+            setFilteredProductCount(filteredProducts.length);
+            const totalPagesCount = Math.ceil(filteredProductCount / productsPerPage);
+            setTotalPages(totalPagesCount);
 
             // Map data of categories
             const categoriesResponse = await axios.get('https://localhost:7101/api/Category/GetAllCategories', {
@@ -131,9 +150,13 @@ const SanPham = () => {
 
 
     useEffect(() => {
-        fetchProductData(categoryFilter);
+        fetchProductData(categoryFilter, 1);
+
     }, [currentUser, userLogout, navigate, categoryFilter]);
 
+    const handlePageClick = (event) => {
+        fetchProductData(categoryFilter, event.selected + 1);
+    }
 
     const handleAddProductInputChange = (event) => {
         const { name, value } = event.target;
@@ -144,7 +167,14 @@ const SanPham = () => {
     };
     const handleAddProduct = async (categoryFilter) => {
         try {
+
             const headers = sendToken(); // Get headers with Authorization token
+
+            const imageUrls = await Promise.all(newProduct.imageFiles.map(async (file, index) => {
+                const imgRef = ref(imageDb, `files/${categoryFilter}/${newProduct.productId}/${file.name}-${index}`);
+                await uploadBytes(imgRef, file);
+                return await getDownloadURL(imgRef);
+            }));
             const response = await axios.post('https://localhost:7101/api/products/CreateProduct', {
                 productId: newProduct.productId,
                 categoryId: categoryFilter,
@@ -155,6 +185,7 @@ const SanPham = () => {
                 basePrice: newProduct.basePrice,
                 markupRate: newProduct.markupRate,
                 isActive: newProduct.isActive,
+                imageUrls
             }, {
                 headers: {
                     ...headers,
@@ -176,6 +207,8 @@ const SanPham = () => {
                 basePrice: 0,
                 markupRate: 0,
                 isActive: true,
+                imageUrls: [],
+                imageFiles: []
             });
             setShowAddProductOverlay(false);
         } catch (error) {
@@ -187,6 +220,58 @@ const SanPham = () => {
             }
         }
     };
+    const handleImageUpload = (event) => {
+        const files = Array.from(event.target.files);
+        setNewProduct(prevProduct => ({
+            ...prevProduct,
+            imageFiles: files
+        }));
+    };
+    const handleDeleteProduct = async (productId) => {
+        if (!currentUser) {
+            console.log("User not logged in. Redirecting to login.");
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+            if (userRole !== 'Admin') {
+                console.log("User is not an admin. Redirecting to home.");
+                navigate('/');
+                return;
+            }
+
+            const headers = sendToken(); // Get headers with Authorization token
+
+            await axios.delete(`https://localhost:7101/api/products/DeleteProduct?id=${productId}`, {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Product deleted successfully');
+            // Refresh product list
+            fetchProductData(categoryFilter, currentPage + 1); // Fetch updated product list
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            if (error.response) {
+                setErrorMessage(error.response.data.message || 'Unknown error occurred');
+            } else {
+                setErrorMessage('Error deleting product.');
+            }
+        }
+    };
+
     const [showAddProductOverlay, setShowAddProductOverlay] = useState(false);
 
     const handleOpenAddProductButtonClick = () => {
@@ -437,6 +522,10 @@ const SanPham = () => {
                                         />
                                     </div>
                                     <div>
+                                        <label>Hình ảnh:</label>
+                                        <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
+                                    </div>
+                                    <div>
                                         <label>Thiết lập trang sức:</label>
                                         <select
                                             name="jewelrySettingID"
@@ -530,6 +619,11 @@ const SanPham = () => {
                                         <td>
                                             <img src={product.imageUrl} alt={product.productName} style={{ width: '50px', height: '50px' }} />
                                         </td>
+                                        {/* <td>
+                                            {product.imageUrls.map((url, index) => (
+                                                <img key={index} src={url} alt={`${product.productName} ${index + 1}`} style={{ width: '100px', height: '100px' }} />
+                                            ))}
+                                        </td> */}
                                         <td>{product.productName}</td>
                                         <td>{product.stock}</td>
                                         <td>{formatCurrency(product.basePrice)}đ</td> {/* Định dạng tiền tệ */}
@@ -538,8 +632,11 @@ const SanPham = () => {
                                         <td>
                                             <button>Chỉnh sửa</button>
                                             <button onClick={() => handleDetailsClick(product)}>Chi tiết</button>
+                                            <button onClick={() => handleDeleteProduct(product.productId)}>Xóa</button> {/* Delete button */}
 
                                         </td>
+                                        {/* <td>{filteredProductCount}</td>
+                                        <td>{totalPages}</td> */}
                                     </tr>
                                 ))}
                             </tbody>
@@ -617,9 +714,32 @@ const SanPham = () => {
     }
 `}</style>
 
+                    <ReactPaginate
+                        previousLabel={"Trước"}
+                        nextLabel={"Sau"}
+                        breakLabel={"..."}
+                        pageCount={totalPages}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        subContainerClassName={"pages pagination"}
+                        activeClassName={"active"}
+
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                        breakClassName="page-item"
+                        breakLinkClassName="page-link"
+                    />
+
+
+
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 };
 
