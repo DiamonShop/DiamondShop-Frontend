@@ -24,19 +24,19 @@ export default function Chi_tiet_san_pham() {
         };
     }, []);
 
-
     //Get product when reload
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
-    const [token, setToken] = useState();
 
     const largeSliderSettings = {
         fade: true,
         arrows: false,
         speed: 1000,
         asNavFor: navSliderRef.current,
-        ref: largeSliderRef
+        ref: largeSliderRef,
+        autoplay: true, // Thêm dòng này
+        autoplaySpeed: 5000, // Thêm dòng này (5000 milliseconds = 5 seconds)
     };
 
     const navSliderSettings = {
@@ -52,15 +52,16 @@ export default function Chi_tiet_san_pham() {
                 slidesToShow: 3,
             }
         }],
-        ref: navSliderRef
+        ref: navSliderRef,
+        autoplay: true, // Thêm dòng này
+        autoplaySpeed: 5000, // Thêm dòng này (5000 milliseconds = 5 seconds)
     };
-
 
     const [quantity, setQuantity] = useState(1);
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
     };
-
+    
     const handleDecrement = () => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
@@ -97,9 +98,7 @@ export default function Chi_tiet_san_pham() {
                 }
             } else {
                 const orderId = await handleCreateOrder(userId);
-                console.log(orderId);
                 const order = await handleGetOrderByUserId(parseInt(userId, 10));
-                console.log(order)
                 for (const item of order) {
                     if (item.status === 'Ordering' && item.orderId === orderId) {
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
@@ -213,20 +212,25 @@ export default function Chi_tiet_san_pham() {
 
                                             <div class="pro-size">
                                                 <h6 class="option-title">Size :</h6>
-                                                <select class="nice-select">
-                                                    <option >8</option>
-                                                    <option >9</option>
-                                                    <option >10</option>
-                                                    <option >11</option>
-                                                    <option >12</option>
-                                                    <option >13</option>
-                                                    <option >14</option>
-                                                    <option >15</option>
-                                                </select>
-                                                {productObj.categoryName == 'Nhẫn' ? (
+                                                {productObj.categoryName === 'Nhẫn' ? (
+                                                    <select class="nice-select">
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                    </select>
+                                                ) : productObj.categoryName === 'Vòng tay' ? (
+                                                    <select class="nice-select">
+                                                        <option>3</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                                {productObj.categoryName === 'Nhẫn' && (
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-
-                                                ) : (<></>)}
+                                                )}
                                             </div>
 
                                             <div class="button-them-vao-gio-hang">
@@ -314,7 +318,7 @@ export default function Chi_tiet_san_pham() {
                                                                 <label class="col-form-label"><span class="text-danger">*</span>
                                                                     Tin nhắn của bạn</label>
                                                                 <textarea class="form-control" required></textarea>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

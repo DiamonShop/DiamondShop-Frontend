@@ -16,13 +16,6 @@ export default function Header({ tokenIsValid }) {
     document.body.classList.add('fix');
   };
 
-  const handleSearch = (e) => {
-    // if (searchValue.length > 0) {
-    //   window.location.href = `/search/${searchValue}`
-    // }
-
-  }
-
   const handleLogout = () => {
     apilogout();
     localStorage.removeItem('token');
@@ -133,7 +126,7 @@ export default function Header({ tokenIsValid }) {
                       <button className="search-trigger d-xl-none d-lg-block">
                         <i className="pe-7s-search"></i>
                       </button>
-                      <form className="header-search-box d-lg-none d-xl-block" action='/Ketquatimkiem' onSubmit={handleSearch}>
+                      <form className="header-search-box d-lg-none d-xl-block" action='/Ketquatimkiem'>
                         <input
                           type="text"
                           name='txtSearchValue'

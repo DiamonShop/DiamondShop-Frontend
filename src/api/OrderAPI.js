@@ -14,15 +14,13 @@ export const handleCreateOrder = async (userId) => {
     }
 };
 
-export const handleAddProductToOrder = (orderId, productId, quantity) => {
+export const handleAddProductToOrder = async (orderId, productId, quantity) => {
     try {
-        fetch(`https://localhost:7101/api/orders/AddProductToOrderDetail?orderId=${orderId}&productId=${productId}&quantity=${quantity}`, {
+        await fetch(`https://localhost:7101/api/orders/AddProductToOrderDetail?orderId=${orderId}&productId=${productId}&quantity=${quantity}`, {
             method: 'POST',
             mode: 'cors',
         });
-
     } catch (error) {
-        console.error("Error during add product to order:", error);
         return null; // Return null on error
     }
 }
@@ -58,7 +56,6 @@ export const handleUpdateTotalPrice = async (orderId, totalPrice) => {
             return true;
         }
     } catch (error) {
-        console.error("Error during get order:", error);
         return false;
     }
 }

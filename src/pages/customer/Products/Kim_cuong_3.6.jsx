@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Filter_product from '../../../components/Filter_product';
 import { Product_kimcuong3_6_data } from '../../../Data/Product_kimcuong3.6_data';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
+import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
 export default function Kim_cuong_3_6({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -10,8 +11,6 @@ export default function Kim_cuong_3_6({ onProductClick }) {
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
-
-  
 
     const sortedProducts = Product_kimcuong3_6_data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -59,7 +58,7 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                                     <div className="shop-product-wrap grid-view row mbn-30">
                                         {currentProducts.map((item) => (
                                             <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                                <Du_lieu_san_pham
+                                                <Du_lieu_san_pham_kc
                                                     productId={item.id}
                                                     image1={item.image1}
                                                     image2={item.image2}

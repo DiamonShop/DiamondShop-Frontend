@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Product_kimcuong4_1_data } from '../../../Data/Product_kimcuong4.1_data';
-import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Filter_product from '../../../components/Filter_product';
-
-function Kim_cuong_4_1({ onProductClick }) {
+import { Product_kimcuong4_1_data } from '../../../Data/Product_kimcuong4.1_data';
+import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
+export default function Kim_cuong_4_1({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
@@ -11,8 +10,6 @@ function Kim_cuong_4_1({ onProductClick }) {
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
-
-  
 
     const sortedProducts = Product_kimcuong4_1_data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -28,6 +25,7 @@ function Kim_cuong_4_1({ onProductClick }) {
                 return 0;
         }
     });
+    console.log(sortedProducts)
 
     // Calculate the products to be displayed on the current page
     const indexOfLastProduct = currentPage * itemsPerPage;
@@ -45,10 +43,10 @@ function Kim_cuong_4_1({ onProductClick }) {
         pageNumbers.push(i);
     }
 
-   
     return (
         <div>
-            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong-2.png)` }}>
+            <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong.png)` }}>
+
             </div>
             <div className="shop-main-wrapper section-padding">
                 <div className="container">
@@ -60,7 +58,7 @@ function Kim_cuong_4_1({ onProductClick }) {
                                     <div className="shop-product-wrap grid-view row mbn-30">
                                         {currentProducts.map((item) => (
                                             <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                                <Du_lieu_san_pham
+                                                <Du_lieu_san_pham_kc
                                                     productId={item.id}
                                                     image1={item.image1}
                                                     image2={item.image2}
@@ -114,7 +112,5 @@ function Kim_cuong_4_1({ onProductClick }) {
 
 
         </div>
-  )
+    )
 }
-
-export default Kim_cuong_4_1

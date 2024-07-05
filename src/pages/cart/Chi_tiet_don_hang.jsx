@@ -59,17 +59,6 @@ function Chi_tiet_don_hang() {
         return total;
     };
 
-    const removeProduct = async () => {
-        var orderDetailAll = await handleGetAllOrderDetail();
-        for (const od of orderDetailLists) {
-            for (const item of orderDetailAll) {
-                if (item.orderDetailId === od.orderDetailId) {
-                    await handleDeleteOrderDetail(od.orderDetailId);
-                }
-            }
-        }
-    }
-
     return (
         <div>
             <ToastContainer />
@@ -113,10 +102,7 @@ function Chi_tiet_don_hang() {
                                                     <td className="pro-title">{orderDetail.productName}</td>
                                                     <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
                                                     <td className="pro-quantity">{orderDetail.quantity}</td>
-                                                    <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
-                                                    <td className="pro-remove">
-                                                        <a style={{ cursor: 'pointer' }} onClick={() => removeProduct()}><i className="fa fa-trash-o"></i></a>
-                                                    </td>
+                                                    <td className="pro-subtotal">{} VND</td>
                                                 </tr>
                                             ))
                                             }

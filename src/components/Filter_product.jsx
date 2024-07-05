@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Filter_product({ sortOption, handleSortChange, count,countInPage}) {
+function Filter_product({ sortOption, handleSortChange, count}) {
     return (
         <div className="shop-top-bar">
             <div className="row align-items-center">
@@ -12,7 +12,7 @@ function Filter_product({ sortOption, handleSortChange, count,countInPage}) {
                             </a>
                         </div>
                         <div className="product-amount">
-                            <p>Hiển thị 1–{countInPage} trên {count} kết quả</p>
+                            <p>Hiển thị 1–8 trên {count} kết quả</p>
                         </div>
                     </div>
                 </div>

@@ -4,11 +4,23 @@ import { useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { decodeToken } from '../../../api/TokenAPI';
+import { handleAddProductToOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
+import { formatCurrency } from '../../../utils/NumberFormat';
+
 export default function Chi_tiet_san_pham_kc() {
   const largeSliderRef = useRef(null);
   const navSliderRef = useRef(null);
-  const navigate = useNavigate();
+  const productObj = JSON.parse(localStorage.getItem('product'));
+  const [showMessage, setShowMessage] = useState(false);
+
+  const successAddMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 5000); // 5000 milliseconds = 5 seconds
+  }
 
   const largeSliderSettings = {
     fade: true,
@@ -58,20 +70,38 @@ export default function Chi_tiet_san_pham_kc() {
     setIsOverlayVisible(false);
   };
 
-  const addToCart = () => {
-    const colorSelect = document.getElementById('color-select');
-    const selectedColor = colorSelect.value;
-    const claritySelect = document.getElementById('clarity-select');
-    const selectedClarity = claritySelect.value;
-    const cutSelect = document.getElementById('cut-select');
-    const selectedCut = cutSelect.value;
-
-    let diamond = {
-      Color: selectedColor,
-      Clarity: selectedClarity,
-      Cut: selectedCut
-    }
-
+  const handleAddToCart = async () => {
+    // const token = localStorage.getItem('token')
+    // if (token) {
+    //   const userId = decodeToken(token).sid;
+    //   //Gọi API để tạo order
+    //   const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+    //   //Nếu Order bằng null thì tạo Order mới
+    //   if (orders != null) {
+    //     for (const item of orders) {
+    //       if (item.status == 'Ordering') {
+    //         handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+    //         successAddMessage();
+    //         break;
+    //       } else if (item.status == 'Completed' || item.status == 'Shipped') {
+    //         const orderId = await handleCreateOrder(userId);
+    //         handleAddProductToOrder(orderId, productObj.productId, quantity);
+    //         successAddMessage();
+    //         break;
+    //       }
+    //     }
+    //   } else {
+    //     const orderId = await handleCreateOrder(userId);
+    //     const order = await handleGetOrderByUserId(parseInt(userId, 10));
+    //     for (const item of order) {
+    //       if (item.status === 'Ordering' && item.orderId === orderId) {
+    //         handleAddProductToOrder(orderId, productObj.productId, quantity);
+    //         successAddMessage();
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   return (
@@ -105,34 +135,37 @@ export default function Chi_tiet_san_pham_kc() {
                   <div class="col-lg-5">
                     <Slider {...largeSliderSettings} className="product-large-slider">
                       <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="diamond-details" />
+                        <img src={productObj.image1} alt="product-details" />
                       </div>
                       <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="diamond-details" />
+                        <img src={productObj.image2} alt="product-details" />
                       </div>
                       <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-03.png" alt="diamond-details" />
+                        <img src={productObj.image3} alt="product-details" />
                       </div>
-
+                      <div className="pro-large-img img-zoom">
+                        <img src={productObj.image4} alt="product-details" />
+                      </div>
                     </Slider>
+
                     <Slider {...navSliderSettings} className="pro-nav">
-                      <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="diamond-details" />
+                      <div className="pro-nav-thumb">
+                        <img src={productObj.image1} alt="product-details" />
                       </div>
-                      <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="diamond-details" />
+                      <div className="pro-nav-thumb">
+                        <img src={productObj.image2} alt="product-details" />
                       </div>
-                      <div className="pro-large-img img-zoom">
-                        <img src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-03.png" alt="diamond-details" />
+                      <div className="pro-nav-thumb">
+                        <img src={productObj.image3} alt="product-details" />
+                      </div>
+                      <div className="pro-nav-thumb">
+                        <img src={productObj.image4} alt="product-details" />
                       </div>
                     </Slider>
                   </div>
                   <div class="col-lg-7">
                     <div class="product-details-des">
-                      {/* <div class="manufacturer-name">
-                                                <a href="product-details.html">HasTech</a>
-                                            </div> */}
-                      <h3 class="product-name">Kim cương viên GIA 3.6ly G VS2 EX</h3>
+                      <h3 class="product-name">{productObj.productName}</h3>
                       <div class="ratings d-flex">
                         <span><i class="fa fa-star-o"></i></span>
                         <span><i class="fa fa-star-o"></i></span>
@@ -144,35 +177,25 @@ export default function Chi_tiet_san_pham_kc() {
                         </div>
                       </div>
                       <div class="price-box">
-                        <span class="price-regular">10,382,000₫</span>
-                        <span class="price-old"><del>11,045,000₫</del></span>
+                        <span class="price-regular">{formatCurrency(productObj.newPrice)}đ</span>
+                        <span class="price-old"><del>{formatCurrency(productObj.oldPrice)}đ</del></span>
                       </div>
-                      {/* <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                            <div class="product-countdown" data-countdown="2022/12/20"></div>
-                                            <div class="availability">
-                                                <i class="fa fa-check-circle"></i>
-                                                <span>200 in stock</span>
-                                            </div> */}
                       <p className='diamond-filter-line'>------------------------------------------------------------------------------------</p>
-                      {/* <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                                eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                                voluptua. Phasellus id nisi quis justo tempus mollis sed et dui. In hac
-                                                habitasse platea dictumst.</p> */}
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <p className='filter-name'>Màu sắc</p>
+                          <p className='filter-name'>Màu sắc COlor</p>
                           <select id='color-select'>
                             <option value="G">G</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Độ Tinh Khiết</p>
+                          <p className='filter-name'>Độ Tinh Khiết Clarity</p>
                           <select id='clarity-select'>
                             <option value="VS2">VS2</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Giác Cắt</p>
+                          <p className='filter-name'>Giác Cắt Cut</p>
                           <select id='cut-select'>
                             <option value="EX">EX</option>
                           </select>
@@ -212,9 +235,17 @@ export default function Chi_tiet_san_pham_kc() {
                                                 <div class="quantity">
                                                     <div class="pro-qty"><input type="text" value="1" /></div>
                                                 </div> */}
-                        <div class="action_link">
-                          <a class="btn btn-cart2" href="#" onClick={addToCart}>Add to cart</a>
+                        <div class="button-them-vao-gio-hang">
+                          <div class="action_link">
+                            <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
+                          </div>
                         </div>
+
+                        {showMessage && (
+                          <div class="message-add-to-cart-success">
+                            <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                          </div>
+                        )}
                       </div>
                       {/* <div class="pro-size">
                                                 <h6 class="option-title">size :</h6>
@@ -406,41 +437,13 @@ export default function Chi_tiet_san_pham_kc() {
                       <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
                       <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
-                    {/* <div class="product-badge">
-                      <div class="product-label new">
-                        <span>new</span>
-                      </div>
-                      <div class="product-label discount">
-                        <span>10%</span>
-                      </div>
-                    </div> */}
                     <div class="button-group">
                       <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                       <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                       <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                     </div>
-                    <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
-                    </div>
                   </figure>
                   <div class="product-caption text-center">
-                    {/* <div class="product-identity">
-                      <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                    </div>
-                    <ul class="color-categories">
-                      <li>
-                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                      </li>
-                      <li>
-                        <a class="c-darktan" href="#" title="Darktan"></a>
-                      </li>
-                      <li>
-                        <a class="c-grey" href="#" title="Grey"></a>
-                      </li>
-                      <li>
-                        <a class="c-brown" href="#" title="Brown"></a>
-                      </li>
-                    </ul> */}
                     <h6 class="product-name">
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly G VS1 EX</a>
                     </h6>
@@ -457,14 +460,6 @@ export default function Chi_tiet_san_pham_kc() {
                       <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
                       <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
-                    {/* <div class="product-badge">
-                      <div class="product-label new">
-                        <span>sale</span>
-                      </div>
-                      <div class="product-label discount">
-                        <span>new</span>
-                      </div>
-                    </div> */}
                     <div class="button-group">
                       <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                       <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
@@ -475,23 +470,6 @@ export default function Chi_tiet_san_pham_kc() {
                     </div>
                   </figure>
                   <div class="product-caption text-center">
-                    {/* <div class="product-identity">
-                      <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                    </div>
-                    <ul class="color-categories">
-                      <li>
-                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                      </li>
-                      <li>
-                        <a class="c-darktan" href="#" title="Darktan"></a>
-                      </li>
-                      <li>
-                        <a class="c-grey" href="#" title="Grey"></a>
-                      </li>
-                      <li>
-                        <a class="c-brown" href="#" title="Brown"></a>
-                      </li>
-                    </ul> */}
                     <h6 class="product-name">
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS2 EX</a>
                     </h6>
@@ -508,11 +486,6 @@ export default function Chi_tiet_san_pham_kc() {
                       <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
                       <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
-                    {/* <div class="product-badge">
-                      <div class="product-label new">
-                        <span>new</span>
-                      </div>
-                    </div> */}
                     <div class="button-group">
                       <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                       <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
@@ -523,23 +496,6 @@ export default function Chi_tiet_san_pham_kc() {
                     </div>
                   </figure>
                   <div class="product-caption text-center">
-                    {/* <div class="product-identity">
-                      <p class="manufacturer-name"><a href="product-details.html">Diamond</a></p>
-                    </div>
-                    <ul class="color-categories">
-                      <li>
-                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                      </li>
-                      <li>
-                        <a class="c-darktan" href="#" title="Darktan"></a>
-                      </li>
-                      <li>
-                        <a class="c-grey" href="#" title="Grey"></a>
-                      </li>
-                      <li>
-                        <a class="c-brown" href="#" title="Brown"></a>
-                      </li>
-                    </ul> */}
                     <h6 class="product-name">
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS1 EX</a>
                     </h6>
@@ -556,14 +512,6 @@ export default function Chi_tiet_san_pham_kc() {
                       <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
                       <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
-                    {/* <div class="product-badge">
-                      <div class="product-label new">
-                        <span>sale</span>
-                      </div>
-                      <div class="product-label discount">
-                        <span>15%</span>
-                      </div>
-                    </div> */}
                     <div class="button-group">
                       <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                       <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
@@ -574,29 +522,11 @@ export default function Chi_tiet_san_pham_kc() {
                     </div>
                   </figure>
                   <div class="product-caption text-center">
-                    {/* <div class="product-identity">
-                      <p class="manufacturer-name"><a href="product-details.html">silver</a></p>
-                    </div>
-                    <ul class="color-categories">
-                      <li>
-                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                      </li>
-                      <li>
-                        <a class="c-darktan" href="#" title="Darktan"></a>
-                      </li>
-                      <li>
-                        <a class="c-grey" href="#" title="Grey"></a>
-                      </li>
-                      <li>
-                        <a class="c-brown" href="#" title="Brown"></a>
-                      </li>
-                    </ul> */}
                     <h6 class="product-name">
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS2 EX</a>
                     </h6>
                     <div class="price-box">
                       <span class="price-regular">11,531,000₫</span>
-                      {/* <span class="price-old"><del>$75.00</del></span> */}
                     </div>
                   </div>
                 </div>
@@ -607,14 +537,6 @@ export default function Chi_tiet_san_pham_kc() {
                       <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
                       <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
                     </a>
-                    {/* <div class="product-badge">
-                      <div class="product-label new">
-                        <span>new</span>
-                      </div>
-                      <div class="product-label discount">
-                        <span>20%</span>
-                      </div>
-                    </div> */}
                     <div class="button-group">
                       <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                       <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
@@ -625,23 +547,6 @@ export default function Chi_tiet_san_pham_kc() {
                     </div>
                   </figure>
                   <div class="product-caption text-center">
-                    {/* <div class="product-identity">
-                      <p class="manufacturer-name"><a href="product-details.html">mony</a></p>
-                    </div>
-                    <ul class="color-categories">
-                      <li>
-                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                      </li>
-                      <li>
-                        <a class="c-darktan" href="#" title="Darktan"></a>
-                      </li>
-                      <li>
-                        <a class="c-grey" href="#" title="Grey"></a>
-                      </li>
-                      <li>
-                        <a class="c-brown" href="#" title="Brown"></a>
-                      </li>
-                    </ul> */}
                     <h6 class="product-name">
                       <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS1 EX</a>
                     </h6>

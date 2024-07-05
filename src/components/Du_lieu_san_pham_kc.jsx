@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
 
-function Du_lieu_san_pham(props) {
+function Du_lieu_san_pham_kc(props) {
     return (
         <div>
             <div className="product-item">
                 <figure className="product-thumb">
-                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
+                    <Link to={{ pathname: "/Chitietsanphamkimcuong" }} onClick={() => props.onProductClick(props)}>
                         <img className="pri-img" src={props.image1} alt="product" />
                         <img className="sec-img" src={props.image2} alt="product" />
                     </Link>
@@ -19,7 +19,7 @@ function Du_lieu_san_pham(props) {
                 </figure>
                 <div className="product-caption text-center">
                     <h6 className="product-name">
-                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
+                    <Link to={{ pathname: "/Chitietsanphamkimcuong" }} onClick={() => props.onProductClick(props)}>
                         {props.productName}
                     </Link>
                     </h6>
@@ -33,7 +33,7 @@ function Du_lieu_san_pham(props) {
     )
 }
 
-export default Du_lieu_san_pham
+export default Du_lieu_san_pham_kc
 
 
 

@@ -9,47 +9,29 @@ export default function Gio_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    //useEffect để set list của orderDetail
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const userId = decodeToken(token).sid;
-            handleGetOrderByUserId(parseInt(userId, 10))
-                .then((data) => {
-                    if (data) {
-                        const orderingOrder = data.find(order => order.status === 'Ordering');
-                        if (orderingOrder) {
-                            setOrderDetailLists(orderingOrder.orderDetails);
-                        }
-                    }
-                });
-        } else {
-            setOrderDetailLists([]);
-            setTotalPrice(0);
-        }
-    }, [orderDetailLists]);
-
-    //useEffect để cập nhật total price
-    useEffect(() => {
-        if (orderDetailLists.length > 0) {
-            const total = calculateTotalPrice(orderDetailLists);
-            setTotalPrice(total);
-            // Cập nhật total price
+        const fetchOrderDetails = async () => {
             const token = localStorage.getItem('token');
             if (token) {
                 const userId = decodeToken(token).sid;
-                handleGetOrderByUserId(parseInt(userId, 10))
-                    .then((data) => {
-                        if (data) {
-                            const orderingOrder = data.find(order => order.status === 'Ordering');
-                            if (orderingOrder) {
-                                handleUpdateTotalPrice(orderingOrder.orderId, total);
-                            }
-                        }
-                    });
+                const data = await handleGetOrderByUserId(parseInt(userId, 10));
+                if (data) {
+                    const orderingOrder = data.find(order => order.status === 'Ordering');
+                    if (orderingOrder) {
+                        setOrderDetailLists(orderingOrder.orderDetails);
+                        const total = calculateTotalPrice(orderingOrder.orderDetails);
+                        setTotalPrice(total);
+                        await handleUpdateTotalPrice(orderingOrder.orderId, total);
+                    }
+                }
+            } else {
+                setOrderDetailLists([]);
+                setTotalPrice(0);
             }
-        }
-    }, [orderDetailLists]);
+        };
+
+        fetchOrderDetails();
+    }, [orderDetailLists]); // Empty dependency array to run only once on component mount
 
     const calculateTotalPrice = (orderDetails) => {
         let total = 0;
@@ -59,16 +41,12 @@ export default function Gio_hang() {
         return total;
     };
 
-    const removeProduct = async () => {
-        var orderDetailAll = await handleGetAllOrderDetail();
-        for (const od of orderDetailLists) {
-            for (const item of orderDetailAll) {
-                if (item.orderDetailId === od.orderDetailId) {
-                    await handleDeleteOrderDetail(od.orderDetailId);
-                }
-            }
-        }
-    }
+    const handleRemoveProduct = async (orderDetailId) => {
+        await handleDeleteOrderDetail(orderDetailId);
+        setOrderDetailLists(prevOrderDetailLists =>
+            prevOrderDetailLists.filter(item => item.orderDetailId !== orderDetailId)
+        );
+    };
 
     return (
         <div>
@@ -120,7 +98,7 @@ export default function Gio_hang() {
                                                         <td className="pro-quantity">{orderDetail.quantity}</td>
                                                         <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
                                                         <td className="pro-remove">
-                                                            <a style={{ cursor: 'pointer' }} onClick={() => removeProduct()}><i className="fa fa-trash-o"></i></a>
+                                                            <a style={{ cursor: 'pointer' }} onClick={() => handleRemoveProduct(orderDetail.orderDetailId)}><i className="fa fa-trash-o"></i></a>
                                                         </td>
                                                     </tr>
                                                 ))
@@ -150,19 +128,17 @@ export default function Gio_hang() {
                                                 </tbody>
                                             </table>
                                         </div>
-
                                     </div>
-
                                 </div>
                                 <div >
-                                    <Link to="/Thanhtoan" className=" btn-sqr d-block">Xác nhận thanh toán</Link>
+                                    {totalPrice > 0 ? (
+                                        <Link to="/Thanhtoan" className="btn-sqr d-block">Xác nhận thanh toán</Link>
+                                    ) : (
+                                        <button className="btn-sqr d-block" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>Xác nhận thanh toán</button>
+                                    )}
                                 </div>
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>

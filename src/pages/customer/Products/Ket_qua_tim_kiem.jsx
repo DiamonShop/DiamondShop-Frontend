@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
+import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc'; // Import component cho Diamond
 import Filter_product from '../../../components/Filter_product';
 import GetProductByName from '../../../Data/Product_all_data';
 
-export default function Ket_qua_tim_kiem({ onProductClick }) {
+export default function Ket_qua_tim_kiem ({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [productCount,setproductCount] =useState(0);
-    const [productCountInPage,setproductCountInPage] = useState(0);
+    const [productCount, setProductCount] = useState(0);
     const itemsPerPage = 8;
 
     // Hàm để lấy query từ URL
@@ -22,19 +22,8 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            
             const filtered = await GetProductByName(txtSearchValue);
-            
-            let count = 0;
-            for (const item of filtered) {              
-                count++;
-            }
-            let countProInPage =0;
-            for (const item of currentProducts) {
-                countProInPage++;
-            }
-            setproductCountInPage(countProInPage);
-            setproductCount(count);
+            setProductCount(filtered.length);
             setFilteredProducts(filtered);
         };
 
@@ -45,17 +34,18 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
         setSortOption(event.target.value);
     };
 
-    const parsePrice = (price) => {
-        return parseFloat(price.replace(/[^\d]/g, '')) || 0;
-    };
-
     const sortedProducts = [...filteredProducts].sort((a, b) => {
-        if (sortOption === 'price-asc') {
-            return parsePrice(a.newPrice) - parsePrice(b.newPrice);
-        } else if (sortOption === 'price-desc') {
-            return parsePrice(b.newPrice) - parsePrice(a.newPrice);
-        } else {
-            return 0;
+        switch (sortOption) {
+            case 'name-asc':
+                return a.productName.localeCompare(b.productName);
+            case 'name-desc':
+                return b.productName.localeCompare(a.productName);
+            case 'price-asc':
+                return a.newPrice - b.newPrice;
+            case 'price-desc':
+                return b.newPrice - a.newPrice;
+            default:
+                return 0;
         }
     });
 
@@ -63,7 +53,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-   
+
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
@@ -101,25 +91,42 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                        <div className="shop-product-wrapper">
-                            <Filter_product countInPage={productCountInPage} count={productCount} sortOption={sortOption} handleSortChange={handleSortChange} />
+                            <div className="shop-product-wrapper">
+                                <Filter_product count={productCount} sortOption={sortOption} handleSortChange={handleSortChange} />
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham
-                                                productId={item.id}
-                                                image1={item.image1}
-                                                image2={item.image2}
-                                                image3={item.image3}
-                                                image4={item.image4}
-                                                label={item.label}
-                                                productName={item.productName}
-                                                categoryName={item.categoryName}
-                                                newPrice={item.newPrice}
-                                                oldPrice={item.oldPrice}
-                                                description={item.description}
-                                                onProductClick={onProductClick}
-                                            />
+                                            {item.productType === 'Jewelry' ? (
+                                                <Du_lieu_san_pham
+                                                    productId={item.id}
+                                                    image1={item.image1}
+                                                    image2={item.image2}
+                                                    image3={item.image3}
+                                                    image4={item.image4}
+                                                    label={item.label}
+                                                    productName={item.productName}
+                                                    categoryName={item.categoryName}
+                                                    newPrice={item.newPrice}
+                                                    oldPrice={item.oldPrice}
+                                                    description={item.description}
+                                                    onProductClick={onProductClick}
+                                                />
+                                            ) : (
+                                                <Du_lieu_san_pham_kc
+                                                    productId={item.id}
+                                                    image1={item.image1}
+                                                    image2={item.image2}
+                                                    image3={item.image3}
+                                                    image4={item.image4}
+                                                    label={item.label}
+                                                    productName={item.productName}
+                                                    categoryName={item.categoryName}
+                                                    newPrice={item.newPrice}
+                                                    oldPrice={item.oldPrice}
+                                                    description={item.description}
+                                                    onProductClick={onProductClick}
+                                                />
+                                            )}
                                         </div>
                                     ))}
                                 </div>

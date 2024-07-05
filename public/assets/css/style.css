@@ -707,11 +707,13 @@ only screen and (max-width: 767.98px) {
   visibility: visible;
   color: white;
 }
+
 @media only screen and (max-width: 767.98px) {
   .scroll-top {
     display: none;
   }
 }
+
 .scroll-top i {
   font-size: 24px;
   /* Tăng kích thước của biểu tượng mũi tên */
@@ -726,8 +728,9 @@ only screen and (max-width: 767.98px) {
 .container {
   padding-right: var(--bs-gutter-x, 15px);
   padding-left: var(--bs-gutter-x, 15px);
-  
+
 }
+
 .container {
   max-width: 1140px;
 }
@@ -1101,6 +1104,7 @@ only screen and (max-width: 767.98px) {
     padding: 0 85px;
   }
 }
+
 .header-wide .container {
   max-width: 100%;
 }
@@ -1749,6 +1753,7 @@ only screen and (max-width: 767.98px) {
   background-color: #c29958;
   padding: 12px 25px;
   text-align: center;
+  width: 100%;
 }
 
 .btn-sqr:hover {
@@ -3257,7 +3262,7 @@ only screen and (max-width: 479.98px) {
 .product-tab-menu {
   margin-top: -6px;
   margin-bottom: 35px;
-  
+
 }
 
 .product-tab-menu ul li {
@@ -5774,7 +5779,7 @@ only screen and (max-width: 767.98px) {
 
 .order-summary-table .table th {
   background-color: #c29958;
-color: white;
+  color: white;
 }
 
 .order-summary-table .table tr td a,
@@ -5791,6 +5796,7 @@ color: white;
 .order-summary-table table tr th strong {
   font-weight: 600;
   color: #c29958;
+  font-size: 20px;
 }
 
 .order-summary-table .shipping-type {
@@ -6122,8 +6128,9 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 .cart-calculator-wrapper .cart-calculate-items .table tr td.total-amount {
-  color: #000;
+  color: #c29958;
   font-weight: 700;
+  font-size: 20px;
 }
 
 .cart-calculator-wrapper a {
@@ -6448,7 +6455,7 @@ only screen and (max-width: 767.98px) {
 
 .footer-top [class*=col-]:last-child .widget-item {
   margin-bottom: 0;
-  margin-left:100px;
+  margin-left: 100px;
 }
 
 .widget-title {
@@ -10916,7 +10923,6 @@ textarea.form-control-lg {
 
 .d-block {
   display: block !important
-  
 }
 
 .d-grid {
@@ -20935,8 +20941,8 @@ footer.footer p {
 /* end add account in dashboard */
 
 /* css don hang */
-.table-don-hang th{
- background-color: #c29958;
+.table-don-hang th {
+  background-color: #c29958;
 }
 
 /* end cc don hang */
@@ -20945,6 +20951,7 @@ footer.footer p {
   padding-right: var(--bs-gutter-x, 70px);
   padding-left: var(--bs-gutter-x, 70px);
 }
+
 /* end gio hang */
 /* start thanh toan */
 .container-thanhtoan {
@@ -20954,7 +20961,8 @@ footer.footer p {
 
 /* end thanh toan */
 /* Start chi tiet don hang */
-.Chitietdonhang-giatien{
+.Chitietdonhang-giatien {
   margin-top: 20px;
 }
+
 /* End chi tiet don hang */

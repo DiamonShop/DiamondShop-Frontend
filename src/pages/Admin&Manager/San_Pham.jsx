@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
-import { getImageUrls } from '../../FirebaseImage/firebaseHelper';
+import { getJewelryImageUrls } from '../../FirebaseImage/firebaseHelper';
 import { imageDb } from '../../FirebaseImage/Config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import ReactPaginate from 'react-paginate';
@@ -99,7 +99,7 @@ const SanPham = () => {
             console.log("All Products:", productResponse.data);
             // Fetching images for each product
             const formattedProducts = await Promise.all(productResponse.data.map(async (product) => {
-                const { image1Url } = await getImageUrls(product.productId, product.categoryId);
+                const { image1Url } = await getJewelryImageUrls(product.productId, product.categoryId);
 
                 return {
                     ...product,

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Filter_product from '../../../components/Filter_product';
 import { Product_kimcuong4_5_data } from '../../../Data/Product_kimcuong4.5_data';
+import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
 
 function Kim_cuong_4_5({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
@@ -60,7 +61,7 @@ function Kim_cuong_4_5({ onProductClick }) {
                                     <div className="shop-product-wrap grid-view row mbn-30">
                                         {currentProducts.map((item) => (
                                             <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                                <Du_lieu_san_pham
+                                                <Du_lieu_san_pham_kc
                                                     productId={item.id}
                                                     image1={item.image1}
                                                     image2={item.image2}

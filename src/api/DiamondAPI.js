@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const HandleGetAll = async () => {
+export const HandleGetAllDiamond = async () => {
     // Perform POST request to create a new user
-    const response = axios.get("https://localhost:7101/api/Jewelry/GetAllJewelry",
+    const response = axios.get("https://localhost:7101/api/Diamonds/GetAllDiamond",
         {
             'Content-Type': 'application/json'
         })
@@ -10,9 +10,9 @@ export const HandleGetAll = async () => {
     return arr;
 };
 
-export const handleGetJewelryByProductId = async (productId) => {
+export const handleGetDiamondByProductId = async (productId) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/Jewelry/GetJewelryByProductId?productId=${productId}`, {
+        const response = await fetch(`https://localhost:7101/api/Diamonds/GetDiamondByProductId?productId=${productId}`, {
             method: 'GET',
             mode: 'cors',
         });
