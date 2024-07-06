@@ -174,29 +174,31 @@ const Taikhoan = () => {
                     <ul className="sidebar-nav">
                         <li className="sidebar-header">Trang chủ</li>
                         <li className="sidebar-item">
-                            <a className="sidebar-link" href="/Dashboard">
+                            <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle">Dashboard</span>
+                                <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
                             </a>
                         </li>
                         <li className="sidebar-header">Quản lý</li>
                         <li className="sidebar-item " >
                             <a className="sidebar-link" href="/SanPham">
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle">Sản phẩm</span>
+                                <span className="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
                             </a>
                         </li>
                         <li className="sidebar-item active">
-                            <a className="sidebar-link" href="/TaiKhoan">
+                            <a className="sidebar-link">
                                 <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle">Tài khoản</span>
+                                <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
                             </a>
                         </li>
                         <li className="sidebar-item">
-                            <a className="sidebar-link" href="/DonHang">
+                            <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle">Đơn hàng</span>
+                                <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
+                        </li>
+                        <li className="sidebar-item">
                             <a className="sidebar-link">
                                 <i className="align-middle"
                                     data-feather="check-square">

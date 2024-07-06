@@ -315,15 +315,17 @@ const Don_Hang = () => {
                             </a>
                         </li>
                         <li className="sidebar-item active">
-                            <a className="sidebar-link">
+                            <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
-                            <a class="sidebar-link">
-                                <i class="align-middle"
+                        </li>
+                        <li className="sidebar-item">
+                            <a className="sidebar-link">
+                                <i className="align-middle"
                                     data-feather="check-square">
                                 </i>
-                                <span class="align-middle">Chứng nhận sản phẩm</span>
+                                <span className="align-middle">Chứng nhận sản phẩm</span>
                             </a>
                         </li>
                     </ul>
