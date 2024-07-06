@@ -218,7 +218,7 @@ export default function Thong_tin_tk() {
                                                 <div className="tab-pane fade" id="payment-method" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Phương thức thanh toán</h5>
-                                                        <p className="saved-message">You have no saved payment method</p>
+                                                        <p className="saved-message">Chúng tôi sẽ sớm phát triển </p>
                                                     </div>
                                                 </div>
                                             </div>

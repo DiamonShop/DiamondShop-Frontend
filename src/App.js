@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from './MainLayout';
 import DashboardLayout from './DashboardLayout';
+import PaymentLayout from './PaymentLayout';
 import Home from './pages/customer/Home';
 import Nhan from './pages/customer/Products/Nhan';
 import Day_chuyen from './pages/customer/Products/Day_chuyen';
@@ -36,6 +37,7 @@ import Kim_cuong_4_1 from './pages/customer/Products/Kim_cuong_4.1';
 import Kim_cuong_4_5 from './pages/customer/Products/Kim_cuong_4.5';
 import Kim_cuong_5_4 from './pages/customer/Products/Kim_cuong_5.4';
 import Chi_tiet_don_hang from './pages/cart/Chi_tiet_don_hang';
+import Dat_hang_thanh_cong from './pages/cart/Dat_hang_thanh_cong';
 function App({ tokenIsValid }) {
 
   //Lưu product để khi reload sẽ không bị lỗi
@@ -81,6 +83,7 @@ function App({ tokenIsValid }) {
               <Route path='/Huongdandoni' element={<MainLayout tokenIsValid={tokenIsValid}><Huong_dan_do_ni /></MainLayout>} />
               <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
               <Route path='/Ketquatimkiem' element={<MainLayout tokenIsValid={tokenIsValid}><Ket_qua_tim_kiem onProductClick={handleProductClick}/></MainLayout>} />
+              <Route path='/Thanhtoanthanhcong' element={<PaymentLayout tokenIsValid={tokenIsValid}><Dat_hang_thanh_cong/></PaymentLayout>} />
             </Routes>
             
         </Router>

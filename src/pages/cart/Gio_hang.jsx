@@ -132,9 +132,9 @@ export default function Gio_hang() {
                                 </div>
                                 <div >
                                     {totalPrice > 0 ? (
-                                        <Link to="/Thanhtoan" className="btn-sqr d-block">Xác nhận thanh toán</Link>
+                                        <Link to="/Thanhtoan" className="btn-sqr-xacnhanthanhtoan d-block">Xác nhận thanh toán</Link>
                                     ) : (
-                                        <button className="btn-sqr d-block" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>Xác nhận thanh toán</button>
+                                        <button className="btn-sqr-xacnhanthanhtoan d-block" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>Xác nhận thanh toán</button>
                                     )}
                                 </div>
                             </div>

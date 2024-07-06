@@ -153,6 +153,25 @@ input:focus,
 textarea:focus {
   outline: none;
 }
+thead th{
+  background-color: #8c6b2f;
+  color: #fff;
+  padding: 10px;
+}
+tbody td{
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+tbody tr:nth-child(even){
+  background-color: #f9f9f9;
+}
+tbody tr:nth-child(odd){
+  background-color: #fff;
+}
+tbody td:nth-child(1){
+  font-weight: bold;
+}
+
 
 .form-control:focus {
   border-color: #c29958;
@@ -336,27 +355,19 @@ textarea:focus {
   right: auto;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1499px),
-only screen and (min-width: 992px) and (max-width: 1199px),
-only screen and (min-width: 768px) and (max-width: 991px),
-only screen and (max-width: 767.98px) {
-  .slick-arrow-style:hover button.slick-arrow.slick-prev {
-    left: -20px;
-  }
+
+.slick-arrow-style:hover button.slick-arrow.slick-prev {
+  left: -20px;
 }
+
 
 .slick-arrow-style:hover button.slick-arrow.slick-next {
   left: auto;
   right: -60px;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1499px),
-only screen and (min-width: 992px) and (max-width: 1199px),
-only screen and (min-width: 768px) and (max-width: 991px),
-only screen and (max-width: 767.98px) {
-  .slick-arrow-style:hover button.slick-arrow.slick-next {
-    right: -20px;
-  }
+.slick-arrow-style:hover button.slick-arrow.slick-next {
+  right: -20px;
 }
 
 .slick-arrow-style_hero button.slick-arrow {
@@ -1753,9 +1764,34 @@ only screen and (max-width: 767.98px) {
   background-color: #c29958;
   padding: 12px 25px;
   text-align: center;
+}
+.btn-sqr-xacnhanthanhtoan{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 50px;
+  background-color: #c29958;
+  padding: 12px 25px;
+  text-align: center;
   width: 100%;
 }
-
+.btn-sqr-chitietdondang{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 30px;
+  background-color: #c29958;
+  padding: 10px 20px;
+  text-align: center;
+}
+.btn-sqr-chitietdondang:hover{
+  color: #fff;
+  background-color: #222222;
+}
+.btn-sqr-xacnhanthanhtoan:hover{
+  color: #fff;
+  background-color: #222222;
+}
 .btn-sqr:hover {
   color: #fff;
   background-color: #222222;
@@ -6230,23 +6266,24 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 
 .myaccount-table {
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .myaccount-table table th,
 .myaccount-table .table th {
   color: white;
   font-size: medium;
-  padding: 10px;
+  padding: 10px 31px;
   font-weight: 600;
   background-color: #c29958;
   border-color: #ccc;
   border-bottom: 0;
+  border-width:1px;
 }
 
 .myaccount-table table td,
 .myaccount-table .table td {
-  padding: 10px;
+  padding: 10px 31px;;
   vertical-align: middle;
   border-color: #ccc;
 }
@@ -6565,28 +6602,33 @@ only screen and (max-width: 767.98px) {
   color: #d62e2e;
 }
 
+.diamond-price-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
 
-
-thead th {
+.diamond-price-list thead th {
   background-color: #8c6b2f;
   color: #fff;
   padding: 10px;
+  border-width:1px;
 }
 
-tbody td {
+.diamond-price-list tbody td {
   padding: 10px;
   border: 1px solid #ccc;
 }
 
-tbody tr:nth-child(even) {
+.diamond-price-list tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-tbody tr:nth-child(odd) {
+.diamond-price-list tbody tr:nth-child(odd) {
   background-color: #fff;
 }
 
-tbody td:nth-child(1) {
+.diamond-price-list tbody td:nth-child(1) {
   font-weight: bold;
 }
 
@@ -20940,12 +20982,6 @@ footer.footer p {
 
 /* end add account in dashboard */
 
-/* css don hang */
-.table-don-hang th {
-  background-color: #c29958;
-}
-
-/* end cc don hang */
 /* start gio hang */
 .container-giohang {
   padding-right: var(--bs-gutter-x, 70px);
@@ -20954,15 +20990,190 @@ footer.footer p {
 
 /* end gio hang */
 /* start thanh toan */
-.container-thanhtoan {
-  padding-right: var(--bs-gutter-x, 120px);
-  padding-left: var(--bs-gutter-x, 120px);
+.btn-view-cart {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 5px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-/* end thanh toan */
-/* Start chi tiet don hang */
-.Chitietdonhang-giatien {
-  margin-top: 20px;
+.btn-dat-hang-thanh-cong {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
-/* End chi tiet don hang */
+.btn-return-home {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 5px 13px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-view-cart:hover {
+  background-color: #45a049;
+  color: #F3F3F3;
+}
+
+.btn-return-home:hover {
+  background-color: #45a049;
+  color: #F3F3F3;
+}
+
+.box-dat-hang {
+  background: #dcf0fa;
+  height: 100vh;
+}
+
+.container-dat-hang {
+  max-width: 500px;
+  margin: 0px auto;
+  overflow: hidden;
+}
+
+.printer-top {
+  margin-top: 50px;
+  z-index: 1;
+  border: 6px solid #666666;
+  height: 6px;
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+  background: #333333;
+  box-sizing: unset;
+}
+
+.printer-bottom {
+  z-index: 0;
+  border: 6px solid #666666;
+  height: 6px;
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+  background: #333333;
+  box-sizing: unset;
+}
+
+.paper-container {
+  position: relative;
+  overflow: hidden;
+  height: 700px;
+}
+
+.paper {
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  z-index: 2;
+  margin: 0 12px;
+  margin-top: -12px;
+  animation: print 2500ms cubic-bezier(0.68, -0.55, 0.265, 0.9);
+  -moz-animation: print 2500ms cubic-bezier(0.68, -0.55, 0.265, 0.9);
+}
+
+.main-contents {
+  margin: 0 12px;
+  padding: 24px;
+}
+
+.jagged-edge {
+  position: relative;
+  height: 20px;
+  width: 100%;
+  margin-top: -1px;
+}
+
+.jagged-edge::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -21px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(45deg,
+      transparent 33.333%,
+      #ffffff 33.333%,
+      #ffffff 66.667%,
+      transparent 66.667%),
+    linear-gradient(-45deg,
+      transparent 33.333%,
+      #ffffff 33.333%,
+      #ffffff 66.667%,
+      transparent 66.667%);
+  background-size: 16px 40px;
+  background-position: 0 -23px;
+}
+
+.success-icon {
+  text-align: center;
+  font-size: 48px;
+  height: 72px;
+  background: #359d00;
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  margin: 16px auto;
+  color: #fff;
+}
+
+.success-title {
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: #666;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.success-description {
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 21px;
+  color: #999;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.order-details {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.order-number-label {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.order-number {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  line-height: 48px;
+  font-size: 48px;
+  padding: 8px 0;
+  margin-bottom: 24px;
+}
+
+.complement {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #32a852;
+}
+
+@keyframes print {
+  0% {
+    transform: translateY(-90%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+
+/* End thong bao dat hang */
