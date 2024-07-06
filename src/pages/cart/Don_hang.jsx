@@ -6,7 +6,7 @@ function Don_hang() {
             <div className="myaccount-content">
                 <h5>Đơn hàng</h5>
                 <div className="myaccount-table table-responsive text-center">
-                    <table className="table-don-hang">
+                    <table >
                         <thead className="thead-light">
                             <tr>
                                 <th>Đơn hàng</th>
@@ -23,7 +23,7 @@ function Don_hang() {
                                 <td>30.000.000đ</td>
                                 <td>Đang thanh toán</td>
                                 <td>
-                                    <a href="/Chitietdonhang" className="btn btn-sqr">Xem</a>
+                                    <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a>
                                 </td>
                             </tr>
                             <tr>
@@ -31,14 +31,14 @@ function Don_hang() {
                                 <td>1/6/2024</td>
                                 <td>25.000.000đ</td>
                                 <td>Thành công</td>
-                                <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
+                                <td><a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>5/6/2024</td>
                                 <td>3.000.000đ</td>
                                 <td>Đã hủy</td>
-                                <td><a href="cart.html" className="btn btn-sqr">Xem</a></td>
+                                <td><a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a></td>
                             </tr>
                         </tbody>
                     </table>

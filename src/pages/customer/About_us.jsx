@@ -56,10 +56,10 @@ export default function About_us() {
                         <div class="col-lg-4 col-md-4">
                             <div class="single-choose-item text-center mb-30">
                                 <i class="fa fa-globe"></i>
-                                <h4>free shipping</h4>
-                                <p>Amadea Shop is a very slick and clean e-commerce template with endless possibilities. (?)</p>
+                                <h4>Giao hàng miễn phí</h4>
+                                <p>Dịch vụ giao hàng tận tâm và miễn phí</p>
                             </div>
-                        </div>
+                        </div>  
                         <div class="col-lg-4 col-md-4">
                             <div class="single-choose-item text-center mb-30">
                                 <i class="fa fa-plane"></i>
@@ -78,123 +78,6 @@ export default function About_us() {
                 </div>
             </div>
 
-
-            <div class="team-area section-padding">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-title text-center">
-                                <h2 class="title">Đội ngũ của chúng tôi</h2>
-                                <p>Chuyên gia giàu kinh nghiệm, tận tâm và luôn sẵn sàng hỗ trợ.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mbn-30">
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Nguyễn Đăng Khoa</h6>
-                                    <p>Leader</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Trần Đức Vương</h6>
-                                    <p>Backend Leader</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Đỗ Tuấn Hùng</h6>
-                                    <p>Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Trần Lê Tuấn Kiệt</h6>
-                                    <p>Frontend Leader</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Huỳnh Thanh Vinh</h6>
-                                    <p>Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="team-member mb-30">
-                                <div class="team-thumb">
-                                    <img src="assets/img/team/team_member_2.jpg" alt="" />
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
-                                </div>
-                                <div class="team-content text-center">
-                                    <h6 class="team-member-name">Nguyễn Hoàng Long</h6>
-                                    <p>Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="scroll-top not-visible">
                 <i class="fa fa-angle-up"></i>
             </div>

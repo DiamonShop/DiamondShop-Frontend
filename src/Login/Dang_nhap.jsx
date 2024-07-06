@@ -97,10 +97,10 @@ export default function Dang_nhap() {
                                 />
                             </div>
                             <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
-                            <p className="social-text">Hoặc đăng nhập bằng Google</p>
+                            {/* <p className="social-text">Hoặc đăng nhập bằng Google</p>
                             <div className="social-media">
                                 
-                            </div>
+                            </div> */}
                         </form>
                     </div>
                 </div>
