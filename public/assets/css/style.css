@@ -21177,3 +21177,31 @@ footer.footer p {
 
 
 /* End thong bao dat hang */
+/* Admin & Manager */
+.sidebar-nav {
+  position: relative;
+  background-color: transparent;
+}
+.sidebar-item {
+  position: relative;
+}
+.dropdown-menu {
+      left: 30px;
+  max-width: 200px;
+  margin: 0px 0px;
+  padding: 0px 0px;
+}
+.sidebar-item.active .dropdown-menu {
+  display: block;
+}
+.sidebar-link a{
+  color: #fff;
+}
+.sidebar-nav:hover{
+  background-color: transparent;
+}
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+/* End Admin & Manager */
