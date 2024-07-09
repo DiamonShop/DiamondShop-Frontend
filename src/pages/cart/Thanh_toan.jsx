@@ -15,6 +15,7 @@ export default function Thanh_toan() {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const [numberPhone, setNumberPhone] = useState('');
     const [userId, setUserId] = useState('');
     const [loading, setLoading] = useState(false);
     const [orderDetail, setOrderDetail] = useState('');
@@ -65,6 +66,7 @@ export default function Thanh_toan() {
                 setEmail(response.data.email || '');
                 setAddress(response.data.address || '');
                 setUserId(response.data.userId || '');
+                setNumberPhone(response.data.numberPhone || '');
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -153,6 +155,10 @@ export default function Thanh_toan() {
 
     const handleUserIdChange = (event) => {
         setUserId(event.target.value);
+    };
+
+    const handlePhoneChange = (event) => {
+        setNumberPhone(event.target.value);
     };
 
     return (
@@ -259,8 +265,8 @@ export default function Thanh_toan() {
                                                         name="phoneNumber"
                                                         placeholder="Số điện thoại"
                                                         required
-                                                        value={formData.phoneNumber}
-                                                        onChange={handleCheckoutChange}
+                                                        value={numberPhone}
+                                                        onChange={handlePhoneChange}
                                                     />
                                                 </div>
                                             </div>
