@@ -21721,3 +21721,149 @@ footer.footer p {
 }
 
 /* End add products in admin page */
+
+/*Start Shipper page*/
+.Shipper-App {
+  text-align: center;
+}
+
+.Shipper-Nav {
+  display: flex;
+  justify-content: flex-end;
+  /* Điều chỉnh sang bên phải */
+  align-items: center;
+  background-color: #007bff;
+  padding: 10px;
+  color: white;
+}
+
+.Shipper-NavRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Shipper-Username {
+  font-weight: bold;
+}
+
+.Shipper-LogoutButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Shipper-LogoutButton:hover {
+  background-color: #0056b3;
+}
+
+.Shipper-Main {
+  padding: 20px;
+}
+
+.Shipper-Title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.Shipper-SearchContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.Shipper-FilterContainer select {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.Shipper-Table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.Shipper-Table th,
+.Shipper-Table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.Shipper-Table th {
+  background-color: #c29958;
+  /* Màu nền cho thead */
+  color: white;
+  /* Màu chữ cho thead */
+}
+
+.Shipper-ConfirmButton {
+  background-color: #28a745;
+  /* Xanh lá */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Shipper-ConfirmButton:hover {
+  background-color: #218838;
+}
+
+.Shipper-Status-Shipping {
+  color: #f0ad4e;
+  /* Vàng đậm */
+}
+
+.Shipper-Status-Completed {
+  color: #5cb85c;
+  /* Xanh lá */
+}
+
+.Shipper-Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Shipper-PopupContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.Shipper-StatusButton {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.Shipper-ConfirmButton {
+  background-color: #5cb85c;
+  /* Xanh lá */
+}
+
+.Shipper-CancelButton {
+  background-color: #d9534f;
+  /* Đỏ */
+}
+
+/*End Shipper page*/

@@ -1,287 +1,437 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { Modal, Button, Table, Input, Select } from 'antd';
 
+const { Option } = Select;
 
-// State và hàm xử lý tài khoản
-const accountDatas = [
-    { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Quản trị viên', status: 'Hoạt động' },
-    { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Người dùng', status: 'Ngừng hoạt động' },
-    { id: 3, name: 'Charlie Brown', email: 'charlie@example.com', role: 'Người dùng', status: 'Hoạt động' }
+const orderStatuses = ['Đã hoàn thành', 'Đã hủy', 'Đang giao hàng', 'Đang tiếp nhận'];
+const jewelryItems = [
+    'Nhẫn kim cương', 'Dây chuyền vàng', 'Bông tai ngọc trai', 'Lắc tay bạc',
+    'Vòng cổ hồng ngọc', 'Nhẫn sapphire', 'Bông tai vàng', 'Lắc chân kim cương',
+    'Dây chuyền bạc', 'Vòng tay ruby'
 ];
 
-// State và hàm xử lý modal chỉnh sửa tài khoản
+const orders = [
+    {
+        id: 1,
+        date: '2024-05-01 20:05:01',
+        total: '$1500',
+        status: 'Đã hoàn thành',
+        customer: {
+            name: 'Khách hàng 1',
+            email: 'customer1@example.com',
+            phone: '0123456781',
+            address: 'Địa chỉ 1',
+            note: 'Ghi chú đơn hàng 1'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Nhẫn kim cương',
+                quantity: 2,
+                price: '$750',
+                discount: '10%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 2,
+        date: '2024-05-02 20:05:01',
+        total: '$2000',
+        status: 'Đã hủy',
+        customer: {
+            name: 'Khách hàng 2',
+            email: 'customer2@example.com',
+            phone: '0123456782',
+            address: 'Địa chỉ 2',
+            note: 'Ghi chú đơn hàng 2'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Dây chuyền vàng',
+                quantity: 1,
+                price: '$2000',
+                discount: '15%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: 'Lý do hủy đơn hàng'
+    },
+    {
+        id: 3,
+        date: '2024-05-03 20:05:01',
+        total: '$3000',
+        status: 'Đang giao hàng',
+        customer: {
+            name: 'Khách hàng 3',
+            email: 'customer3@example.com',
+            phone: '0123456783',
+            address: 'Địa chỉ 3',
+            note: 'Ghi chú đơn hàng 3'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Bông tai ngọc trai',
+                quantity: 3,
+                price: '$1000',
+                discount: '20%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 4,
+        date: '2024-05-04 20:05:01',
+        total: '$4000',
+        status: 'Đang tiếp nhận',
+        customer: {
+            name: 'Khách hàng 4',
+            email: 'customer4@example.com',
+            phone: '0123456784',
+            address: 'Địa chỉ 4',
+            note: 'Ghi chú đơn hàng 4'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Lắc tay bạc',
+                quantity: 4,
+                price: '$1000',
+                discount: '25%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 5,
+        date: '2024-05-05 20:05:01',
+        total: '$5000',
+        status: 'Đã hoàn thành',
+        customer: {
+            name: 'Khách hàng 5',
+            email: 'customer5@example.com',
+            phone: '0123456785',
+            address: 'Địa chỉ 5',
+            note: 'Ghi chú đơn hàng 5'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Vòng cổ hồng ngọc',
+                quantity: 5,
+                price: '$1000',
+                discount: '30%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 6,
+        date: '2024-05-06 20:05:01',
+        total: '$6000',
+        status: 'Đã hủy',
+        customer: {
+            name: 'Khách hàng 6',
+            email: 'customer6@example.com',
+            phone: '0123456786',
+            address: 'Địa chỉ 6',
+            note: 'Ghi chú đơn hàng 6'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Nhẫn sapphire',
+                quantity: 6,
+                price: '$1000',
+                discount: '35%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: 'Lý do hủy đơn hàng'
+    },
+    {
+        id: 7,
+        date: '2024-05-07 20:05:01',
+        total: '$7000',
+        status: 'Đang giao hàng',
+        customer: {
+            name: 'Khách hàng 7',
+            email: 'customer7@example.com',
+            phone: '0123456787',
+            address: 'Địa chỉ 7',
+            note: 'Ghi chú đơn hàng 7'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Bông tai vàng',
+                quantity: 7,
+                price: '$1000',
+                discount: '40%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 8,
+        date: '2024-05-08 20:05:01',
+        total: '$8000',
+        status: 'Đang tiếp nhận',
+        customer: {
+            name: 'Khách hàng 8',
+            email: 'customer8@example.com',
+            phone: '0123456788',
+            address: 'Địa chỉ 8',
+            note: 'Ghi chú đơn hàng 8'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Lắc chân kim cương',
+                quantity: 8,
+                price: '$1000',
+                discount: '45%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 9,
+        date: '2024-05-09 20:05:01',
+        total: '$9000',
+        status: 'Đã hoàn thành',
+        customer: {
+            name: 'Khách hàng 9',
+            email: 'customer9@example.com',
+            phone: '0123456789',
+            address: 'Địa chỉ 9',
+            note: 'Ghi chú đơn hàng 9'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Dây chuyền bạc',
+                quantity: 9,
+                price: '$1000',
+                discount: '50%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: ''
+    },
+    {
+        id: 10,
+        date: '2024-05-10 20:05:01',
+        total: '$10000',
+        status: 'Đã hủy',
+        customer: {
+            name: 'Khách hàng 10',
+            email: 'customer10@example.com',
+            phone: '0123456790',
+            address: 'Địa chỉ 10',
+            note: 'Ghi chú đơn hàng 10'
+        },
+        items: [
+            {
+                id: 1,
+                image: 'https://via.placeholder.com/50',
+                name: 'Vòng tay ruby',
+                quantity: 10,
+                price: '$1000',
+                discount: '55%',
+                category: 'Trang sức',
+                condition: 'Mới'
+            }
+        ],
+        cancelReason: 'Lý do hủy đơn hàng'
+    }
+];
 
-
-// Hàm render danh sách tài khoản
 const OrderManagement = () => {
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [searchValue, setSearchValue] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+    const [sortType, setSortType] = useState('');
+
+    const handleViewDetails = (order) => {
+        setSelectedOrder(order);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedOrder(null);
+    };
+
+    const filteredOrders = orders.filter(order =>
+        order.id.toString().includes(searchValue) &&
+        (statusFilter ? order.status === statusFilter : true)
+    );
+
+    const sortedOrders = [...filteredOrders].sort((a, b) => {
+        if (sortType === 'price-asc') {
+            return parseInt(a.total.slice(1)) - parseInt(b.total.slice(1));
+        }
+        if (sortType === 'price-desc') {
+            return parseInt(b.total.slice(1)) - parseInt(a.total.slice(1));
+        }
+        if (sortType === 'id-asc') {
+            return a.id - b.id;
+        }
+        if (sortType === 'id-desc') {
+            return b.id - a.id;
+        }
+        return 0;
+    });
+
+    const columns = [
+        { title: 'ID', dataIndex: 'id', key: 'id' },
+        {
+            title: 'Hình ảnh',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text, record) => (
+                <>
+                    <img src={text} alt="Product" width={50} height={50} />
+                    <span>{record.name}</span>
+                </>
+            )
+        },
+        { title: 'Tên món hàng', dataIndex: 'name', key: 'name' },
+        { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity' },
+        { title: 'Giá gốc', dataIndex: 'price', key: 'price' },
+        { title: 'Loại sản phẩm', dataIndex: 'category', key: 'category' },
+        { title: 'Tình trạng', dataIndex: 'condition', key: 'condition' }
+    ];
+
+    const getStatusClass = (status) => {
+        switch (status) {
+            case 'Đã hoàn thành':
+                return 'Shipper-Status-Completed';
+            case 'Đã hủy':
+                return 'Shipper-Status-Cancelled';
+            case 'Đang giao hàng':
+                return 'Shipper-Status-Shipping';
+            default:
+                return '';
+        }
+    };
 
     return (
         <div className="content">
-                <div class="container mt-5">
-                    <h2 class="text-center mb-4">Order Management</h2>
-                    <div class="table-responsive table-wrapper">
-                        <table class="table table-bordered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Item</th>
-                                    <th>Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1001</td>
-                                    <td>Diamond Ring</td>
-                                    <td>2024-05-01</td>
-                                    <td>Nguyen Van A</td>
-                                    <td>$5000</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1002</td>
-                                    <td>Diamond Necklace</td>
-                                    <td>2024-05-02</td>
-                                    <td>Tran Thi B</td>
-                                    <td>$7000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1003</td>
-                                    <td>Diamond Earrings</td>
-                                    <td>2024-05-03</td>
-                                    <td>Le Van C</td>
-                                    <td>$3000</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1004</td>
-                                    <td>Diamond Bracelet</td>
-                                    <td>2024-05-04</td>
-                                    <td>Pham Thi D</td>
-                                    <td>$4000</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1005</td>
-                                    <td>Diamond Pendant</td>
-                                    <td>2024-05-05</td>
-                                    <td>Nguyen Van E</td>
-                                    <td>$3500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1006</td>
-                                    <td>Diamond Watch</td>
-                                    <td>2024-05-06</td>
-                                    <td>Tran Thi F</td>
-                                    <td>$8000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1007</td>
-                                    <td>Diamond Brooch</td>
-                                    <td>2024-05-07</td>
-                                    <td>Le Van G</td>
-                                    <td>$4500</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1008</td>
-                                    <td>Diamond Cufflinks</td>
-                                    <td>2024-05-08</td>
-                                    <td>Pham Thi H</td>
-                                    <td>$5000</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1009</td>
-                                    <td>Diamond Anklet</td>
-                                    <td>2024-05-09</td>
-                                    <td>Nguyen Van I</td>
-                                    <td>$2500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1010</td>
-                                    <td>Diamond Tiara</td>
-                                    <td>2024-05-10</td>
-                                    <td>Tran Thi J</td>
-                                    <td>$10000</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1011</td>
-                                    <td>Diamond Ring</td>
-                                    <td>2024-05-11</td>
-                                    <td>Nguyen Van K</td>
-                                    <td>$5500</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1012</td>
-                                    <td>Diamond Necklace</td>
-                                    <td>2024-05-12</td>
-                                    <td>Tran Thi L</td>
-                                    <td>$7200</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1013</td>
-                                    <td>Diamond Earrings</td>
-                                    <td>2024-05-13</td>
-                                    <td>Le Van M</td>
-                                    <td>$3100</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1014</td>
-                                    <td>Diamond Bracelet</td>
-                                    <td>2024-05-14</td>
-                                    <td>Pham Thi N</td>
-                                    <td>$4300</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1015</td>
-                                    <td>Diamond Pendant</td>
-                                    <td>2024-05-15</td>
-                                    <td>Nguyen Van O</td>
-                                    <td>$3600</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1016</td>
-                                    <td>Diamond Watch</td>
-                                    <td>2024-05-16</td>
-                                    <td>Tran Thi P</td>
-                                    <td>$8300</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1017</td>
-                                    <td>Diamond Brooch</td>
-                                    <td>2024-05-17</td>
-                                    <td>Le Van Q</td>
-                                    <td>$4700</td>
-                                    <td>Cancelled</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1018</td>
-                                    <td>Diamond Cufflinks</td>
-                                    <td>2024-05-18</td>
-                                    <td>Pham Thi R</td>
-                                    <td>$5200</td>
-                                    <td>Shipped</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1019</td>
-                                    <td>Diamond Anklet</td>
-                                    <td>2024-05-19</td>
-                                    <td>Nguyen Van S</td>
-                                    <td>$2600</td>
-                                    <td>Delivered</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1020</td>
-                                    <td>Diamond Tiara</td>
-                                    <td>2024-05-20</td>
-                                    <td>Tran Thi T</td>
-                                    <td>$10300</td>
-                                    <td>Pending</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm">Edit</button>
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div className="container mt-5">
+                <h2 className="text-center mb-4">Order Management</h2>
+                <div className="search-filter-container">
+                    <Input
+                        style={{ width: 200, marginRight: 10 }}
+                        placeholder="Tìm kiếm mã đơn hàng"
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <Select
+                        style={{ width: 200, marginRight: 10 }}
+                        placeholder="Sắp xếp trạng thái"
+                        onChange={(value) => setStatusFilter(value)}
+                        allowClear
+                    >
+                        {orderStatuses.map(status => (
+                            <Option key={status} value={status}>{status}</Option>
+                        ))}
+                    </Select>
+                    <Select
+                        style={{ width: 250 }}
+                        placeholder="Sắp xếp theo"
+                        onChange={(value) => setSortType(value)}
+                        allowClear
+                    >
+                        <Option value="price-asc">Giá tiền từ thấp đến cao</Option>
+                        <Option value="price-desc">Giá tiền từ cao đến thấp</Option>
+                        <Option value="id-asc">Mã đơn hàng từ thấp đến cao</Option>
+                        <Option value="id-desc">Mã đơn hàng từ cao đến thấp</Option>
+                    </Select>
                 </div>
+                <div className="table-responsive table-wrapper mt-4">
+                    <table className="table">
+                        <thead className="thead-light">
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Ngày đặt đơn</th>
+                                <th>Tổng cộng</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedOrders.map(order => (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{order.date}</td>
+                                    <td>{order.total}</td>
+                                    <td className={getStatusClass(order.status)}>{order.status}</td>
+                                    <td>
+                                        <button type="button" className="btn btn-primary btn-sm" onClick={() => handleViewDetails(order)}>Xem chi tiết</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-           
+            {selectedOrder && (
+                <Modal
+                    title={<span className="modal-title">Chi tiết đơn hàng</span>}
+                    visible={!!selectedOrder}
+                    onCancel={handleCloseModal}
+                    footer={null}
+                    centered
+                >
+                    <p><strong>Mã đơn hàng:</strong> {selectedOrder.id}</p>
+                    <p><strong>Họ và tên:</strong> {selectedOrder.customer.name}</p>
+                    <p><strong>Email:</strong> {selectedOrder.customer.email}</p>
+                    <p><strong>Số điện thoại:</strong> {selectedOrder.customer.phone}</p>
+                    <p><strong>Địa chỉ nhận hàng:</strong> {selectedOrder.customer.address}</p>
+                    <p><strong>Ghi chú:</strong> {selectedOrder.customer.note}</p>
+                    <p><strong>Trạng thái:</strong> {selectedOrder.status}</p>
+                    {selectedOrder.cancelReason && (
+                        <p><strong>Lý do hủy:</strong> {selectedOrder.cancelReason}</p>
+                    )}
+                    <Table
+                        dataSource={selectedOrder.items}
+                        columns={columns}
+                        pagination={false}
+                        rowKey="id"
+                    />
+                    <div className="total-container">
+                        <p><strong>Tổng cộng:</strong> {selectedOrder.total}</p>
+                    </div>
+                </Modal>
+            )}
         </div>
-
-
     );
 };
 
@@ -315,18 +465,11 @@ const Don_Hang = () => {
                             </a>
                         </li>
                         <li className="sidebar-item active">
-                            <a className="sidebar-link" >
+                            <a className="sidebar-link">
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
-                        </li>
-                        <li className="sidebar-item">
-                            <a className="sidebar-link">
-                                <i className="align-middle"
-                                    data-feather="check-square">
-                                </i>
-                                <span className="align-middle">Chứng nhận sản phẩm</span>
-                            </a>
+                            
                         </li>
                     </ul>
                 </div>
@@ -425,7 +568,6 @@ const Don_Hang = () => {
                 </nav>
                 <OrderManagement />
             </div>
-            
         </div>
     );
 }

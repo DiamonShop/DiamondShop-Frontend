@@ -38,6 +38,8 @@ import Kim_cuong_4_5 from './pages/customer/Products/Kim_cuong_4.5';
 import Kim_cuong_5_4 from './pages/customer/Products/Kim_cuong_5.4';
 import Chi_tiet_don_hang from './pages/cart/Chi_tiet_don_hang';
 import Dat_hang_thanh_cong from './pages/cart/Dat_hang_thanh_cong';
+import ShipperLayout from './ShipperLayout';
+import Shipper from './pages/Shipper/Shipper';
 function App({ tokenIsValid }) {
 
   //Lưu product để khi reload sẽ không bị lỗi
