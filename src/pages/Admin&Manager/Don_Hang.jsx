@@ -2,6 +2,13 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Table, Input, Select } from 'antd';
 
+import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
+import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
+
+
 const { Option } = Select;
 
 const orderStatuses = ['Đã hoàn thành', 'Đã hủy', 'Đang giao hàng', 'Đang tiếp nhận'];
@@ -344,8 +351,8 @@ const OrderManagement = () => {
 
     return (
         <div className="content">
-            <div className="container mt-5">
-                <h2 className="text-center mb-4">Order Management</h2>
+            <div className="container">
+                <h2 className="text-center admin-page-title">Order Management</h2>
                 <div className="search-filter-container">
                     <Input
                         style={{ width: 200, marginRight: 10 }}
@@ -374,10 +381,10 @@ const OrderManagement = () => {
                         <Option value="id-desc">Mã đơn hàng từ cao đến thấp</Option>
                     </Select>
                 </div>
-                <div className="table-responsive table-wrapper mt-4">
-                    <table className="table">
-                        <thead className="thead-light">
-                            <tr>
+                <div >
+                    <table className="admin-page-table">
+                        <thead >
+                            <tr className='admin-page-column-table'>
                                 <th>Mã đơn hàng</th>
                                 <th>Ngày đặt đơn</th>
                                 <th>Tổng cộng</th>
@@ -393,7 +400,7 @@ const OrderManagement = () => {
                                     <td>{order.total}</td>
                                     <td className={getStatusClass(order.status)}>{order.status}</td>
                                     <td>
-                                        <button type="button" className="btn btn-primary btn-sm" onClick={() => handleViewDetails(order)}>Xem chi tiết</button>
+                                        <button type="button" className='admin-page-view-button' onClick={() => handleViewDetails(order)}>Xem chi tiết</button>
                                     </td>
                                 </tr>
                             ))}
@@ -436,6 +443,59 @@ const OrderManagement = () => {
 };
 
 const Don_Hang = () => {
+    const { user: currentUser, logout: userLogout } = useUser();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [displayName, setDisplayName] = useState('');
+    const navigate = useNavigate();
+    const fetchUserData = async () => {
+        if (!currentUser) {
+            console.log("User not logged in. Redirecting to login.");
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+            if (userRole !== 'Admin') {
+                console.log("User is not an admin. Redirecting to home.");
+                navigate('/');
+                return;
+            }
+
+            setLoading(true);
+            const headers = sendToken(); // Get headers with Authorization token
+            const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setDisplayName(Userresponse.data.fullName || '');
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            if (error.response && error.response.status === 401) {
+                console.log('Token expired or invalid. Redirecting to login.');
+                userLogout();
+            } else {
+                setErrorMessage('Error fetching user data.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserData();
+    }, [currentUser, userLogout, navigate]);
     return (
         <div className="wrapper">
             <nav id="sidebar" className="sidebar js-sidebar">
@@ -469,7 +529,7 @@ const Don_Hang = () => {
                                 <i className="align-middle" data-feather="square"></i>
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -482,84 +542,13 @@ const Don_Hang = () => {
                     <div className="navbar-collapse collapse">
                         <ul className="navbar-nav navbar-align">
                             <li className="nav-item dropdown">
-                                <a className="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                                    <div className="position-relative">
-                                        <i className="align-middle pe-7s-bell" data-feather="bell"></i>
-                                        <span className="indicator">4</span>
-                                    </div>
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-                                    <div className="dropdown-menu-header">
-                                        4 New Notifications
-                                    </div>
-                                    <div className="list-group">
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-danger" data-feather="alert-circle"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Update completed</div>
-                                                    <div className="text-muted small mt-1">Restart server 12 to complete the update.</div>
-                                                    <div className="text-muted small mt-1">30m ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-warning" data-feather="bell"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Lorem ipsum</div>
-                                                    <div className="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-                                                    <div className="text-muted small mt-1">2h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-primary" data-feather="home"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Login from 192.186.1.8</div>
-                                                    <div className="text-muted small mt-1">5h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-success" data-feather="user-plus"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">New connection</div>
-                                                    <div className="text-muted small mt-1">Christina accepted your request.</div>
-                                                    <div className="text-muted small mt-1">14h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="dropdown-menu-footer">
-                                        <a href="#" className="text-muted">Show all notifications</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="nav-item dropdown">
                                 <a className="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                                     <i className="align-middle" data-feather="settings"></i>
                                 </a>
                                 <a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                    <img src="~/image/LeftNavBar/avatars/avatar.jpg" className="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span className="text-dark">Charles Hall</span>
+                                    <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-end">
-                                    <a className="dropdown-item" href="pages-profile.html"><i className="align-middle me-1" data-feather="user"></i>Thông tin cá nhân</a>
-                                    <a className="dropdown-item" href="#"><i className="align-middle me-1" data-feather="pie-chart"></i> Phân tích</a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="index.html"><i className="align-middle me-1" data-feather="settings"></i> Cài đặt và bảo mật</a>
-                                    <a className="dropdown-item" href="#"><i className="align-middle me-1" data-feather="help-circle"></i> Trung tâm trợ giúp</a>
-                                    <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href='/'>Đăng xuất</a>
                                 </div>
                             </li>

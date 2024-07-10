@@ -7,12 +7,14 @@ import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { Link } from 'react-router-dom';
 
 const Taikhoan = () => {
+    const [showAddOverlay, setShowAddOverlay] = useState(false);
     const { user: currentUser, logout: userLogout } = useUser();
     const [errorMessage, setErrorMessage] = useState('');
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [displayName, setDisplayName] = useState('');
     const navigate = useNavigate();
-    const [showAddOverlay, setShowAddOverlay] = useState(false);
+
 
     const fetchUserData = async () => {
         if (!currentUser) {
@@ -39,7 +41,12 @@ const Taikhoan = () => {
 
             setLoading(true);
             const headers = sendToken(); // Get headers with Authorization token
-
+            const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setDisplayName(Userresponse.data.fullName || '');
             const response = await axios.get('https://localhost:7101/api/User/GetAllUsers', {
                 headers: {
                     ...headers,
@@ -169,7 +176,7 @@ const Taikhoan = () => {
             <nav id="sidebar" className="sidebar js-sidebar">
                 <div className="sidebar-content js-simplebar">
                     <a className="sidebar-brand" href='/'>
-                        <img src="assets/img/logo/logo.png" alt="Logo" />
+                        <img src="assets/img/logo/Logo.png" alt="Logo" />
                     </a>
                     <ul className="sidebar-nav">
                         <li className="sidebar-header">Trang chủ</li>
@@ -198,14 +205,14 @@ const Taikhoan = () => {
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
                         </li>
-                        <li className="sidebar-item">
+                        {/* <li className="sidebar-item">
                             <a className="sidebar-link">
                                 <i className="align-middle"
                                     data-feather="check-square">
                                 </i>
                                 <span className="align-middle">Chứng nhận sản phẩm</span>
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </nav>
@@ -217,84 +224,13 @@ const Taikhoan = () => {
                     <div className="navbar-collapse collapse">
                         <ul className="navbar-nav navbar-align">
                             <li className="nav-item dropdown">
-                                <a className="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                                    <div className="position-relative">
-                                        <i className="align-middle pe-7s-bell" data-feather="bell"></i>
-                                        <span className="indicator">4</span>
-                                    </div>
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-                                    <div className="dropdown-menu-header">
-                                        4 New Notifications
-                                    </div>
-                                    <div className="list-group">
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-danger" data-feather="alert-circle"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Update completed</div>
-                                                    <div className="text-muted small mt-1">Restart server 12 to complete the update.</div>
-                                                    <div className="text-muted small mt-1">30m ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-warning" data-feather="bell"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Lorem ipsum</div>
-                                                    <div className="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-                                                    <div className="text-muted small mt-1">2h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-primary" data-feather="home"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">Login from 192.186.1.8</div>
-                                                    <div className="text-muted small mt-1">5h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" className="list-group-item">
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-2">
-                                                    <i className="text-success" data-feather="user-plus"></i>
-                                                </div>
-                                                <div className="col-10">
-                                                    <div className="text-dark">New connection</div>
-                                                    <div className="text-muted small mt-1">Christina accepted your request.</div>
-                                                    <div className="text-muted small mt-1">14h ago</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div className="dropdown-menu-footer">
-                                        <a href="#" className="text-muted">Show all notifications</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="nav-item dropdown">
                                 <a className="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                                     <i className="align-middle" data-feather="settings"></i>
                                 </a>
                                 <a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                    <img src="~/image/LeftNavBar/avatars/avatar.jpg" className="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span className="text-dark">Charles Hall</span>
+                                    <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-end">
-                                    <a className="dropdown-item" href="pages-profile.html"><i className="align-middle me-1" data-feather="user"></i>Thông tin cá nhân</a>
-                                    <a className="dropdown-item" href="#"><i className="align-middle me-1" data-feather="pie-chart"></i> Phân tích</a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="index.html"><i className="align-middle me-1" data-feather="settings"></i> Cài đặt và bảo mật</a>
-                                    <a className="dropdown-item" href="#"><i className="align-middle me-1" data-feather="help-circle"></i> Trung tâm trợ giúp</a>
-                                    <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href='/'>Đăng xuất</a>
                                 </div>
                             </li>
@@ -302,8 +238,8 @@ const Taikhoan = () => {
                     </div>
                 </nav>
                 <div className="content">
-                    <div className="container">
-                        <h2 className="text-center">Quản lí tài khoản</h2>
+                    <div className="admin-page-container">
+                        <h2 className="text-center admin-page-title">Quản lí tài khoản</h2>
 
                         {/* <div className="filters">
                             <label>Chọn theo chức vụ:</label>
@@ -323,7 +259,10 @@ const Taikhoan = () => {
                             </select>
                         </div> */}
                         {/* Button to open add account overlay */}
-                        <button onClick={handleOpenAddButtonClick} className="btn-add-account ">Thêm tài khoản</button>
+                        <div className="admin-page-controls">
+                            <button onClick={handleOpenAddButtonClick} className="admin-page-add-button">Thêm tài khoản</button>
+                        </div>
+
 
                         {/* Overlay for adding new account */}
                         {showAddOverlay && (
@@ -407,9 +346,9 @@ const Taikhoan = () => {
                         )}
 
 
-                        <table className="">
-                            <thead>
-                                <tr>
+                        <table className="admin-page-table">
+                            <thead >
+                                <tr className='admin-page-column-table'>
                                     <th>ID</th>
                                     <th>Họ và tên</th>
                                     <th>Tên tài khoản</th>
@@ -429,7 +368,12 @@ const Taikhoan = () => {
                                         <td>{user.roleName}</td>
                                         <td>{user.isActive ? 'Hoạt động' : 'Ngừng hoạt động'}</td>
                                         <td>
-                                            <button className="btn-add-account ">Chỉnh sửa</button>
+                                        <div className="admin-page-buttons">
+                                            <button className='admin-page-view-button'>Xem</button>
+                                            <button className='admin-page-edit-button'>Sửa</button>
+                                            <button className='admin-page-delete-button'>Xóa</button>
+                                        </div>
+                                            
                                         </td>
                                     </tr>
                                 ))}
