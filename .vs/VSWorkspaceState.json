@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\pages",
+    "\\src\\pages\\cart",
+    "\\src\\pages\\customer"
   ],
-  "SelectedNode": "\\C:\\Users\\tuanh\\Source\\Repos\\DiamondShop-Frontend",
+  "SelectedNode": "\\src\\pages\\cart\\Thanh_toan.jsx",
   "PreviewInSolutionExplorer": false
 }

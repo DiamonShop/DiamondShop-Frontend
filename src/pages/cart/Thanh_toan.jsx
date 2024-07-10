@@ -121,7 +121,7 @@ export default function Thanh_toan() {
         const orderModel = {
             userId: userId,
             fullName: displayName,
-            phoneNumber: formData.phoneNumber,
+            phoneNumber: numberPhone,
             birthday: formData.birthday,
             email: email,
             streetAddress: address,

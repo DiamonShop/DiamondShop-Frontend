@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\tuanh\\source\\repos\\DiamondShop-Frontend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tuanh\\source\\repos\\DiamondShop-Frontend\\src\\pages\\cart\\Thanh_toan.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\cart\\Thanh_toan.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +35,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Thanh_toan.jsx",
+              "DocumentMoniker": "C:\\Users\\tuanh\\source\\repos\\DiamondShop-Frontend\\src\\pages\\cart\\Thanh_toan.jsx",
+              "RelativeDocumentMoniker": "src\\pages\\cart\\Thanh_toan.jsx",
+              "ToolTip": "C:\\Users\\tuanh\\source\\repos\\DiamondShop-Frontend\\src\\pages\\cart\\Thanh_toan.jsx",
+              "RelativeToolTip": "src\\pages\\cart\\Thanh_toan.jsx",
+              "ViewState": "AQIAAHYAAAAAAAAAAADwv0ABAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-07-10T06:10:54.047Z",
+              "EditorCaption": ""
             }
           ]
         }
