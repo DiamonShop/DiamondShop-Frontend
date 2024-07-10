@@ -34,27 +34,9 @@ export default function Thanh_toan() {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
-            if (!currentUser) {
-                console.log("User not logged in. Redirecting to login.");
-                navigate('/Dangnhap');
-                return;
-            }
-
-            setLoading(true);
             const token = localStorage.getItem('token');
-            if (!token) {
-                console.log("Token not found or expired. Logging out.");
-                userLogout();
-                navigate('/Dang_nhap');
-            }
-
             try {
                 const decodedToken = jwtDecode(token);
-                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-                if (userRole === 'Admin') {
-                    navigate('/BangDieuKhien');
-                }
 
                 const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
                     headers: {
@@ -109,24 +91,21 @@ export default function Thanh_toan() {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
 
-    }, [currentUser, userLogout, navigate]);
+    }, [navigate]);
 
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        const totalElement = document.getElementById("total");
-        const totalText = totalElement.textContent.replace(/\D/g, ''); // Remove non-numeric characters
-        const totalPrices = totalPrice; // Convert to integer
+        const totalPrices = totalPrice;
 
         const orderModel = {
             userId: userId,
             fullName: displayName,
             phoneNumber: numberPhone,
-            birthday: formData.birthday,
             email: email,
             streetAddress: address,
             orderNote: formData.orderNote,
-            price: totalPrices
+            price: totalPrices,
         };
         try {
             const url = await handleCheckout(orderModel); // Await the promise
