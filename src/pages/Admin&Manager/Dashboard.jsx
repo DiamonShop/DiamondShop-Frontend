@@ -1,17 +1,75 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
+import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { Link } from 'react-router-dom';
 
 
-export default function Dashboard() {
+const Dashboard = () => {
+    const { user: currentUser, logout: userLogout } = useUser();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [displayName, setDisplayName] = useState('');
+    const navigate = useNavigate();
+    const fetchUserData = async () => {
+        if (!currentUser) {
+            console.log("User not logged in. Redirecting to login.");
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+            if (userRole !== 'Admin') {
+                console.log("User is not an admin. Redirecting to home.");
+                navigate('/');
+                return;
+            }
+
+            setLoading(true);
+            const headers = sendToken(); // Get headers with Authorization token
+            const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setDisplayName(Userresponse.data.fullName || '');
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            if (error.response && error.response.status === 401) {
+                console.log('Token expired or invalid. Redirecting to login.');
+                userLogout();
+            } else {
+                setErrorMessage('Error fetching user data.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserData();
+    }, [currentUser, userLogout, navigate]);
     return (
         <div>
             <div class="wrapper">
                 <nav id="sidebar" class="sidebar js-sidebar">
                     <div class="sidebar-content js-simplebar">
-                        <a class="sidebar-link" href='/'>
+                        <a class="sidebar-brand" href='/'>
                             <span class="align-middle">
-                                <img src="assets/img/logo/logo.png" alt="" />
+                                <img src="assets/img/logo/Logo.png" alt="" />
                             </span>
                         </a>
                         <ul class="sidebar-nav">
@@ -51,152 +109,40 @@ export default function Dashboard() {
                             </li>
 
                             <li className="sidebar-item">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
-                            </a>
-                        </li>
-                        <li className="sidebar-item">
-                            <a className="sidebar-link">
-                                <i className="align-middle"
-                                    data-feather="check-square">
-                                </i>
-                                <span className="align-middle">Chứng nhận sản phẩm</span>
-                            </a>
-                        </li>
+                                <a className="sidebar-link" >
+                                    <i className="align-middle" data-feather="square"></i>
+                                    <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                                </a>
+                            </li>
+                            {/* <li className="sidebar-item">
+                                <a className="sidebar-link">
+                                    <i className="align-middle"
+                                        data-feather="check-square">
+                                    </i>
+                                    <span className="align-middle">Chứng nhận sản phẩm</span>
+                                </a>
+                            </li> */}
 
-                            {/* <li class="sidebar-item">
-                                    <a class="sidebar-link" href="ui-cards.html">
-                                        <i class="align-middle" data-feather="grid">
-                                            </i> 
-                                            <span class="align-middle">Order</span>
-        
-                                    </a>
-                                </li> */}
-                            {/* 
-                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-typography.html">
-                                <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Typography</span>
-                            </a>
-                        </li>
-        
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="icons-feather.html">
-                                <i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-                            </a>
-                        </li>
-        
-                        <li class="sidebar-header">
-                            Plugins & Addons
-                        </li>
-        
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="charts-chartjs.html">
-                                <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
-                            </a>
-                        </li>
-        
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="maps-google.html">
-                                <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
-                            </a>
-                        </li>  */}
                         </ul>
-
 
                     </div>
                 </nav>
                 <div class="main">
-
-                    <nav class="navbar navbar-expand navbar-light navbar-bg">
-                        <a class="sidebar-toggle js-sidebar-toggle">
-                            <i class="hamburger align-self-center"></i>
+                    <nav className="navbar navbar-expand navbar-light navbar-bg">
+                        <a className="sidebar-toggle js-sidebar-toggle">
+                            <i className="hamburger align-self-center"></i>
                         </a>
-
-                        <div class="navbar-collapse collapse">
-                            <ul class="navbar-nav navbar-align">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                                        <div class="position-relative">
-                                            <i class="align-middle pe-7s-bell" data-feather="bell"></i>
-                                            <span class="indicator">4</span>
-                                        </div>
+                        <div className="navbar-collapse collapse">
+                            <ul className="navbar-nav navbar-align">
+                                <li className="nav-item dropdown">
+                                    <a className="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                                        <i className="align-middle" data-feather="settings"></i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-                                        <div class="dropdown-menu-header">
-                                            4 New Notifications
-                                        </div>
-                                        <div class="list-group">
-                                            <a href="#" class="list-group-item">
-                                                <div class="row g-0 align-items-center">
-                                                    <div class="col-2">
-                                                        <i class="text-danger" data-feather="alert-circle"></i>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <div class="text-dark">Update completed</div>
-                                                        <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-                                                        <div class="text-muted small mt-1">30m ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item">
-                                                <div class="row g-0 align-items-center">
-                                                    <div class="col-2">
-                                                        <i class="text-warning" data-feather="bell"></i>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <div class="text-dark">Lorem ipsum</div>
-                                                        <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-                                                        <div class="text-muted small mt-1">2h ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item">
-                                                <div class="row g-0 align-items-center">
-                                                    <div class="col-2">
-                                                        <i class="text-primary" data-feather="home"></i>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <div class="text-dark">Login from 192.186.1.8</div>
-                                                        <div class="text-muted small mt-1">5h ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="list-group-item">
-                                                <div class="row g-0 align-items-center">
-                                                    <div class="col-2">
-                                                        <i class="text-success" data-feather="user-plus"></i>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <div class="text-dark">New connection</div>
-                                                        <div class="text-muted small mt-1">Christina accepted your request.</div>
-                                                        <div class="text-muted small mt-1">14h ago</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="dropdown-menu-footer">
-                                            <a href="#" class="text-muted">Show all notifications</a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                                        <i class="align-middle" data-feather="settings"></i>
+                                    <a className="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                        <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                     </a>
-
-                                    <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                        <img src="~/image/LeftNavBar/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i>Thông tin cá nhân</a>
-                                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Phân tích</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Cài đặt và bảo mật</a>
-                                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Trung tâm trợ giúp</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href='/'>Đăng xuất</a>
+                                    <div className="dropdown-menu dropdown-menu-end">
+                                        <a className="dropdown-item" href='/'>Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>
@@ -412,8 +358,9 @@ export default function Dashboard() {
                 </div>
             </div>
 
-           
+
         </div>
 
     )
 }
+export default Dashboard;
