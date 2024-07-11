@@ -2995,29 +2995,32 @@ const SanPham = () => {
                                                                 <option value="4">Vòng tay</option>
                                                             </select>
                                                         </div> */}
-                                                        <div className="admin-page-add-product-form-group">
-                                                            <label htmlFor="basePrice">Giá gốc sản phẩm</label>
-                                                            <input
-                                                                type="number"
-                                                                id="basePrice"
-                                                                name="basePrice"
-                                                                placeholder="Nhập giá gốc sản phẩm"
-                                                                value={newProductJewelry.basePrice}
-                                                                onChange={handleNewJewelryChange}
-                                                                required
-                                                            />
+                                                        <div className="admin-page-add-product-form-group-row">
+                                                            <div className="admin-page-add-product-form-group">
+                                                                <label htmlFor="basePrice">Giá gốc sản phẩm</label>
+                                                                <input
+                                                                    type="number"
+                                                                    id="basePrice"
+                                                                    name="basePrice"
+                                                                    placeholder="Nhập giá gốc sản phẩm"
+                                                                    value={newProductJewelry.basePrice}
+                                                                    onChange={handleNewJewelryChange}
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div className="admin-page-add-product-form-group">
+                                                                <label htmlFor="markupRate">Tỉ lệ áp giá</label>
+                                                                <input
+                                                                    type="text"
+                                                                    id="markupRate"
+                                                                    name="markupRate"
+                                                                    placeholder="Nhập tỉ lệ áp giá"
+                                                                    value={newProductJewelry.markupRate}
+                                                                    onChange={handleNewJewelryChange}
+                                                                />
+                                                            </div>
                                                         </div>
-                                                        <div className="admin-page-add-product-form-group">
-                                                            <label htmlFor="markupRate">Tỉ lệ áp giá</label>
-                                                            <input
-                                                                type="text"
-                                                                id="markupRate"
-                                                                name="markupRate"
-                                                                placeholder="Nhập tỉ lệ áp giá"
-                                                                value={newProductJewelry.markupRate}
-                                                                onChange={handleNewJewelryChange}
-                                                            />
-                                                        </div>
+
                                                         <div className="admin-page-add-product-form-group">
                                                             <label htmlFor="stock">Số lượng</label>
                                                             <input
