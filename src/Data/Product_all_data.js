@@ -26,7 +26,6 @@ async function GetProductByName(searchValue) {
                     image4: image4Url || "default_image_url_4.png", // URL thay thế nếu ảnh không tồn tại
                     label: "Mới",
                     newPrice: basePrice,
-                    oldPrice: basePrice,
                     description: description,
                     stock: stock,
                     productType: product.productType,

@@ -67,7 +67,6 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
-                                                    oldPrice={item.oldPrice}
                                                     description={item.description}
                                                     onProductClick={onProductClick}
                                                 />

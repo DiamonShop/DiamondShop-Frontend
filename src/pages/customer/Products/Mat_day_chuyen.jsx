@@ -77,7 +77,6 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
                                                 newPrice={item.newPrice}
-                                                oldPrice={item.oldPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
                                             />

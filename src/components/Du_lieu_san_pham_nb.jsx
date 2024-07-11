@@ -39,7 +39,6 @@ function Du_lieu_san_pham_nb(props) {
                     </h6>
                     <div className="price-box">
                         <span className="price-regular">{formatCurrency(props.newPrice)}đ</span>
-                        <span className="price-old"><del>{formatCurrency(props.oldPrice)}đ</del></span>
                     </div>
                 </div>
             </div>

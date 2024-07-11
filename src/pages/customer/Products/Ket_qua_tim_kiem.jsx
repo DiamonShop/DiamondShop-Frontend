@@ -107,7 +107,6 @@ export default function Ket_qua_tim_kiem ({ onProductClick }) {
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
-                                                    oldPrice={item.oldPrice}
                                                     description={item.description}
                                                     onProductClick={onProductClick}
                                                 />
@@ -122,7 +121,6 @@ export default function Ket_qua_tim_kiem ({ onProductClick }) {
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
-                                                    oldPrice={item.oldPrice}
                                                     description={item.description}
                                                     onProductClick={onProductClick}
                                                 />

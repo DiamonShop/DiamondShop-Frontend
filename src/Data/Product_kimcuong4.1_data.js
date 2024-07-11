@@ -18,7 +18,6 @@ const productData = await Promise.all(listProduct
             image3: image3Url ? image3Url : "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại
             label: "Mới",
             newPrice: basePrice,
-            oldPrice: basePrice,
             categoryName: "Kim cương 3.6 ",
             description: description,
             stock: stock,

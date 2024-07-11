@@ -183,19 +183,19 @@ export default function Chi_tiet_san_pham_kc() {
                       <p className='diamond-filter-line'>------------------------------------------------------------------------------------</p>
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <p className='filter-name'>Màu sắc COlor</p>
+                          <p className='filter-name'>Màu sắc (Color)</p>
                           <select id='color-select'>
                             <option value="G">G</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Độ Tinh Khiết Clarity</p>
+                          <p className='filter-name'>Độ Tinh Khiết (Clarity)</p>
                           <select id='clarity-select'>
                             <option value="VS2">VS2</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Giác Cắt Cut</p>
+                          <p className='filter-name'>Giác Cắt (Cut)</p>
                           <select id='cut-select'>
                             <option value="EX">EX</option>
                           </select>
@@ -231,10 +231,6 @@ export default function Chi_tiet_san_pham_kc() {
 
 
                       <div class="quantity-cart-box d-flex align-items-center">
-                        {/* <h6 class="option-title">qty:</h6>
-                                                <div class="quantity">
-                                                    <div class="pro-qty"><input type="text" value="1" /></div>
-                                                </div> */}
                         <div class="button-them-vao-gio-hang">
                           <div class="action_link">
                             <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
