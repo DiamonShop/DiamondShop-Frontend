@@ -39,7 +39,7 @@ import Kim_cuong_5_4 from './pages/customer/Products/Kim_cuong_5.4';
 import Chi_tiet_don_hang from './pages/cart/Chi_tiet_don_hang';
 import Dat_hang_thanh_cong from './pages/cart/Dat_hang_thanh_cong';
 import ShipperLayout from './ShipperLayout';
-import Shipper from './pages/Shipper/Shipper';
+import Shipper from './pages/ShipperPage/Shipper';
 function App({ tokenIsValid }) {
 
   //Lưu product để khi reload sẽ không bị lỗi
@@ -86,6 +86,7 @@ function App({ tokenIsValid }) {
               <Route path='/Chinhsachgiaohang' element={<MainLayout tokenIsValid={tokenIsValid}><Chinh_sach_giao_hang /></MainLayout>} />
               <Route path='/Ketquatimkiem' element={<MainLayout tokenIsValid={tokenIsValid}><Ket_qua_tim_kiem onProductClick={handleProductClick}/></MainLayout>} />
               <Route path='/Thanhtoanthanhcong' element={<PaymentLayout tokenIsValid={tokenIsValid}><Dat_hang_thanh_cong/></PaymentLayout>} />
+              <Route path='/Shipper' element={<ShipperLayout tokenIsValid={tokenIsValid}><Shipper/></ShipperLayout>}/>
             </Routes>
             
         </Router>
