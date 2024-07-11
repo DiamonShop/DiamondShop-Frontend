@@ -7,7 +7,7 @@ import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
 function Kim_cuong_4_5({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4;
+    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -81,7 +81,7 @@ function Kim_cuong_4_5({ onProductClick }) {
                                         <ul className="pagination-box">
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                    Trước
+                                                <i className="pe-7s-angle-left"></i>
                                                 </a>
                                             </li>
                                             {pageNumbers.map(number => (
@@ -93,7 +93,7 @@ function Kim_cuong_4_5({ onProductClick }) {
                                             ))}
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                    Sau
+                                                <i className="pe-7s-angle-right"></i>
                                                 </a>
                                             </li>
                                         </ul>

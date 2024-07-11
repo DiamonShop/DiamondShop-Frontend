@@ -7,12 +7,12 @@ export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
-    
+
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
 
-   
+
 
     const sortedProducts = Product_Daychuyen_Data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -95,7 +95,7 @@ export default function Day_chuyen({ onProductClick }) {
                                     <ul className="pagination-box">
                                         <li>
                                             <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                Trước
+                                                <i className="pe-7s-angle-left"></i>
                                             </a>
                                         </li>
                                         {pageNumbers.map(number => (
@@ -107,7 +107,7 @@ export default function Day_chuyen({ onProductClick }) {
                                         ))}
                                         <li>
                                             <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                Sau
+                                                <i className="pe-7s-angle-right"></i>
                                             </a>
                                         </li>
                                     </ul>
