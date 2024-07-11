@@ -78,38 +78,39 @@ export default function Chi_tiet_san_pham() {
 
     const handleAddToCart = async () => {
         //Lấy userId để tạo order
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
             //Gọi API để tạo order
             const orders = await handleGetOrderByUserId(parseInt(userId, 10));
-            //Nếu Order bằng null thì tạo Order mới
+            let orderId = null;
+    
             if (orders != null) {
                 for (const item of orders) {
-                    if (item.status == 'Ordering') {
-                        handleAddProductToOrder(item.orderId, productObj.productId, quantity);
-                        successAddMessage();
-                        break;
-                    } else if (item.status == 'Completed' || item.status == 'Shipped') {
-                        const orderId = await handleCreateOrder(userId);
-                        handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        successAddMessage();
-                        break;
-                    }
-                }
-            } else {
-                const orderId = await handleCreateOrder(userId);
-                const order = await handleGetOrderByUserId(parseInt(userId, 10));
-                for (const item of order) {
-                    if (item.status === 'Ordering' && item.orderId === orderId) {
-                        handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        successAddMessage();
+                    if (item.status === 'Ordering') {
+                        orderId = item.orderId;
                         break;
                     }
                 }
             }
+    
+            if (orderId === null) {
+                // Create a new order if no "Ordering" order is found
+                orderId = await handleCreateOrder(userId);
+            }
+    
+            if (orderId !== null) {
+                const addProductResponse = await handleAddProductToOrder(orderId, productObj.productId, quantity);
+                if (addProductResponse !== null) {
+                    successAddMessage();
+                } else {
+                    console.error('Failed to add product to order');
+                }
+            } else {
+                console.error('Failed to create or retrieve order');
+            }
         }
-    }
+    };
 
     return (
         <div>

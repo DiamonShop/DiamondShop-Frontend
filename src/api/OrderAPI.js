@@ -16,14 +16,21 @@ export const handleCreateOrder = async (userId) => {
 
 export const handleAddProductToOrder = async (orderId, productId, quantity) => {
     try {
-        await fetch(`https://localhost:7101/api/orders/AddProductToOrderDetail?orderId=${orderId}&productId=${productId}&quantity=${quantity}`, {
+        const response = await fetch(`https://localhost:7101/api/orders/AddProductToOrderDetail?orderId=${orderId}&productId=${productId}&quantity=${quantity}`, {
             method: 'POST',
             mode: 'cors',
         });
+
+        if (!response.ok) {
+            throw new Error(`Failed to add product to order: ${response.statusText}`);
+        }
+
+        return await response.json();
     } catch (error) {
-        return null; // Return null on error
+        console.error("Error adding product to order:", error);
+        return null;
     }
-}
+};
 
 export const handleGetOrderByUserId = async (userId) => {
     try {

@@ -13,8 +13,15 @@ export const handleCheckout = async (orderModel) => {
             throw new Error('Network response was not ok ' + response.statusText);
         }
 
-        const data = await response.json();
-        return data; // Assuming the API returns an object with 'url' and 'billId' properties
+        const contentType = response.headers.get("content-type");
+        let data;
+        if (contentType && contentType.includes("application/json")) {
+            data = await response.json();
+            return data.url; // Assuming the API returns an object with a 'url' property
+        } else {
+            data = await response.text();
+            return data; // Directly return the plain text response (URL)
+        }
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         throw error;
