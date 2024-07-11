@@ -36,9 +36,6 @@ function Sanphamnoibat({ onProductClick }) {
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         arrows: true,
-        row: 1,
-        coloum: 4,
-
     };
     return (
         <div>
@@ -88,7 +85,7 @@ function Sanphamnoibat({ onProductClick }) {
                                     <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                                         <div className="tab-content">
                                             <div className="tab-pane fade show active" id="tab1">
-                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">
+                                                <div className="product-carousel-5 slick-row-10 slick-arrow-style">
                                                     <Slider {...SecondSliderSettings}>
                                                         {randomProductsNhan.map((item) => (
                                                             <div key={item.id} >

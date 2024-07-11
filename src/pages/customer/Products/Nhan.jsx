@@ -91,26 +91,26 @@ export default function Nhan({ onProductClick }) {
                                     ))}
                                 </div>
                                 <div className="pagination-area text-center">
-                                    <ul className="pagination-box">
-                                        <li>
-                                            <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                Trước
-                                            </a>
-                                        </li>
-                                        {pageNumbers.map(number => (
-                                            <li key={number} className={currentPage === number ? 'active' : ''}>
-                                                <a href="#" onClick={(e) => handleClick(e, number)}>
-                                                    {number}
+                                        <ul className="pagination-box">
+                                            <li>
+                                                <a href="#" onClick={(e) => handleClick(e, 1)}>
+                                                <i className="pe-7s-angle-left"></i>
                                                 </a>
                                             </li>
-                                        ))}
-                                        <li>
-                                            <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                Sau
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                            {pageNumbers.map(number => (
+                                                <li key={number} className={currentPage === number ? 'active' : ''}>
+                                                    <a href="#" onClick={(e) => handleClick(e, number)}>
+                                                        {number}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                            <li>
+                                                <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
+                                                <i className="pe-7s-angle-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                             </div>
                         </div>
                     </div>

@@ -11,8 +11,6 @@ function Main_bestseller_product() {
         nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
         dots: true,
         slidesToShow: 1,
-
-
     };
     return (
         <div>
@@ -35,10 +33,7 @@ function Main_bestseller_product() {
                                     <h4>Sản Phẩm Bán Chạy</h4>
                                     <div className="slick-append"></div>
                                 </div>
-
                                 <Sanphambanchay/>
-
-
                             </div>
                         </div>
                         <div className="col-lg-3">
@@ -48,9 +43,6 @@ function Main_bestseller_product() {
                                     <h4>Sản phẩm đang giảm giá</h4>
                                     <div className="slick-append"></div>
                                 </div>
-
-
-
                                 <div className="group-list-item-wrapper">
                                     <div className="group-list-carousel">
                                         <Slider {...FifthSliderSettings}>

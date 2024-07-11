@@ -3307,19 +3307,15 @@ only screen and (max-width: 479.98px) {
 
 .product-tab-menu {
   margin-top: -6px;
-  margin-bottom: 35px;
+  margin-bottom: 50px;
 
 }
+
 
 .product-tab-menu ul li {
   margin-right: 35px;
 }
 
-@media only screen and (max-width: 479.98px) {
-  .product-tab-menu ul li {
-    margin-right: 15px;
-  }
-}
 
 .product-tab-menu ul li:last-child {
   margin-right: 0;
@@ -3518,6 +3514,7 @@ only screen and (max-width: 479.98px) {
 /*------- product item start -------*/
 .product-item {
   overflow: hidden;
+  height: 400px;
 }
 
 .product-item .color-categories {
@@ -3809,6 +3806,7 @@ only screen and (max-width: 479.98px) {
     flex-basis: 100%;
   }
 }
+
 
 .product-content-list {
   padding-left: 20px;
