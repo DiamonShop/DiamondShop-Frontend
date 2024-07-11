@@ -70,7 +70,6 @@ function Kim_cuong_4_5({ onProductClick }) {
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
-                                                    oldPrice={item.oldPrice}
                                                     description={item.description}
                                                     onProductClick={onProductClick}
                                                 />

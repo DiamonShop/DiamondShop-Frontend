@@ -147,7 +147,7 @@ export default function Thanh_toan() {
         <div>
             {/* <!-- breadcrumb area start --> */}
             <div class="breadcrumb-area">
-                <div class="container">
+                <div class="container-giohang">
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-wrap">

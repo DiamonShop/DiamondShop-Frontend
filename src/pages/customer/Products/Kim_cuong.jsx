@@ -46,25 +46,6 @@ export default function Kim_cuong({ onProductClick }) {
 
     return (
         <div>
-
-            {/* <div className="breadcrumb-area">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="breadcrumb-wrap">
-                                    <nav aria-label="breadcrumb">
-                                        <ul className="breadcrumb">
-                                            <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link>
-                                            </li>
-                                            <li className="breadcrumb-item active" aria-current="page">Kim Cương</li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 */}
             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong.png)` }}>
 
             </div>
@@ -88,7 +69,7 @@ export default function Kim_cuong({ onProductClick }) {
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
-                                                    oldPrice={item.oldPrice}
+
                                                     description={item.description}
                                                     onProductClick={onProductClick}
                                                 />

@@ -19,7 +19,6 @@ const productData = await Promise.all(listProduct
             image4: image4Url ? image4Url : "default_image_url_4.png", // URL thay thế nếu ảnh không tồn tại
             label: "Mới",
             newPrice: basePrice,
-            oldPrice: basePrice,
             categoryName: "Vòng tay",
             categoryId: categoryId,
             description: description,
