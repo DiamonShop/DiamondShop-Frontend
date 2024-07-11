@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { decodeToken } from '../../api/TokenAPI';
+import { handleUpdateStatusByUserId } from '../../api/OrderAPI';
 
 function Dat_hang_thanh_cong() {
   const [transactionId, setTransactionId] = useState('');
   const [billId, setBillId] = useState('');
+  const getUserId = async () =>{
+    const token = localStorage.getItem("token");
+    if(token){
+        const userId = decodeToken(token).sid;
+        const status = await handleUpdateStatusByUserId(userId);        
+    }
+}
 
   useEffect(() => {
     setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
     const storedBillId = localStorage.getItem('billId');
-    setBillId(storedBillId);
-    localStorage.removeItem('billId'); // Optionally remove it if not needed anymore
-  }, []);
+    if (storedBillId) {
+        setBillId(storedBillId);
+        //localStorage.removeItem('billId'); // Optionally remove it if not needed anymore
+        
+    } else {
+        console.error("No billId found in localStorage");
+    }
 
+    getUserId();
+  }, []);
   return (
     <div>
       <div className='box-dat-hang'>

@@ -97,7 +97,7 @@ export default function Thanh_toan() {
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
         const totalPrices = totalPrice;
-    
+
         const orderModel = {
             userId: userId,
             fullName: displayName,
@@ -107,11 +107,12 @@ export default function Thanh_toan() {
             orderNote: formData.orderNote,
             price: totalPrices,
         };
-    
+
         try {
-            const { url, billId } = await handleCheckout(orderModel); // Await the promise and get the billId
+            const { url, billId } = await handleCheckout(orderModel);
             localStorage.setItem('billId', billId); // Save the billId in localStorage
             window.location.href = url; // Use the resolved URL
+
         } catch (error) {
             console.error('Error during checkout:', error);
         }
