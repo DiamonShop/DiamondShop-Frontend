@@ -29,8 +29,10 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
+    const [BillId, setTBillId] = useState('');
 
     useEffect(() => {
+        setTBillId(Math.floor(100000000 + Math.random() * 900000000));
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
@@ -99,6 +101,7 @@ export default function Thanh_toan() {
         const totalPrices = totalPrice;
     
         const orderModel = {
+            billId:BillId,
             userId: userId,
             fullName: displayName,
             phoneNumber: numberPhone,
@@ -109,6 +112,7 @@ export default function Thanh_toan() {
         };
     
         const billCreateDTO = {
+            BillId: orderModel.billId,
             UserId: orderModel.userId,
             FullName: orderModel.fullName,
             NumberPhone: orderModel.phoneNumber,

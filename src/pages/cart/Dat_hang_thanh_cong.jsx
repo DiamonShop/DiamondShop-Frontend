@@ -4,7 +4,7 @@ import { decodeToken } from '../../api/TokenAPI';
 import { handleUpdateStatusByUserId } from '../../api/OrderAPI';
 
 function Dat_hang_thanh_cong() {
-  const [transactionId, setTransactionId] = useState('');
+  //const [transactionId, setTransactionId] = useState('');
   const [billCreateDTO, setBillCreateDTO] = useState(null);
   const getUserId = async () => {
     const token = localStorage.getItem("token");
@@ -14,7 +14,7 @@ function Dat_hang_thanh_cong() {
     }
   }
   useEffect(() => {
-    setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
+    //setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
     const storedBill = localStorage.getItem('billCreateDTO');
     if (storedBill) {
       setBillCreateDTO(JSON.parse(storedBill));
@@ -42,7 +42,7 @@ function Dat_hang_thanh_cong() {
                 </div>
                 <div class="order-details">
                   <div class="order-number-label">Mã đơn hàng</div>
-                  <div class="order-number" >{transactionId}</div>
+                  <div class="order-number" >{billCreateDTO.BillId}</div>
                   {billCreateDTO && (
                     <div>
                       <div>User ID: {billCreateDTO.UserId}</div>
