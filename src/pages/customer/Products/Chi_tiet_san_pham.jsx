@@ -230,10 +230,7 @@ export default function Chi_tiet_san_pham() {
                                                         <option>10</option>
                                                         <option>11</option>
                                                     </select>
-
-
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-
                                                 </div>
                                             )}
                                             <div class="button-them-vao-gio-hang">
