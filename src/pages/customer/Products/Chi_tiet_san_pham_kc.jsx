@@ -9,6 +9,7 @@ import { decodeToken } from '../../../api/TokenAPI';
 import { handleAddProductToOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import Mota_danhgia_kc from '../../../components/Mota_danhgia_kc';
+import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
 
 export default function Chi_tiet_san_pham_kc() {
   const largeSliderRef = useRef(null);
@@ -22,7 +23,14 @@ export default function Chi_tiet_san_pham_kc() {
       setShowMessage(false);
     }, 5000); // 5000 milliseconds = 5 seconds
   }
+  const [quantity, setQuantity] = useState(1);
+  const handleIncrement = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
 
+  const handleDecrement = () => {
+    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
   const largeSliderSettings = {
     fade: true,
     arrows: false,
@@ -32,7 +40,7 @@ export default function Chi_tiet_san_pham_kc() {
   };
 
   const navSliderSettings = {
-    slidesToShow: 4,
+    slidesToShow: 3,
     asNavFor: largeSliderRef.current,
     centerMode: true,
     centerPadding: '0',
@@ -52,7 +60,7 @@ export default function Chi_tiet_san_pham_kc() {
     speed: 1000,
     autoplay: true,
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToRoll: 1,
     adaptiveHeight: true,
     arrows: true,
@@ -144,9 +152,7 @@ export default function Chi_tiet_san_pham_kc() {
                       <div className="pro-large-img img-zoom">
                         <img src={productObj.image3} alt="product-details" />
                       </div>
-                      <div className="pro-large-img img-zoom">
-                        <img src={productObj.image4} alt="product-details" />
-                      </div>
+
                     </Slider>
 
                     <Slider {...navSliderSettings} className="pro-nav">
@@ -159,9 +165,7 @@ export default function Chi_tiet_san_pham_kc() {
                       <div className="pro-nav-thumb">
                         <img src={productObj.image3} alt="product-details" />
                       </div>
-                      <div className="pro-nav-thumb">
-                        <img src={productObj.image4} alt="product-details" />
-                      </div>
+
                     </Slider>
                   </div>
                   <div class="col-lg-7">
@@ -178,30 +182,30 @@ export default function Chi_tiet_san_pham_kc() {
                         </div>
                       </div>
                       <div class="price-box">
-                        <span class="price-regular">{formatCurrency(productObj.newPrice)}đ</span>
+                        <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                       </div>
                       <p className='diamond-filter-line'>------------------------------------------------------------------------------------</p>
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <p className='filter-name'>Màu sắc (Color)</p>
-                          <select id='color-select'>
+                          <h6 className='filter-name'>Màu sắc (Color):</h6>
+                          <select className='nice-select'>
                             <option value="G">G</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Độ Tinh Khiết (Clarity)</p>
-                          <select id='clarity-select'>
+                          <h6 className='filter-name'>Độ Tinh Khiết (Clarity):</h6>
+                          <select className='nice-select' >
                             <option value="VS2">VS2</option>
                           </select>
                         </li>
-                        <li class="filter-group">
-                          <p className='filter-name'>Giác Cắt (Cut)</p>
-                          <select id='cut-select'>
+                        <li class="filter-group">            
+                          <h6 className='filter-name'>Giác Cắt (Cut):</h6>
+                          <select className='nice-select'>
                             <option value="EX">EX</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <p className='filter-name'>Giấy kiểm định</p>
+                          <h6 className='filter-name'>Giấy kiểm định</h6>
                           <div className='filter-img' onClick={handleImageClick}>
                             <img src="https://file.hstatic.net/1000381168/file/gia-logo_5deb96f1f2b541568f93dc916976d435.svg" alt="GIA" />
                           </div>
@@ -226,6 +230,24 @@ export default function Chi_tiet_san_pham_kc() {
                               </div>
                             </div>
                           )}
+                        </li>
+                        <li class="filter-group">
+                          <div class="quantity-cart-box d-flex align-items-center">
+                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                            <div class="quantity">
+                              <div class="pro-qty">
+                                <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                <input
+                                  name='txtQuantity'
+                                  type="text"
+                                  value={quantity}
+                                  readOnly
+                                />
+                                <span className=" qtybtn" onClick={handleIncrement}>+</span>
+
+                              </div>
+                            </div>
+                          </div>
                         </li>
                       </ul>
 
@@ -275,7 +297,7 @@ export default function Chi_tiet_san_pham_kc() {
               </div>
 
 
-              <Mota_danhgia_kc/>
+              <Mota_danhgia_kc />
 
             </div>
 
@@ -283,154 +305,8 @@ export default function Chi_tiet_san_pham_kc() {
         </div>
       </div>
 
-      <section class="related-products section-padding">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-
-              <div class="section-title text-center">
-                <h2 class="title">Sản phẩm tương tự</h2>
-                {/* <p class="sub-title">Add related products to weekly lineup</p> */}
-              </div>
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-
-              <Slider {...relatedSliderSettings} class="product-carousel-4 slick-row-10 slick-arrow-style">
-                <div class="product-item">
-                  <figure class="product-thumb">
-                    <a href="product-details.html">
-                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
-                    </a>
-                    <div class="button-group">
-                      <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                      <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                    </div>
-                  </figure>
-                  <div class="product-caption text-center">
-                    <h6 class="product-name">
-                      <a href="product-details.html">Kim Cương Viên GIA 3.6ly G VS1 EX</a>
-                    </h6>
-                    <div class="price-box">
-                      <span class="price-regular">10,736,000₫</span>
-                      <span class="price-old"><del>11,421,000₫</del></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-item">
-                  <figure class="product-thumb">
-                    <a href="product-details.html">
-                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
-                    </a>
-                    <div class="button-group">
-                      <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                      <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                    </div>
-                    <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
-                    </div>
-                  </figure>
-                  <div class="product-caption text-center">
-                    <h6 class="product-name">
-                      <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS2 EX</a>
-                    </h6>
-                    <div class="price-box">
-                      <span class="price-regular">11,178,000₫</span>
-                      <span class="price-old"><del>11,891,000₫</del></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-item">
-                  <figure class="product-thumb">
-                    <a href="product-details.html">
-                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
-                    </a>
-                    <div class="button-group">
-                      <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                      <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                    </div>
-                    <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
-                    </div>
-                  </figure>
-                  <div class="product-caption text-center">
-                    <h6 class="product-name">
-                      <a href="product-details.html">Kim Cương Viên GIA 3.6ly F VS1 EX</a>
-                    </h6>
-                    <div class="price-box">
-                      <span class="price-regular">11,531,000₫</span>
-                      <span class="price-old"><del>12,267,000₫</del></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-item">
-                  <figure class="product-thumb">
-                    <a href="product-details.html">
-                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
-                    </a>
-                    <div class="button-group">
-                      <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                      <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                    </div>
-                    <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
-                    </div>
-                  </figure>
-                  <div class="product-caption text-center">
-                    <h6 class="product-name">
-                      <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS2 EX</a>
-                    </h6>
-                    <div class="price-box">
-                      <span class="price-regular">11,531,000₫</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-item">
-                  <figure class="product-thumb">
-                    <a href="product-details.html">
-                      <img class="pri-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-01.png" alt="product" />
-                      <img class="sec-img" src="assets\img\product\Kim-cuong\kim-cuong-3,6ly-g-vs2-ex-02.png" alt="product" />
-                    </a>
-                    <div class="button-group">
-                      <a href="wishlist.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                      <a href="compare.html" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
-                    </div>
-                    <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
-                    </div>
-                  </figure>
-                  <div class="product-caption text-center">
-                    <h6 class="product-name">
-                      <a href="product-details.html">Kim Cương Viên GIA 3.6ly E VS1 EX</a>
-                    </h6>
-                    <div class="price-box">
-                      <span class="price-regular">11,884,000₫</span>
-                      <span class="price-old"><del>12,643,000₫</del></span>
-                    </div>
-                  </div>
-                </div>
-              </Slider>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
+     
+                        <Sanphamtuongtu_kc/>
       <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>
       </div>
