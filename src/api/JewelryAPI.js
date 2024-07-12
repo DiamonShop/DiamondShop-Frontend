@@ -7,6 +7,7 @@ export const HandleGetAll = async () => {
             'Content-Type': 'application/json'
         })
     var arr = (await response).data;
+    console.log((await response).data)
     return arr;
 };
 
