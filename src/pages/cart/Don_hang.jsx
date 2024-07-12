@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
+import { decodeToken } from '../../api/TokenAPI';
 
 function Don_hang() {
+    const [orderLists, setOrderLists] = useState([]);
+    const token = localStorage.getItem('token');
+    useEffect(() => {
+        const fetchOrderDetails = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userId = decodeToken(token).sid;
+                const data = await handleGetOrderByUserId(parseInt(userId, 10));
+                if (data) {
+                    setOrderLists(data);
+                }
+            } else {
+                setOrderLists([]);
+            }
+        };
+
+        fetchOrderDetails();
+    }, [orderLists]);
+
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('de-DE').format(value);
+    };
+
     return (
         <div>
             <div className="myaccount-content">
@@ -17,29 +42,24 @@ function Don_hang() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>10/6/2024</td>
-                                <td>30.000.000đ</td>
-                                <td>Đang thanh toán</td>
-                                <td>
-                                    <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>1/6/2024</td>
-                                <td>25.000.000đ</td>
-                                <td>Thành công</td>
-                                <td><a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>5/6/2024</td>
-                                <td>3.000.000đ</td>
-                                <td>Đã hủy</td>
-                                <td><a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a></td>
-                            </tr>
+                            {orderLists.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có đơn hàng</td>
+                                </tr>
+                            ) : (orderLists.map((details, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{details.orderDate}</td>
+                                    <td>{formatCurrency(details.totalPrice)}</td>
+                                    <td>
+                                        {details.status === 'Shipping' ? 'Đang vận chuyển' : details.status === 'Ordering' ? 'Đang thanh toán' : 'Hoàn Thành'}
+                                    </td>
+                                    <td>
+                                        <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a>
+                                    </td>
+                                </tr>
+                            )))}
+
                         </tbody>
                     </table>
                 </div>

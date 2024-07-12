@@ -29,10 +29,10 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
-    const [BillId, setTBillId] = useState('');
+    const [BillId, setBillId] = useState('');
 
     useEffect(() => {
-        setTBillId(Math.floor(100000000 + Math.random() * 900000000));
+        setBillId(Math.floor(100000000 + Math.random() * 900000000));
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
