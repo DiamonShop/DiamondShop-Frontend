@@ -120,6 +120,7 @@ export default function Thanh_toan() {
             Address: orderModel.streetAddress,
             OrderNote: orderModel.orderNote,
             IsActive: true, // or whatever logic you have for IsActive
+            Price: orderModel.price,
         };
     
         localStorage.setItem('billCreateDTO', JSON.stringify(billCreateDTO));
