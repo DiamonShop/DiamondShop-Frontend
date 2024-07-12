@@ -62,7 +62,7 @@ export default function Chi_tiet_san_pham() {
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
     };
-    
+
     const handleDecrement = () => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
@@ -185,12 +185,23 @@ export default function Chi_tiet_san_pham() {
                                                     <span>1 Reviews</span>
                                                 </div>
                                             </div>
+                                            
                                             <div class="price-box">
                                                 <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
                                             <div class="pro-size">
                                                 <h6 class="option-title">Chất liệu:</h6>
                                                 <input class="nice-select-chatlieu" value='Vàng' type='text' readOnly>
+                                                </input>
+                                            </div>
+                                            <div class="pro-size">
+                                                <h6 class="option-title">Viên chính:</h6>
+                                                <input class="nice-select-chatlieu" value='Thêm viên vào đây' type='text' readOnly>
+                                                </input>
+                                            </div>
+                                            <div class="pro-size">
+                                                <h6 class="option-title">Viên phụ:</h6>
+                                                <input class="nice-select-chatlieu" value='Thêm viên vào đây' type='text' readOnly>
                                                 </input>
                                             </div>
 
@@ -210,30 +221,19 @@ export default function Chi_tiet_san_pham() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            {productObj.categoryName === 'Nhẫn' && (
+                                                <div class="pro-size">
+                                                    <h6 class="option-title">Size :</h6>
 
-                                            <div class="pro-size">
-                                                <h6 class="option-title">Size :</h6>
-                                                {productObj.categoryName === 'Nhẫn' ? (
                                                     <select class="nice-select">
                                                         <option>8</option>
                                                         <option>9</option>
                                                         <option>10</option>
                                                         <option>11</option>
                                                     </select>
-                                                ) : productObj.categoryName === 'Vòng tay' ? (
-                                                    <select class="nice-select">
-                                                        <option>3</option>
-                                                        <option>5</option>
-                                                        <option>6</option>
-                                                    </select>
-                                                ) : (
-                                                    <></>
-                                                )}
-                                                {productObj.categoryName === 'Nhẫn' && (
                                                     <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-                                                )}
-                                            </div>
-
+                                                </div>
+                                            )}
                                             <div class="button-them-vao-gio-hang">
                                                 <div class="action_link">
                                                     <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
@@ -250,7 +250,7 @@ export default function Chi_tiet_san_pham() {
                                 </div>
                             </div>
 
-                        <Mota_danhgia/>
+                            <Mota_danhgia />
 
                         </div>
 
