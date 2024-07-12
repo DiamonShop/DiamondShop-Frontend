@@ -84,7 +84,7 @@ export default function Chi_tiet_san_pham() {
             //Gọi API để tạo order
             const orders = await handleGetOrderByUserId(parseInt(userId, 10));
             let orderId = null;
-    
+
             if (orders != null) {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
@@ -93,12 +93,12 @@ export default function Chi_tiet_san_pham() {
                     }
                 }
             }
-    
+
             if (orderId === null) {
                 // Create a new order if no "Ordering" order is found
                 orderId = await handleCreateOrder(userId);
             }
-    
+
             if (orderId !== null) {
                 const addProductResponse = await handleAddProductToOrder(orderId, productObj.productId, quantity);
                 if (addProductResponse !== null) {
@@ -185,55 +185,68 @@ export default function Chi_tiet_san_pham() {
                                                     <span>1 Reviews</span>
                                                 </div>
                                             </div>
-                                            
                                             <div class="price-box">
                                                 <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">Chất liệu:</h6>
-                                                <input class="nice-select-chatlieu" value='Vàng' type='text' readOnly>
-                                                </input>
-                                            </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">Viên chính:</h6>
-                                                <input class="nice-select-chatlieu" value='Thêm viên vào đây' type='text' readOnly>
-                                                </input>
-                                            </div>
-                                            <div class="pro-size">
-                                                <h6 class="option-title">Viên phụ:</h6>
-                                                <input class="nice-select-chatlieu" value='Thêm viên vào đây' type='text' readOnly>
-                                                </input>
-                                            </div>
-
-                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                <h6 class="option-title">Số lượng:</h6>
-                                                <div class="quantity">
-                                                    <div class="pro-qty">
-                                                        <span className=" qtybtn" onClick={handleDecrement}>-</span>
-                                                        <input
-                                                            name='txtQuantity'
-                                                            type="text"
-                                                            value={quantity}
-                                                            readOnly
-                                                        />
-                                                        <span className=" qtybtn" onClick={handleIncrement}>+</span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {productObj.categoryName === 'Nhẫn' && (
-                                                <div class="pro-size">
-                                                    <h6 class="option-title">Size :</h6>
-
-                                                    <select class="nice-select">
-                                                        <option>8</option>
-                                                        <option>9</option>
-                                                        <option>10</option>
-                                                        <option>11</option>
+                                            <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
+                                            <ul class="jewelry-filter-container">
+                                                <li class="filter-group">
+                                                    <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                    <select className='nice-select'>
+                                                        <option value="Vàng"> Vàng  </option>
                                                     </select>
-                                                    <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-                                                </div>
-                                            )}
+                                                </li>
+                                                <li class="filter-group">
+                                                    <h6 className='filter-name-jewelry' >Viên chính:</h6>
+                                                    <select className='nice-select' >
+                                                        <option value="VS2">Thêm viên vào</option>
+                                                    </select>
+                                                </li>
+                                                <li class="filter-group">
+                                                    <h6 className='filter-name-jewelry'>Viên phụ:</h6>
+                                                    <select  >
+                                                        <option value="VS2">Thêm viên vào</option>
+                                                    </select>
+                                                </li>
+                                                <li class="filter-group">
+                                                    {productObj.categoryName === 'Nhẫn' && (
+                                                        <>
+                                                            <h6 className='filter-name-jewelry'>Size :</h6>
+
+                                                            <select >
+                                                                <option >8</option>
+                                                                <option>9</option>
+                                                                <option>10</option>
+                                                                <option>11</option>
+                                                            </select>
+                                                            <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                        </>
+                                                    )}
+                                                </li>
+                                                <li class="filter-group">
+                                                    <div class="quantity-cart-box d-flex align-items-center">
+                                                        <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                        <div class="quantity">
+                                                            <div class="pro-qty">
+                                                                <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                                                <input
+                                                                    name='txtQuantity'
+                                                                    type="text"
+                                                                    value={quantity}
+                                                                    readOnly
+                                                                />
+                                                                <span className=" qtybtn" onClick={handleIncrement}>+</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+
+
+
+
                                             <div class="button-them-vao-gio-hang">
                                                 <div class="action_link">
                                                     <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>

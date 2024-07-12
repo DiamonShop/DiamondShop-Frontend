@@ -30,7 +30,6 @@ function Sanphamtuongtu({ onProductClick }) {
         autoplay: true,
         infinite: true,
         slidesToShow: 4,
-        slidesToRoll: 1,
         adaptiveHeight: true,
         arrows: true,
         prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
