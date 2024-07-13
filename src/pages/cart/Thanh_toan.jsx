@@ -29,8 +29,10 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
+    const [BillId, setBillId] = useState('');
 
     useEffect(() => {
+        setBillId(Math.floor(100000000 + Math.random() * 900000000));
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
@@ -97,8 +99,9 @@ export default function Thanh_toan() {
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
         const totalPrices = totalPrice;
-
+    
         const orderModel = {
+            billId:BillId,
             userId: userId,
             fullName: displayName,
             phoneNumber: numberPhone,
@@ -107,16 +110,29 @@ export default function Thanh_toan() {
             orderNote: formData.orderNote,
             price: totalPrices,
         };
-
+    
+        const billCreateDTO = {
+            BillId: orderModel.billId,
+            UserId: orderModel.userId,
+            FullName: orderModel.fullName,
+            NumberPhone: orderModel.phoneNumber,
+            Email: orderModel.email,
+            Address: orderModel.streetAddress,
+            OrderNote: orderModel.orderNote,
+            IsActive: true, // or whatever logic you have for IsActive
+            Price: orderModel.price,
+        };
+    
+        localStorage.setItem('billCreateDTO', JSON.stringify(billCreateDTO));
+    
         try {
-            const { url, billId } = await handleCheckout(orderModel);
-            localStorage.setItem('billId', billId); // Save the billId in localStorage
+            const url = await handleCheckout(orderModel); // Await the promise
             window.location.href = url; // Use the resolved URL
-
         } catch (error) {
             console.error('Error during checkout:', error);
         }
     };
+
 
     const handleDisplayNameChange = (event) => {
         setDisplayName(event.target.value);

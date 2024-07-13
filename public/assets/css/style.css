@@ -5010,21 +5010,10 @@ only screen and (max-width: 767.98px) {
 .nice-select {
   height: 36px;
   line-height: 34px;
-  width: 200px;
+  width: 170px;
   padding: 0 10px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .nice-select {
-    width: 170px;
-  }
-}
-
-@media only screen and (max-width: 479.98px) {
-  .nice-select {
-    width: 190px;
-  }
-}
 
 .nice-select.open {
   border-color: #c29958;
@@ -5302,17 +5291,15 @@ only screen and (max-width: 767.98px) {
   width: 70px;
   height: 40px;
   line-height: 40px;
-  border-radius: 40px;
   margin-left: 45px;
   border: solid 1px #c0c0c0;
   text-align: center;
 }
 
 .product-details-des .pro-size .nice-select-chatlieu {
-  width: 100px;
+  width: 150px;
   height: 40px;
   line-height: 50px;
-  border-radius: 40px;
   padding: 0;
   border: solid 1px #c0c0c0;
   text-align: center;
@@ -6677,24 +6664,6 @@ only screen and (max-width: 767.98px) {
   width: 200px;
 }
 
-.accordion {
-
-  display: flex;
-  justify-content: space-between;
-
-}
-
-.accordion::before {
-  content: '\25BC';
-  font-size: 12px;
-}
-
-select {
-  width: calc(100% - 20px);
-  /* width - padding */
-  border: 1px solid #ccc;
-  background: white;
-}
 
 .filter-img img {
   width: 60px;
@@ -6707,10 +6676,6 @@ select {
 
 .filter-group button {
   margin-right: 20px;
-}
-
-.accordion.active::before {
-  content: '\25B2';
 }
 
 /* overlay of image GIA */
@@ -21813,3 +21778,21 @@ footer.footer p {
 }
 
 /*End Shipper page*/
+/*Start Chi tiet san pham  */
+.jewelry-filter-line {
+  opacity: 0.5;
+}
+.jewelry-filter-container {
+  width: 550px;
+  padding: 0;
+  margin: 0;
+}
+.filter-name-jewelry {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  margin-left: 0px;
+  width: 85px;
+}
+
+/* End Chi tiet san pham  */

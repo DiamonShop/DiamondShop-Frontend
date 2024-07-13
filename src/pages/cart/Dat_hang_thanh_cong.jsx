@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { decodeToken } from '../../api/TokenAPI';
 import { handleUpdateStatusByUserId } from '../../api/OrderAPI';
 
 function Dat_hang_thanh_cong() {
-  const [transactionId, setTransactionId] = useState('');
-  const [billId, setBillId] = useState('');
-  const getUserId = async () =>{
+  //const [transactionId, setTransactionId] = useState('');
+  const [billCreateDTO, setBillCreateDTO] = useState(null);
+  const getUserId = async () => {
     const token = localStorage.getItem("token");
-    if(token){
-        const userId = decodeToken(token).sid;
-        const status = await handleUpdateStatusByUserId(userId);        
+    if (token) {
+      const userId = decodeToken(token).sid;
+      await handleUpdateStatusByUserId(userId);
     }
-}
-
+  }
   useEffect(() => {
-    setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
-    const storedBillId = localStorage.getItem('billId');
-    if (storedBillId) {
-        setBillId(storedBillId);
-        //localStorage.removeItem('billId'); // Optionally remove it if not needed anymore
-        
-    } else {
-        console.error("No billId found in localStorage");
+    //setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
+    const storedBill = localStorage.getItem('billCreateDTO');
+    if (storedBill) {
+      setBillCreateDTO(JSON.parse(storedBill));
     }
-
     getUserId();
   }, []);
+
   return (
     <div>
       <div className='box-dat-hang'>
@@ -47,9 +42,17 @@ function Dat_hang_thanh_cong() {
                 </div>
                 <div className="order-details">
                   <div className="order-number-label">Mã đơn hàng</div>
-                  <div className="order-number">{transactionId}</div>
-                  <div className="order-number-label">Mã hóa đơn</div>
-                  <div className="order-number">{billId || "Not available"}</div>
+                  <div className="order-number">{billCreateDTO ? billCreateDTO.BillId : ''}</div>
+                  {billCreateDTO && (
+                    <div>
+                      <div>User ID: {billCreateDTO.UserId}</div>
+                      <div>Full Name: {billCreateDTO.FullName}</div>
+                      <div>Phone Number: {billCreateDTO.NumberPhone}</div>
+                      <div>Email: {billCreateDTO.Email}</div>
+                      <div>Address: {billCreateDTO.Address}</div>
+                      <div>Order Note: {billCreateDTO.OrderNote}</div>
+                    </div>
+                  )}
                   <div className="complement">Thank You!</div>
                   <div className='btn-dat-hang-thanh-cong'>
                     <Link to="/" className="btn-return-home">Tiếp tục mua hàng</Link>
@@ -58,7 +61,6 @@ function Dat_hang_thanh_cong() {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <div className="jagged-edge"></div>
