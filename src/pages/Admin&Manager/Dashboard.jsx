@@ -95,10 +95,15 @@ const Dashboard = () => {
                                     <i class="align-middle"
                                         data-feather="square">
                                     </i>
-                                    <span class="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
+                                    <span class="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
                                 </a>
                             </li>
-
+                            <li className="sidebar-item">
+                            <a className="sidebar-link" >
+                                <i className="align-middle" data-feather="sliders"></i>
+                                <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                            </a>
+                        </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link" >
                                     <i class="align-middle"

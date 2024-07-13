@@ -188,9 +188,15 @@ const Taikhoan = () => {
                         </li>
                         <li className="sidebar-header">Quản lý</li>
                         <li className="sidebar-item " >
-                            <a className="sidebar-link" href="/SanPham">
+                            <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
+                                <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                            </a>
+                        </li>
+                        <li className="sidebar-item active">
+                            <a className="sidebar-link" >
+                                <i className="align-middle" data-feather="sliders"></i>
+                                <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
                             </a>
                         </li>
                         <li className="sidebar-item active">
