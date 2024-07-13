@@ -64,6 +64,11 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                                                     image2={item.image2}
                                                     image3={item.image3}
                                                     label={item.label}
+                                                    Carat={item.Carat}
+                                                    Clarity={item.Clarity}
+                                                    Cut={item.Cut}
+                                                    Color={item.Color}
+                                                    Quantity={item.Quantity}
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}
@@ -77,7 +82,7 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                                         <ul className="pagination-box">
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                <i className="pe-7s-angle-left"></i>
+                                                    <i className="pe-7s-angle-left"></i>
                                                 </a>
                                             </li>
                                             {pageNumbers.map(number => (
@@ -89,7 +94,7 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                                             ))}
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                <i className="pe-7s-angle-right"></i>
+                                                    <i className="pe-7s-angle-right"></i>
                                                 </a>
                                             </li>
                                         </ul>

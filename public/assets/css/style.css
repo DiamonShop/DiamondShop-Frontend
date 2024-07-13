@@ -5176,7 +5176,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .quantity {
-  margin-right: 15px;
+  margin-right: 25px;
 }
 
 .product-details-des .quantity .pro-qty {
@@ -5186,7 +5186,6 @@ only screen and (max-width: 767.98px) {
   padding: 0 15px;
   border-radius: 40px;
   float: left;
-  margin-left: 10px;
 }
 
 .product-details-des .quantity .pro-qty .qtybtn {
@@ -6635,129 +6634,6 @@ only screen and (max-width: 767.98px) {
 }
 
 /* end banner diamond */
-/* diamond filter container */
-.diamond-filter-line {
-  opacity: 0.5;
-}
-
-.diamond-filter-container {
-  width: 450px;
-  padding: 0;
-  margin: 0;
-}
-
-.filter-group {
-  /* position: relative; */
-  margin-bottom: 5px;
-  list-style-type: none;
-  display: flex;
-  justify-content: start;
-  margin-top: 20px;
-
-}
-
-.filter-name {
-  display: flex;
-  align-items: center;
-  margin-right: 50px;
-  margin-left: 0px;
-  width: 200px;
-}
-
-
-.filter-img img {
-  width: 60px;
-  height: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition */
-
-}
-
-.filter-group button {
-  margin-right: 20px;
-}
-
-/* overlay of image GIA */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
-  overflow: auto;
-  /* Cho phép cuộn nếu nội dung quá dài */
-}
-
-.overlay-content {
-  background: white;
-  padding: 0px 20px;
-  border-radius: 5px;
-  text-align: center;
-  max-width: 98%;
-  /* Giới hạn chiều rộng của nội dung overlay */
-  max-height: 98%;
-  /* Giới hạn chiều cao của nội dung overlay */
-  overflow: auto;
-}
-
-.overlay-content h2 {
-  margin-top: 0;
-}
-
-.overlay-close-button {
-  display: flex;
-  justify-content: right;
-  cursor: pointer;
-  margin: 0px 0px;
-  font-size: larger;
-}
-
-.overlay-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #b5925a;
-  margin-bottom: 20px;
-
-}
-
-.overlay-description {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 30px;
-  padding: 0px 50px;
-}
-
-.overlay-link {
-  font-size: 16px;
-  color: #333;
-  font-weight: bold;
-  text-decoration: none;
-  padding-bottom: 3px;
-  transition: color 0.3s, border-color 0.3s;
-
-}
-
-.overlay-link:hover {
-  color: #b5925a;
-  border-color: #b5925a;
-}
-
-.overlay-GIA-image {
-  vertical-align: middle;
-  border-style: none;
-  max-width: 100%;
-  max-height: 100%;
-  /* Đảm bảo hình ảnh không vượt quá kích thước của overlay */
-}
-
-/* end diamond filter container */
 
 /* signup-signin form */
 
@@ -21794,5 +21670,133 @@ footer.footer p {
   margin-left: 0px;
   width: 85px;
 }
+.soluongsanphamtrongkho {
+  margin-top: 10px;
 
+}
 /* End Chi tiet san pham  */
+
+/* diamond filter container */
+.diamond-filter-line {
+  opacity: 0.5;
+}
+
+.diamond-filter-container {
+  width: 550px;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-group {
+  /* position: relative; */
+  margin-bottom: 5px;
+  list-style-type: none;
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+
+}
+
+
+.filter-name-kc{
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  margin-left: 0px;
+  width: 200px;
+}
+
+
+.filter-img img {
+  width: 60px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth transition */
+
+}
+
+.filter-group button {
+  margin-right: 20px;
+}
+
+/* overlay of image GIA */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
+  overflow: auto;
+  /* Cho phép cuộn nếu nội dung quá dài */
+}
+
+.overlay-content {
+  background: white;
+  padding: 0px 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 98%;
+  /* Giới hạn chiều rộng của nội dung overlay */
+  max-height: 98%;
+  /* Giới hạn chiều cao của nội dung overlay */
+  overflow: auto;
+}
+
+.overlay-content h2 {
+  margin-top: 0;
+}
+
+.overlay-close-button {
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+  margin: 0px 0px;
+  font-size: larger;
+}
+
+.overlay-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #b5925a;
+  margin-bottom: 20px;
+
+}
+
+.overlay-description {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 30px;
+  padding: 0px 50px;
+}
+
+.overlay-link {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  padding-bottom: 3px;
+  transition: color 0.3s, border-color 0.3s;
+
+}
+
+.overlay-link:hover {
+  color: #b5925a;
+  border-color: #b5925a;
+}
+
+.overlay-GIA-image {
+  vertical-align: middle;
+  border-style: none;
+  max-width: 100%;
+  max-height: 100%;
+  /* Đảm bảo hình ảnh không vượt quá kích thước của overlay */
+}
+
+/* end diamond filter container */
