@@ -39,7 +39,7 @@ function Don_hang() {
                     <table >
                         <thead className="thead-light">
                             <tr>
-                                <th>Đơn hàng</th>
+                                <th>Mã Đơn hàng</th>
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
@@ -53,7 +53,7 @@ function Don_hang() {
                                 </tr>
                             ) : (orderLists.map((details, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>{details.orderId}</td>
                                     <td>{details.orderDate}</td>
                                     <td>{formatCurrency(details.totalPrice)}</td>
                                     <td>

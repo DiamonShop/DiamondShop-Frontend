@@ -1,20 +1,106 @@
 import React, { useEffect, useState } from 'react';
-import { handleGetFeedbacksByProductId } from '../api/FeedbackAPI'; // Adjust the import path based on your project structure
+import { handleGetFeedbacksByProductId, handleCreateFeedback } from '../api/FeedbackAPI'; // Adjust the import path based on your project structure
 import { format } from 'date-fns';
+import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
+import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
+import StarRating from '../components/StarRating'; // Adjust the import path
 
 const Mota_danhgia = ({ productId }) => {
     const [feedbacks, setFeedbacks] = useState([]);
+    const [canComment, setCanComment] = useState(true);
+    const [highestRating, setHighestRating] = useState(0);
+    const [orderIdForComment, setOrderIdForComment] = useState(null);
+    const [feedback, setFeedback] = useState({ description: '', rating: 0 });
+    const [feedbackMessage, setFeedbackMessage] = useState('');
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
-            const feedbackData = await handleGetFeedbacksByProductId(productId);
-            if (feedbackData) {
+            try {
+                const feedbackData = await handleGetFeedbacksByProductId(productId);
                 setFeedbacks(feedbackData);
+            } catch (error) {
+                console.error("Error fetching feedbacks:", error);
             }
         };
 
         fetchFeedbacks();
     }, [productId]);
+
+    useEffect(() => {
+        const checkCanComment = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userId = decodeToken(token).sid;
+                const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+                if (orders) {
+                    const completedOrders = orders.filter(order => order.status === 'Completed');
+                    const productComments = completedOrders.flatMap(order => order.orderDetails.filter(detail => detail.productId === productId));
+                    const userFeedbacks = feedbacks.filter(f => f.userId === userId);
+                    if (userFeedbacks.length < productComments.length) {
+                        setCanComment(true);
+                        const latestOrder = completedOrders.find(order => order.orderDetails.some(detail => detail.productId === productId));
+                        console.log("Latest order for comment:", latestOrder); // Log the latest order
+                        setOrderIdForComment(latestOrder.orderId);
+                    } else {
+                        setCanComment(false);
+                    }
+                }
+            }
+        };
+
+        checkCanComment();
+    }, [feedbacks, productId]);
+
+    const handleFeedbackChange = (e) => {
+        const { name, value } = e.target;
+        setFeedback(prevFeedback => ({
+            ...prevFeedback,
+            [name]: value
+        }));
+    };
+
+    const handleRatingChange = (rating) => {
+        setFeedback(prevFeedback => ({
+            ...prevFeedback,
+            rating
+        }));
+    };
+
+    const handleFeedbackSubmit = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const userId = decodeToken(token).sid;
+
+        const feedbackData = {
+            userId,
+            productId,
+            orderId: orderIdForComment,
+            description: feedback.description,
+            rating: feedback.rating || highestRating,
+            dateTime: new Date().toISOString()
+        };
+
+        console.log("Submitting feedback:", feedbackData); // Log the payload
+
+        try {
+            const response = await handleCreateFeedback(feedbackData);
+            if (response.data === "Create Feedback Successfully") {
+                setFeedbacks(prevFeedbacks => [...prevFeedbacks, feedbackData]);
+                setFeedback({ description: '', rating: 0 });
+                setFeedbackMessage('Feedback submitted successfully');
+                setCanComment(false);
+            } else {
+                setFeedbackMessage(response.data);
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                setFeedbackMessage(error.response.data);
+            } else {
+                setFeedbackMessage('Error submitting feedback');
+            }
+            console.error("Error creating feedback:", error);
+        }
+    };
 
     return (
         <div className="product-details-reviews section-padding pb-0">
@@ -52,11 +138,12 @@ const Mota_danhgia = ({ productId }) => {
                                         </div>
                                         <div className="review-box">
                                             <div className="ratings">
-                                                <span className="good"><i className="fa fa-star"></i></span>
-                                                <span className="good"><i className="fa fa-star"></i></span>
-                                                <span className="good"><i className="fa fa-star"></i></span>
-                                                <span className="good"><i className="fa fa-star"></i></span>
-                                                <span><i className="fa fa-star"></i></span>
+                                                {[...Array(feedback.rating)].map((_, i) => (
+                                                    <span key={i} className="good"><i className="fa fa-star"></i></span>
+                                                ))}
+                                                {[...Array(5 - feedback.rating)].map((_, i) => (
+                                                    <span key={i}><i className="fa fa-star"></i></span>
+                                                ))}
                                             </div>
                                             <div className="post-author">
                                                 <p><span>{feedback.userName} </span> {format(new Date(feedback.dateTime), 'dd/MM/yyyy')}</p>
@@ -65,6 +152,36 @@ const Mota_danhgia = ({ productId }) => {
                                         </div>
                                     </div>
                                 ))}
+                                {canComment && (
+                                    <form onSubmit={handleFeedbackSubmit} className="review-form">
+                                        <div className="form-group row">
+                                            <div className="col">
+                                                <label className="col-form-label"><span className="text-danger">*</span> Đánh giá:</label>
+                                                <textarea
+                                                    className="form-control"
+                                                    name="description"
+                                                    value={feedback.description}
+                                                    onChange={handleFeedbackChange}
+                                                    required
+                                                ></textarea>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <div className="col">
+                                                <label className="col-form-label"><span className="text-danger">*</span> Rating</label>
+                                                <StarRating rating={feedback.rating} setRating={handleRatingChange} />
+                                            </div>
+                                        </div>
+                                        <div className="buttons">
+                                            <button className="btn btn-sqr" type="submit">Gửi</button>
+                                        </div>
+                                    </form>
+                                )}
+                                {feedbackMessage && (
+                                    <div className="feedback-message">
+                                        <span>{feedbackMessage}</span>
+                                    </div>
+                                )}
                             </div>
                             <div className="tab-pane fade" id="tab_four">
                                 <p color="blue"><b>Bảo hành miễn phí 6 tháng</b></p>
