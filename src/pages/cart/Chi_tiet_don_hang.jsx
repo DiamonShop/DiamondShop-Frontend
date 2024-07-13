@@ -95,7 +95,7 @@ function Chi_tiet_don_hang() {
                                         <tbody>
                                             {
                                                 orderDetailLists.map((orderDetail, index) => (
-
+                                                    <tr key={index}>
                                                         <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
 
                                                         <td className="pro-title">{orderDetail.productName}</td>
