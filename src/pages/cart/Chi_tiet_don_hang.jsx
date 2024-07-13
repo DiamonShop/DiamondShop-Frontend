@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
+import { handleGetOrderByUserIdOrderId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
 
@@ -9,17 +9,18 @@ function Chi_tiet_don_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    //useEffect để set list của orderDetail
+    // useEffect to set the list of orderDetails
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
-            handleGetOrderByUserId(parseInt(userId, 10))
+            const selectedOrderId = localStorage.getItem('selectedOrderId');
+            handleGetOrderByUserIdOrderId(parseInt(userId, 10), parseInt(selectedOrderId, 10))
                 .then((data) => {
                     if (data) {
-                        const orderingOrder = data.find(order => order.status === 'Ordering');
-                        if (orderingOrder) {
-                            setOrderDetailLists(orderingOrder.orderDetails);
+                        for (const item of data) {
+                            setOrderDetailLists(item.orderDetails);
+                            break;
                         }
                     }
                 });
@@ -27,27 +28,13 @@ function Chi_tiet_don_hang() {
             setOrderDetailLists([]);
             setTotalPrice(0);
         }
-    }, [orderDetailLists]);
+    }, []);
 
-    //useEffect để cập nhật total price
+    // useEffect to update total price
     useEffect(() => {
         if (orderDetailLists.length > 0) {
             const total = calculateTotalPrice(orderDetailLists);
             setTotalPrice(total);
-            // Cập nhật total price
-            const token = localStorage.getItem('token');
-            if (token) {
-                const userId = decodeToken(token).sid;
-                handleGetOrderByUserId(parseInt(userId, 10))
-                    .then((data) => {
-                        if (data) {
-                            const orderingOrder = data.find(order => order.status === 'Ordering');
-                            if (orderingOrder) {
-                                handleUpdateTotalPrice(orderingOrder.orderId, total);
-                            }
-                        }
-                    });
-            }
         }
     }, [orderDetailLists]);
 
@@ -58,7 +45,7 @@ function Chi_tiet_don_hang() {
         }
         return total;
     };
-
+    console.log(orderDetailLists)
     return (
         <div>
             <ToastContainer />
@@ -95,16 +82,17 @@ function Chi_tiet_don_hang() {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {
+                                                orderDetailLists.map((orderDetail, index) => (
+                                                    <tr key={index}>
+                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+                                                        <td className="pro-title">{orderDetail.productName}</td>
+                                                        <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
+                                                        <td className="pro-quantity">{orderDetail.quantity}</td>
+                                                        <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
+                                                    </tr>
+                                                ))
 
-                                            {orderDetailLists.map((orderDetail, index) => (
-                                                <tr key={index}>
-                                                    <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
-                                                    <td className="pro-title">{orderDetail.productName}</td>
-                                                    <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
-                                                    <td className="pro-quantity">{orderDetail.quantity}</td>
-                                                    <td className="pro-subtotal">{} VND</td>
-                                                </tr>
-                                            ))
                                             }
                                         </tbody>
                                     </table>
@@ -113,17 +101,11 @@ function Chi_tiet_don_hang() {
                             <div className="Chitietdonhang-giatien">
                                 <div className="row">
                                     <div className="col-lg-5 ms-auto text-end">
-                                        <h5>Thành tiền: <span className="pro-price"> 000.000.000đ</span></h5>
+                                        <h5>Thành tiền: <span className="pro-price">{formatCurrency(totalPrice)} VND</span></h5>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -131,5 +113,4 @@ function Chi_tiet_don_hang() {
     );
 }
 
-
-export default Chi_tiet_don_hang
+export default Chi_tiet_don_hang;
