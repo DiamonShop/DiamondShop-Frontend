@@ -5,27 +5,22 @@ import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
-import '../../../nice-select'
-import '../../../image-zoom'
-
-
+import '../../../nice-select';
+import '../../../image-zoom';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
+
 export default function Chi_tiet_san_pham() {
-
     useEffect(() => {
-
-        // Khởi tạo plugin nice-select sau khi component đã được render
         $('select').niceSelect();
         $('.img-zoom').zoom();
-        // Cleanup khi component unmount
+
         return () => {
             $('select').niceSelect('destroy');
             $('.img-zoom').zoom('destroy');
         };
     }, []);
 
-    //Get product when reload
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
@@ -36,8 +31,8 @@ export default function Chi_tiet_san_pham() {
         speed: 1000,
         asNavFor: navSliderRef.current,
         ref: largeSliderRef,
-        autoplay: true, // Thêm dòng này
-        autoplaySpeed: 5000, // Thêm dòng này (5000 milliseconds = 5 seconds)
+        autoplay: true,
+        autoplaySpeed: 5000,
     };
 
     const navSliderSettings = {
@@ -54,8 +49,8 @@ export default function Chi_tiet_san_pham() {
             }
         }],
         ref: navSliderRef,
-        autoplay: true, // Thêm dòng này
-        autoplaySpeed: 5000, // Thêm dòng này (5000 milliseconds = 5 seconds)
+        autoplay: true,
+        autoplaySpeed: 5000,
     };
 
     const [quantity, setQuantity] = useState(1);
@@ -73,17 +68,18 @@ export default function Chi_tiet_san_pham() {
         setShowMessage(true);
         setTimeout(() => {
             setShowMessage(false);
-        }, 5000); // 5000 milliseconds = 5 seconds
-    }
+        }, 5000);
+    };
 
     const handleAddToCart = async () => {
-        //Lấy userId để tạo order
+
         const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
-            //Gọi API để tạo order
             const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+
             let orderId = null;
+
 
             if (orders != null) {
                 for (const item of orders) {
@@ -114,16 +110,16 @@ export default function Chi_tiet_san_pham() {
 
     return (
         <div>
-            <div class="breadcrumb-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="breadcrumb-wrap">
+            <div className="breadcrumb-area">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="breadcrumb-wrap">
                                 <nav aria-label="breadcrumb">
-                                    <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                                        <li class="breadcrumb-item"><Link to="/Nhan">{productObj.categoryName}</Link></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to="/Nhan">{productObj.categoryName}</Link></li>
+                                        <li className="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -132,15 +128,13 @@ export default function Chi_tiet_san_pham() {
                 </div>
             </div>
 
-            <div class="shop-main-wrapper section-padding pb-0">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-lg-12 order-1 order-lg-2">
-
-                            <div class="product-details-inner">
-                                <div class="row">
-                                    <div class="col-lg-5">
+            <div className="shop-main-wrapper section-padding pb-0">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12 order-1 order-lg-2">
+                            <div className="product-details-inner">
+                                <div className="row">
+                                    <div className="col-lg-5">
                                         <Slider {...largeSliderSettings} className="product-large-slider">
                                             <div className="pro-large-img img-zoom">
                                                 <img src={productObj.image1} alt="product-details" />
@@ -154,7 +148,6 @@ export default function Chi_tiet_san_pham() {
                                             <div className="pro-large-img img-zoom">
                                                 <img src={productObj.image4} alt="product-details" />
                                             </div>
-
                                         </Slider>
                                         <Slider {...navSliderSettings} className="pro-nav">
                                             <div className="pro-nav-thumb">
@@ -169,25 +162,64 @@ export default function Chi_tiet_san_pham() {
                                             <div className="pro-nav-thumb">
                                                 <img src={productObj.image4} alt="product-details" />
                                             </div>
-
                                         </Slider>
                                     </div>
-                                    <div class="col-lg-7">
-                                        <div class="product-details-des">
-                                            <h3 class="product-name">{productObj.productName}</h3>
-                                            <div class="ratings d-flex">
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <span><i class="fa fa-star-o"></i></span>
-                                                <div class="pro-review">
-                                                    <span>1 Reviews</span>
+                                    <div className="col-lg-7">
+                                        <div className="product-details-des">
+                                            <h3 className="product-name">{productObj.productName}</h3>
+                                            <div className="ratings d-flex">
+                                                <span><i className="fa fa-star-o"></i></span>
+                                                <span><i className="fa fa-star-o"></i></span>
+                                                <span><i className="fa fa-star-o"></i></span>
+                                                <span><i className="fa fa-star-o"></i></span>
+                                                <span><i className="fa fa-star-o"></i></span>
+                                                <div className="pro-review">
+                                                    <span>Reviews</span>
                                                 </div>
                                             </div>
-                                            <div class="price-box">
-                                                <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
+                                            <div className="price-box">
+                                                <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
+
+                                            <div className="pro-size">
+                                                <h6 className="option-title">Chất liệu:</h6>
+                                                <input className="nice-select-chatlieu" value='Vàng' type='text' readOnly />
+                                            </div>
+                                            <div className="quantity-cart-box d-flex align-items-center">
+                                                <h6 className="option-title">Số lượng:</h6>
+                                                <div className="quantity">
+                                                    <div className="pro-qty">
+                                                        <span className="qtybtn" onClick={handleDecrement}>-</span>
+                                                        <input name='txtQuantity' type="text" value={quantity} readOnly />
+                                                        <span className="qtybtn" onClick={handleIncrement}>+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="pro-size">
+                                                <h6 className="option-title">Size :</h6>
+                                                {productObj.categoryName === 'Nhẫn' ? (
+                                                    <select className="nice-select">
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                    </select>
+                                                ) : productObj.categoryName === 'Vòng tay' ? (
+                                                    <select className="nice-select">
+                                                        <option>3</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                                {productObj.categoryName === 'Nhẫn' && (
+                                                    <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                )}
+                                            </div>
+                                            <div className="button-them-vao-gio-hang">
+                                                <div className="action_link">
+                                                    <a className="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
                                             <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
                                             <ul class="jewelry-filter-container">
                                                 <li class="filter-group">
@@ -250,11 +282,11 @@ export default function Chi_tiet_san_pham() {
                                             <div class="button-them-vao-gio-hang">
                                                 <div class="action_link">
                                                     <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
+
                                                 </div>
                                             </div>
-
                                             {showMessage && (
-                                                <div class="message-add-to-cart-success">
+                                                <div className="message-add-to-cart-success">
                                                     <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
                                                 </div>
                                             )}
@@ -263,20 +295,16 @@ export default function Chi_tiet_san_pham() {
                                 </div>
                             </div>
 
+                            <Mota_danhgia productId={productObj.productId} />
                             <Mota_danhgia />
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
-            <Sanphamtuongtu ></Sanphamtuongtu>
-
-            <div class="scroll-top not-visible">
-                <i class="fa fa-angle-up"></i>
+            <Sanphamtuongtu />
+            <div className="scroll-top not-visible">
+                <i className="fa fa-angle-up"></i>
             </div>
-
         </div>
-    )
+    );
 }

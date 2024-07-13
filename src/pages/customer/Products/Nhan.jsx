@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
-
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
