@@ -26,7 +26,6 @@ export default function Kim_cuong_3_6({ onProductClick }) {
                 return 0;
         }
     });
-
     // Calculate the products to be displayed on the current page
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;

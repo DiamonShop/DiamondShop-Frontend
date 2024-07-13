@@ -42,7 +42,6 @@ export default function Kim_cuong_4_1({ onProductClick }) {
     for (let i = 1; i <= Math.ceil(sortedProducts.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
-
     return (
         <div>
             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong.png)` }}>
