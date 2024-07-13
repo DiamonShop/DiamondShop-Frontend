@@ -40,6 +40,7 @@ import Chi_tiet_don_hang from './pages/cart/Chi_tiet_don_hang';
 import Dat_hang_thanh_cong from './pages/cart/Dat_hang_thanh_cong';
 import ShipperLayout from './ShipperLayout';
 import Shipper from './pages/ShipperPage/Shipper';
+import KimCuong from './pages/Admin&Manager/Kim_Cuong';
 function App({ tokenIsValid }) {
 
   //Lưu product để khi reload sẽ không bị lỗi
@@ -77,7 +78,8 @@ function App({ tokenIsValid }) {
               <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
               <Route path='/Thanhtoan' element={<MainLayout tokenIsValid={tokenIsValid}><Thanh_toan /></MainLayout>} />
               <Route path='/Dashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><Dashboard /></DashboardLayout>} />
-              <Route path='/SanPham' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
+              <Route path='/TrangSuc' element={<DashboardLayout tokenIsValid={tokenIsValid}><San_Pham /></DashboardLayout>} />
+              <Route path='/KimCuongDashboard' element={<DashboardLayout tokenIsValid={tokenIsValid}><KimCuong /></DashboardLayout>} />
               <Route path='/TaiKhoan' element={<DashboardLayout tokenIsValid={tokenIsValid}><Tai_Khoan /></DashboardLayout>} />
               <Route path='/Uploadimg' element={<DashboardLayout tokenIsValid={tokenIsValid}><FirebaseImageUpload /></DashboardLayout>} />
               <Route path='/DonHang' element={<DashboardLayout tokenIsValid={tokenIsValid}><Don_Hang /></DashboardLayout>} />

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
+import { handleGetOrderByUserId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 
 function Don_hang() {
     const [orderLists, setOrderLists] = useState([]);
     const token = localStorage.getItem('token');
+
     useEffect(() => {
         const fetchOrderDetails = async () => {
             const token = localStorage.getItem('token');
@@ -20,10 +21,14 @@ function Don_hang() {
         };
 
         fetchOrderDetails();
-    }, [orderLists]);
+    }, []);
 
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('de-DE').format(value);
+    };
+
+    const handleViewOrderDetails = (orderId) => {
+        localStorage.setItem('selectedOrderId', orderId);
     };
 
     return (
@@ -55,7 +60,7 @@ function Don_hang() {
                                         {details.status === 'Shipping' ? 'Đang vận chuyển' : details.status === 'Ordering' ? 'Đang thanh toán' : 'Hoàn Thành'}
                                     </td>
                                     <td>
-                                        <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang">Xem</a>
+                                        <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang" onClick={() => handleViewOrderDetails(details.orderId)}>Xem</a>
                                     </td>
                                 </tr>
                             )))}
@@ -68,4 +73,4 @@ function Don_hang() {
     )
 }
 
-export default Don_hang
+export default Don_hang;

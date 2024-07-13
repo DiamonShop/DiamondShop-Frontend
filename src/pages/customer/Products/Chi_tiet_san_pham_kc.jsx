@@ -56,18 +56,7 @@ export default function Chi_tiet_san_pham_kc() {
     }],
     ref: navSliderRef
   };
-  const relatedSliderSettings = {
-    speed: 1000,
-    autoplay: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToRoll: 1,
-    adaptiveHeight: true,
-    arrows: true,
-    prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-    nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-
-  };
+ 
   // overlay of GIA image
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
@@ -184,28 +173,28 @@ export default function Chi_tiet_san_pham_kc() {
                       <div class="price-box">
                         <span class="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                       </div>
-                      <p className='diamond-filter-line'>------------------------------------------------------------------------------------</p>
+                      <p className='diamond-filter-line'>-----------------------------------------------------------------------------</p>
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <h6 className='filter-name'>Màu sắc (Color):</h6>
+                          <h6 className='filter-name-kc'>Màu sắc (Color):</h6>
                           <select className='nice-select'>
-                            <option value="G">G</option>
+                            <option value="G">{productObj.Color}</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <h6 className='filter-name'>Độ Tinh Khiết (Clarity):</h6>
+                          <h6 className='filter-name-kc'>Độ Tinh Khiết (Clarity):</h6>
                           <select className='nice-select' >
-                            <option value="VS2">VS2</option>
-                          </select>
-                        </li>
-                        <li class="filter-group">            
-                          <h6 className='filter-name'>Giác Cắt (Cut):</h6>
-                          <select className='nice-select'>
-                            <option value="EX">EX</option>
+                            <option value="VS2">{productObj.Clarity}</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <h6 className='filter-name'>Giấy kiểm định</h6>
+                          <h6 className='filter-name-kc'>Giác Cắt (Cut):</h6>
+                          <select className='nice-select'>
+                            <option value="EX">{productObj.Cut}</option>
+                          </select>
+                        </li>
+                        <li class="filter-group">
+                          <h6 className='filter-name-kc'>Giấy kiểm định</h6>
                           <div className='filter-img' onClick={handleImageClick}>
                             <img src="https://file.hstatic.net/1000381168/file/gia-logo_5deb96f1f2b541568f93dc916976d435.svg" alt="GIA" />
                           </div>
@@ -246,9 +235,19 @@ export default function Chi_tiet_san_pham_kc() {
                                 <span className=" qtybtn" onClick={handleIncrement}>+</span>
 
                               </div>
+                              
+
+
+
                             </div>
                           </div>
+                          <span>
+                          <h6 className='soluongsanphamtrongkho'>
+                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
+                              </h6>
+                          </span>
                         </li>
+                       
                       </ul>
 
 
@@ -305,8 +304,8 @@ export default function Chi_tiet_san_pham_kc() {
         </div>
       </div>
 
-     
-                        <Sanphamtuongtu_kc/>
+
+      <Sanphamtuongtu_kc />
       <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>
       </div>
