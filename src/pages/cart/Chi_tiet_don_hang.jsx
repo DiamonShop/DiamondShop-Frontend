@@ -11,6 +11,7 @@ function Chi_tiet_don_hang() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [products, setProducts] = useState([]);
 
+
     useEffect(() => {
         const fetchOrderDetails = async () => {
             const token = localStorage.getItem('token');
@@ -39,6 +40,7 @@ function Chi_tiet_don_hang() {
         fetchOrderDetails();
     }, []);
 
+
     useEffect(() => {
         if (orderDetailLists.length > 0) {
             const total = calculateTotalPrice(orderDetailLists);
@@ -53,7 +55,7 @@ function Chi_tiet_don_hang() {
         }
         return total;
     };
-
+    console.log(orderDetailLists)
     return (
         <div>
             <ToastContainer />
@@ -93,21 +95,26 @@ function Chi_tiet_don_hang() {
                                         <tbody>
                                             {
                                                 orderDetailLists.map((orderDetail, index) => (
-                                                    <tr key={index}>
-                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.image1} alt="Product" /></td>
+
+                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+
                                                         <td className="pro-title">{orderDetail.productName}</td>
                                                         <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
                                                         <td className="pro-quantity">{orderDetail.quantity}</td>
                                                         <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
-                                                        
+
                                                     </tr>
                                                 ))
+
+
                                             }
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+
                             
+
                         </div>
                     </div>
                 </div>
@@ -116,4 +123,6 @@ function Chi_tiet_don_hang() {
     );
 }
 
+
 export default Chi_tiet_don_hang;
+

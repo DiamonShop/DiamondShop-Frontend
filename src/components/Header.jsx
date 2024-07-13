@@ -91,7 +91,7 @@ export default function Header({ tokenIsValid }) {
                             </ul>
                           </li>
                           <li>
-                            <a href="/Kimcuong">Kim cương  <i className="fa fa-angle-down"></i>
+                            <a href="">Kim cương  <i className="fa fa-angle-down"></i>
                             </a>
                             <ul className="dropdown">
                               <li>
