@@ -634,7 +634,16 @@ const KimCuong = () => {
                                             <div className="admin-page-buttons">
                                                 <button className='admin-page-view-button' onClick={() => openModal(product)}>Xem</button>
                                                 <button className='admin-page-edit-button' onClick={() => handleEditProductClick(product)}>Sửa</button>
-                                                <button className='admin-page-delete-button' onClick={() => deleteProduct(product.productId)}>Xóa</button>
+                                                <button
+                                                    className='admin-page-delete-button'
+                                                    onClick={() => {
+                                                        if (window.confirm(`Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`)) {
+                                                            deleteProduct(product.productId);
+                                                        }
+                                                    }}
+                                                >
+                                                    Xóa
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
