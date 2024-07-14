@@ -47,6 +47,7 @@ export default function Dang_nhap() {
 
                 if (roleName === 'Admin' || roleName === 'Manager') {
                     navigate('/Dashboard');
+                    window.location.reload();
                 } 
                 else {
                     navigate('/');

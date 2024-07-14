@@ -5010,10 +5010,21 @@ only screen and (max-width: 767.98px) {
 .nice-select {
   height: 36px;
   line-height: 34px;
-  width: 170px;
+  width: 200px;
   padding: 0 10px;
 }
 
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .nice-select {
+    width: 170px;
+  }
+}
+
+@media only screen and (max-width: 479.98px) {
+  .nice-select {
+    width: 190px;
+  }
+}
 
 .nice-select.open {
   border-color: #c29958;
@@ -5176,7 +5187,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .quantity {
-  margin-right: 25px;
+  margin-right: 15px;
 }
 
 .product-details-des .quantity .pro-qty {
@@ -5186,6 +5197,7 @@ only screen and (max-width: 767.98px) {
   padding: 0 15px;
   border-radius: 40px;
   float: left;
+  margin-left: 10px;
 }
 
 .product-details-des .quantity .pro-qty .qtybtn {
@@ -6634,6 +6646,151 @@ only screen and (max-width: 767.98px) {
 }
 
 /* end banner diamond */
+/* diamond filter container */
+.diamond-filter-line {
+  opacity: 0.5;
+}
+
+.diamond-filter-container {
+  width: 450px;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-group {
+  /* position: relative; */
+  margin-bottom: 5px;
+  list-style-type: none;
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+
+}
+
+.filter-name {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  margin-left: 0px;
+  width: 200px;
+}
+
+.accordion {
+
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.accordion::before {
+  content: '\25BC';
+  font-size: 12px;
+}
+
+select {
+  width: calc(100% - 20px);
+  /* width - padding */
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.filter-img img {
+  width: 60px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Smooth transition */
+
+}
+
+.filter-group button {
+  margin-right: 20px;
+}
+
+.accordion.active::before {
+  content: '\25B2';
+}
+
+/* overlay of image GIA */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
+  overflow: auto;
+  /* Cho phép cuộn nếu nội dung quá dài */
+}
+
+.overlay-content {
+  background: white;
+  padding: 0px 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 98%;
+  /* Giới hạn chiều rộng của nội dung overlay */
+  max-height: 98%;
+  /* Giới hạn chiều cao của nội dung overlay */
+  overflow: auto;
+}
+
+.overlay-content h2 {
+  margin-top: 0;
+}
+
+.overlay-close-button {
+  display: flex;
+  justify-content: right;
+  cursor: pointer;
+  margin: 0px 0px;
+  font-size: larger;
+}
+
+.overlay-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #b5925a;
+  margin-bottom: 20px;
+
+}
+
+.overlay-description {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 30px;
+  padding: 0px 50px;
+}
+
+.overlay-link {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  padding-bottom: 3px;
+  transition: color 0.3s, border-color 0.3s;
+
+}
+
+.overlay-link:hover {
+  color: #b5925a;
+  border-color: #b5925a;
+}
+
+.overlay-GIA-image {
+  vertical-align: middle;
+  border-style: none;
+  max-width: 100%;
+  max-height: 100%;
+  /* Đảm bảo hình ảnh không vượt quá kích thước của overlay */
+}
+
+/* end diamond filter container */
 
 /* signup-signin form */
 
@@ -21392,6 +21549,285 @@ footer.footer p {
 }
 
 /* End edit products in admin page */
+/* Add account in admin page */
+.admin-page-add-account-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.admin-page-add-account-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  max-height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.admin-page-add-account-modal-content {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-page-add-account-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-page-add-account-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-page-add-account-form-group label {
+  font-weight: 500;
+  color: #333;
+}
+
+.admin-page-add-account-form-group input,
+.admin-page-add-account-form-group textarea,
+.admin-page-add-account-form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page-add-account-form-group input:focus,
+.admin-page-add-account-form-group textarea:focus,
+.admin-page-add-account-form-group select:focus {
+  border-color: #aaa;
+  outline: none;
+}
+
+.admin-page-add-account-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+.admin-page-add-account-close-button:hover {
+  color: #555;
+}
+
+.admin-page-add-account-form-group-row {
+  display: flex;
+  gap: 20px;
+}
+
+.admin-page-add-account-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  flex: 1;
+  padding-right: 40px; /* Để đủ chỗ cho biểu tượng con mắt */
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #888;
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.password-toggle-icon:hover {
+  color: #555;
+}
+
+/* End add account in admin page */
+/* Details account in admin page */
+.admin-page-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.admin-page-details-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  max-height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.admin-page-details-modal-content {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-page-details-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-page-details-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+.admin-page-details-close-button:hover {
+  color: #555;
+}
+
+/* End details account in admin page */
+/* Edit account in admin page */
+.admin-page-edit-account-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.admin-page-edit-account-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  max-height: 90%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.admin-page-edit-account-modal-content {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-page-edit-account-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-page-edit-account-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-page-edit-account-form-group label {
+  font-weight: 500;
+  color: #333;
+}
+
+.admin-page-edit-account-form-group input,
+.admin-page-edit-account-form-group textarea,
+.admin-page-edit-account-form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page-edit-account-form-group input:focus,
+.admin-page-edit-account-form-group textarea:focus,
+.admin-page-edit-account-form-group select:focus {
+  border-color: #aaa;
+  outline: none;
+}
+
+.admin-page-edit-account-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+.admin-page-edit-account-close-button:hover {
+  color: #555;
+}
+
+.admin-page-edit-account-form-group-row {
+  display: flex;
+  gap: 20px;
+}
+
+.admin-page-edit-account-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-page-edit-account-form-group textarea {
+  min-height: 100px; /* Tăng chiều cao tối thiểu */
+  resize: vertical; /* Cho phép người dùng thay đổi kích thước theo chiều dọc */
+}
+
+/* End edit account in admin page */
 /* Table products in admin page */
 .admin-page-container {
   display: flex;
@@ -21421,6 +21857,13 @@ footer.footer p {
 
 .admin-page-search-button {
   width: 250px; /* Đặt độ rộng cố định cho ô tìm kiếm */
+  height: 35.5px;
+  border-radius: 5px;
+  margin-left: 15px; /* Khoảng cách giữa ô tìm kiếm và nút thêm sản phẩm */
+}
+
+.admin-page-filter-dropdown {
+  width: 150px; /* Đặt độ rộng cố định cho ô tìm kiếm */
   height: 35.5px;
   border-radius: 5px;
   margin-left: 15px; /* Khoảng cách giữa ô tìm kiếm và nút thêm sản phẩm */
@@ -21670,133 +22113,5 @@ footer.footer p {
   margin-left: 0px;
   width: 85px;
 }
-.soluongsanphamtrongkho {
-  margin-top: 10px;
 
-}
 /* End Chi tiet san pham  */
-
-/* diamond filter container */
-.diamond-filter-line {
-  opacity: 0.5;
-}
-
-.diamond-filter-container {
-  width: 550px;
-  padding: 0;
-  margin: 0;
-}
-
-.filter-group {
-  /* position: relative; */
-  margin-bottom: 5px;
-  list-style-type: none;
-  display: flex;
-  justify-content: start;
-  margin-top: 20px;
-
-}
-
-
-.filter-name-kc{
-  display: flex;
-  align-items: center;
-  margin-right: 50px;
-  margin-left: 0px;
-  width: 200px;
-}
-
-
-.filter-img img {
-  width: 60px;
-  height: 20px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition */
-
-}
-
-.filter-group button {
-  margin-right: 20px;
-}
-
-/* overlay of image GIA */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  /* Đảm bảo overlay hiển thị trên tất cả các phần tử khác */
-  overflow: auto;
-  /* Cho phép cuộn nếu nội dung quá dài */
-}
-
-.overlay-content {
-  background: white;
-  padding: 0px 20px;
-  border-radius: 5px;
-  text-align: center;
-  max-width: 98%;
-  /* Giới hạn chiều rộng của nội dung overlay */
-  max-height: 98%;
-  /* Giới hạn chiều cao của nội dung overlay */
-  overflow: auto;
-}
-
-.overlay-content h2 {
-  margin-top: 0;
-}
-
-.overlay-close-button {
-  display: flex;
-  justify-content: right;
-  cursor: pointer;
-  margin: 0px 0px;
-  font-size: larger;
-}
-
-.overlay-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #b5925a;
-  margin-bottom: 20px;
-
-}
-
-.overlay-description {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 30px;
-  padding: 0px 50px;
-}
-
-.overlay-link {
-  font-size: 16px;
-  color: #333;
-  font-weight: bold;
-  text-decoration: none;
-  padding-bottom: 3px;
-  transition: color 0.3s, border-color 0.3s;
-
-}
-
-.overlay-link:hover {
-  color: #b5925a;
-  border-color: #b5925a;
-}
-
-.overlay-GIA-image {
-  vertical-align: middle;
-  border-style: none;
-  max-width: 100%;
-  max-height: 100%;
-  /* Đảm bảo hình ảnh không vượt quá kích thước của overlay */
-}
-
-/* end diamond filter container */

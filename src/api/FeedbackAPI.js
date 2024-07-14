@@ -1,15 +1,27 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'https://localhost:7101/api', // Adjust this if needed
-});
-
 export const handleGetFeedbacksByProductId = async (productId) => {
   try {
-    const response = await instance.get(`/Feedback/GetFeedbackByProductId?productId=${productId}`);
-    return response.data;
+      const response = await axios.get(`https://localhost:7101/api/Feedback/GetFeedbackByProductId`, {
+          params: { productId }
+      });
+      return response.data;
   } catch (error) {
-    console.error('Error fetching feedbacks:', error);
-    return [];
+      console.error("Error fetching feedbacks:", error); // Log the error for debugging
+      throw error;
   }
+};
+
+export const handleCreateFeedback = async (feedbackData) => {
+    try {
+        const response = await axios.post(`https://localhost:7101/api/Feedback/CreateFeedback`, feedbackData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating feedback:", error);
+        throw error;
+    }
 };
