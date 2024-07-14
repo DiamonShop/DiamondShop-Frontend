@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 const Mota_danhgia = ({ productId }) => {
     const [feedbacks, setFeedbacks] = useState([]);
-
+    const productObj = JSON.parse(localStorage.getItem('product'));
     useEffect(() => {
         const fetchFeedbacks = async () => {
             const feedbackData = await handleGetFeedbacksByProductId(productId);
@@ -35,12 +35,7 @@ const Mota_danhgia = ({ productId }) => {
                         <div className="tab-content reviews-tab">
                             <div className="tab-pane fade show active" id="tab_one">
                                 <div className="tab-one">
-                                    <p>Kim cương vốn là món trang sức mang đến niềm kiêu hãnh và cảm hứng thời trang bất tận.
-                                        Sở hữu riêng cho mình món trang sức kim cương chính là điều mà ai cũng mong muốn.
-                                        Chiếc nhẫn được chế tác từ vàng 14K cùng điểm nhấn kim cương với 57 giác cắt chuẩn xác,
-                                        tạo nên món trang sức đầy sự sang trọng và đẳng cấp.
-                                    </p>
-                                    <p>Kim cương đã đẹp, trang sức kim cương lại càng mang sức hấp dẫn khó cưỡng. Sự kết hợp mới mẻ này chắc chắn sẽ tạo nên dấu ấn thời trang hiện đại và giúp quý cô trở nên nổi bật, tự tin và thu hút sự ngưỡng mộ của mọi người</p>
+                                 <p>{productObj.description}</p>
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
