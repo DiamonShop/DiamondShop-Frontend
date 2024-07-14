@@ -182,19 +182,19 @@ export default function Chi_tiet_san_pham() {
                                                         <li class="filter-group">
                                                             <h6 className='filter-name-jewelry'>Chất liệu:</h6>
                                                             <select className='nice-select'>
-                                                                <option value="Vàng"> Vàng  </option>
+                                                                <option value="Vàng">{productObj.material}</option>
                                                             </select>
                                                         </li>
                                                         <li class="filter-group">
                                                             <h6 className='filter-name-jewelry' >Viên chính:</h6>
                                                             <select className='nice-select' >
-                                                                <option value="VS2">Thêm viên vào</option>
+                                                                <option value="VS2">{productObj.mainDiamondName}</option>
                                                             </select>
                                                         </li>
                                                         <li class="filter-group">
                                                             <h6 className='filter-name-jewelry'>Viên phụ:</h6>
                                                             <select  >
-                                                                <option value="VS2">Thêm viên vào</option>
+                                                                <option value="VS2">{productObj.sideDiamondName}</option>
                                                             </select>
                                                         </li>
                                                         <li class="filter-group">
