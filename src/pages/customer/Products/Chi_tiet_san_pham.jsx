@@ -258,8 +258,7 @@ export default function Chi_tiet_san_pham() {
                                 </div>
                             </div>
 
-                            <Mota_danhgia productId={productObj.productId} />
-
+                       
                         </div>
                     </div>
                     <Sanphamtuongtu />
