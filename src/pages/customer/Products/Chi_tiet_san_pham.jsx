@@ -5,20 +5,19 @@ import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
-import '../../../nice-select';
-import '../../../image-zoom';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
 
 export default function Chi_tiet_san_pham() {
     useEffect(() => {
-        $('select').niceSelect();
-        $('.img-zoom').zoom();
+        // Assuming niceSelect and zoom plugins are already included in your project and work correctly
+        // $('select').niceSelect();
+        // $('.img-zoom').zoom();
 
         return () => {
-            $('select').niceSelect('destroy');
-            $('.img-zoom').zoom('destroy');
+            // $('select').niceSelect('destroy');
+            // $('.img-zoom').trigger('zoom.destroy');
         };
     }, []);
 
@@ -57,6 +56,7 @@ export default function Chi_tiet_san_pham() {
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
+    const [averageRating, setAverageRating] = useState(0);
     const [showMessage, setShowMessage] = useState(false);
 
     const handleIncrement = () => {
@@ -104,6 +104,11 @@ export default function Chi_tiet_san_pham() {
                 }
             }
         }
+    };
+
+    const updateReviewCountAndAverageRating = (feedbackCount, avgRating) => {
+        setReviewCount(feedbackCount);
+        setAverageRating(avgRating);
     };
 
     return (
@@ -166,106 +171,103 @@ export default function Chi_tiet_san_pham() {
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
                                             <div className="ratings d-flex align-items-center">
-                                                <StarRating rating={rating} setRating={setRating} />
+                                                <div className="star-rating">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <span key={i} className={i < averageRating ? "good" : ""}><i className="fa fa-star"></i></span>
+                                                    ))}
+                                                </div>
                                                 <div className="pro-review">
-                                                    <span>{reviewCount} Review(s)</span>
+                                                    <span>{averageRating} Đánh Giá: {reviewCount} Review(s)</span>
                                                 </div>
                                             </div>
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
 
+                                            <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
+                                            <ul className="jewelry-filter-container">
+                                                <li className="filter-group">
+                                                    <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                    <select>
+                                                        <option value="Vàng"> Vàng  </option>
+                                                    </select>
+                                                </li>
+                                                <li className="filter-group">
+                                                    <h6 className='filter-name-jewelry'>Viên chính:</h6>
+                                                    <select>
+                                                        <option value="VS2">Thêm viên vào</option>
+                                                    </select>
+                                                </li>
+                                                <li className="filter-group">
+                                                    <h6 className='filter-name-jewelry'>Viên phụ:</h6>
+                                                    <select>
+                                                        <option value="VS2">Thêm viên vào</option>
+                                                    </select>
+                                                </li>
+                                                {productObj.categoryName === 'Nhẫn' && (
+                                                    <li className="filter-group">
+                                                        <h6 className='filter-name-jewelry'>Size :</h6>
+                                                        <select>
+                                                            <option>8</option>
+                                                            <option>9</option>
+                                                            <option>10</option>
+                                                            <option>11</option>
+                                                        </select>
+                                                        <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                    </li>
+                                                )}
+                                                <li className="filter-group">
+                                                    <div className="quantity-cart-box d-flex align-items-center">
+                                                        <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                        <div className="quantity">
+                                                            <div className="pro-qty">
+                                                                <span className="qtybtn" onClick={handleDecrement}>-</span>
+                                                                <input
+                                                                    name='txtQuantity'
+                                                                    type="text"
+                                                                    value={quantity}
+                                                                    readOnly
+                                                                />
+                                                                <span className="qtybtn" onClick={handleIncrement}>+</span>
 
-                                           
-                                                    <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
-                                                    <ul class="jewelry-filter-container">
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry'>Chất liệu:</h6>
-                                                            <select className='nice-select'>
-                                                                <option value="Vàng">{productObj.material}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry' >Viên chính:</h6>
-                                                            <select className='nice-select' >
-                                                                <option value="VS2">{productObj.mainDiamondName}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry'>Viên phụ:</h6>
-                                                            <select  >
-                                                                <option value="VS2">{productObj.sideDiamondName}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            {productObj.categoryName === 'Nhẫn' && (
-                                                                <>
-                                                                    <h6 className='filter-name-jewelry'>Size :</h6>
-
-                                                                    <select >
-                                                                        <option >8</option>
-                                                                        <option>9</option>
-                                                                        <option>10</option>
-                                                                        <option>11</option>
-                                                                    </select>
-                                                                    <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-                                                                </>
-                                                            )}
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                                <h6 className='filter-name-jewelry'>Số lượng:</h6>
-                                                                <div class="quantity">
-                                                                    <div class="pro-qty">
-                                                                        <span className=" qtybtn" onClick={handleDecrement}>-</span>
-                                                                        <input
-                                                                            name='txtQuantity'
-                                                                            type="text"
-                                                                            value={quantity}
-                                                                            readOnly
-                                                                        />
-                                                                        <span className=" qtybtn" onClick={handleIncrement}>+</span>
-
-                                                                    </div>
-                                                                </div>
                                                             </div>
-                                                        </li>
-                                                    </ul>
-
-
-
-
-
-                                                    <div class="button-them-vao-gio-hang">
-                                                        <div class="action_link">
-                                                            <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
-
                                                         </div>
                                                     </div>
-                                                    {showMessage && (
-                                                        <div className="message-add-to-cart-success">
-                                                            <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
-                                                        </div>
-                                                    )}
+                                                </li>
+                                            </ul>
 
+                                            <div className="button-them-vao-gio-hang">
+                                                <div className="action_link">
+                                                    <button className="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                                                 </div>
                                             </div>
+                                            {showMessage && (
+                                                <div className="message-add-to-cart-success">
+                                                    <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                                                </div>
+                                            )}
+
                                         </div>
                                     </div>
-
-                                    <Mota_danhgia productId={productObj.productId} />
-
                                 </div>
                             </div>
+
+
+                            <Mota_danhgia 
+                                productId={productObj.productId} 
+                                onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
+                            />
+
 
                        
                         </div>
                     </div>
-                    <Sanphamtuongtu />
-                    <div className="scroll-top not-visible">
-                        <i className="fa fa-angle-up"></i>
-                    </div>
                 </div>
-
+                <Sanphamtuongtu />
+                <div className="scroll-top not-visible">
+                    <i className="fa fa-angle-up"></i>
+                </div>
+            </div>
+        </div>
     );
 }
