@@ -12,8 +12,6 @@ export default function Nhan({ onProductClick }) {
         setSortOption(event.target.value);
     };
 
-
-
     const sortedProducts = Product_Nhan_Data.slice().sort((a, b) => {
         switch (sortOption) {
             case 'name-asc':
@@ -81,6 +79,7 @@ export default function Nhan({ onProductClick }) {
                                                 label={item.label}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
+                                                categoryId= {item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
