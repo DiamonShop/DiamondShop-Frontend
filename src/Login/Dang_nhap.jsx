@@ -49,6 +49,10 @@ export default function Dang_nhap() {
                     navigate('/Dashboard');
                     window.location.reload();
                 } 
+                else if (roleName === 'Delivery'){
+                    navigate('/Shipper');
+                    window.location.reload();
+                }
                 else {
                     navigate('/');
                     window.location.reload();
