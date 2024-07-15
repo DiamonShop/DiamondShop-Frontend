@@ -229,6 +229,7 @@ export default function Chi_tiet_san_pham() {
                                                                     readOnly
                                                                 />
                                                                 <span className="qtybtn" onClick={handleIncrement}>+</span>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -251,11 +252,14 @@ export default function Chi_tiet_san_pham() {
                                 </div>
                             </div>
 
+
                             <Mota_danhgia 
                                 productId={productObj.productId} 
                                 onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
                             />
 
+
+                       
                         </div>
                     </div>
                 </div>

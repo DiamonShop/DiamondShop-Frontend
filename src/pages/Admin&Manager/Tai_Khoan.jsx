@@ -16,6 +16,8 @@ const Taikhoan = () => {
     const navigate = useNavigate();
 
 
+    const [searchTerm, setSearchTerm] = useState(''); // State for search term
+
     const fetchUserData = async () => {
         if (!currentUser) {
             console.log("User not logged in. Redirecting to login.");
@@ -63,6 +65,9 @@ const Taikhoan = () => {
                 email: user.email,
                 roleName: user.roleName,
                 isActive: user.isActive,
+                address: user.address,
+                numberPhone: user.numberPhone,
+                loyaltyPoints: user.loyaltyPoints
             }));
             setUsers(formattedUsers);
         } catch (error) {
@@ -85,12 +90,15 @@ const Taikhoan = () => {
     const [newAccount, setNewAccount] = useState({
         fullname: '',
         username: '',
-        password: '', // Add password field
+        password: '',
         email: '',
+        numberPhone: '',
         isActive: true,
         roleId: 0,
-        address: '', // Add address field
+        address: '',
     });
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleAddInputChange = (e) => {
         const { name, value } = e.target;
@@ -99,6 +107,11 @@ const Taikhoan = () => {
             [name]: value
         }));
     };
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
 
     const handleAddAccount = async () => {
         try {
@@ -110,6 +123,7 @@ const Taikhoan = () => {
                 email: newAccount.email,
                 isActive: newAccount.isActive,
                 roleId: newAccount.roleId,
+                numberPhone: newAccount.numberPhone,
                 address: newAccount.address,
             }, {
                 headers: {
@@ -127,6 +141,7 @@ const Taikhoan = () => {
                 username: '',
                 password: '',
                 email: '',
+                numberPhone: '',
                 isActive: true,
                 roleId: 0,
                 address: '',
@@ -138,6 +153,97 @@ const Taikhoan = () => {
                 setErrorMessage(error.response.data.message || 'Unknown error occurred');
             } else {
                 setErrorMessage('Error adding new account.');
+            }
+        }
+    };
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editAccount, setEditAccount] = useState({
+        id: '',
+        fullname: '',
+        username: '',
+        password: '',
+        email: '',
+        numberPhone: '',
+        loyaltyPoints: 0,
+        isActive: true,
+        roleId: 0,
+        address: '',
+    });
+
+    const handleEditInputChange = (e) => {
+        const { name, value } = e.target;
+        setEditAccount(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleEditAccount = async (e) => {
+        e.preventDefault();
+        try {
+            const headers = sendToken(); // Get headers with Authorization token
+            const response = await axios.put(`https://localhost:7101/api/User/UpdateUserProfile?id=${editAccount.id}`, {
+                fullName: editAccount.fullname,
+                username: editAccount.username,
+                password: editAccount.password,
+                email: editAccount.email,
+                numberPhone: editAccount.numberPhone,
+                isActive: editAccount.isActive,
+                roleId: editAccount.roleId,
+                address: editAccount.address,
+                loyaltyPoints: editAccount.loyaltyPoints
+            }, {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Account updated:', response.data);
+            // Refresh user list
+            fetchUserData();
+            // Clear input fields
+            setEditAccount({
+                id: '',
+                fullname: '',
+                username: '',
+                password: '',
+                email: '',
+                phone: '',
+                isActive: true,
+                roleId: 0,
+                address: '',
+                loyaltyPoints: 0
+            });
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error('Error updating account:', error);
+            if (error.response) {
+                setErrorMessage(error.response.data.message || 'Unknown error occurred');
+            } else {
+                setErrorMessage('Error updating account.');
+            }
+        }
+    };
+    const handleDeleteAccount = async (id) => {
+        try {
+            const headers = sendToken(); // Get headers with Authorization token
+            await axios.delete(`https://localhost:7101/api/User/DeleteUser?id=${id}`, {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Account deleted:', id);
+            // Refresh user list
+            fetchUserData();
+        } catch (error) {
+            console.error('Error deleting account:', error);
+            if (error.response) {
+                setErrorMessage(error.response.data.message || 'Unknown error occurred');
+            } else {
+                setErrorMessage('Error deleting account.');
             }
         }
     };
@@ -163,6 +269,14 @@ const Taikhoan = () => {
     if (statusFilter !== 'Tất cả') {
         filteredAccounts = filteredAccounts.filter(account => (account.isActive ? 'Hoạt động' : 'Ngừng hoạt động') === statusFilter);
     }
+    if (searchTerm !== '') {
+        filteredAccounts = filteredAccounts.filter(account =>
+            account.fullname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            account.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            account.email.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
+
     const handleOpenAddButtonClick = () => {
         setShowAddOverlay(true);
     };
@@ -171,6 +285,25 @@ const Taikhoan = () => {
         setShowAddOverlay(false);
     };
 
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+    const [selectedAccount, setSelectedAccount] = useState(null);
+
+    const openDetailModal = (account) => {
+        setSelectedAccount(account);
+        setIsDetailModalOpen(true);
+    };
+
+    const closeDetailModal = () => {
+        setSelectedAccount(null);
+        setIsDetailModalOpen(false);
+    };
+    const openEditModal = (account) => {
+        setEditAccount(account);
+        setIsEditModalOpen(true);
+    };
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+    };
     return (
         <div className="wrapper">
             <nav id="sidebar" className="sidebar js-sidebar">
@@ -193,7 +326,7 @@ const Taikhoan = () => {
                                 <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
                             </a>
                         </li>
-                        <li className="sidebar-item active">
+                        <li className="sidebar-item">
                             <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="sliders"></i>
                                 <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
@@ -247,110 +380,29 @@ const Taikhoan = () => {
                     <div className="admin-page-container">
                         <h2 className="text-center admin-page-title">Quản lí tài khoản</h2>
 
-                        {/* <div className="filters">
-                            <label>Chọn theo chức vụ:</label>
-                            <select value={roleFilter} onChange={handleRoleFilterChange}>
-                                <option value="Tất cả">Tất cả</option>
-                                <option value="Admin">Quản trị viên</option>
-                                <option value="Member">Người dùng</option>
-                                <option value="Manager">Quản lí</option>
-                                <option value="Staff">Nhân viên</option>
-                                <option value="Delivery">Vận chuyển</option>
-                            </select>
-                            <label>Chọn theo trạng thái:</label>
-                            <select value={statusFilter} onChange={handleStatusFilterChange}>
-                                <option value="Tất cả">Tất cả</option>
-                                <option value="Hoạt động">Hoạt động</option>
-                                <option value="Ngừng hoạt động">Ngừng hoạt động</option>
-                            </select>
-                        </div> */}
                         {/* Button to open add account overlay */}
                         <div className="admin-page-controls">
                             <button onClick={handleOpenAddButtonClick} className="admin-page-add-button">Thêm tài khoản</button>
-                        </div>
 
-
-                        {/* Overlay for adding new account */}
-                        {showAddOverlay && (
-                            <div className=" add-account-overlay">
-                                <div className="add-account">
-                                    <h3>Thêm tài khoản mới</h3>
-                                    <div>
-                                        <label>Họ và tên:</label>
-                                        <input
-                                            type="text"
-                                            name="fullname"
-                                            value={newAccount.fullname}
-                                            onChange={handleAddInputChange}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label>Tên tài khoản:</label>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            value={newAccount.username}
-                                            onChange={handleAddInputChange}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label>Mật khẩu:</label>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            value={newAccount.password}
-                                            onChange={handleAddInputChange}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label>Email:</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={newAccount.email}
-                                            onChange={handleAddInputChange}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label>Trạng thái:</label>
-                                        <select
-                                            name="isActive"
-                                            value={newAccount.isActive}
-                                            onChange={handleAddInputChange}
-                                        >
-                                            <option value={true}>Hoạt động</option>
-                                            <option value={false}>Ngừng hoạt động</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label>Chức vụ:</label>
-                                        <select
-                                            name="roleId"
-                                            value={newAccount.roleId}
-                                            onChange={handleAddInputChange}
-                                        >
-                                            <option value={0}>Admin</option>
-                                            <option value={1}>Member</option>
-                                            <option value={2}>Manager</option>
-                                            <option value={3}>Staff</option>
-                                            <option value={4}>Delivery</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label>Địa chỉ:</label>
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            value={newAccount.address}
-                                            onChange={handleAddInputChange}
-                                        />
-                                    </div>
-                                    <button onClick={handleAddAccount}>Thêm tài khoản</button>
-                                    <button onClick={handleCloseAddButtonClick}>Đóng</button>
-                                </div>
+                            <div className="admin-page-search-button-container">
+                                <input
+                                    type="text"
+                                    className="form-control admin-page-search-button"
+                                    placeholder="Tìm kiếm..."
+                                    aria-label="Search"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
                             </div>
-                        )}
 
+                            <div className="admin-page-status-filter">
+                                <select className="form-control admin-page-filter-dropdown" value={statusFilter} onChange={handleStatusFilterChange}>
+                                    <option value="Tất cả">Trạng thái</option>
+                                    <option value="Hoạt động">Hoạt động</option>
+                                    <option value="Ngừng hoạt động">Ngừng hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <table className="admin-page-table">
                             <thead >
@@ -374,24 +426,320 @@ const Taikhoan = () => {
                                         <td>{user.roleName}</td>
                                         <td>{user.isActive ? 'Hoạt động' : 'Ngừng hoạt động'}</td>
                                         <td>
-                                        <div className="admin-page-buttons">
-                                            <button className='admin-page-view-button'>Xem</button>
-                                            <button className='admin-page-edit-button'>Sửa</button>
-                                            <button className='admin-page-delete-button'>Xóa</button>
-                                        </div>
-                                            
+                                            <div className="admin-page-buttons">
+                                                <button className='admin-page-view-button' onClick={() => openDetailModal(user)}>Xem</button>
+                                                <button className='admin-page-edit-button' onClick={() => openEditModal(user)}>Sửa</button>
+                                                <button
+                                                    className='admin-page-delete-button'
+                                                    onClick={() => {
+                                                        if (window.confirm(`Bạn có chắc chắn muốn xóa tài khoản của ${user.fullname}?`)) {
+                                                            handleDeleteAccount(user.id);
+                                                        }
+                                                    }}
+                                                >
+                                                    Xóa
+                                                </button>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                        {/* Overlay for adding new account */}
+                        {showAddOverlay && (
+                            <div className="admin-page-add-account-overlay">
+                                <div className="admin-page-add-account-modal">
+                                    <button className="admin-page-add-account-close-button" onClick={handleCloseAddButtonClick}>&times;</button>
+                                    <div className="admin-page-add-account-modal-content">
+                                        <div className="admin-page-add-account-info-column">
+                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Thêm tài khoản mới</h2>
+                                            <form onSubmit={handleAddAccount}>
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Họ và tên:</label>
+                                                    <input
+                                                        type="text"
+                                                        name="fullname"
+                                                        value={newAccount.fullname}
+                                                        onChange={handleAddInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="admin-page-add-account-form-group-row">
+                                                    <div className="admin-page-add-account-form-group">
+                                                        <label>Tên tài khoản:</label>
+                                                        <input
+                                                            type="text"
+                                                            name="username"
+                                                            value={newAccount.username}
+                                                            onChange={handleAddInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-add-account-form-group">
+                                                        <label>Mật khẩu:</label>
+                                                        <div className="password-input-container">
+                                                            <input
+                                                                type={showPassword ? "text" : "password"}
+                                                                name="password"
+                                                                value={newAccount.password}
+                                                                onChange={handleAddInputChange}
+                                                                required
+                                                            />
+                                                            <span className="password-toggle-icon" onClick={toggleShowPassword}>
+                                                                {showPassword ? 'Ẩn' : 'Hiển thị'}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Email:</label>
+                                                    <input
+                                                        type="email"
+                                                        name="email"
+                                                        value={newAccount.email}
+                                                        onChange={handleAddInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="admin-page-add-account-form-group-row">
+                                                    <div className="admin-page-add-account-form-group">
+                                                        <label>Số điện thoại:</label>
+                                                        <input
+                                                            type="tel"
+                                                            name="numberPhone"
+                                                            value={newAccount.numberPhone}
+                                                            onChange={handleAddInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-add-account-form-group">
+                                                        <label>Chức vụ:</label>
+                                                        <select
+                                                            name="roleId"
+                                                            value={newAccount.roleId}
+                                                            onChange={handleAddInputChange}
+                                                            required
+                                                        >
+                                                            <option >Chọn chức vụ</option>
+                                                            <option value={1}>Quản trị viên</option>
+                                                            <option value={2}>Quản lí</option>
+                                                            <option value={3}>Thành viên</option>
+                                                            <option value={4}>Vận chuyển</option>
+                                                            <option value={5}>Nhân viên</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Địa chỉ:</label>
+                                                    <textarea
+                                                        name="address"
+                                                        value={newAccount.address}
+                                                        onChange={handleAddInputChange}
+                                                        required
+                                                    />
+                                                </div>
+
+                                                <div className="admin-page-add-account-form-group">
+                                                    <input type="submit" value="Thêm tài khoản" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {isDetailModalOpen && selectedAccount && (
+                            <div className="admin-page-add-account-overlay">
+                                <div className="admin-page-add-account-modal">
+                                    <button className="admin-page-add-account-close-button" onClick={closeDetailModal}>&times;</button>
+                                    <div className="admin-page-add-account-modal-content">
+                                        <div className="admin-page-add-account-info-column">
+                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Chi tiết tài khoản</h2>
+                                            <div className="admin-page-add-account-form-group-row">
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>ID:</label>
+                                                    <input type="text" value={selectedAccount.id} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Trạng thái:</label>
+                                                    <input type="text" value={selectedAccount.isActive ? 'Hoạt động' : 'Ngừng hoạt động'} readOnly />
+                                                </div>
+                                            </div>
+                                            <div className="admin-page-add-account-form-group">
+                                                <label>Họ và tên:</label>
+                                                <input type="text" value={selectedAccount.fullname} readOnly />
+                                            </div>
+                                            <div className="admin-page-add-account-form-group-row">
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Tên tài khoản:</label>
+                                                    <input type="text" value={selectedAccount.username} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Chức vụ:</label>
+                                                    <input type="text" value={selectedAccount.roleName} readOnly />
+                                                </div>
+                                            </div>
+
+                                            <div className="admin-page-add-account-form-group">
+                                                <label>Email:</label>
+                                                <input type="email" value={selectedAccount.email} readOnly />
+                                            </div>
+                                            <div className="admin-page-add-account-form-group-row">
+                                                <div className="admin-page-add-account-form-group">
+                                                    <label>Số điện thoại:</label>
+                                                    <input type="tel" value={selectedAccount.numberPhone} readOnly />
+                                                </div>
+                                                {selectedAccount.roleName === 'Member' && (
+                                                    <div className="admin-page-add-account-form-group">
+                                                        <label>Điểm tích lũy:</label>
+                                                        <input type="text" value={selectedAccount.loyaltyPoints} readOnly />
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="admin-page-add-account-form-group">
+                                                <label>Địa chỉ:</label>
+                                                <textarea value={selectedAccount.address} readOnly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {isEditModalOpen && (
+                            <div className="admin-page-edit-account-overlay">
+                                <div className="admin-page-edit-account-modal">
+                                    <button className="admin-page-edit-account-close-button" onClick={closeEditModal}>&times;</button>
+                                    <div className="admin-page-edit-account-modal-content">
+                                        <div className="admin-page-edit-account-info-column">
+                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Chỉnh sửa tài khoản</h2>
+                                            <form onSubmit={handleEditAccount}>
+                                                <div className="admin-page-edit-account-form-group">
+                                                    <label>Họ và tên:</label>
+                                                    <input
+                                                        type="text"
+                                                        name="fullname"
+                                                        value={editAccount.fullname}
+                                                        onChange={handleEditInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="admin-page-edit-account-form-group-row">
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Tên tài khoản:</label>
+                                                        <input
+                                                            type="text"
+                                                            name="username"
+                                                            value={editAccount.username}
+                                                            onChange={handleEditInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Mật khẩu:</label>
+                                                        <div className="password-input-container">
+                                                            <input
+                                                                type={showPassword ? "text" : "password"}
+                                                                name="password"
+                                                                value={editAccount.password}
+                                                                onChange={handleEditInputChange}
+                                                                required
+                                                            />
+                                                            <span className="password-toggle-icon" onClick={toggleShowPassword}>
+                                                                {showPassword ? 'Ẩn' : 'Hiển thị'}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="admin-page-edit-account-form-group">
+                                                    <label>Email:</label>
+                                                    <input
+                                                        type="email"
+                                                        name="email"
+                                                        value={editAccount.email}
+                                                        onChange={handleEditInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="admin-page-edit-account-form-group-row">
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Số điện thoại:</label>
+                                                        <input
+                                                            type="tel"
+                                                            name="numberPhone"
+                                                            value={editAccount.numberPhone}
+                                                            onChange={handleEditInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Chức vụ:</label>
+                                                        <select
+                                                            name="roleId"
+                                                            value={editAccount.roleId}
+                                                            onChange={handleEditInputChange}
+                                                            required
+                                                        >
+                                                            <option value="">Chọn chức vụ</option>
+                                                            <option value={1}>Quản trị viên</option>
+                                                            <option value={2}>Quản lí</option>
+                                                            <option value={3}>Thành viên</option>
+                                                            <option value={4}>Vận chuyển</option>
+                                                            <option value={5}>Nhân viên</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="admin-page-edit-account-form-group-row">
+                                                    {editAccount.roleName === 'Member' && (
+                                                        <div className="admin-page-edit-account-form-group">
+                                                            <label>Điểm tích lũy:</label>
+                                                            <input
+                                                                type="number"
+                                                                name="loyaltyPoints"
+                                                                value={editAccount.loyaltyPoints}
+                                                                onChange={handleEditInputChange}
+                                                                required
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Trạng thái:</label>
+                                                        <select
+                                                            name="isActive"
+                                                            value={editAccount.isActive}
+                                                            onChange={handleEditInputChange}
+                                                            required
+                                                        >
+                                                            <option value={true}>Hoạt động</option>
+                                                            <option value={false}>Ngừng hoạt động</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="admin-page-edit-account-form-group">
+                                                    <label>Địa chỉ:</label>
+                                                    <textarea
+                                                        name="address"
+                                                        value={editAccount.address}
+                                                        onChange={handleEditInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="admin-page-edit-account-form-group">
+                                                    <input type="submit" value="Cập nhật tài khoản" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
     );
 };
