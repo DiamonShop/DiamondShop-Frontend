@@ -16,11 +16,9 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
         const fetchFeedbacks = async () => {
             try {
                 const feedbackData = await handleGetFeedbacksByProductId(productId);
-                setFeedbacks(feedbackData);
-                if (onReviewCountChange) {
-                    const avgRating = feedbackData.length > 0 ? (feedbackData.reduce((acc, curr) => acc + curr.rating, 0) / feedbackData.length).toFixed(1) : 0;
-                    onReviewCountChange(feedbackData.length, avgRating);
-                }
+                setFeedbacks(feedbackData); // Ensure feedback data is being set correctly
+                const avgRating = feedbackData.reduce((acc, curr) => acc + curr.rating, 0) / feedbackData.length;
+                onReviewCountChange(feedbackData.length, avgRating.toFixed(1));
             } catch (error) {
                 console.error("Error fetching feedbacks:", error);
             }
@@ -87,15 +85,12 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
         try {
             const response = await handleCreateFeedback(feedbackData);
             if (response === "Create Feedback Successfully") {
-                const newFeedbacks = [...feedbacks, feedbackData];
-                setFeedbacks(newFeedbacks);
+                setFeedbacks(prevFeedbacks => [...prevFeedbacks, feedbackData]);
                 setFeedback({ description: '', rating: 0 });
                 setFeedbackMessage('Feedback submitted successfully');
                 setCanComment(false);
-                if (onReviewCountChange) {
-                    const avgRating = newFeedbacks.length > 0 ? (newFeedbacks.reduce((acc, curr) => acc + curr.rating, 0) / newFeedbacks.length).toFixed(1) : 0;
-                    onReviewCountChange(newFeedbacks.length, avgRating);
-                }
+                const avgRating = (feedbacks.reduce((acc, curr) => acc + curr.rating, 0) + feedbackData.rating) / (feedbacks.length + 1);
+                onReviewCountChange(feedbacks.length + 1, avgRating.toFixed(1));
             } else {
                 setFeedbackMessage(response);
             }
@@ -141,12 +136,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                                         </div>
                                         <div className="review-box">
                                             <div className="ratings">
-                                                {[...Array(feedback.rating)].map((_, i) => (
-                                                    <span key={i} className="good"><i className="fa fa-star"></i></span>
-                                                ))}
-                                                {[...Array(5 - feedback.rating)].map((_, i) => (
-                                                    <span key={i}><i className="fa fa-star"></i></span>
-                                                ))}
+                                                <StarRating rating={feedback.rating} setRating={() => {}} isEditable={false} />
                                             </div>
                                             <div className="post-author">
                                                 <p><span>{feedback.userName} </span> {format(new Date(feedback.dateTime), 'dd/MM/yyyy')}</p>
