@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { GoogleLogin, handleLoginUser } from '../api/LoginAPI';
 import { Link } from 'react-router-dom';
-
+import { Button, message } from 'antd';
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
+    const [messageApi, contextHolder] = message.useMessage();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -45,23 +46,33 @@ export default function Dang_nhap() {
                 const roleName = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                 console.log('Role Name:', roleName); // Log the role name
 
-                if (roleName === 'Admin' || roleName === 'Manager') {
-                    navigate('/Dashboard');
+
+                messageApi.open({
+                    type: 'loading',
+                    content: 'Logging in...',
+                    duration: 2,
+                }).then(() => message.success('Đăng nhập thành công', 2)).then(() => {
+                    if (roleName === 'Admin' || roleName === 'Manager') {
+                        navigate('/Dashboard');
+                    } else {
+                        navigate('/');
+                    }
                     window.location.reload();
-                } 
-                else if (roleName === 'Delivery'){
-                    navigate('/Shipper');
-                    window.location.reload();
-                }
-                else {
-                    navigate('/');
-                    window.location.reload();
-                }
+                });
+
             } else {
                 console.error('Token is not available in the response');
+                messageApi.open({
+                    type: 'error',
+                    content: 'Sai tài khoản hoặc mật khẩu',
+                });
             }
         } catch (error) {
             console.error('Login failed', error);
+            messageApi.open({
+                type: 'error',
+                content: 'Đăng nhập thất bại: ' + error.message,
+            });
         }
     };
 
@@ -76,6 +87,7 @@ export default function Dang_nhap() {
 
     return (
         <div>
+            {contextHolder}
             <div className="signin-signup-container">
                 <div className="signin-signup-forms-container">
                     <div className="signin-signup">
