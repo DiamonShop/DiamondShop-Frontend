@@ -171,11 +171,7 @@ export default function Chi_tiet_san_pham() {
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
                                             <div className="ratings d-flex align-items-center">
-                                                <div className="star-rating">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <span key={i} className={i < averageRating ? "good" : ""}><i className="fa fa-star"></i></span>
-                                                    ))}
-                                                </div>
+                                                <StarRating rating={averageRating} setRating={setRating} isEditable={false} />
                                                 <div className="pro-review">
                                                     <span>{averageRating} Đánh Giá: {reviewCount} Review(s)</span>
                                                 </div>
@@ -229,7 +225,6 @@ export default function Chi_tiet_san_pham() {
                                                                     readOnly
                                                                 />
                                                                 <span className="qtybtn" onClick={handleIncrement}>+</span>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -252,14 +247,11 @@ export default function Chi_tiet_san_pham() {
                                 </div>
                             </div>
 
-
                             <Mota_danhgia 
                                 productId={productObj.productId} 
                                 onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
                             />
 
-
-                       
                         </div>
                     </div>
                 </div>
