@@ -1,36 +1,69 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Slider from "react-slick";
+import $ from 'jquery';
+import '../slick-min'
 import { HandleGetAll } from '../api/JewelryAPI';
 import Du_lieu_san_pham from './Du_lieu_san_pham';
 import { Product_Jewelry_Data } from '../Data/Product_jewelry_data';
 function Main_product({ onProductClick }) {
     const [randomProductsJewelry, setRandomProductsJewelry] = useState([]);
-    const ThirdSliderSettings = {
-        speed: 1000,
-        slidesToShow: 4,
-        autoplay: true,
-        infinite: true,
-        rows: 2,
-        adaptiveHeight: true,
-        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-        slidesToScroll: 1
-    };
+    
     useEffect(()=>{
         function getRandomProductsJewelry(products, count) {
             const shuffled = products.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
-        setRandomProductsJewelry(getRandomProductsJewelry(Product_Jewelry_Data, 20));
+        setRandomProductsJewelry(getRandomProductsJewelry(Product_Jewelry_Data, 10));
+
+        const initializeSlick = () => {
+            $('.product-carousel-4_2').slick({
+                speed: 1000,
+                slidesToShow: 4,
+                autoplay: true,
+                rows: 2,
+                adaptiveHeight: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+                responsive: [{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        arrows: false,
+                        rows: 1
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        rows: 1
+                    }
+                }]
+            });
+        };
+
+        $(document).ready(initializeSlick);
+
+        return () => {
+           
+            if ($('.product-carousel-4_2').hasClass('slick-initialized')) {
+                $('.product-carousel-4_2').slick('unslick');
+            }
+        };
     }, []);
    
     return (
         <div>
             <section className="feature-product section-padding">
                 <div className="container">
-                    <section className="slider-area">
-                        <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
+                   
                             <div className="row">
                                 <div className="col-12">
                                     <div className="section-title text-center">
@@ -41,8 +74,7 @@ function Main_product({ onProductClick }) {
                             </div>
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="product-carousel-4_2 slick-row-10 slick-arrow-style">
-                                        <Slider {...ThirdSliderSettings}>
+                                    <div className="product-carousel-4_2 slick-row-10 slick-arrow-style">                                 
                                             {randomProductsJewelry.map((item) => (
                                                 <div key={item.id}>
                                                         <Du_lieu_san_pham
@@ -60,15 +92,12 @@ function Main_product({ onProductClick }) {
                                                         />           
                                                 </div>
                                             ))}
-                                        </Slider>
+                                      
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                </div>
-            </section>
-
         </div>
     )
 }

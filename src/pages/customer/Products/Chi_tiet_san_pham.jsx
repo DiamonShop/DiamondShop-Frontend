@@ -10,54 +10,55 @@ import '../../../image-zoom';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
+import { notification} from 'antd';
+
 
 export default function Chi_tiet_san_pham() {
     useEffect(() => {
         $('select').niceSelect();
         $('.img-zoom').zoom();
+        // product details slider active
+        $('.product-large-slider').slick({
+            fade: true,
+            arrows: false,
+            speed: 1000,
+            asNavFor: '.pro-nav'
+        });
 
+
+        // product details slider nav active
+        $('.pro-nav').slick({
+            slidesToShow: 4,
+            asNavFor: '.product-large-slider',
+            centerMode: true,
+            speed: 1000,
+            centerPadding: 0,
+            focusOnSelect: true,
+            prevArrow: '<button type="button" class="slick-prev"><i class="lnr lnr-chevron-left"></i></button>',
+            nextArrow: '<button type="button" class="slick-next"><i class="lnr lnr-chevron-right"></i></button>',
+            responsive: [{
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 3,
+                }
+            }]
+        });
         return () => {
             $('select').niceSelect('destroy');
             $('.img-zoom').zoom('destroy');
         };
+
     }, []);
 
     const productObj = JSON.parse(localStorage.getItem('product'));
     const largeSliderRef = useRef(null);
     const navSliderRef = useRef(null);
 
-    const largeSliderSettings = {
-        fade: true,
-        arrows: false,
-        speed: 1000,
-        asNavFor: navSliderRef.current,
-        ref: largeSliderRef,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    };
-
-    const navSliderSettings = {
-        slidesToShow: 4,
-        asNavFor: largeSliderRef.current,
-        centerMode: true,
-        speed: 1000,
-        centerPadding: '0',
-        focusOnSelect: true,
-        responsive: [{
-            breakpoint: 576,
-            settings: {
-                slidesToShow: 3,
-            }
-        }],
-        ref: navSliderRef,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    };
 
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
-    const [showMessage, setShowMessage] = useState(false);
+    const [api, contextHolder] = notification.useNotification();
 
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -67,13 +68,13 @@ export default function Chi_tiet_san_pham() {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
-    const successAddMessage = () => {
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 5000);
+    const openNotificationWithIcon = (type, message, description) => {
+        api[type]({
+            message: message,
+            description: description,
+            duration: 1,
+        });
     };
-
     const handleAddToCart = async () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -83,12 +84,12 @@ export default function Chi_tiet_san_pham() {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
                         handleAddProductToOrder(item.orderId, productObj.productId, quantity);
-                        successAddMessage();
+                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     } else if (item.status === 'Completed' || item.status === 'Shipped') {
                         const orderId = await handleCreateOrder(userId);
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        successAddMessage();
+                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     }
                 }
@@ -98,7 +99,7 @@ export default function Chi_tiet_san_pham() {
                 for (const item of order) {
                     if (item.status === 'Ordering' && item.orderId === orderId) {
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        successAddMessage();
+                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     }
                 }
@@ -108,6 +109,7 @@ export default function Chi_tiet_san_pham() {
 
     return (
         <div>
+            {contextHolder}
             <div className="breadcrumb-area">
                 <div className="container">
                     <div className="row">
@@ -116,7 +118,7 @@ export default function Chi_tiet_san_pham() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to="/Nhan">{productObj.categoryName}</Link></li>
+                                        <li className="breadcrumb-item"><Link to={`/${productObj.categoryName}`}>{productObj.categoryName}</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                     </ul>
                                 </nav>
@@ -132,36 +134,69 @@ export default function Chi_tiet_san_pham() {
                         <div className="col-lg-12 order-1 order-lg-2">
                             <div className="product-details-inner">
                                 <div className="row">
-                                    <div className="col-lg-5">
-                                        <Slider {...largeSliderSettings} className="product-large-slider">
-                                            <div className="pro-large-img img-zoom">
-                                                <img src={productObj.image1} alt="product-details" />
+                                    {productObj.categoryName === 'Nhẫn' ? (
+                                        <div className="col-lg-5">
+
+                                            <div className="product-large-slider">
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image1} alt="product-details" />
+                                                </div>
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image2} alt="product-details" />
+                                                </div>
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image3} alt="product-details" />
+                                                </div>
+
                                             </div>
-                                            <div className="pro-large-img img-zoom">
-                                                <img src={productObj.image2} alt="product-details" />
+                                            <div className="pro-nav">
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image1} alt="product-details" />
+                                                </div>
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image2} alt="product-details" />
+                                                </div>
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image3} alt="product-details" />
+                                                </div>
+
                                             </div>
-                                            <div className="pro-large-img img-zoom">
-                                                <img src={productObj.image3} alt="product-details" />
+
+                                        </div>
+                                    ) : (
+                                        <div className="col-lg-5">
+
+                                            <div className="product-large-slider">
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image1} alt="product-details" />
+                                                </div>
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image2} alt="product-details" />
+                                                </div>
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image3} alt="product-details" />
+                                                </div>
+                                                <div className="pro-large-img img-zoom">
+                                                    <img src={productObj.image4} alt="product-details" />
+                                                </div>
                                             </div>
-                                            <div className="pro-large-img img-zoom">
-                                                <img src={productObj.image4} alt="product-details" />
+                                            <div className="pro-nav">
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image1} alt="product-details" />
+                                                </div>
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image2} alt="product-details" />
+                                                </div>
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image3} alt="product-details" />
+                                                </div>
+                                                <div className="pro-nav-thumb">
+                                                    <img src={productObj.image4} alt="product-details" />
+                                                </div>
                                             </div>
-                                        </Slider>
-                                        <Slider {...navSliderSettings} className="pro-nav">
-                                            <div className="pro-nav-thumb">
-                                                <img src={productObj.image1} alt="product-details" />
-                                            </div>
-                                            <div className="pro-nav-thumb">
-                                                <img src={productObj.image2} alt="product-details" />
-                                            </div>
-                                            <div className="pro-nav-thumb">
-                                                <img src={productObj.image3} alt="product-details" />
-                                            </div>
-                                            <div className="pro-nav-thumb">
-                                                <img src={productObj.image4} alt="product-details" />
-                                            </div>
-                                        </Slider>
-                                    </div>
+
+                                        </div>)
+                                    }
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
@@ -176,96 +211,117 @@ export default function Chi_tiet_san_pham() {
                                             </div>
 
 
-                                           
-                                                    <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
-                                                    <ul class="jewelry-filter-container">
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry'>Chất liệu:</h6>
-                                                            <select className='nice-select'>
-                                                                <option value="Vàng">{productObj.material}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry' >Viên chính:</h6>
-                                                            <select className='nice-select' >
-                                                                <option value="VS2">{productObj.mainDiamondName}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <h6 className='filter-name-jewelry'>Viên phụ:</h6>
-                                                            <select  >
-                                                                <option value="VS2">{productObj.sideDiamondName}</option>
-                                                            </select>
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            {productObj.categoryName === 'Nhẫn' && (
-                                                                <>
-                                                                    <h6 className='filter-name-jewelry'>Size :</h6>
 
-                                                                    <select >
-                                                                        <option >8</option>
-                                                                        <option>9</option>
-                                                                        <option>10</option>
-                                                                        <option>11</option>
-                                                                    </select>
-                                                                    <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
-                                                                </>
-                                                            )}
-                                                        </li>
-                                                        <li class="filter-group">
-                                                            <div class="quantity-cart-box d-flex align-items-center">
-                                                                <h6 className='filter-name-jewelry'>Số lượng:</h6>
-                                                                <div class="quantity">
-                                                                    <div class="pro-qty">
-                                                                        <span className=" qtybtn" onClick={handleDecrement}>-</span>
-                                                                        <input
-                                                                            name='txtQuantity'
-                                                                            type="text"
-                                                                            value={quantity}
-                                                                            readOnly
-                                                                        />
-                                                                        <span className=" qtybtn" onClick={handleIncrement}>+</span>
+                                            <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
+                                            {productObj.categoryName === 'Dây chuyền' ? (
+                                                <ul class="jewelry-filter-container">
+                                                    <li class="filter-group">
+                                                        <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                        <select className='nice-select'>
+                                                            <option value="Vàng">{productObj.material}</option>
+                                                        </select>
+                                                    </li>
+                                                    <li class="filter-group">
+                                                        <div class="quantity-cart-box d-flex align-items-center">
+                                                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                            <div class="quantity">
+                                                                <div class="pro-qty">
+                                                                    <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                                                    <input
+                                                                        name='txtQuantity'
+                                                                        type="text"
+                                                                        value={quantity}
+                                                                        readOnly
+                                                                    />
+                                                                    <span className=" qtybtn" onClick={handleIncrement}>+</span>
 
-                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </li>
-                                                    </ul>
-
-
-
-
-
-                                                    <div class="button-them-vao-gio-hang">
-                                                        <div class="action_link">
-                                                            <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
-
                                                         </div>
-                                                    </div>
-                                                    {showMessage && (
-                                                        <div className="message-add-to-cart-success">
-                                                            <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                                                    </li>
+                                                </ul>
+                                            ) : (
+
+                                                <ul class="jewelry-filter-container">
+                                                    <li class="filter-group">
+                                                        <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                        <select className='nice-select'>
+                                                            <option value="Vàng">{productObj.material}</option>
+                                                        </select>
+                                                    </li>
+                                                    <li class="filter-group">
+                                                        <h6 className='filter-name-jewelry' >Viên chính:</h6>
+                                                        <select className='nice-select' >
+                                                            <option value="VS2">{productObj.mainDiamondName}</option>
+                                                        </select>
+                                                    </li>
+                                                    <li class="filter-group">
+                                                        <h6 className='filter-name-jewelry'>Viên phụ:</h6>
+                                                        <select  >
+                                                            <option value="VS2">{productObj.sideDiamondName}</option>
+                                                        </select>
+                                                    </li>
+                                                    <li class="filter-group">
+                                                        {productObj.categoryName === 'Nhẫn' &&(
+                                                            <>
+                                                                <h6 className='filter-name-jewelry'>Size :</h6>
+
+                                                                <select >
+                                                                    <option >8</option>
+                                                                    <option>9</option>
+                                                                    <option>10</option>
+                                                                    <option>11</option>
+                                                                </select>
+                                                                <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                            </>
+                                                        )}
+                                                    </li>
+                                                    <li class="filter-group">
+                                                        <div class="quantity-cart-box d-flex align-items-center">
+                                                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                            <div class="quantity">
+                                                                <div class="pro-qty">
+                                                                    <span className=" qtybtn" onClick={handleDecrement}>-</span>
+                                                                    <input
+                                                                        name='txtQuantity'
+                                                                        type="text"
+                                                                        value={quantity}
+                                                                        readOnly
+                                                                    />
+                                                                    <span className=" qtybtn" onClick={handleIncrement}>+</span>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    )}
+                                                    </li>
+                                                </ul>
+
+                                            )}
+                                            <div class="button-them-vao-gio-hang">
+                                                <div class="action_link">
+                                                    <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
 
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
-
-                                    <Mota_danhgia productId={productObj.productId} />
-
                                 </div>
                             </div>
 
-                       
+                            <Mota_danhgia productId={productObj.productId} />
+
                         </div>
                     </div>
-                    <Sanphamtuongtu />
-                    <div className="scroll-top not-visible">
-                        <i className="fa fa-angle-up"></i>
-                    </div>
+
+
                 </div>
+            </div>
+            <Sanphamtuongtu />
+            <div className="scroll-top not-visible">
+                <i className="fa fa-angle-up"></i>
+            </div>
+        </div>
 
     );
 }

@@ -3142,11 +3142,6 @@ only screen and (max-width: 479.98px) {
   margin-top: -3px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .section-title-append:after {
-    margin-top: 2px;
-  }
-}
 
 .section-title-append h4 {
   display: inline-block;
@@ -3514,7 +3509,7 @@ only screen and (max-width: 479.98px) {
 /*------- product item start -------*/
 .product-item {
   overflow: hidden;
-  height: 400px;
+  height: 380px;
 }
 
 .product-item .color-categories {

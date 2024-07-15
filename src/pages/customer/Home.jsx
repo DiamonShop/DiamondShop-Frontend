@@ -2,10 +2,6 @@ import React, { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import BannerHome from '../../components/BannerHome';
 import Service_policy from '../../components/Service_policy';
 import Sanphamnoibat from '../../components/Sanphamnoibat';
@@ -38,6 +34,7 @@ export default function Home() {
     }
 
       useEffect(() => {    
+        
         const params = new URLSearchParams(location.search);
         const message = params.get('message');
         if (message) {

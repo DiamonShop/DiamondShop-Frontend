@@ -14,7 +14,7 @@ const ChatIcon = () => {
     <div>
       <a href="https://m.me/337606799444520" target="_blank"> 
       <img
-        src="assets/img/messenger.jpg" // Đường dẫn tới hình ảnh của bạn
+        src="assets/img/messenger.png" // Đường dẫn tới hình ảnh của bạn
 
         alt="Chat Icon"
         className="chat-icon"
