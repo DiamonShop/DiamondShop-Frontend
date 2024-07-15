@@ -46,6 +46,7 @@ export default function Dang_nhap() {
                 const roleName = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                 console.log('Role Name:', roleName); // Log the role name
 
+
                 messageApi.open({
                     type: 'loading',
                     content: 'Logging in...',

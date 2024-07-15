@@ -41,23 +41,13 @@ function Dat_hang_thanh_cong() {
                   Cảm ơn bạn đã hoàn tất thanh toán! Bạn sẽ nhận được sản phẩm bạn đã mua trong thời gian sớm nhất.
                 </div>
                 <div className="order-details">
-                  <div className="order-number-label">Mã đơn hàng</div>
+                  <div className="order-number-label">Mã thanh toán</div>
                   <div className="order-number">{billCreateDTO ? billCreateDTO.BillId : ''}</div>
-                  {billCreateDTO && (
-                    <div>
-                      <div>User ID: {billCreateDTO.UserId}</div>
-                      <div>Full Name: {billCreateDTO.FullName}</div>
-                      <div>Phone Number: {billCreateDTO.NumberPhone}</div>
-                      <div>Email: {billCreateDTO.Email}</div>
-                      <div>Address: {billCreateDTO.Address}</div>
-                      <div>Order Note: {billCreateDTO.OrderNote}</div>
-                    </div>
-                  )}
                   <div className="complement">Thank You!</div>
                   <div className='btn-dat-hang-thanh-cong'>
                     <Link to="/" className="btn-return-home">Tiếp tục mua hàng</Link>
                     <div>
-                      <Link to="/" className="btn-view-cart">Xem đơn hàng</Link>
+                      <Link to="/Thongtintk?tab=orders" className="btn-view-cart">Xem đơn hàng</Link>
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import Don_hang from '../pages/cart/Don_hang';
 
@@ -18,7 +18,9 @@ export default function Thong_tin_tk() {
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('account-info'); // Default tab
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -69,6 +71,14 @@ export default function Thong_tin_tk() {
 
         fetchUserData();
     }, [currentUser, userLogout, navigate]);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const tab = params.get('tab');
+        if (tab) {
+            setActiveTab(tab);
+        }
+    }, [location.search]);
 
     const handlePasswordChange = (event) => {
         const { id, value } = event.target;
@@ -159,20 +169,20 @@ export default function Thong_tin_tk() {
                                     <div className="row">
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
-                                                <a className="active" href="#account-info" data-bs-toggle="tab">
+                                                <a className={activeTab === 'account-info' ? 'active' : ''} href="#account-info" data-bs-toggle="tab">
                                                     <i className="fa fa-user"></i> Thông tin cá nhân
                                                 </a>
-                                                <a href="#orders" data-bs-toggle="tab">
+                                                <a className={activeTab === 'orders' ? 'active' : ''} href="#orders" data-bs-toggle="tab">
                                                     <i className="fa fa-cart-arrow-down"></i> Đơn hàng
                                                 </a>
-                                                <a href="#payment-method" data-bs-toggle="tab">
+                                                <a className={activeTab === 'payment-method' ? 'active' : ''} href="#payment-method" data-bs-toggle="tab">
                                                     <i className="fa fa-credit-card"></i> Phương thức thanh toán
                                                 </a>
                                             </div>
                                         </div>
                                         <div className="col-lg-9 col-md-8">
                                             <div className="tab-content" id="myaccountContent">
-                                                <div className="tab-pane fade show active" id="account-info" role="tabpanel">
+                                                <div className={`tab-pane fade ${activeTab === 'account-info' ? 'show active' : ''}`} id="account-info" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Thông tin cá nhân</h5>
                                                         <div className="account-details-form">
@@ -212,10 +222,10 @@ export default function Thong_tin_tk() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                   <Don_hang/>
+                                                <div className={`tab-pane fade ${activeTab === 'orders' ? 'show active' : ''}`} id="orders" role="tabpanel">
+                                                    <Don_hang />
                                                 </div>
-                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
+                                                <div className={`tab-pane fade ${activeTab === 'payment-method' ? 'show active' : ''}`} id="payment-method" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Phương thức thanh toán</h5>
                                                         <p className="saved-message">Chúng tôi sẽ sớm phát triển </p>

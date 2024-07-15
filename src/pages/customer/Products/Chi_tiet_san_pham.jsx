@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import { decodeToken } from '../../../api/TokenAPI';
-import '../../../nice-select';
-import '../../../image-zoom';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
@@ -15,6 +13,7 @@ import { notification} from 'antd';
 
 export default function Chi_tiet_san_pham() {
     useEffect(() => {
+
         $('select').niceSelect();
         $('.img-zoom').zoom();
         // product details slider active
@@ -44,8 +43,8 @@ export default function Chi_tiet_san_pham() {
             }]
         });
         return () => {
-            $('select').niceSelect('destroy');
-            $('.img-zoom').zoom('destroy');
+             $('select').niceSelect('destroy');
+             $('.img-zoom').trigger('zoom.destroy');
         };
 
     }, []);
@@ -58,7 +57,12 @@ export default function Chi_tiet_san_pham() {
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
+
     const [api, contextHolder] = notification.useNotification();
+
+    const [averageRating, setAverageRating] = useState(0);
+    const [showMessage, setShowMessage] = useState(false);
+
 
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -105,6 +109,11 @@ export default function Chi_tiet_san_pham() {
                 }
             }
         }
+    };
+
+    const updateReviewCountAndAverageRating = (feedbackCount, avgRating) => {
+        setReviewCount(feedbackCount);
+        setAverageRating(avgRating);
     };
 
     return (
@@ -308,18 +317,18 @@ export default function Chi_tiet_san_pham() {
                                     </div>
                                 </div>
                             </div>
-
-                            <Mota_danhgia productId={productObj.productId} />
+                            <Mota_danhgia 
+                                productId={productObj.productId} 
+                                onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
+                            />
 
                         </div>
                     </div>
-
-
                 </div>
-            </div>
-            <Sanphamtuongtu />
-            <div className="scroll-top not-visible">
-                <i className="fa fa-angle-up"></i>
+                <Sanphamtuongtu />
+                <div className="scroll-top not-visible">
+                    <i className="fa fa-angle-up"></i>
+                </div>
             </div>
         </div>
 
