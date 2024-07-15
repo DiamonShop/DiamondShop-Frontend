@@ -73,11 +73,11 @@ export const handleDeleteOrderDetail = async (orderDetailId) => {
         mode: 'cors',
     });
     const data = await response.json();
-        if (data == null) {
-            return null;
-        } else {
-            return data;
-        }
+    if (data == null) {
+        return null;
+    } else {
+        return data;
+    }
 }
 
 export const handleGetAllOrderDetail = async () => {
@@ -106,4 +106,23 @@ export const handleUpdateStatusByUserId = async (userId) => {
         console.error(error);
         return false;
     }
+}
+
+export const handleGetOrderByUserIdOrderId = async (userId, orderId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/GetOrderByUserIdOrderId?userId=${userId}&orderId=${orderId}`, {
+            method: 'GET',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        if (data.data == null) {
+            return null;
+        } else {
+            return data.data;
+        }
+    } catch (error) {
+        console.error("Error during get order:", error);
+        return null; // Return null on error
+    }
+
 }

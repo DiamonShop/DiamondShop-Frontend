@@ -9,6 +9,7 @@ import '../../../nice-select';
 import '../../../image-zoom';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
+import StarRating from '../../../components/StarRating';
 
 export default function Chi_tiet_san_pham() {
     useEffect(() => {
@@ -54,6 +55,10 @@ export default function Chi_tiet_san_pham() {
     };
 
     const [quantity, setQuantity] = useState(1);
+    const [rating, setRating] = useState(0);
+    const [reviewCount, setReviewCount] = useState(0);
+    const [showMessage, setShowMessage] = useState(false);
+
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
     };
@@ -61,8 +66,6 @@ export default function Chi_tiet_san_pham() {
     const handleDecrement = () => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
-
-    const [showMessage, setShowMessage] = useState(false);
 
     const successAddMessage = () => {
         setShowMessage(true);
@@ -72,38 +75,33 @@ export default function Chi_tiet_san_pham() {
     };
 
     const handleAddToCart = async () => {
-
         const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
             const orders = await handleGetOrderByUserId(parseInt(userId, 10));
-
-            let orderId = null;
-
-
             if (orders != null) {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
-                        orderId = item.orderId;
+                        handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    } else if (item.status === 'Completed' || item.status === 'Shipped') {
+                        const orderId = await handleCreateOrder(userId);
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
                         break;
                     }
                 }
-            }
-
-            if (orderId === null) {
-                // Create a new order if no "Ordering" order is found
-                orderId = await handleCreateOrder(userId);
-            }
-
-            if (orderId !== null) {
-                const addProductResponse = await handleAddProductToOrder(orderId, productObj.productId, quantity);
-                if (addProductResponse !== null) {
-                    successAddMessage();
-                } else {
-                    console.error('Failed to add product to order');
-                }
             } else {
-                console.error('Failed to create or retrieve order');
+                const orderId = await handleCreateOrder(userId);
+                const order = await handleGetOrderByUserId(parseInt(userId, 10));
+                for (const item of order) {
+                    if (item.status === 'Ordering' && item.orderId === orderId) {
+                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        successAddMessage();
+                        break;
+                    }
+                }
             }
         }
     };
@@ -167,38 +165,36 @@ export default function Chi_tiet_san_pham() {
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
-                                            <div className="ratings d-flex">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
+                                            <div className="ratings d-flex align-items-center">
+                                                <StarRating rating={rating} setRating={setRating} />
                                                 <div className="pro-review">
-                                                    <span>Reviews</span>
+                                                    <span>{reviewCount} Review(s)</span>
                                                 </div>
                                             </div>
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
 
+
+
                                             <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
                                             <ul class="jewelry-filter-container">
                                                 <li class="filter-group">
                                                     <h6 className='filter-name-jewelry'>Chất liệu:</h6>
                                                     <select className='nice-select'>
-                                                        <option value="Vàng"> Vàng  </option>
+                                                        <option value="Vàng">{productObj.material}</option>
                                                     </select>
                                                 </li>
                                                 <li class="filter-group">
                                                     <h6 className='filter-name-jewelry' >Viên chính:</h6>
                                                     <select className='nice-select' >
-                                                        <option value="VS2">Thêm viên vào</option>
+                                                        <option value="VS2">{productObj.mainDiamondName}</option>
                                                     </select>
                                                 </li>
                                                 <li class="filter-group">
                                                     <h6 className='filter-name-jewelry'>Viên phụ:</h6>
                                                     <select  >
-                                                        <option value="VS2">Thêm viên vào</option>
+                                                        <option value="VS2">{productObj.sideDiamondName}</option>
                                                     </select>
                                                 </li>
                                                 <li class="filter-group">
@@ -267,6 +263,5 @@ export default function Chi_tiet_san_pham() {
                 <i className="fa fa-angle-up"></i>
             </div>
         </div>
-
     );
 }

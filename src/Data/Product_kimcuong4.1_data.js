@@ -7,7 +7,7 @@ const listProduct = await HandleGetAllDiamond();
 const productData = await Promise.all(listProduct
     .filter(product => product.diameterMM === 4.1 && product.isActive === true)
     .map(async product => {
-        const { basePrice, productID, productName, categoryId, stock, description, isActive, diameterMM} = product;
+        const {basePrice, productID, productName, categoryId, stock, description, isActive, diameterMM,carat,clarity,cut,color,quantity} = product;
         const { image1Url, image2Url, image3Url } = await getDiamondImageUrls(productID, 5, diameterMM);
         
         return {
@@ -23,6 +23,11 @@ const productData = await Promise.all(listProduct
             stock: stock,
             isActive: isActive,
             categoryId: categoryId,
+            Carat: carat,
+            Clarity: clarity,
+            Cut: cut,
+            Color:color,
+            Quantity:quantity
         };
     })
 );

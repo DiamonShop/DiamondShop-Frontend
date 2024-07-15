@@ -264,32 +264,7 @@ export default function Chi_tiet_san_pham_kc() {
                           </div>
                         )}
                       </div>
-                      {/* <div class="pro-size">
-                                                <h6 class="option-title">size :</h6>
-                                                <select class="nice-select">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                    <option>XL</option>
-                                                </select>
-                                            </div> */}
-                      {/* <div class="color-option">
-                                                <h6 class="option-title">color :</h6>
-                                                <ul class="color-categories">
-                                                    <li>
-                                                        <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-darktan" href="#" title="Darktan"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-grey" href="#" title="Grey"></a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="c-brown" href="#" title="Brown"></a>
-                                                    </li>
-                                                </ul>
-                                            </div> */}
+                      
                     </div>
                   </div>
                 </div>

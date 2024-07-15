@@ -67,6 +67,11 @@ function Kim_cuong_4_5({ onProductClick }) {
                                                     image2={item.image2}
                                                     image3={item.image3}
                                                     label={item.label}
+                                                    Carat={item.Carat}
+                                                    Clarity={item.Clarity}
+                                                    Cut={item.Cut}
+                                                    Color={item.Color}
+                                                    Quantity={item.Quantity}
                                                     productName={item.productName}
                                                     categoryName={item.categoryName}
                                                     newPrice={item.newPrice}

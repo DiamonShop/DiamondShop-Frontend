@@ -2153,6 +2153,7 @@ const SanPham = () => {
         productName: '',
         productType: '',
         description: '',
+        markupRate: 0,
         stock: 0,
         diamondCategoryId: 5,
         diameterMM: 0,
@@ -2403,7 +2404,24 @@ const SanPham = () => {
             setErrorMessage('Error adding new jewelry product.');
         }
     };
+    const generateProductId = async (diameterMM) => {
+        try {
+            const headers = sendToken();
+            const response = await axios.get(`https://localhost:7101/api/Diamonds/GetDiamondCountByDiameter?diameterMM=${diameterMM}`, {
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
+            });
 
+            const count = response.data;
+            const nextId = count + 1;
+            return `KC-${diameterMM}-${nextId.toString().padStart(3, '0')}`;
+        } catch (error) {
+            console.error('Error generating product ID:', error);
+            return null;
+        }
+    };
     const addNewDiamondProduct = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
@@ -2424,7 +2442,7 @@ const SanPham = () => {
             const diamondPayload = {
                 productID: newProductDiamond.productId, // Assuming productId is not auto-generated
                 productName: newProductDiamond.productName,
-                stock: newProductDiamond.stock,
+                quantity: newProductDiamond.stock,
                 carat: newProductDiamond.carat,
                 clarity: newProductDiamond.clarity,
                 cut: newProductDiamond.cut,
@@ -2432,6 +2450,7 @@ const SanPham = () => {
                 color: newProductDiamond.color,
                 description: newProductDiamond.description,
                 basePrice: newProductDiamond.basePrice,
+                markupRate: newProductDiamond.markupRate,
                 isActive: true // Make sure this is the correct value
             };
 
@@ -2451,7 +2470,7 @@ const SanPham = () => {
                 description: newDiamond.description,
                 stock: newDiamond.stock,
                 markupPrice: newDiamond.basePrice * newProductDiamond.markupRate, // Ensure this calculation is correct
-                markupRate: newProductDiamond.markupRate,
+                markupRate: newDiamond.markupRate,
                 productType: 'Diamond',
                 isActive: true,
                 imageUrls: imageUrls // Add image URLs
@@ -2470,8 +2489,9 @@ const SanPham = () => {
             setNewProductDiamond({
                 productId: '',
                 productName: '',
-                productType: 'Diamond',
+                productType: '',
                 description: '',
+                markupRate: 0,
                 stock: 0,
                 diamondCategoryId: 5,
                 diameterMM: 0,
@@ -2482,6 +2502,7 @@ const SanPham = () => {
                 basePrice: 0,
                 imageUrls: [],
                 imageFiles: []
+
             });
         } catch (error) {
             console.error('Error adding new diamond product:', error);
@@ -2768,7 +2789,7 @@ const SanPham = () => {
                         <li className="sidebar-item active">
                             <a className="sidebar-link" >
                                 <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/SanPham">Sản phẩm</Link></span>
+                                <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
                             </a>
 
                             <ul className="sidebar-nav dropdown-menu">
@@ -2796,13 +2817,13 @@ const SanPham = () => {
                                         <span className="align-middle">Vòng tay</span>
                                     </a>
                                 </li>
-                                <li className={`sidebar-item ${activeCategory === '5' ? 'active' : ''}`} onClick={() => handleCategoryClick('5')}>
-                                    <a className="sidebar-link">
-                                        <i className="align-middle" data-feather="square"></i>
-                                        <span className="align-middle">Kim cương</span>
-                                    </a>
-                                </li>
                             </ul>
+                        </li>
+                        <li className="sidebar-item">
+                            <a className="sidebar-link" >
+                                <i className="align-middle" data-feather="square"></i>
+                                <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                            </a>
                         </li>
                         <li className="sidebar-item ">
                             <a className="sidebar-link" >
@@ -2816,6 +2837,7 @@ const SanPham = () => {
                                 <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                             </a>
                         </li>
+
                         {/* <li className="sidebar-item">
                             <a className="sidebar-link">
                                 <i className="align-middle"
@@ -3073,7 +3095,7 @@ const SanPham = () => {
                                                                     id="productId"
                                                                     name="productId"
                                                                     placeholder="Nhập ID sản phẩm"
-                                                                    value={newProductDiamond.productId}
+                                                                    value={generateProductId}
                                                                     onChange={handleNewDiamondChange}
                                                                 />
                                                             </div>
@@ -3143,22 +3165,6 @@ const SanPham = () => {
                                                                 />
                                                             </div>
                                                             <div className="admin-page-add-product-form-group">
-                                                                <label htmlFor="color">Màu sắc</label>
-                                                                <select
-                                                                    id="color"
-                                                                    name="color"
-                                                                    value={newProductDiamond.color}
-                                                                    onChange={handleNewDiamondChange}
-                                                                    required
-                                                                >
-                                                                    <option value="D">D</option>
-                                                                    <option value="E">E</option>
-                                                                    <option value="F">F</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div className="admin-page-add-product-form-group-row">
-                                                            <div className="admin-page-add-product-form-group">
                                                                 <label htmlFor="clarity">Độ tinh khiết</label>
                                                                 <select
                                                                     id="clarity"
@@ -3174,6 +3180,54 @@ const SanPham = () => {
                                                                     <option value="VS2">VS2</option>
                                                                 </select>
                                                             </div>
+
+
+                                                        </div>
+                                                        <div className="admin-page-add-product-form-group-row">
+                                                            <div className="admin-page-add-product-form-group">
+                                                                <label htmlFor="markupRate">Tỉ lệ áp giá</label>
+                                                                <input
+                                                                    type="number"
+                                                                    id="markupRate"
+                                                                    name="markupRate"
+                                                                    placeholder="Tỉ lệ áp giá"
+                                                                    value={newProductDiamond.markupRate}
+                                                                    onChange={handleNewDiamondChange}
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div className="admin-page-add-product-form-group">
+                                                                <label htmlFor="color">Màu sắc</label>
+                                                                <select
+                                                                    id="color"
+                                                                    name="color"
+                                                                    value={newProductDiamond.color}
+                                                                    onChange={handleNewDiamondChange}
+                                                                    required
+                                                                >
+                                                                    <option value="D">D</option>
+                                                                    <option value="E">E</option>
+                                                                    <option value="F">F</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="admin-page-add-product-form-group-row">
+                                                            <div className="admin-page-add-product-form-group">
+                                                                <label htmlFor="imageFiles">Hình ảnh sản phẩm</label>
+                                                                <input
+                                                                    type="file"
+                                                                    id="imageFiles"
+                                                                    name="imageFiles"
+                                                                    multiple
+                                                                    onChange={(e) => setNewProductDiamond({
+                                                                        ...newProductDiamond,
+                                                                        imageFiles: Array.from(e.target.files)
+                                                                    })}
+                                                                />
+                                                            </div>
+
                                                             <div className="admin-page-add-product-form-group">
                                                                 <label htmlFor="cut">Cắt</label>
                                                                 <select
@@ -3190,20 +3244,6 @@ const SanPham = () => {
                                                             </div>
                                                         </div>
 
-
-                                                        <div className="admin-page-add-product-form-group">
-                                                            <label htmlFor="imageFiles">Hình ảnh sản phẩm</label>
-                                                            <input
-                                                                type="file"
-                                                                id="imageFiles"
-                                                                name="imageFiles"
-                                                                multiple
-                                                                onChange={(e) => setNewProductDiamond({
-                                                                    ...newProductDiamond,
-                                                                    imageFiles: Array.from(e.target.files)
-                                                                })}
-                                                            />
-                                                        </div>
                                                         <div className="admin-page-add-product-form-group">
                                                             <label htmlFor="description">Mô tả sản phẩm</label>
                                                             <textarea
