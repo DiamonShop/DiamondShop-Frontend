@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
 import { message, Select, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useUser } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
+import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 
 const { Option } = Select;
 
-export default function Shipper() {
+const Shipper = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [searchType, setSearchType] = useState('billid');
+  const [searchType, setSearchType] = useState('OrderId');
   const [searchValue, setSearchValue] = useState('');
-  const [orders, setOrders] = useState([
-    { billid: 1, fullname: 'Nguyễn Văn A', numberphone: '0123456789', address: '123 Cao Thắng', ordernote: '', status: 'Đang giao hàng' },
-    { billid: 2, fullname: 'Trần Thị B', numberphone: '0123456789', address: '123 Cao Thắng', ordernote: '', status: 'Đang giao hàng' },
-    { billid: 3, fullname: 'Lê Bảo C', numberphone: '0123456789', address: '123 Nguyễn Đình Chiểu', ordernote: 'giao vào 4h chiều', status: 'Đang giao hàng' },
-    { billid: 4, fullname: 'Nguyễn Quốc D', numberphone: '0123456789', address: '123 Cao Thắng', ordernote: '', status: 'Đang giao hàng' },
-    // Thêm các đơn hàng khác nếu cần
-  ]);
+  const { user: currentUser, logout: userLogout } = useUser();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
+  const [cancelReason, setCancelReason] = useState('');
+  const [selectedCancelOrder, setSelectedCancelOrder] = useState(null);
 
-  const filteredOrders = orders.filter(order => order.status === 'Đang giao hàng');
+  const filteredOrders = orders.filter(order => order.orderStatus === 'Shipping');
 
-  const getStatusClass = (status) => {
-    if (status === 'Đang giao hàng') {
+  const getStatusClass = (orderStatus) => {
+    if (orderStatus === 'Shipping') {
       return 'Shipper-Status-Shipping';
     }
     return '';
@@ -30,12 +35,44 @@ export default function Shipper() {
     setShowPopup(true);
   };
 
-  const handleStatusUpdate = () => {
+  const handleStatusUpdate = async () => {
     if (selectedOrder) {
-      setOrders(prevOrders => prevOrders.filter(order => order.billid !== selectedOrder.billid));
-      message.success('Đơn hàng đã được hoàn thành');
-      setShowPopup(false);
-      setSelectedOrder(null);
+      try {
+        await updateStatus(selectedOrder.orderId);
+        setOrders(prevOrders => prevOrders.filter(order => order.orderId !== selectedOrder.orderId));
+        message.success('Đơn hàng đã được hoàn thành');
+        setShowPopup(false);
+        setSelectedOrder(null);
+      } catch (error) {
+        console.error('Error updating order status:', error.response || error.message);
+        message.error('Lỗi khi cập nhật trạng thái đơn hàng.');
+      }
+    }
+  };
+
+  const handleCancelClick = (order) => {
+    setSelectedCancelOrder(order);
+    setShowCancelPopup(true);
+  };
+
+  const handleCancelOrder = async () => {
+    if (cancelReason.trim() === '') {
+      message.error('Vui lòng nhập lý do hủy đơn hàng.');
+      return;
+    }
+
+    if (selectedCancelOrder) {
+      try {
+        await updateCancelStatus(selectedCancelOrder.orderId, cancelReason);
+        setOrders(prevOrders => prevOrders.filter(order => order.orderId !== selectedCancelOrder.orderId));
+        message.success('Đơn hàng đã được hủy');
+        setShowCancelPopup(false);
+        setSelectedCancelOrder(null);
+        setCancelReason('');
+      } catch (error) {
+        console.error('Error updating order cancel status:', error.response || error.message);
+        message.error('Lỗi khi cập nhật trạng thái đơn hàng.');
+      }
     }
   };
 
@@ -49,14 +86,76 @@ export default function Shipper() {
 
   const searchOrders = () => {
     return filteredOrders.filter(order => {
-      if (searchType === 'billid') {
-        return order.billid.toString().includes(searchValue);
-      } else if (searchType === 'fullname') {
-        return order.fullname.toLowerCase().includes(searchValue.toLowerCase());
+      if (searchType === 'OrderId') {
+        return order.orderId.toString().includes(searchValue);
+      } else if (searchType === 'FullName') {
+        return order.fullName.toLowerCase().includes(searchValue.toLowerCase());
       }
       return false;
     });
   };
+
+  const updateStatus = async (orderId) => {
+    const headers = sendToken();
+    try {
+      const response = await axios.put(`https://localhost:7101/api/orders/UpdateStatusCompleted?orderId=${orderId}`, null, {
+        headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Order status updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating order status:', error.response || error.message);
+      throw error;
+    }
+  };
+
+  const updateCancelStatus = async (orderId, cancelReason) => {
+    const headers = sendToken();
+    try {
+      const response = await axios.put(`https://localhost:7101/api/orders/UpdateStatusCancel?orderId=${orderId}&cancelReason=${cancelReason}`, null, {
+        headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Order cancel status updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating order cancel status:', error.response || error.message);
+      throw error;
+    }
+  };
+
+  const fetchShipperData = async () => {
+    try {
+      const headers = sendToken(); // Get headers with Authorization token
+
+      // Get Shipping data
+      const ordersResponse = await axios.get('https://localhost:7101/api/Bill/GetAllBills', {
+        headers: {
+          ...headers,
+          'Content-Type': 'application/json'
+        }
+      });
+      const orders = ordersResponse.data;
+      setOrders(orders); // Update state with fetched orders
+
+    } catch (error) {
+      console.error('Error fetching user data:', error.response || error.message);
+      if (error.response && error.response.status === 401) {
+        userLogout();
+      } else {
+        setErrorMessage('Error fetching user data.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchShipperData();
+  }, [currentUser, userLogout, navigate]);
 
   return (
     <div className="Shipper-App">
@@ -64,9 +163,9 @@ export default function Shipper() {
         <h2 className="Shipper-Title">Quản lý đơn giao hàng</h2>
         <div className="Shipper-SearchContainer">
           <p>Tìm kiếm theo:</p>
-          <Select defaultValue="billid" style={{ width: 150 }} onChange={handleSearchTypeChange}>
-            <Option value="billid">Mã đơn hàng</Option>
-            <Option value="fullname">Họ và tên</Option>
+          <Select defaultValue="OrderId" style={{ width: 150 }} onChange={handleSearchTypeChange}>
+            <Option value="OrderId">Mã đơn hàng</Option>
+            <Option value="FullName">Họ và tên</Option>
           </Select>
           <Input
             style={{ width: 300, marginLeft: 10 }}
@@ -88,14 +187,17 @@ export default function Shipper() {
           </thead>
           <tbody>
             {searchOrders().map(order => (
-              <tr key={order.billid}>
-                <td>{order.billid}</td>
-                <td>{order.fullname}</td>
-                <td>{order.numberphone}</td>
+              <tr key={order.orderId}>
+                <td>{order.orderId}</td>
+                <td>{order.fullName}</td>
+                <td>{order.numberPhone}</td>
                 <td>{order.address}</td>
-                <td>{order.ordernote}</td>
-                <td className={getStatusClass(order.status)}>{order.status}</td>
-                <td><button className="Shipper-ConfirmButton" onClick={() => handleConfirmClick(order)}>Xác nhận</button></td>
+                <td>{order.orderNote}</td>
+                <td className={getStatusClass(order.orderStatus)}>{order.orderStatus}</td>
+                <td>
+                  <button className="Shipper-ConfirmButton" onClick={() => handleConfirmClick(order)}>Xác nhận</button>
+                  <button className="Shipper-CancelButton" onClick={() => handleCancelClick(order)}>Hủy đơn hàng</button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -111,7 +213,27 @@ export default function Shipper() {
             </div>
           </div>
         )}
+
+        {showCancelPopup && (
+          <div className="Shipper-Popup">
+            <div className="Shipper-PopupContent">
+              <h3>Hủy đơn hàng</h3>
+              <p>Lý do:</p>
+              <Input
+                type="text"
+                value={cancelReason}
+                onChange={(e) => setCancelReason(e.target.value)}
+                placeholder="Nhập lý do hủy đơn hàng"
+              />
+              <button className="Shipper-StatusButton Shipper-ConfirmButton" onClick={handleCancelOrder}>Xác nhận</button>
+              <button className="Shipper-StatusButton Shipper-CancelButton" onClick={() => setShowCancelPopup(false)}>Hủy bỏ</button>
+            </div>
+          </div>
+        )}
       </main>
+      {errorMessage && <p className="Shipper-Error">{errorMessage}</p>}
     </div>
   );
-}
+};
+
+export default Shipper;

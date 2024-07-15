@@ -21803,7 +21803,7 @@ footer.footer p {
 /* End add products in admin page */
 
 /*Start Shipper page*/
-.Shipper-App {
+.Shipper-Page {
   text-align: center;
 }
 
@@ -21906,6 +21906,9 @@ footer.footer p {
   color: #5cb85c;
   /* Xanh lá */
 }
+.Shipper-Status-Ordering{
+  color: #ff583b;
+}
 
 .Shipper-Popup {
   position: fixed;
@@ -21944,7 +21947,18 @@ footer.footer p {
 .Shipper-CancelButton {
   background-color: #d9534f;
   /* Đỏ */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
 }
+
+.Shipper-CancelButton:hover {
+  background-color: #c9302c;
+}
+
 
 /*End Shipper page*/
 /*Start Chi tiet san pham  */
