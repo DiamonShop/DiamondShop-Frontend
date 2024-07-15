@@ -5,10 +5,9 @@ import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
 
-const Mota_danhgia = ({ productId }) => {
+const Mota_danhgia = ({ productId, onReviewCountChange }) => {
     const [feedbacks, setFeedbacks] = useState([]);
-    const [canComment, setCanComment] = useState(true);
-    const [highestRating, setHighestRating] = useState(0);
+    const [canComment, setCanComment] = useState(false);
     const [orderIdForComment, setOrderIdForComment] = useState(null);
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -18,13 +17,17 @@ const Mota_danhgia = ({ productId }) => {
             try {
                 const feedbackData = await handleGetFeedbacksByProductId(productId);
                 setFeedbacks(feedbackData);
+                if (onReviewCountChange) {
+                    const avgRating = feedbackData.length > 0 ? (feedbackData.reduce((acc, curr) => acc + curr.rating, 0) / feedbackData.length).toFixed(1) : 0;
+                    onReviewCountChange(feedbackData.length, avgRating);
+                }
             } catch (error) {
                 console.error("Error fetching feedbacks:", error);
             }
         };
 
         fetchFeedbacks();
-    }, [productId]);
+    }, [productId, onReviewCountChange]);
 
     useEffect(() => {
         const checkCanComment = async () => {
@@ -34,12 +37,13 @@ const Mota_danhgia = ({ productId }) => {
                 const orders = await handleGetOrderByUserId(parseInt(userId, 10));
                 if (orders) {
                     const completedOrders = orders.filter(order => order.status === 'Completed');
-                    const productComments = completedOrders.flatMap(order => order.orderDetails.filter(detail => detail.productId === productId));
-                    const userFeedbacks = feedbacks.filter(f => f.userId === userId);
-                    if (userFeedbacks.length < productComments.length) {
+                    const hasPurchasedProduct = completedOrders.some(order =>
+                        order.orderDetails.some(detail => detail.productId === productId)
+                    );
+
+                    if (hasPurchasedProduct) {
                         setCanComment(true);
                         const latestOrder = completedOrders.find(order => order.orderDetails.some(detail => detail.productId === productId));
-                        console.log("Latest order for comment:", latestOrder); // Log the latest order
                         setOrderIdForComment(latestOrder.orderId);
                     } else {
                         setCanComment(false);
@@ -76,28 +80,27 @@ const Mota_danhgia = ({ productId }) => {
             productId,
             orderId: orderIdForComment,
             description: feedback.description,
-            rating: feedback.rating || highestRating,
+            rating: feedback.rating,
             dateTime: new Date().toISOString()
         };
 
-        console.log("Submitting feedback:", feedbackData); // Log the payload
-
         try {
             const response = await handleCreateFeedback(feedbackData);
-            if (response.data === "Create Feedback Successfully") {
-                setFeedbacks(prevFeedbacks => [...prevFeedbacks, feedbackData]);
+            if (response === "Create Feedback Successfully") {
+                const newFeedbacks = [...feedbacks, feedbackData];
+                setFeedbacks(newFeedbacks);
                 setFeedback({ description: '', rating: 0 });
                 setFeedbackMessage('Feedback submitted successfully');
                 setCanComment(false);
+                if (onReviewCountChange) {
+                    const avgRating = newFeedbacks.length > 0 ? (newFeedbacks.reduce((acc, curr) => acc + curr.rating, 0) / newFeedbacks.length).toFixed(1) : 0;
+                    onReviewCountChange(newFeedbacks.length, avgRating);
+                }
             } else {
-                setFeedbackMessage(response.data);
+                setFeedbackMessage(response);
             }
         } catch (error) {
-            if (error.response && error.response.data) {
-                setFeedbackMessage(error.response.data);
-            } else {
-                setFeedbackMessage('Error submitting feedback');
-            }
+            setFeedbackMessage('Error submitting feedback');
             console.error("Error creating feedback:", error);
         }
     };
@@ -130,7 +133,7 @@ const Mota_danhgia = ({ productId }) => {
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
-                                <h5>{feedbacks.length} review{feedbacks.length > 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
+                                <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
                                 {feedbacks.map((feedback, index) => (
                                     <div className="total-reviews" key={index}>
                                         <div className="rev-avatar">
