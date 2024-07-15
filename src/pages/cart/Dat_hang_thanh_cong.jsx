@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
-import { handleUpdateStatusByUserId } from '../../api/OrderAPI';
+import { handleUpdateStatusByUserId, handleGetLatestOrderByUserId } from '../../api/OrderAPI';
 
 function Dat_hang_thanh_cong() {
-  //const [transactionId, setTransactionId] = useState('');
-  const [billCreateDTO, setBillCreateDTO] = useState(null);
+  const [order, setOrder] = useState([]);
+
   const getUserId = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -13,15 +13,30 @@ function Dat_hang_thanh_cong() {
       await handleUpdateStatusByUserId(userId);
     }
   }
+
   useEffect(() => {
-    //setTransactionId(Math.floor(100000000 + Math.random() * 900000000));
-    const storedBill = localStorage.getItem('billCreateDTO');
-    if (storedBill) {
-      setBillCreateDTO(JSON.parse(storedBill));
-    }
+    const fetchOrder = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const userId = decodeToken(token).sid;
+        const data = await handleGetLatestOrderByUserId(parseInt(userId, 10));
+        if (data) {
+          setOrder(data);
+        }
+      } else {
+        setOrder(null);
+      }
+    };
+
+    fetchOrder();
     getUserId();
   }, []);
 
+  const handleViewOrderDetails = (orderId) => {
+    localStorage.setItem('selectedOrderId', orderId);
+  };
+
+  console.log(order.orderId)
   return (
     <div>
       <div className='box-dat-hang'>
@@ -42,12 +57,13 @@ function Dat_hang_thanh_cong() {
                 </div>
                 <div className="order-details">
                   <div className="order-number-label">Mã thanh toán</div>
-                  <div className="order-number">{billCreateDTO ? billCreateDTO.BillId : ''}</div>
+                  <div className="order-number">{order ? order.orderId : ''}</div>
                   <div className="complement">Thank You!</div>
                   <div className='btn-dat-hang-thanh-cong'>
                     <Link to="/" className="btn-return-home">Tiếp tục mua hàng</Link>
                     <div>
-                      <Link to="/Thongtintk?tab=orders" className="btn-view-cart">Xem đơn hàng</Link>
+                      <Link to="/Chitietdonhang"
+                         className="btn-view-cart" onClick={() => handleViewOrderDetails(order.orderId)}>Xem đơn hàng</Link>
                     </div>
                   </div>
                 </div>
