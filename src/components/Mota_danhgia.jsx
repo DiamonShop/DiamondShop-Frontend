@@ -5,30 +5,27 @@ import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
 
-const Mota_danhgia = ({ productId }) => {
+const Mota_danhgia = ({ productId, onReviewCountChange }) => {
     const [feedbacks, setFeedbacks] = useState([]);
-
-    const productObj = JSON.parse(localStorage.getItem('product'));
-
-    const [canComment, setCanComment] = useState(true);
-    const [highestRating, setHighestRating] = useState(0);
+    const [canComment, setCanComment] = useState(false);
     const [orderIdForComment, setOrderIdForComment] = useState(null);
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [feedbackMessage, setFeedbackMessage] = useState('');
-
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
                 const feedbackData = await handleGetFeedbacksByProductId(productId);
-                setFeedbacks(feedbackData);
+                setFeedbacks(feedbackData); // Ensure feedback data is being set correctly
+                const avgRating = feedbackData.reduce((acc, curr) => acc + curr.rating, 0) / feedbackData.length;
+                onReviewCountChange(feedbackData.length, avgRating.toFixed(1));
             } catch (error) {
                 console.error("Error fetching feedbacks:", error);
             }
         };
 
         fetchFeedbacks();
-    }, [productId]);
+    }, [productId, onReviewCountChange]);
 
     useEffect(() => {
         const checkCanComment = async () => {
@@ -38,12 +35,13 @@ const Mota_danhgia = ({ productId }) => {
                 const orders = await handleGetOrderByUserId(parseInt(userId, 10));
                 if (orders) {
                     const completedOrders = orders.filter(order => order.status === 'Completed');
-                    const productComments = completedOrders.flatMap(order => order.orderDetails.filter(detail => detail.productId === productId));
-                    const userFeedbacks = feedbacks.filter(f => f.userId === userId);
-                    if (userFeedbacks.length < productComments.length) {
+                    const hasPurchasedProduct = completedOrders.some(order =>
+                        order.orderDetails.some(detail => detail.productId === productId)
+                    );
+
+                    if (hasPurchasedProduct) {
                         setCanComment(true);
                         const latestOrder = completedOrders.find(order => order.orderDetails.some(detail => detail.productId === productId));
-                        console.log("Latest order for comment:", latestOrder); // Log the latest order
                         setOrderIdForComment(latestOrder.orderId);
                     } else {
                         setCanComment(false);
@@ -80,28 +78,24 @@ const Mota_danhgia = ({ productId }) => {
             productId,
             orderId: orderIdForComment,
             description: feedback.description,
-            rating: feedback.rating || highestRating,
+            rating: feedback.rating,
             dateTime: new Date().toISOString()
         };
 
-        console.log("Submitting feedback:", feedbackData); // Log the payload
-
         try {
             const response = await handleCreateFeedback(feedbackData);
-            if (response.data === "Create Feedback Successfully") {
+            if (response === "Create Feedback Successfully") {
                 setFeedbacks(prevFeedbacks => [...prevFeedbacks, feedbackData]);
                 setFeedback({ description: '', rating: 0 });
                 setFeedbackMessage('Feedback submitted successfully');
                 setCanComment(false);
+                const avgRating = (feedbacks.reduce((acc, curr) => acc + curr.rating, 0) + feedbackData.rating) / (feedbacks.length + 1);
+                onReviewCountChange(feedbacks.length + 1, avgRating.toFixed(1));
             } else {
-                setFeedbackMessage(response.data);
+                setFeedbackMessage(response);
             }
         } catch (error) {
-            if (error.response && error.response.data) {
-                setFeedbackMessage(error.response.data);
-            } else {
-                setFeedbackMessage('Error submitting feedback');
-            }
+            setFeedbackMessage('Error submitting feedback');
             console.error("Error creating feedback:", error);
         }
     };
@@ -125,11 +119,16 @@ const Mota_danhgia = ({ productId }) => {
                         <div className="tab-content reviews-tab">
                             <div className="tab-pane fade show active" id="tab_one">
                                 <div className="tab-one">
-                                 <p>{productObj.description}</p>
+                                    <p>Kim cương vốn là món trang sức mang đến niềm kiêu hãnh và cảm hứng thời trang bất tận.
+                                        Sở hữu riêng cho mình món trang sức kim cương chính là điều mà ai cũng mong muốn.
+                                        Chiếc nhẫn được chế tác từ vàng 14K cùng điểm nhấn kim cương với 57 giác cắt chuẩn xác,
+                                        tạo nên món trang sức đầy sự sang trọng và đẳng cấp.
+                                    </p>
+                                    <p>Kim cương đã đẹp, trang sức kim cương lại càng mang sức hấp dẫn khó cưỡng. Sự kết hợp mới mẻ này chắc chắn sẽ tạo nên dấu ấn thời trang hiện đại và giúp quý cô trở nên nổi bật, tự tin và thu hút sự ngưỡng mộ của mọi người</p>
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
-                                <h5>{feedbacks.length} review{feedbacks.length > 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
+                                <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
                                 {feedbacks.map((feedback, index) => (
                                     <div className="total-reviews" key={index}>
                                         <div className="rev-avatar">
@@ -137,12 +136,7 @@ const Mota_danhgia = ({ productId }) => {
                                         </div>
                                         <div className="review-box">
                                             <div className="ratings">
-                                                {[...Array(feedback.rating)].map((_, i) => (
-                                                    <span key={i} className="good"><i className="fa fa-star"></i></span>
-                                                ))}
-                                                {[...Array(5 - feedback.rating)].map((_, i) => (
-                                                    <span key={i}><i className="fa fa-star"></i></span>
-                                                ))}
+                                                <StarRating rating={feedback.rating} setRating={() => {}} isEditable={false} />
                                             </div>
                                             <div className="post-author">
                                                 <p><span>{feedback.userName} </span> {format(new Date(feedback.dateTime), 'dd/MM/yyyy')}</p>

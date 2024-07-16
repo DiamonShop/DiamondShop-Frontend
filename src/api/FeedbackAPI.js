@@ -7,7 +7,7 @@ export const handleGetFeedbacksByProductId = async (productId) => {
       });
       return response.data;
   } catch (error) {
-      console.error("Error fetching feedbacks:", error); // Log the error for debugging
+      console.error("Error fetching feedbacks:", error);
       throw error;
   }
 };

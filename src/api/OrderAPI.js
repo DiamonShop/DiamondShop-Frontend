@@ -144,3 +144,21 @@ export const handleGetOrderByUserIdOrderId = async (userId, orderId) => {
     }
 
 }
+
+export const handleGetLatestOrderByUserId = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/GetLatestOrderByUserId?userId=${userId}`, {
+            method: 'GET',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        if (data.data == null) {
+            return null;
+        } else {
+            return data.data;
+        }
+    } catch (error) {
+        console.error("Error during get order:", error);
+        return null; // Return null on error
+    }
+}

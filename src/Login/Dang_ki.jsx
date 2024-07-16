@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleSignUpUser, isValidEmail } from '../api/SignUpAPI';
 import { Link } from 'react-router-dom';
-
+import { Button, message, Space } from 'antd';
 export default function Dang_ki() {
     const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    // const [successMessage, setSuccessMessage] = useState('');
+    const [messageApi, contextHolder] = message.useMessage();
+    // const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,24 +40,35 @@ export default function Dang_ki() {
         };
 
         if (!isValidEmail(user.email)) {
-            setErrorMessage('Invalid email format');
+            messageApi.open({
+                type: 'error',
+                content: 'Email không hợp lệ',
+            });
             return;
         }
 
         try {
             const result = await handleSignUpUser(user);
             if (result && result.success) {
-                setSuccessMessage('Register successfully!');
-                setErrorMessage('');
+                messageApi.open({
+                    type: 'success',
+                    content: 'Đăng kí thành công !',
+                });
                 // Redirect to login page after a short delay
                 setTimeout(() => {
                     navigate('/Dangnhap');
                 }, 2000); // Delay for 2 seconds before navigating
             } else {
-                setErrorMessage('Sign-up failed');
+                messageApi.open({
+                    type: 'error',
+                    content: 'Đăng kí thất bại',
+                });
             }
         } catch (error) {
-            setErrorMessage('Sign-up error: ' + error.message);
+            messageApi.open({
+                type: 'error',
+                content: 'Sign-up error: ' + error.message,
+            });
         }
 
         console.log('Sign-Up:', signUpForm);
@@ -64,15 +76,10 @@ export default function Dang_ki() {
 
     return (
         <div>
+            {contextHolder}
             <div className="signin-signup-container">
                 <div className="signin-signup-forms-container">
                     <div className="signin-signup">
-                        {successMessage && (
-                            <div className="success-message">{successMessage}</div>
-                        )}
-                        {errorMessage && (
-                            <div className="error-message">{errorMessage}</div>
-                        )}
                         <form onSubmit={handleSignUpSubmit} className="sign-in-form">
                             <h2 className="sign-up-form-title">Đăng kí</h2>
                             <div className="input-field">

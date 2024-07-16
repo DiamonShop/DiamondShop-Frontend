@@ -1,17 +1,27 @@
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
+import $ from 'jquery';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom';
 import { decodeToken } from '../../../api/TokenAPI';
 import { handleAddProductToOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
+import '../../../nice-select';
+import '../../../image-zoom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import Mota_danhgia_kc from '../../../components/Mota_danhgia_kc';
 import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
 
 export default function Chi_tiet_san_pham_kc() {
+  useEffect(() => {
+    $('select').niceSelect();
+    $('.img-zoom').zoom();
+
+    return () => {
+        $('select').niceSelect('destroy');
+        $('.img-zoom').zoom('destroy');
+    };
+}, []);
   const largeSliderRef = useRef(null);
   const navSliderRef = useRef(null);
   const productObj = JSON.parse(localStorage.getItem('product'));

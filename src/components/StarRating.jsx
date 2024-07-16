@@ -1,8 +1,21 @@
 import React from 'react';
 
-const StarRating = ({ rating, setRating }) => {
+
+const StarRating = ({ rating, setRating, isEditable = true }) => {
     const handleStarClick = (value) => {
-        setRating(value);
+        if (isEditable) {
+            setRating(value);
+        }
+    };
+
+    const getStarClass = (index) => {
+        if (rating >= index) {
+            return 'fa fa-star full-star';
+        } else if (rating >= index - 0.5) {
+            return 'fa fa-star half-star';
+        } else {
+            return 'fa fa-star empty-star';
+        }
     };
 
     return (
@@ -10,7 +23,7 @@ const StarRating = ({ rating, setRating }) => {
             <h6 className="option-title">Đánh giá:</h6>
             {[1, 2, 3, 4, 5].map((value) => (
                 <span key={value} onClick={() => handleStarClick(value)}>
-                    <i className={`fa ${value <= rating ? 'fa-star' : 'fa-star-o'}`} />
+                    <i className={getStarClass(value)} />
                 </span>
             ))}
             <div>
