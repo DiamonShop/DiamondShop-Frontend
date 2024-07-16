@@ -9,7 +9,7 @@ const productData = await Promise.all(listProduct
 
         const { basePrice, productID, productName, categoryId, stock, description, isActive,material,mainDiamondName,sideDiamondName,jewelrySizes } = product;
         const { image1Url, image2Url, image3Url, } = await getJewelryImageUrls(productID, categoryId);
-        console.log(product);
+        
         return {
             id: productID,
             productName: productName,

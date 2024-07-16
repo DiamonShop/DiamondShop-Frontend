@@ -56,7 +56,7 @@ export default function Chi_tiet_san_pham_kc() {
     }],
     ref: navSliderRef
   };
- 
+
   // overlay of GIA image
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
@@ -235,19 +235,19 @@ export default function Chi_tiet_san_pham_kc() {
                                 <span className=" qtybtn" onClick={handleIncrement}>+</span>
 
                               </div>
-                              
+
 
 
 
                             </div>
                           </div>
                           <span>
-                          <h6 className='soluongsanphamtrongkho'>
-                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
-                              </h6>
+                            <h6 className='soluongsanphamtrongkho'>
+                              Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
+                            </h6>
                           </span>
                         </li>
-                       
+
                       </ul>
 
 
@@ -264,7 +264,7 @@ export default function Chi_tiet_san_pham_kc() {
                           </div>
                         )}
                       </div>
-                      
+
                     </div>
                   </div>
                 </div>

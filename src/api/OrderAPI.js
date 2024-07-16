@@ -50,6 +50,24 @@ export const handleGetOrderByUserId = async (userId) => {
     }
 }
 
+export const handleGetHistoryOrderByUserId = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/GetHistoryOrderByUserId?userId=${userId}`, {
+            method: 'GET',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        if (data.data == null) {
+            return null;
+        } else {
+            return data.data;
+        }
+    } catch (error) {
+        console.error("Error during get order:", error);
+        return null; // Return null on error
+    }
+}
+
 export const handleUpdateTotalPrice = async (orderId, totalPrice) => {
     try {
         const response = await fetch(`https://localhost:7101/api/orders/UpdateTotalPrice?orderId=${orderId}&totalPrice=${totalPrice}`, {

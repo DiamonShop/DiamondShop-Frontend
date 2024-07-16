@@ -5,8 +5,6 @@ import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -27,11 +25,13 @@ export default function Nhan({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-    
+
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
@@ -82,7 +82,7 @@ export default function Nhan({ onProductClick }) {
                                                 jewelrySizes={item.jewelrySizes}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
-                                                categoryId= {item.categoryId}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
@@ -91,26 +91,26 @@ export default function Nhan({ onProductClick }) {
                                     ))}
                                 </div>
                                 <div className="pagination-area text-center">
-                                        <ul className="pagination-box">
-                                            <li>
-                                                <a href="#" onClick={(e) => handleClick(e, 1)}>
+                                    <ul className="pagination-box">
+                                        <li>
+                                            <a href="#" onClick={(e) => handleClick(e, 1)}>
                                                 <i className="pe-7s-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        {pageNumbers.map(number => (
+                                            <li key={number} className={currentPage === number ? 'active' : ''}>
+                                                <a href="#" onClick={(e) => handleClick(e, number)}>
+                                                    {number}
                                                 </a>
                                             </li>
-                                            {pageNumbers.map(number => (
-                                                <li key={number} className={currentPage === number ? 'active' : ''}>
-                                                    <a href="#" onClick={(e) => handleClick(e, number)}>
-                                                        {number}
-                                                    </a>
-                                                </li>
-                                            ))}
-                                            <li>
-                                                <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
+                                        ))}
+                                        <li>
+                                            <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
                                                 <i className="pe-7s-angle-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

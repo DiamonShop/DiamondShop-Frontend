@@ -5,8 +5,6 @@ import Filter_product from '../../../components/Filter_product';
 import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
 export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -29,7 +27,9 @@ export default function Day_chuyen({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);

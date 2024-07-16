@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import Don_hang from '../pages/cart/Don_hang';
 
@@ -40,7 +40,7 @@ export default function Thong_tin_tk() {
                 const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
                 if (userRole === 'Admin') {
-                    navigate('/BangDieuKhien');
+                    navigate('/Dashboard');
                 }
 
                 const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
@@ -213,7 +213,7 @@ export default function Thong_tin_tk() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                   <Don_hang/>
+                                                    <Don_hang />
                                                 </div>
                                                 <div className="tab-pane fade" id="payment-method" role="tabpanel">
                                                     <div className="myaccount-content">

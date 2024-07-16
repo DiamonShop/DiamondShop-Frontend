@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
-import { HandleGetAll } from '../api/JewelryAPI';
+import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
+import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
+import { Product_Nhan_Data } from '../Data/Product_nhan_data';
+import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
 
-const productObj = JSON.parse(localStorage.getItem('product'));
+import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
 
 function Sanphamtuongtu({ onProductClick }) {
+    const productObj = JSON.parse(localStorage.getItem('product'));
     const [randomProducts, setRandomProducts] = useState([]);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const allProducts = await HandleGetAll();
-                console.log(allProducts);
-                const similarProducts = allProducts.filter(product => product.categoryId === productObj.categoryId);
-                setRandomProducts(getRandomProducts(similarProducts, 5));
-            } catch (error) {
-                console.error("There was an error fetching the jewelry data!", error);
-            }
-        };
-
-        fetchProducts();
-    }, []); // Dependency array is empty to prevent re-fetching
+        let productsData;
+        switch (productObj.categoryId) {
+            case 1:
+                productsData = Product_Nhan_Data;
+                break;
+            case 2:
+                productsData = Product_Daychuyen_Data;
+                break;
+            case 3:
+                productsData = Product_Matdaychuyen_Data;
+                break;
+            case 4:
+                productsData = Product_Vongtay_Data;
+                break;
+            default:
+                productsData = [];
+        }
+        setRandomProducts(getRandomProducts(productsData, 5));
+    }, [productObj.categoryId]);
 
     function getRandomProducts(products, count) {
         const shuffled = products.sort(() => 0.5 - Math.random());
@@ -64,7 +73,6 @@ function Sanphamtuongtu({ onProductClick }) {
                                             label={item.label}
                                             productName={item.productName}
                                             categoryName={item.categoryName}
-                                            categoryId={item.categoryId}
                                             newPrice={item.newPrice}
                                             oldPrice={item.oldPrice}
                                             description={item.description}

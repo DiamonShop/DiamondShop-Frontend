@@ -7,14 +7,10 @@ import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
 
 function Kim_cuong_5_4({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
-
-  
 
     const sortedProducts = Product_kimcuong5_4_data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -31,7 +27,9 @@ function Kim_cuong_5_4({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -47,7 +45,6 @@ function Kim_cuong_5_4({ onProductClick }) {
         pageNumbers.push(i);
     }
 
-   
     return (
         <div>
             <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/label-kim-cuong-2.png)` }}>
@@ -86,7 +83,7 @@ function Kim_cuong_5_4({ onProductClick }) {
                                         <ul className="pagination-box">
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                <i className="pe-7s-angle-left"></i>
+                                                    <i className="pe-7s-angle-left"></i>
                                                 </a>
                                             </li>
                                             {pageNumbers.map(number => (
@@ -98,7 +95,7 @@ function Kim_cuong_5_4({ onProductClick }) {
                                             ))}
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                <i className="pe-7s-angle-right"></i>
+                                                    <i className="pe-7s-angle-right"></i>
                                                 </a>
                                             </li>
                                         </ul>
@@ -120,7 +117,7 @@ function Kim_cuong_5_4({ onProductClick }) {
 
 
         </div>
-  )
+    )
 }
 
 export default Kim_cuong_5_4
