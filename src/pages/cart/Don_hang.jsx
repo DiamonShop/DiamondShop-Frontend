@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { handleGetOrderByUserId } from '../../api/OrderAPI';
+import { handleGetHistoryOrderByUserId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 
 function Don_hang() {
@@ -11,7 +11,7 @@ function Don_hang() {
             const token = localStorage.getItem('token');
             if (token) {
                 const userId = decodeToken(token).sid;
-                const data = await handleGetOrderByUserId(parseInt(userId, 10));
+                const data = await handleGetHistoryOrderByUserId(parseInt(userId, 10));
                 if (data) {
                     setOrderLists(data);
                 }
