@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Slider from "react-slick";
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
+import '../slick-min'
 import Du_lieu_san_pham_nb from './Du_lieu_san_pham_nb';
 import { Product_Nhan_Data } from '../Data/Product_nhan_data';
 import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
@@ -25,18 +26,50 @@ function Sanphamnoibat({ onProductClick }) {
             return shuffled.slice(0, count);
         }
         setRandomProductsMatdaychuyen(getRandomProductsMatdaychuyen(Product_Matdaychuyen_Data, 5));
+    
+    
+        const initializeSlick = () => {
+            $('.product-carousel-4').slick({
+                speed: 1000,
+                autoplay: true,
+                slidesToShow: 4,
+                adaptiveHeight: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+                responsive: [{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false
+                    }
+                }]
+            });
 
-    }, []); // Chỉ chạy một lần khi component được mount
-    const SecondSliderSettings = {
-        speed: 1000,
-        autoplay: true,
-        infinite: true,
-        slidesToShow: 4,
-        adaptiveHeight: true,
-        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-        arrows: true,
-    };
+        };
+
+        $(document).ready(initializeSlick);
+
+        return () => {
+            if ($('.product-carousel-4').hasClass('slick-initialized')) {
+                $('.product-carousel-4').slick('unslick');
+            }
+        
+        };
+    }, []);
+
     return (
         <div>
             <section className="product-area section-padding">
@@ -85,8 +118,7 @@ function Sanphamnoibat({ onProductClick }) {
                                     <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">
                                         <div className="tab-content">
                                             <div className="tab-pane fade show active" id="tab1">
-                                                <div className="product-carousel-5 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
+                                                <div className="product-carousel-4 slick-row-10 slick-arrow-style">                          
                                                         {randomProductsNhan.map((item) => (
                                                             <div key={item.id} >
                                                                 <Du_lieu_san_pham_nb
@@ -96,6 +128,10 @@ function Sanphamnoibat({ onProductClick }) {
                                                                     image3={item.image3}
                                                                     image4={item.image4}
                                                                     label={item.label}
+                                                                    material={item.material}
+                                                                    mainDiamondName={item.mainDiamondName}
+                                                                    sideDiamondName={item.sideDiamondName}
+                                                                    jewelrySizes={item.jewelrySizes}
                                                                     productName={item.productName}
                                                                     categoryName={item.categoryName}
                                                                     newPrice={item.newPrice}
@@ -105,12 +141,12 @@ function Sanphamnoibat({ onProductClick }) {
                                                                 />
                                                             </div>
                                                         ))}
-                                                    </Slider>
+                                                   
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="tab2">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
+                                                   
                                                         {randomProductsDaychuyen.map((item) => (
                                                             <div key={item.id} >
                                                                 <Du_lieu_san_pham_nb
@@ -129,13 +165,13 @@ function Sanphamnoibat({ onProductClick }) {
                                                                 />
                                                             </div>
                                                         ))}
-                                                    </Slider>
+                                                   
                                                 </div>
                                             </div>
 
                                             <div className="tab-pane fade " id="tab3">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
+                                                   
                                                         {randomProductsMatdaychuyen.map((item) => (
                                                             <div key={item.id} >
                                                                 <Du_lieu_san_pham_nb
@@ -155,12 +191,12 @@ function Sanphamnoibat({ onProductClick }) {
                                                             </div>
                                                         ))}
 
-                                                    </Slider>
+                                                   
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="tab4">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                                    <Slider {...SecondSliderSettings}>
+                                                    
                                                         <div className="product-item">
                                                             <figure className="product-thumb">
                                                                 <Link to="/Chitietsanpham">
@@ -349,7 +385,7 @@ function Sanphamnoibat({ onProductClick }) {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </Slider>
+                                                  
                                                 </div>
                                             </div>
 

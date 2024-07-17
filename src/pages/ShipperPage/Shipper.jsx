@@ -193,6 +193,7 @@ const Shipper = () => {
                 <td>{order.numberPhone}</td>
                 <td>{order.address}</td>
                 <td>{order.orderNote}</td>
+                
                 <td className={getStatusClass(order.orderStatus)}>{order.orderStatus}</td>
                 <td>
                   <button className="Shipper-ConfirmButton" onClick={() => handleConfirmClick(order)}>Xác nhận</button>

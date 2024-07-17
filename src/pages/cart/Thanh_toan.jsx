@@ -8,6 +8,11 @@ import { formatCurrency } from '../../utils/NumberFormat';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetOrderByUserId } from '../../api/OrderAPI';
 
+//9704198526191432198
+//NGUYEN VAN A
+//07/15
+//123456
+
 export default function Thanh_toan() {
     const { user: currentUser, logout: userLogout } = useUser();
     const [userData, setUserData] = useState(null);
