@@ -7,7 +7,7 @@ const updateProfile = async (token, userDataToUpdate) => {
         const sid = decodedToken.sid;
 
         const response = await axios.put(
-            `https://localhost:7101/api/User/UpdateUserProfile?id=${sid}`, // Use 'sid' to match fetch logic
+            `https://localhost:7101/api/User/UpdateUserProfile?id=${sid}`, // Sử dụng 'sid' từ dữ liệu người dùng
             userDataToUpdate,
             {
                 headers: {
@@ -16,6 +16,7 @@ const updateProfile = async (token, userDataToUpdate) => {
                 }
             }
         );
+        
         
         return response.data;
     } catch (error) {
