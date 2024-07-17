@@ -7,7 +7,6 @@ import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { jwtDecode } from 'jwt-decode';
 import ReactPaginate from 'react-paginate';
 
-
 const { Option } = Select;
 
 const Don_Hang = () => {
@@ -24,25 +23,29 @@ const Don_Hang = () => {
     const [showCancelPopup, setShowCancelPopup] = useState(false);
     const [cancelReason, setCancelReason] = useState('');
     const [selectedCancelOrder, setSelectedCancelOrder] = useState(null);
+    const [ordersDetailProduct, setOrdersDetailProduct] = useState([]);
 
     const orderStatuses = ['Đã hoàn thành', 'Đã hủy', 'Đang giao hàng', 'Đang xử lý'];
 
     const handleViewDetails = async (order) => {
         try {
             const headers = sendToken(); // Get headers with Authorization token
-            //get order with orderID
-            const ordersDetailResponse = await axios.get(`https://localhost:7101/api/orders/GetAllOrders`, {
+            // Fetching order details
+            const ordersDetailProductResponse = await axios.get(`https://localhost:7101/api/orders/GetAllOrderDetail`, {
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json'
                 }
             });
+
             const orderWithDetails = {
                 ...order,
-                items: ordersDetailResponse.data.orderDetails
+                items: ordersDetailProductResponse.data.filter(item => item.orderId === order.orderId)
             };
+
             console.log(orderWithDetails);
             setSelectedOrder(orderWithDetails);
+            setOrdersDetailProduct(orderWithDetails.items);
 
         } catch (error) {
             console.error('Error fetching order details:', error);
@@ -59,7 +62,6 @@ const Don_Hang = () => {
         setShowCancelPopup(true);
     };
 
-    //--------cập nhật trạng thái hủy đơn hàng---------------
     const updateCancelStatus = async (orderId, cancelReason) => {
         const headers = sendToken();
         try {
@@ -96,8 +98,6 @@ const Don_Hang = () => {
             }
         }
     };
-
-    //---------------------------------------------------------------------------------------------
 
     const filteredOrders = orders.filter(order =>
         order && order.orderId && order.orderId.toString().includes(searchValue) &&
@@ -310,17 +310,27 @@ const Don_Hang = () => {
                             {selectedOrder.cancelReason && (
                                 <p><strong>Lý do hủy:</strong> {selectedOrder.cancelReason}</p>
                             )}
-                            <Table
-                                dataSource={selectedOrder.items}
-                                columns={[
-                                    { title: 'ID sản phẩm', dataIndex: 'id', key: 'id' },
-                                    { title: 'Tên sản phẩm', dataIndex: 'productName', key: 'productName' },
-                                    { title: 'Số lượng', dataIndex: 'quantity', key: 'quantity' },
-                                    { title: 'Giá', dataIndex: 'price', key: 'price' }
-                                ]}
-                                pagination={false}
-                                rowKey="id"
-                            />
+                            <table className="admin-page-table">
+                                <thead>
+                                    <tr className='admin-page-column-table'>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {ordersDetailProduct.map(product => (
+                                        <tr key={product.productId}>
+                                            <td>{product.productId}</td>
+                                            
+                                            <td>{product.productName}</td>
+                                            <td>{product.unitPrice}</td>
+                                            <td>{product.quantity}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                             <div className="total-container">
                                 <p><strong>Tổng cộng:</strong> {selectedOrder.totalPrice}</p>
                             </div>
