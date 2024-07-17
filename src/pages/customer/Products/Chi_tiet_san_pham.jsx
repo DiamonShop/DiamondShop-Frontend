@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
@@ -8,7 +7,7 @@ import { decodeToken } from '../../../api/TokenAPI';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
-import { notification} from 'antd';
+import { notification } from 'antd';
 
 
 export default function Chi_tiet_san_pham() {
@@ -43,8 +42,8 @@ export default function Chi_tiet_san_pham() {
             }]
         });
         return () => {
-             $('select').niceSelect('destroy');
-             $('.img-zoom').trigger('zoom.destroy');
+            $('select').niceSelect('destroy');
+            $('.img-zoom').trigger('zoom.destroy');
         };
 
     }, []);
@@ -72,27 +71,26 @@ export default function Chi_tiet_san_pham() {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
-    const successAddMessage = () => {
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 5000);
+    const openNotificationWithIcon = (type, message, description) => {
+        api[type]({
+            message: message,
+            description: description,
+            duration: 1,
+        });
     };
+
     const handleAddToCart = async () => {
         const token = localStorage.getItem('token');
         if (token) {
             const userId = decodeToken(token).sid;
             const orders = await handleGetOrderByUserId(parseInt(userId, 10));
-
-            let orderId = null;
-
             if (orders != null) {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
                         handleAddProductToOrder(item.orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
-                    } else if (item.status === 'Completed' || item.status === 'Shipped') {
+                    } else if (item.status === 'Completed' || item.status === 'Shipping') {
                         const orderId = await handleCreateOrder(userId);
                         handleAddProductToOrder(orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
@@ -118,6 +116,21 @@ export default function Chi_tiet_san_pham() {
         setAverageRating(avgRating);
     };
 
+    const getCategoryName = (categoryId) => {
+        switch (categoryId) {
+            case 1:
+                return 'Nhan';
+            case 2:
+                return 'Daychuyen';
+            case 3:
+                return 'Matdaychuyen';
+            case 4:
+                return 'Vongtay';
+            default:
+                return 'Unknown';
+        }
+    };
+
     return (
         <div>
             {contextHolder}
@@ -129,7 +142,7 @@ export default function Chi_tiet_san_pham() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to={`/${productObj.categoryName}`}>{productObj.categoryName}</Link></li>
+                                        <li className="breadcrumb-item"><Link to={`/${getCategoryName(productObj.categoryId)}`}>{productObj.categoryName}</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                     </ul>
                                 </nav>
@@ -211,21 +224,15 @@ export default function Chi_tiet_san_pham() {
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
-                                            <div className="ratings d-flex">
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
-                                                <span><i className="fa fa-star-o"></i></span>
+                                            <div className="ratings d-flex align-items-center">
+                                                <StarRating rating={rating} setRating={setRating} />
                                                 <div className="pro-review">
-                                                    <span>Reviews</span>
+                                                    <span>{reviewCount} Review(s)</span>
                                                 </div>
                                             </div>
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
-
-
 
                                             <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
                                             {productObj.categoryName === 'Dây chuyền' ? (
@@ -277,7 +284,7 @@ export default function Chi_tiet_san_pham() {
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
-                                                        {productObj.categoryName === 'Nhẫn' &&(
+                                                        {productObj.categoryName === 'Nhẫn' && (
                                                             <>
                                                                 <h6 className='filter-name-jewelry'>Size :</h6>
 
@@ -323,8 +330,8 @@ export default function Chi_tiet_san_pham() {
                                     </div>
                                 </div>
                             </div>
-                            <Mota_danhgia 
-                                productId={productObj.productId} 
+                            <Mota_danhgia
+                                productId={productObj.productId}
                                 onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
                             />
 

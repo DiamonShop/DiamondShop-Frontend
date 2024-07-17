@@ -108,9 +108,27 @@ export const handleGetAllOrderDetail = async () => {
     return arr;
 }
 
-export const handleUpdateStatusByUserId = async (userId) => {
+export const handleUpdateStatusToPending = async (userId) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusByUserId?userId=${userId}`, {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusToPending?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export const handleUpdateStatusToShipping = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusToShipping?userId=${userId}`, {
             method: 'PUT',
             mode: 'cors'
         });

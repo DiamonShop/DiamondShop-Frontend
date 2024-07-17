@@ -10,7 +10,6 @@ import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
 function Sanphamtuongtu({ onProductClick }) {
     const productObj = JSON.parse(localStorage.getItem('product'));
     const [randomProducts, setRandomProducts] = useState([]);
-
     useEffect(() => {
         let productsData;
         switch (productObj.categoryId) {
@@ -29,6 +28,7 @@ function Sanphamtuongtu({ onProductClick }) {
             default:
                 productsData = [];
         }
+        console.log(productsData)
         setRandomProducts(getRandomProducts(productsData, 5));
     }, [productObj.categoryId]);
 
@@ -77,6 +77,7 @@ function Sanphamtuongtu({ onProductClick }) {
                                             jewelrySizes={item.jewelrySizes}
                                             productName={item.productName}
                                             categoryName={item.categoryName}
+                                            categoryId={item.categoryId}
                                             newPrice={item.newPrice}
                                             oldPrice={item.oldPrice}
                                             description={item.description}

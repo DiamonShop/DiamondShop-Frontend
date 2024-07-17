@@ -5,12 +5,13 @@ import $ from 'jquery';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { decodeToken } from '../../../api/TokenAPI';
-import { handleAddProductToOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
+import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import '../../../nice-select';
 import '../../../image-zoom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import Mota_danhgia_kc from '../../../components/Mota_danhgia_kc';
 import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
+import { notification } from 'antd';
 
 export default function Chi_tiet_san_pham_kc() {
   useEffect(() => {
@@ -18,10 +19,10 @@ export default function Chi_tiet_san_pham_kc() {
     $('.img-zoom').zoom();
 
     return () => {
-        $('select').niceSelect('destroy');
-        $('.img-zoom').zoom('destroy');
+      $('select').niceSelect('destroy');
+      $('.img-zoom').zoom('destroy');
     };
-}, []);
+  }, []);
   const largeSliderRef = useRef(null);
   const navSliderRef = useRef(null);
   const productObj = JSON.parse(localStorage.getItem('product'));
@@ -78,42 +79,52 @@ export default function Chi_tiet_san_pham_kc() {
     setIsOverlayVisible(false);
   };
 
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({
+      message: message,
+      description: description,
+      duration: 1,
+    });
+  };
+
   const handleAddToCart = async () => {
-    // const token = localStorage.getItem('token')
-    // if (token) {
-    //   const userId = decodeToken(token).sid;
-    //   //Gọi API để tạo order
-    //   const orders = await handleGetOrderByUserId(parseInt(userId, 10));
-    //   //Nếu Order bằng null thì tạo Order mới
-    //   if (orders != null) {
-    //     for (const item of orders) {
-    //       if (item.status == 'Ordering') {
-    //         handleAddProductToOrder(item.orderId, productObj.productId, quantity);
-    //         successAddMessage();
-    //         break;
-    //       } else if (item.status == 'Completed' || item.status == 'Shipped') {
-    //         const orderId = await handleCreateOrder(userId);
-    //         handleAddProductToOrder(orderId, productObj.productId, quantity);
-    //         successAddMessage();
-    //         break;
-    //       }
-    //     }
-    //   } else {
-    //     const orderId = await handleCreateOrder(userId);
-    //     const order = await handleGetOrderByUserId(parseInt(userId, 10));
-    //     for (const item of order) {
-    //       if (item.status === 'Ordering' && item.orderId === orderId) {
-    //         handleAddProductToOrder(orderId, productObj.productId, quantity);
-    //         successAddMessage();
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
-  }
+    const token = localStorage.getItem('token');
+    if (token) {
+      const userId = decodeToken(token).sid;
+      const orders = await handleGetOrderByUserId(parseInt(userId, 10));
+      if (orders != null) {
+        for (const item of orders) {
+          if (item.status === 'Ordering') {
+            handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            break;
+          } else if (item.status === 'Completed' || item.status === 'Shipping') {
+            const orderId = await handleCreateOrder(userId);
+            handleAddProductToOrder(orderId, productObj.productId, quantity);
+            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            break;
+          }
+        }
+      } else {
+        const orderId = await handleCreateOrder(userId);
+        const order = await handleGetOrderByUserId(parseInt(userId, 10));
+        console.log(orderId)
+        for (const item of order) {
+          if (item.status === 'Ordering' && item.orderId === orderId) {
+            handleAddProductToOrder(orderId, productObj.productId, quantity);
+            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            break;
+          }
+        }
+      }
+    }
+  };
 
   return (
     <div>
+      {contextHolder}
       <div class="breadcrumb-area">
         <div class="container">
           <div class="row">

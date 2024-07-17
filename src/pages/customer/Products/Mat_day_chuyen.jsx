@@ -76,11 +76,14 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 image3={item.image3}
-                                                image4={item.image4}
                                                 label={item.label}
+                                                material={item.material}
+                                                mainDiamondName={item.mainDiamondName}
+                                                sideDiamondName={item.sideDiamondName}
+                                                jewelrySizes={item.jewelrySizes}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
-                                                categoryId= {item.categoryId}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
