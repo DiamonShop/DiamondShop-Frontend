@@ -18,18 +18,6 @@ function Du_lieu_san_pham_tt(props) {
                                     <span>{props.label}</span>
                                 </div>
                             </div>
-                            <div className="button-group">
-                                <Link to="/Yeuthich"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="left"
-                                    title="Add to wishlist">
-                                    <i className="pe-7s-like"></i>
-                                </Link>
-
-                            </div>
-                            <div className="cart-hover">
-                                <button className="btn btn-cart">Thêm vào giỏ hàng</button>
-                            </div>
                         </figure>
                         <div className="product-caption text-center">
                             <h6 className="product-name">

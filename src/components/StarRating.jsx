@@ -20,12 +20,13 @@ const StarRating = ({ rating, setRating, isEditable = true }) => {
 
     return (
         <div className="star-rating">
-            <h6 className="option-title">Đánh giá:</h6>
+             
             {[1, 2, 3, 4, 5].map((value) => (
                 <span key={value} onClick={() => handleStarClick(value)}>
                     <i className={getStarClass(value)} />
                 </span>
             ))}
+            
             <div>
                 {rating === 1 ? 'Tệ' : rating === 2 ? 'Kém' : rating === 3 ? 'Trung bình' : rating === 4 ? 'Tốt' : rating === 5 ? 'Xuất sắc' : ''}
             </div>

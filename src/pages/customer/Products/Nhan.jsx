@@ -77,6 +77,7 @@ export default function Nhan({ onProductClick }) {
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 image3={item.image3}
+                                                image4={item.image4}
                                                 label={item.label}
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}

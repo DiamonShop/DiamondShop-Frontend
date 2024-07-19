@@ -80,6 +80,8 @@ export default function Vongtay({ onProductClick }) {
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}
                                                 sideDiamondName={item.sideDiamondName}
+                                                mainDiamondQuantity={item.mainDiamondQuantity}
+                                                sideDiamondQuantity={item.sideDiamondQuantity}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
                                                 newPrice={item.newPrice}

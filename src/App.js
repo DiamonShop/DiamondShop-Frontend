@@ -55,10 +55,10 @@ function App({ tokenIsValid }) {
         <ScrollToTop/>
             <Routes>
               <Route path="/" element={<MainLayout tokenIsValid={tokenIsValid}><Home /></MainLayout>} />
-              <Route path="/Nhan" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan onProductClick={handleProductClick} /></MainLayout>} />
-              <Route path='/Daychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
-              <Route path='/Matdaychuyen' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
-              <Route path='/Vongtay' element={<MainLayout tokenIsValid={tokenIsValid}><Vong_tay onProductClick={handleProductClick}/></MainLayout>} />
+              <Route path="/Nhẫn" element={<MainLayout tokenIsValid={tokenIsValid}><Nhan onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Dây chuyền' element={<MainLayout tokenIsValid={tokenIsValid}><Day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Mặt dây chuyền' element={<MainLayout tokenIsValid={tokenIsValid}><Mat_day_chuyen onProductClick={handleProductClick} /></MainLayout>} />
+              <Route path='/Vòng tay' element={<MainLayout tokenIsValid={tokenIsValid}><Vong_tay onProductClick={handleProductClick}/></MainLayout>} />
               <Route path='/Kimcuong' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong onProductClick={handleProductClick} /></MainLayout>} />
               <Route path='/Kimcuong3.6' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_3_6 onProductClick={handleProductClick}/></MainLayout>} />
               <Route path='/Kimcuong4.1' element={<MainLayout tokenIsValid={tokenIsValid}><Kim_cuong_4_1 onProductClick={handleProductClick}/></MainLayout>} />

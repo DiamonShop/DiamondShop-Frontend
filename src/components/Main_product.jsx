@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import '../slick-min'
 import { HandleGetAll } from '../api/JewelryAPI';
-import Du_lieu_san_pham from './Du_lieu_san_pham';
 import { Product_Jewelry_Data } from '../Data/Product_jewelry_data';
+import Du_lieu_san_pham_vtxmdc from './Du_lieu_san_pham_vtxmdc';
 function Main_product({ onProductClick }) {
     const [randomProductsJewelry, setRandomProductsJewelry] = useState([]);
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         function getRandomProductsJewelry(products, count) {
             const shuffled = products.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
@@ -52,52 +52,58 @@ function Main_product({ onProductClick }) {
         $(document).ready(initializeSlick);
 
         return () => {
-           
+
             if ($('.product-carousel-4_2').hasClass('slick-initialized')) {
                 $('.product-carousel-4_2').slick('unslick');
             }
         };
     }, []);
-   
+
     return (
         <div>
             <section className="feature-product section-padding">
                 <div className="container">
-                   
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="section-title text-center">
-                                        <h2 className="title">Sản phẩm</h2>
-                                    </div>
 
-                                </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="section-title text-center">
+                                <h2 className="title">Sản phẩm</h2>
                             </div>
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="product-carousel-4_2 slick-row-10 slick-arrow-style">                                 
-                                            {randomProductsJewelry.map((item) => (
-                                                <div key={item.id}>
-                                                        <Du_lieu_san_pham
-                                                            productId={item.id}
-                                                            image1={item.image1}
-                                                            image2={item.image2}
-                                                            image3={item.image3}
-                                                            image4={item.image4}
-                                                            label={item.label}
-                                                            productName={item.productName}
-                                                            categoryName={item.categoryName}
-                                                            newPrice={item.newPrice}
-                                                            description={item.description}
-                                                            onProductClick={onProductClick}
-                                                        />           
-                                                </div>
-                                            ))}
-                                      
+
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="product-carousel-4_2 slick-row-10 slick-arrow-style">
+                                {randomProductsJewelry.map((item) => (
+                                    <div key={item.id}>
+                                        <Du_lieu_san_pham_vtxmdc
+                                            productId={item.id}
+                                            image1={item.image1}
+                                            image2={item.image2}
+                                            image3={item.image3}
+                                            image4={item.image4}
+                                            label={item.label}
+                                            material={item.material}
+                                            mainDiamondName={item.mainDiamondName}
+                                            sideDiamondName={item.sideDiamondName}
+                                            mainDiamondQuantity={item.mainDiamondQuantity}
+                                            sideDiamondQuantity={item.sideDiamondQuantity}
+                                            jewelrySizes={item.jewelrySizes}
+                                            productName={item.productName}
+                                            categoryName={item.categoryName}
+                                            newPrice={item.newPrice}
+                                            description={item.description}
+                                            onProductClick={onProductClick}
+                                        />
                                     </div>
-                                </div>
+                                ))}
+
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }
