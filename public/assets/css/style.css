@@ -3509,7 +3509,7 @@ only screen and (max-width: 479.98px) {
 /*------- product item start -------*/
 .product-item {
   overflow: hidden;
-  height: 380px;
+  height: 360px;
 }
 
 .product-item .color-categories {
@@ -3526,6 +3526,10 @@ only screen and (max-width: 479.98px) {
 .product-list-item:hover .product-thumb .pri-img {
   opacity: 0;
   visibility: hidden;
+}
+.product-item:hover .product-thumb .pri-img-vongtay,
+.product-list-item:hover .product-thumb .pri-img-vongtay {
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .product-item:hover .button-group a,
@@ -5109,6 +5113,7 @@ only screen and (max-width: 767.98px) {
 .pro-nav {
   margin-top: 20px;
 }
+
 
 /*----- product details slider end ----*/
 /*----- product details content start ----*/
@@ -20841,7 +20846,10 @@ footer.footer p {
   padding-right: var(--bs-gutter-x, 70px);
   padding-left: var(--bs-gutter-x, 70px);
 }
-
+.container-thanhtoan{
+  padding-right: var(--bs-gutter-x, 50px);
+  padding-left: var(--bs-gutter-x, 50px);
+}
 /* end gio hang */
 /* start thanh toan */
 .btn-view-cart {

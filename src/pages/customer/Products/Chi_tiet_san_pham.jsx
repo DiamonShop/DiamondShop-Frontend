@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
@@ -8,52 +7,12 @@ import { decodeToken } from '../../../api/TokenAPI';
 import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
-import { notification} from 'antd';
+import { notification } from 'antd';
 
 
 export default function Chi_tiet_san_pham() {
-    useEffect(() => {
-
-        $('select').niceSelect();
-        $('.img-zoom').zoom();
-        // product details slider active
-        $('.product-large-slider').slick({
-            fade: true,
-            arrows: false,
-            speed: 1000,
-            asNavFor: '.pro-nav'
-        });
-
-
-        // product details slider nav active
-        $('.pro-nav').slick({
-            slidesToShow: 4,
-            asNavFor: '.product-large-slider',
-            centerMode: true,
-            speed: 1000,
-            centerPadding: 0,
-            focusOnSelect: true,
-            prevArrow: '<button type="button" class="slick-prev"><i class="lnr lnr-chevron-left"></i></button>',
-            nextArrow: '<button type="button" class="slick-next"><i class="lnr lnr-chevron-right"></i></button>',
-            responsive: [{
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 3,
-                }
-            }]
-        });
-        return () => {
-             $('select').niceSelect('destroy');
-             $('.img-zoom').trigger('zoom.destroy');
-        };
-
-    }, []);
 
     const productObj = JSON.parse(localStorage.getItem('product'));
-    const largeSliderRef = useRef(null);
-    const navSliderRef = useRef(null);
-
-
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
@@ -61,7 +20,6 @@ export default function Chi_tiet_san_pham() {
     const [api, contextHolder] = notification.useNotification();
 
     const [averageRating, setAverageRating] = useState(0);
-    const [showMessage, setShowMessage] = useState(false);
 
 
     const handleIncrement = () => {
@@ -76,7 +34,7 @@ export default function Chi_tiet_san_pham() {
         api[type]({
             message: message,
             description: description,
-            duration: 1,
+            duration: 1.5,
         });
     };
     const handleAddToCart = async () => {
@@ -87,12 +45,12 @@ export default function Chi_tiet_san_pham() {
             if (orders != null) {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
-                        handleAddProductToOrder(item.orderId, productObj.productId, quantity);
+                        await handleAddProductToOrder(item.orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     } else if (item.status === 'Completed' || item.status === 'Shipped') {
                         const orderId = await handleCreateOrder(userId);
-                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        await handleAddProductToOrder(orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     }
@@ -102,12 +60,14 @@ export default function Chi_tiet_san_pham() {
                 const order = await handleGetOrderByUserId(parseInt(userId, 10));
                 for (const item of order) {
                     if (item.status === 'Ordering' && item.orderId === orderId) {
-                        handleAddProductToOrder(orderId, productObj.productId, quantity);
+                        await handleAddProductToOrder(orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
                     }
                 }
             }
+        } else {
+            openNotificationWithIcon('warning', 'Cảnh báo', 'Vui lòng đăng nhập để tiếp tục mua hàng', 'top');
         }
     };
 
@@ -116,6 +76,46 @@ export default function Chi_tiet_san_pham() {
         setAverageRating(avgRating);
     };
 
+    useEffect(() => {
+        const initSlickSliders = () => {
+            $('.product-large-slider').slick({
+                fade: true,
+                arrows: false,
+                speed: 1000,
+                asNavFor: '.pro-nav'
+            });
+    
+            $('.pro-nav').slick({
+                slidesToShow: 3,
+                asNavFor: '.product-large-slider',
+                centerMode: true,
+                speed: 1000,
+                centerPadding: 0,
+                focusOnSelect: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="lnr lnr-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="lnr lnr-chevron-right"></i></button>',
+                responsive: [{
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                }]
+            });
+        };
+    
+        const timer = setTimeout(() => {
+            initSlickSliders();
+        }, 100); // Adjust the delay as needed
+    
+        $('select').niceSelect();
+        $('.img-zoom').zoom();
+    
+        return () => {
+            clearTimeout(timer);
+            $('select').niceSelect('destroy');
+            $('.img-zoom').trigger('zoom.destroy');
+        };
+    }, []);
     return (
         <div>
             {contextHolder}
@@ -143,38 +143,16 @@ export default function Chi_tiet_san_pham() {
                         <div className="col-lg-12 order-1 order-lg-2">
                             <div className="product-details-inner">
                                 <div className="row">
-                                    {productObj.categoryName === 'Nhẫn' ? (
+                                    {productObj.categoryName === 'Mặt dây chuyền' || productObj.categoryName === 'Vòng tay' ? (
                                         <div className="col-lg-5">
-
                                             <div className="product-large-slider">
                                                 <div className="pro-large-img img-zoom">
                                                     <img src={productObj.image1} alt="product-details" />
                                                 </div>
-                                                <div className="pro-large-img img-zoom">
-                                                    <img src={productObj.image2} alt="product-details" />
-                                                </div>
-                                                <div className="pro-large-img img-zoom">
-                                                    <img src={productObj.image3} alt="product-details" />
-                                                </div>
-
                                             </div>
-                                            <div className="pro-nav">
-                                                <div className="pro-nav-thumb">
-                                                    <img src={productObj.image1} alt="product-details" />
-                                                </div>
-                                                <div className="pro-nav-thumb">
-                                                    <img src={productObj.image2} alt="product-details" />
-                                                </div>
-                                                <div className="pro-nav-thumb">
-                                                    <img src={productObj.image3} alt="product-details" />
-                                                </div>
-
-                                            </div>
-
                                         </div>
                                     ) : (
                                         <div className="col-lg-5">
-
                                             <div className="product-large-slider">
                                                 <div className="pro-large-img img-zoom">
                                                     <img src={productObj.image1} alt="product-details" />
@@ -189,7 +167,7 @@ export default function Chi_tiet_san_pham() {
                                                     <img src={productObj.image4} alt="product-details" />
                                                 </div>
                                             </div>
-                                            <div className="pro-nav">
+                                            <div class="pro-nav slick-row-10 slick-arrow-style">
                                                 <div className="pro-nav-thumb">
                                                     <img src={productObj.image1} alt="product-details" />
                                                 </div>
@@ -203,9 +181,9 @@ export default function Chi_tiet_san_pham() {
                                                     <img src={productObj.image4} alt="product-details" />
                                                 </div>
                                             </div>
+                                        </div>
 
-                                        </div>)
-                                    }
+                                    )}
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
@@ -261,17 +239,17 @@ export default function Chi_tiet_san_pham() {
                                                     <li class="filter-group">
                                                         <h6 className='filter-name-jewelry' >Viên chính:</h6>
                                                         <select className='nice-select' >
-                                                            <option value="VS2">{productObj.mainDiamondName}</option>
+                                                            <option value="VS2">{productObj.mainDiamondName} x{productObj.mainDiamondQuantity}</option>
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
                                                         <h6 className='filter-name-jewelry'>Viên phụ:</h6>
                                                         <select  >
-                                                            <option value="VS2">{productObj.sideDiamondName}</option>
+                                                            <option value="VS2">{productObj.sideDiamondName} x{productObj.sideDiamondQuantity}</option>
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
-                                                        {productObj.categoryName === 'Nhẫn' &&(
+                                                        {productObj.categoryName === 'Nhẫn' && (
                                                             <>
                                                                 <h6 className='filter-name-jewelry'>Size :</h6>
 
@@ -317,8 +295,8 @@ export default function Chi_tiet_san_pham() {
                                     </div>
                                 </div>
                             </div>
-                            <Mota_danhgia 
-                                productId={productObj.productId} 
+                            <Mota_danhgia
+                                productId={productObj.productId}
                                 onReviewCountChange={(count, avgRating) => updateReviewCountAndAverageRating(count, avgRating)}
                             />
 
