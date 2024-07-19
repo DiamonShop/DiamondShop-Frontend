@@ -81,6 +81,7 @@ export default function Day_chuyen({ onProductClick }) {
                                                 image3={item.image3}
                                                 image4={item.image4}
                                                 label={item.label}
+                                                material={item.material}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
                                                 newPrice={item.newPrice}

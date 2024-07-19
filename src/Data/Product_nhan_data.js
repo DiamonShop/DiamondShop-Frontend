@@ -7,7 +7,7 @@ const productData = await Promise.all(listProduct
     .filter(product => product.categoryId === 1 && product.isActive === true)
     .map(async product => {
 
-        const { basePrice, productID, productName, categoryId, stock, description, isActive,material,mainDiamondName,sideDiamondName,jewelrySizes } = product;
+        const { basePrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes, mainDiamondQuantity, sideDiamondQuantity } = product;
         const { image1Url, image2Url, image3Url, } = await getJewelryImageUrls(productID, categoryId);
         console.log(product);
         return {
@@ -23,10 +23,12 @@ const productData = await Promise.all(listProduct
             stock: stock,
             isActive: isActive,
             categoryId: categoryId,
-            material:material,
-            mainDiamondName:mainDiamondName,
-            sideDiamondName:sideDiamondName,
-            jewelrySizes:jewelrySizes
+            material: material,
+            mainDiamondName: mainDiamondName,
+            sideDiamondName: sideDiamondName,
+            jewelrySizes: jewelrySizes,
+            mainDiamondQuantity: mainDiamondQuantity,
+            sideDiamondQuantity: sideDiamondQuantity,
         };
     })
 );

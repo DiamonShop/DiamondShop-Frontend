@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Matdaychuyen_Data } from '../../../Data/Product_matdaychuyen_data';
 import Filter_product from '../../../components/Filter_product';
+import Du_lieu_san_pham_vtxmdc from '../../../components/Du_lieu_san_pham_vtxmdc';
 export default function Mat_day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -67,15 +67,15 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                 <div className="shop-product-wrap grid-view row mbn-30">
                                     {currentProducts.map((item) => (
                                         <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
-                                            <Du_lieu_san_pham
+                                            <Du_lieu_san_pham_vtxmdc
                                                 productId={item.id}
                                                 image1={item.image1}
-                                                image2={item.image2}
-                                                image3={item.image3}
-                                                image4={item.image4}
                                                 label={item.label}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
+                                                material={item.material}
+                                                mainDiamondName={item.mainDiamondName}
+                                                sideDiamondName={item.sideDiamondName}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}

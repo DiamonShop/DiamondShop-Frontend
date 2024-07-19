@@ -11,7 +11,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
     const [orderIdForComment, setOrderIdForComment] = useState(null);
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [feedbackMessage, setFeedbackMessage] = useState('');
-
+    const productObj = JSON.parse(localStorage.getItem('product'));
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
@@ -119,12 +119,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                         <div className="tab-content reviews-tab">
                             <div className="tab-pane fade show active" id="tab_one">
                                 <div className="tab-one">
-                                    <p>Kim cương vốn là món trang sức mang đến niềm kiêu hãnh và cảm hứng thời trang bất tận.
-                                        Sở hữu riêng cho mình món trang sức kim cương chính là điều mà ai cũng mong muốn.
-                                        Chiếc nhẫn được chế tác từ vàng 14K cùng điểm nhấn kim cương với 57 giác cắt chuẩn xác,
-                                        tạo nên món trang sức đầy sự sang trọng và đẳng cấp.
-                                    </p>
-                                    <p>Kim cương đã đẹp, trang sức kim cương lại càng mang sức hấp dẫn khó cưỡng. Sự kết hợp mới mẻ này chắc chắn sẽ tạo nên dấu ấn thời trang hiện đại và giúp quý cô trở nên nổi bật, tự tin và thu hút sự ngưỡng mộ của mọi người</p>
+                                    <p>{productObj.description}</p>
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
@@ -179,7 +174,6 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                             <div className="tab-pane fade" id="tab_four">
                                 <p color="blue"><b>Bảo hành miễn phí 6 tháng</b></p>
                                 <p>- Bảo hành 6 tháng lỗi kỹ thuật, nước xi.</p>
-                                <p><b>Miễn phí siêu âm và đánh bóng bằng máy chuyên dụng trọn đời</b></p>
                                 <ul>
                                     <li>- Đối với sản phẩm bị oxy hóa, xuống màu, sẽ được siêu âm làm sạch bằng máy chuyên dụng (siêu âm, không xi) miễn phí trọn đời tại cửa hàng.​</li>
                                     <li>- Miễn phí đánh bóng trọn đời . Nhẫn cưới sẽ được bảo hành, làm mới, đánh bóng, xi miễn phí trọn đời.​</li>
@@ -190,7 +184,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                                     <li>- Khách hàng cung cấp thông tin truy lục hóa đơn không chính xác.​​​​​</li>
                                 </ul>
                                 <ul><i>Lưu ý:</i>
-                                    <li><i>- PNJ bảo hành các sản phẩm thuộc hệ thống cửa hàng online của ES.</i>​​</li>
+                                    <li><i>- ES bảo hành các sản phẩm thuộc hệ thống cửa hàng online của ES.</i>​​</li>
                                     <li><i>- Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của ES đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.​</i></li>
                                 </ul>
                             </div>
