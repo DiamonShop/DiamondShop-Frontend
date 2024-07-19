@@ -15,18 +15,14 @@ const productData = await Promise.all(listProduct
             image1: image1Url ? image1Url : "default_image_url_1.png", // URL thay thế nếu ảnh không tồn tại
             label: "Mới",
             newPrice: basePrice,
-            categoryName: "Mặt dây chuyền",
+            categoryId: categoryId,
             description: description,
+            categoryName: "Mặt dây chuyền",
             stock: stock,
             material:material,
             mainDiamondName:mainDiamondName,
             sideDiamondName:sideDiamondName,
             isActive: isActive,
-            categoryId: categoryId,
-            material:material,
-            mainDiamondName:mainDiamondName,
-            sideDiamondName:sideDiamondName,
-            jewelrySizes:jewelrySizes
         };
     })
 );

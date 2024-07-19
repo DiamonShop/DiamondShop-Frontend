@@ -119,6 +119,21 @@ export default function Chi_tiet_san_pham() {
             $('.img-zoom').trigger('zoom.destroy');
         };
     }, []);
+    
+    const getCategoryName = (categoryId) => {
+        switch (categoryId) {
+            case 1:
+                return 'Nhan';
+            case 2:
+                return 'Daychuyen';
+            case 3:
+                return 'Matdaychuyen';
+            case 4:
+                return 'Vongtay';
+            default:
+                return 'Unknown';
+        }
+    };
     return (
         <div>
             {contextHolder}

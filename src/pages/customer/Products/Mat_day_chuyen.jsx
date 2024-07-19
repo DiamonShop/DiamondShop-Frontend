@@ -81,6 +81,7 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                                 jewelrySizes={item.jewelrySizes}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
