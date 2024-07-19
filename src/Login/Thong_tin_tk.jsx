@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '../UserContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
@@ -15,71 +15,64 @@ export default function Thong_tin_tk() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [numberPhone, setNumberPhone] = useState('');
+    const [address, setAddress] = useState('');
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [activeTab, setActiveTab] = useState('account-info'); // Default tab
     const navigate = useNavigate();
-    const location = useLocation();
+
+    const fetchUserData = async () => {
+        if (!currentUser) {
+            console.log("User not logged in. Redirecting to login.");
+            return;
+        }
+
+        setLoading(true);
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+            if (userRole === 'Admin') {
+                navigate('/BangDieuKhien');
+            }
+
+            const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log("Response data:", response.data);
+            setUserData(response.data);
+            setUsername(response.data.username || '');
+            setDisplayName(response.data.fullName || '');
+            setEmail(response.data.email || '');
+            setNumberPhone(response.data.numberPhone || '');
+            setAddress(response.data.address || '');
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            if (error.response && error.response.status === 401) {
+                console.log('Token expired or invalid. Redirecting to login.');
+                userLogout();
+            } else {
+                setErrorMessage('Error fetching user data.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            if (!currentUser) {
-                console.log("User not logged in. Redirecting to login.");
-                return;
-            }
-
-            setLoading(true);
-            const token = localStorage.getItem('token');
-            if (!token) {
-                console.log("Token not found or expired. Logging out.");
-                userLogout();
-                return;
-            }
-
-            try {
-                const decodedToken = jwtDecode(token);
-                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-                if (userRole === 'Admin') {
-                    navigate('/BangDieuKhien');
-                }
-
-                const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                console.log("Response data:", response.data);
-                setUserData(response.data);
-                setUsername(response.data.username || '');
-                setDisplayName(response.data.fullName || '');
-                setEmail(response.data.email || '');
-                setNumberPhone(response.data.numberPhone || '');
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-                if (error.response && error.response.status === 401) {
-                    console.log('Token expired or invalid. Redirecting to login.');
-                    userLogout();
-                } else {
-                    setErrorMessage('Error fetching user data.');
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
+        fetchUserData(); // Gọi fetchUserData ở đây để lấy thông tin người dùng ban đầu
     }, [currentUser, userLogout, navigate]);
 
-    useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const tab = params.get('tab');
-        if (tab) {
-            setActiveTab(tab);
-        }
-    }, [location.search]);
-
+    // Các hàm xử lý sự kiện cập nhật thông tin
     const handlePasswordChange = (event) => {
         const { id, value } = event.target;
         if (id === 'new-pwd') {
@@ -101,45 +94,55 @@ export default function Thong_tin_tk() {
         setNumberPhone(event.target.value);
     };
 
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+    };
+
+    // Hàm handleSubmit để cập nhật thông tin người dùng
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
-
+        
+        // Tạo object chứa dữ liệu cần cập nhật
         const userDataToUpdate = {
-            username,
+            userId: userData.userId, // Thêm userId vào dữ liệu cập nhật
             fullName: displayName,
             email,
             numberPhone,
-            password: newPwd
+            address,
+            password: newPwd // Nếu có
         };
-
+    
         try {
             setLoading(true);
             const updatedUser = await updateProfile(token, userDataToUpdate);
             console.log('Update response:', updatedUser);
-            setErrorMessage('Update successful');
+            setErrorMessage('Cập nhật thành công.');
             setUserData(updatedUser);
+            
+            fetchUserData(); // Sau khi cập nhật thành công, fetch lại thông tin người dùng để hiển thị
         } catch (error) {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);
                 console.error('Error details:', error.response.data.errors);
-                setErrorMessage(error.response.data.title || 'Unknown error occurred');
+                setErrorMessage(error.response.data.title || 'Đã xảy ra lỗi không xác định');
             } else if (error.request) {
                 console.log('No response received:', error.request);
-                setErrorMessage('No response received from server');
+                setErrorMessage('Không nhận được phản hồi từ máy chủ');
             } else {
                 console.log('Error setting up request:', error.message);
-                setErrorMessage('Error setting up request');
+                setErrorMessage('Đã xảy ra lỗi trong quá trình xử lý yêu cầu');
             }
         } finally {
             setLoading(false);
         }
     };
 
+    // Hàm handleLogout để đăng xuất
     const handleLogout = () => {
-        apilogout(); // Call the logout function from logoutAPI.js
-        userLogout(); // Call the logout function from UserContext
-        navigate('/'); // Redirect to homepage after logout
+        apilogout();
+        userLogout();
+        navigate('/');
     };
 
     return (
@@ -169,20 +172,20 @@ export default function Thong_tin_tk() {
                                     <div className="row">
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
-                                                <a className={activeTab === 'account-info' ? 'active' : ''} href="#account-info" data-bs-toggle="tab">
+                                                <a className="active" href="#account-info" data-bs-toggle="tab">
                                                     <i className="fa fa-user"></i> Thông tin cá nhân
                                                 </a>
-                                                <a className={activeTab === 'orders' ? 'active' : ''} href="#orders" data-bs-toggle="tab">
+                                                <a href="#orders" data-bs-toggle="tab">
                                                     <i className="fa fa-cart-arrow-down"></i> Đơn hàng
                                                 </a>
-                                                <a className={activeTab === 'payment-method' ? 'active' : ''} href="#payment-method" data-bs-toggle="tab">
+                                                <a href="#payment-method" data-bs-toggle="tab">
                                                     <i className="fa fa-credit-card"></i> Phương thức thanh toán
                                                 </a>
                                             </div>
                                         </div>
                                         <div className="col-lg-9 col-md-8">
                                             <div className="tab-content" id="myaccountContent">
-                                                <div className={`tab-pane fade ${activeTab === 'account-info' ? 'show active' : ''}`} id="account-info" role="tabpanel">
+                                                <div className="tab-pane fade show active" id="account-info" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Thông tin cá nhân</h5>
                                                         <div className="account-details-form">
@@ -198,6 +201,10 @@ export default function Thong_tin_tk() {
                                                                 <div className="single-input-item">
                                                                     <label htmlFor="number-phone">Số điện thoại</label>
                                                                     <input type="text" id="number-phone" placeholder="Số điện thoại" value={numberPhone} onChange={handleNumberPhoneChange} />
+                                                                </div>
+                                                                <div className="single-input-item">
+                                                                    <label htmlFor="address">Địa chỉ</label>
+                                                                    <input type="text" id="address" placeholder="Địa chỉ" value={address} onChange={handleAddressChange} />
                                                                 </div>
                                                                 <fieldset>
                                                                     <h5>Thay đổi mật khẩu</h5>
@@ -222,10 +229,10 @@ export default function Thong_tin_tk() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={`tab-pane fade ${activeTab === 'orders' ? 'show active' : ''}`} id="orders" role="tabpanel">
+                                                <div className="tab-pane fade" id="orders" role="tabpanel">
                                                     <Don_hang />
                                                 </div>
-                                                <div className={`tab-pane fade ${activeTab === 'payment-method' ? 'show active' : ''}`} id="payment-method" role="tabpanel">
+                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
                                                     <div className="myaccount-content">
                                                         <h5>Phương thức thanh toán</h5>
                                                         <p className="saved-message">Chúng tôi sẽ sớm phát triển </p>
