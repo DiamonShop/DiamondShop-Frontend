@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import $ from 'jquery';
-import Slider from "react-slick";
+import '../../../slick-min'
 import { Link } from 'react-router-dom';
 import { decodeToken } from '../../../api/TokenAPI';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
@@ -14,15 +14,7 @@ import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
 import { notification } from 'antd';
 
 export default function Chi_tiet_san_pham_kc() {
-  useEffect(() => {
-    $('select').niceSelect();
-    $('.img-zoom').zoom();
 
-    return () => {
-      $('select').niceSelect('destroy');
-      $('.img-zoom').zoom('destroy');
-    };
-  }, []);
   const largeSliderRef = useRef(null);
   const navSliderRef = useRef(null);
   const productObj = JSON.parse(localStorage.getItem('product'));
@@ -42,31 +34,9 @@ export default function Chi_tiet_san_pham_kc() {
   const handleDecrement = () => {
     setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
-  const largeSliderSettings = {
-    fade: true,
-    arrows: false,
-    speed: 1000,
-    asNavFor: navSliderRef.current,
-    ref: largeSliderRef
-  };
 
-  const navSliderSettings = {
-    slidesToShow: 3,
-    asNavFor: largeSliderRef.current,
-    centerMode: true,
-    centerPadding: '0',
-    focusOnSelect: true,
-    draggable: false,
-    //prevArrow: <button type="button" className="slick-prev"><i className="lnr lnr-chevron-left"></i></button>,
-    //nextArrow: <button type="button" className="slick-next"><i className="lnr lnr-chevron-right"></i></button>,
-    responsive: [{
-      breakpoint: 576,
-      settings: {
-        slidesToShow: 3,
-      }
-    }],
-    ref: navSliderRef
-  };
+
+
 
   // overlay of GIA image
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -90,7 +60,7 @@ export default function Chi_tiet_san_pham_kc() {
   };
 
   const handleAddToCart = async () => {
-    const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
     if (token) {
       const userId = decodeToken(token).sid;
       const orders = await handleGetOrderByUserId(parseInt(userId, 10));
@@ -121,7 +91,47 @@ export default function Chi_tiet_san_pham_kc() {
       }
     }
   };
+  useEffect(() => {
+    const initSlickSliders = () => {
+      $('.product-large-slider').slick({
+        fade: true,
+        arrows: false,
+        speed: 1000,
+        asNavFor: '.pro-nav'
+      });
 
+      $('.pro-nav').slick({
+        slidesToShow: 3,
+        asNavFor: '.product-large-slider',
+        centerMode: true,
+        speed: 1000,
+        centerPadding: 0,
+        focusOnSelect: true,
+        infinite: true,
+        prevArrow: '<button type="button" class="slick-prev"><i class="lnr lnr-chevron-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="lnr lnr-chevron-right"></i></button>',
+        responsive: [{
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 3,
+          }
+        }]
+      });
+    };
+
+    const timer = setTimeout(() => {
+      initSlickSliders();
+    }, 100); // Adjust the delay as needed
+
+    $('select').niceSelect();
+    $('.img-zoom').zoom();
+
+    return () => {
+      clearTimeout(timer);
+      $('select').niceSelect('destroy');
+      $('.img-zoom').trigger('zoom.destroy');
+    };
+  }, []);
   return (
     <div>
       {contextHolder}
@@ -152,7 +162,7 @@ export default function Chi_tiet_san_pham_kc() {
               <div class="product-details-inner">
                 <div class="row">
                   <div class="col-lg-5">
-                    <Slider {...largeSliderSettings} className="product-large-slider">
+                    <div className="product-large-slider">
                       <div className="pro-large-img img-zoom">
                         <img src={productObj.image1} alt="product-details" />
                       </div>
@@ -163,9 +173,9 @@ export default function Chi_tiet_san_pham_kc() {
                         <img src={productObj.image3} alt="product-details" />
                       </div>
 
-                    </Slider>
+                    </div>
 
-                    <Slider {...navSliderSettings} className="pro-nav">
+                    <div className="pro-nav slick-row-10 slick-arrow-style">
                       <div className="pro-nav-thumb">
                         <img src={productObj.image1} alt="product-details" />
                       </div>
@@ -176,7 +186,7 @@ export default function Chi_tiet_san_pham_kc() {
                         <img src={productObj.image3} alt="product-details" />
                       </div>
 
-                    </Slider>
+                    </div>
                   </div>
                   <div class="col-lg-7">
                     <div class="product-details-des">

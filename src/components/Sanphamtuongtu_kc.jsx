@@ -1,17 +1,6 @@
 import React from 'react'
-
 function Sanphamtuongtu_kc() {
-  //  const relatedSliderSettings = {
-  //       speed: 1000,
-  //       autoplay: true,
-  //       infinite: true,
-  //       slidesToShow: 4,
-       
-  //       adaptiveHeight: true,
-  //       arrows: true,
-  //       prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-  //       nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-  //   };
+   
   return (
     <div>
        <section class="related-products section-padding">
@@ -155,7 +144,7 @@ function Sanphamtuongtu_kc() {
                     </div>
                   </div>
                 </div>
-         </div>
+             </div>
 
             </div>
           </div>

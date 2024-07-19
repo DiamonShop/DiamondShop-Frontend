@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import $ from 'jquery';
+import '../../../slick-min'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
@@ -87,7 +88,7 @@ export default function Chi_tiet_san_pham() {
                 speed: 1000,
                 asNavFor: '.pro-nav'
             });
-    
+
             $('.pro-nav').slick({
                 slidesToShow: 3,
                 asNavFor: '.product-large-slider',
@@ -105,14 +106,14 @@ export default function Chi_tiet_san_pham() {
                 }]
             });
         };
-    
+
         const timer = setTimeout(() => {
             initSlickSliders();
         }, 100); // Adjust the delay as needed
-    
+
         $('select').niceSelect();
         $('.img-zoom').zoom();
-    
+
         return () => {
             clearTimeout(timer);
             $('select').niceSelect('destroy');
@@ -205,10 +206,10 @@ export default function Chi_tiet_san_pham() {
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
-                                            <div className="ratings d-flex align-items-center">
+                                            <div className="ratings d-flex ">
                                                 <StarRating rating={rating} setRating={setRating} />
-                                                <div className="pro-review">
-                                                    <span>{reviewCount} Review(s)</span>
+                                                <div className="pro-review">                                                   
+                                                <span>   {reviewCount} Review(s)  </span>                                                   
                                                 </div>
                                             </div>
                                             <div className="price-box">
@@ -241,6 +242,11 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <span>
+                                                            <h6 className='soluongsanphamtrongkho'>
+                                                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
+                                                            </h6>
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             ) : (
@@ -268,7 +274,6 @@ export default function Chi_tiet_san_pham() {
                                                         {productObj.categoryName === 'Nhẫn' && (
                                                             <>
                                                                 <h6 className='filter-name-jewelry'>Size :</h6>
-
                                                                 <select >
                                                                     <option >8</option>
                                                                     <option>9</option>
@@ -296,6 +301,11 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <span>
+                                                            <h6 className='soluongsanphamtrongkho'>
+                                                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
+                                                            </h6>
+                                                        </span>
                                                     </li>
                                                 </ul>
 

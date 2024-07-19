@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
 
 function Du_lieu_san_pham_tt(props) {
+
     const handleProductClick = () => {
         localStorage.setItem('product', JSON.stringify(props));
         window.location.reload(); // Reload the page
