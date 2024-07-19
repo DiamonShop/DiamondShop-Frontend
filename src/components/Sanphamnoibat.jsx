@@ -27,7 +27,6 @@ function Sanphamnoibat({ onProductClick }) {
         }
         setRandomProductsMatdaychuyen(getRandomProductsMatdaychuyen(Product_Matdaychuyen_Data, 5));
     
-    
         const initializeSlick = () => {
             $('.product-carousel-4').slick({
                 speed: 1000,

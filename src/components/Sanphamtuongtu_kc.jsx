@@ -1,17 +1,17 @@
 import React from 'react'
-import Slider from "react-slick";
+
 function Sanphamtuongtu_kc() {
-   const relatedSliderSettings = {
-        speed: 1000,
-        autoplay: true,
-        infinite: true,
-        slidesToShow: 4,
+  //  const relatedSliderSettings = {
+  //       speed: 1000,
+  //       autoplay: true,
+  //       infinite: true,
+  //       slidesToShow: 4,
        
-        adaptiveHeight: true,
-        arrows: true,
-        prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
-    };
+  //       adaptiveHeight: true,
+  //       arrows: true,
+  //       prevArrow: <button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>,
+  //       nextArrow: <button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>,
+  //   };
   return (
     <div>
        <section class="related-products section-padding">
@@ -29,7 +29,7 @@ function Sanphamtuongtu_kc() {
           <div class="row">
             <div class="col-12">
 
-              <Slider {...relatedSliderSettings} class="product-carousel-4 slick-row-10 slick-arrow-style">
+              <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                 <div class="product-item">
                   <figure class="product-thumb">
                     <a href="product-details.html">
@@ -155,7 +155,7 @@ function Sanphamtuongtu_kc() {
                     </div>
                   </div>
                 </div>
-              </Slider>
+         </div>
 
             </div>
           </div>

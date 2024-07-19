@@ -6,9 +6,10 @@ const listProduct = await HandleGetAll();
 const productData = await Promise.all(listProduct
     .filter(product => product.categoryId === 4 && product.isActive === true)
     .map(async product => {
-        const { basePrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes } = product;
-        const { image1Url, image2Url, image3Url, } = await getJewelryImageUrls(productID, categoryId);
-        console.log(material)
+        const { basePrice, productID, productName, stock, categoryId, description, isActive,material,mainDiamondName,sideDiamondName } = product;
+
+        const { image1Url, image2Url, image3Url, image4Url } = await getJewelryImageUrls(productID, categoryId);
+
         return {
             id: productID,
             productName: productName,
@@ -20,6 +21,9 @@ const productData = await Promise.all(listProduct
             categoryName: "Vòng tay",
             description: description,
             stock: stock,
+            material:material,
+            mainDiamondName:mainDiamondName,
+            sideDiamondName:sideDiamondName,
             isActive: isActive,
             categoryId: categoryId,
             material: material,

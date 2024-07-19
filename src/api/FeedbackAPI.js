@@ -25,3 +25,16 @@ export const handleCreateFeedback = async (feedbackData) => {
         throw error;
     }
 };
+export const handleCreatefeedback = async (feedbackData) => {
+    try {
+        const response = await axios.post('https://localhost:7101/api/Feedback/create', feedbackData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating feedback:", error);
+        throw error;
+    }
+};

@@ -273,7 +273,6 @@ export default function Thanh_toan() {
                                                     />
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="single-input-item">
                                             <label for="email" class="required">Email</label>

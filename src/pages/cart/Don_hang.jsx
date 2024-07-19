@@ -44,6 +44,7 @@ function Don_hang() {
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
                                 <th>Chi tiết</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
