@@ -155,6 +155,7 @@ function Chi_tiet_don_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to="/Thongtintk">Thông tin tài khoản</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
                                     </ul>
                                 </nav>

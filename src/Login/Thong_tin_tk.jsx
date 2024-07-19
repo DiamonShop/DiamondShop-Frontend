@@ -39,9 +39,9 @@ export default function Thong_tin_tk() {
             const decodedToken = jwtDecode(token);
             const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-            if (userRole === 'Admin') {
-                navigate('/BangDieuKhien');
-            }
+                if (userRole === 'Admin') {
+                    navigate('/Dashboard');
+                }
 
             const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
                 headers: {

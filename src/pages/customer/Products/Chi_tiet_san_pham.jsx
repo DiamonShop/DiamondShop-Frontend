@@ -38,6 +38,7 @@ export default function Chi_tiet_san_pham() {
             duration: 1.5,
         });
     };
+
     const handleAddToCart = async () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -49,7 +50,7 @@ export default function Chi_tiet_san_pham() {
                         await handleAddProductToOrder(item.orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
                         break;
-                    } else if (item.status === 'Completed' || item.status === 'Shipped') {
+                    } else if (item.status === 'Completed' || item.status === 'Shipping') {
                         const orderId = await handleCreateOrder(userId);
                         await handleAddProductToOrder(orderId, productObj.productId, quantity);
                         openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
@@ -76,6 +77,8 @@ export default function Chi_tiet_san_pham() {
         setReviewCount(feedbackCount);
         setAverageRating(avgRating);
     };
+
+    
 
     useEffect(() => {
         const initSlickSliders = () => {
@@ -117,6 +120,21 @@ export default function Chi_tiet_san_pham() {
             $('.img-zoom').trigger('zoom.destroy');
         };
     }, []);
+    
+    const getCategoryName = (categoryId) => {
+        switch (categoryId) {
+            case 1:
+                return 'Nhan';
+            case 2:
+                return 'Daychuyen';
+            case 3:
+                return 'Matdaychuyen';
+            case 4:
+                return 'Vongtay';
+            default:
+                return 'Unknown';
+        }
+    };
     return (
         <div>
             {contextHolder}
@@ -128,7 +146,7 @@ export default function Chi_tiet_san_pham() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to={`/${productObj.categoryName}`}>{productObj.categoryName}</Link></li>
+                                        <li className="breadcrumb-item"><Link to={`/${getCategoryName(productObj.categoryId)}`}>{productObj.categoryName}</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                     </ul>
                                 </nav>
@@ -197,8 +215,6 @@ export default function Chi_tiet_san_pham() {
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
-
-
 
                                             <p className='jewelry-filter-line'>------------------------------------------------------------------------------------</p>
                                             {productObj.categoryName === 'Dây chuyền' ? (

@@ -50,6 +50,24 @@ export const handleGetOrderByUserId = async (userId) => {
     }
 }
 
+export const handleGetHistoryOrderByUserId = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/GetHistoryOrderByUserId?userId=${userId}`, {
+            method: 'GET',
+            mode: 'cors',
+        });
+        const data = await response.json();
+        if (data.data == null) {
+            return null;
+        } else {
+            return data.data;
+        }
+    } catch (error) {
+        console.error("Error during get order:", error);
+        return null; // Return null on error
+    }
+}
+
 export const handleUpdateTotalPrice = async (orderId, totalPrice) => {
     try {
         const response = await fetch(`https://localhost:7101/api/orders/UpdateTotalPrice?orderId=${orderId}&totalPrice=${totalPrice}`, {
@@ -90,9 +108,27 @@ export const handleGetAllOrderDetail = async () => {
     return arr;
 }
 
-export const handleUpdateStatusByUserId = async (userId) => {
+export const handleUpdateStatusToPending = async (userId) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusByUserId?userId=${userId}`, {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusToPending?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export const handleUpdateStatusToShipping = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateStatusToShipping?userId=${userId}`, {
             method: 'PUT',
             mode: 'cors'
         });
@@ -130,24 +166,6 @@ export const handleGetOrderByUserIdOrderId = async (userId, orderId) => {
 export const handleGetLatestOrderByUserId = async (userId) => {
     try {
         const response = await fetch(`https://localhost:7101/api/orders/GetLatestOrderByUserId?userId=${userId}`, {
-            method: 'GET',
-            mode: 'cors',
-        });
-        const data = await response.json();
-        if (data.data == null) {
-            return null;
-        } else {
-            return data.data;
-        }
-    } catch (error) {
-        console.error("Error during get order:", error);
-        return null; // Return null on error
-    }
-}
-
-export const handleGetHistoryOrderByUserId = async (userId) => {
-    try {
-        const response = await fetch(`https://localhost:7101/api/orders/GetHistoryOrderByUserId?userId=${userId}`, {
             method: 'GET',
             mode: 'cors',
         });

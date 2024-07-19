@@ -4,14 +4,10 @@ import { Product_kimcuong3_6_data } from '../../../Data/Product_kimcuong3.6_data
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 export default function Kim_cuong({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
-
-  
 
     const sortedProducts = Product_kimcuong3_6_data.slice().sort((a, b) => {
         switch (sortOption) {
@@ -28,7 +24,9 @@ export default function Kim_cuong({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -80,7 +78,7 @@ export default function Kim_cuong({ onProductClick }) {
                                         <ul className="pagination-box">
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, 1)}>
-                                                <i className="pe-7s-angle-left"></i>
+                                                    <i className="pe-7s-angle-left"></i>
                                                 </a>
                                             </li>
                                             {pageNumbers.map(number => (
@@ -92,7 +90,7 @@ export default function Kim_cuong({ onProductClick }) {
                                             ))}
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, pageNumbers.length)}>
-                                                <i className="pe-7s-angle-right"></i>
+                                                    <i className="pe-7s-angle-right"></i>
                                                 </a>
                                             </li>
                                         </ul>

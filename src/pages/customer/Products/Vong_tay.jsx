@@ -6,8 +6,6 @@ import Du_lieu_san_pham_vtxmdc from '../../../components/Du_lieu_san_pham_vtxmdc
 
 export default function Vongtay({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -29,7 +27,9 @@ export default function Vongtay({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -84,6 +84,7 @@ export default function Vongtay({ onProductClick }) {
                                                 sideDiamondQuantity={item.sideDiamondQuantity}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}

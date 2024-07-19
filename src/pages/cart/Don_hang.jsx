@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { handleGetHistoryOrderByUserId } from '../../api/OrderAPI';
+import { handleGetHistoryOrderByUserId, handleGetOrderByUserId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 
 function Don_hang() {

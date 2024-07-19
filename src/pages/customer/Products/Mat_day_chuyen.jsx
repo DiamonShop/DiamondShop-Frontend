@@ -5,8 +5,6 @@ import Filter_product from '../../../components/Filter_product';
 import Du_lieu_san_pham_vtxmdc from '../../../components/Du_lieu_san_pham_vtxmdc';
 export default function Mat_day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -26,19 +24,25 @@ export default function Mat_day_chuyen({ onProductClick }) {
                 return 0;
         }
     });
-    // Calculate the products to be displayed on the current page
+
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
     const handleClick = (event, pageNumber) => {
         event.preventDefault();
         setCurrentPage(pageNumber);
     };
+
     // Create pagination items
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(sortedProducts.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
+
     return (
         <div>
             <div className="breadcrumb-area">
@@ -71,13 +75,14 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                                 productId={item.id}
                                                 image1={item.image1}
                                                 label={item.label}
-                                                productName={item.productName}
-                                                categoryName={item.categoryName}
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}
                                                 sideDiamondName={item.sideDiamondName}
                                                 mainDiamondQuantity={item.mainDiamondQuantity}
-                                                sideDiamondQuantity={item.sideDiamondQuantity}
+                                                sideDiamondQuantity={item.sideDiamondQuantity}                                       
+                                                productName={item.productName}
+                                                categoryName={item.categoryName}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}

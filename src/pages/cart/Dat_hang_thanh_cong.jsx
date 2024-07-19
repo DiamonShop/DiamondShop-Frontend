@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
-import { handleUpdateStatusByUserId, handleGetLatestOrderByUserId } from '../../api/OrderAPI';
+import { handleGetLatestOrderByUserId, handleUpdateStatusToPending } from '../../api/OrderAPI';
 
 function Dat_hang_thanh_cong() {
   const [order, setOrder] = useState([]);
@@ -10,7 +10,7 @@ function Dat_hang_thanh_cong() {
     const token = localStorage.getItem("token");
     if (token) {
       const userId = decodeToken(token).sid;
-      await handleUpdateStatusByUserId(userId);
+      await handleUpdateStatusToPending(userId);
     }
   }
 
@@ -63,7 +63,7 @@ function Dat_hang_thanh_cong() {
                     <Link to="/" className="btn-return-home">Tiếp tục mua hàng</Link>
                     <div>
                       <Link to="/Chitietdonhang"
-                         className="btn-view-cart" onClick={() => handleViewOrderDetails(order.orderId)}>Xem đơn hàng</Link>
+                        className="btn-view-cart" onClick={() => handleViewOrderDetails(order.orderId)}>Xem đơn hàng</Link>
                     </div>
                   </div>
                 </div>

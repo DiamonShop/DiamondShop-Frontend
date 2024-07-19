@@ -5,8 +5,6 @@ import Filter_product from '../../../components/Filter_product';
 import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
 export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -29,7 +27,9 @@ export default function Day_chuyen({ onProductClick }) {
         }
     });
 
-    // Calculate the products to be displayed on the current page
+    //Pagination
+    const [currentPage, setCurrentPage] = useState(1);  //Bắt đầu từ trang 1
+    const itemsPerPage = 8;
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -79,7 +79,6 @@ export default function Day_chuyen({ onProductClick }) {
                                                 image1={item.image1}
                                                 image2={item.image2}
                                                 image3={item.image3}
-                                                image4={item.image4}
                                                 label={item.label}
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}
@@ -89,6 +88,7 @@ export default function Day_chuyen({ onProductClick }) {
                                                 Quantity={item.Quantity}
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
+                                                categoryId={item.categoryId}
                                                 newPrice={item.newPrice}
                                                 description={item.description}
                                                 onProductClick={onProductClick}
