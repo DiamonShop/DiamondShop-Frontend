@@ -33,3 +33,21 @@ const updateProfile = async (token, userDataToUpdate) => {
 };
 
 export default updateProfile;
+
+export const handleUpdateUserLoyalPoint = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/User/UpdateUserLoyalPoint?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
