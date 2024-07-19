@@ -10,7 +10,10 @@ import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
 
 function Sanphamtuongtu({ onProductClick }) {
     const productObj = JSON.parse(localStorage.getItem('product'));
-    const [randomProducts, setRandomProducts] = useState([]);
+    const [randomProductsNhan, setRandomProductsNhan] = useState([]);
+    const [randomProductsDaychuyen, setRandomProductsDaychuyen] = useState([]);
+    const [randomProductsMatdaychuyen, setRandomProductsMatdaychuyen] = useState([]);
+    const [randomProductsVongtay, setRandomProductsVongtay] = useState([]);
     useEffect(() => {
 
         function getRandomProductsNhan(products, count) {
@@ -32,7 +35,7 @@ function Sanphamtuongtu({ onProductClick }) {
             const shuffled = products.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
-        setrandomProductsVongtay(getRandomProductsVongtay(Product_Vongtay_Data, 5));
+        setRandomProductsVongtay(getRandomProductsVongtay(Product_Vongtay_Data, 5));
         const initializeSlick = () => {
             $('.product-carousel-4').slick({
                 speed: 1000,
