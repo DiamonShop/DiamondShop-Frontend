@@ -21,6 +21,7 @@ export default function Thong_tin_tk() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+
     const fetchUserData = async () => {
         if (!currentUser) {
             console.log("User not logged in. Redirecting to login.");
@@ -105,16 +106,16 @@ export default function Thong_tin_tk() {
         
         // Tạo object chứa dữ liệu cần cập nhật
         const userDataToUpdate = {
-            userId: userData.userId, // Thêm userId vào dữ liệu cập nhật
-            username: userData.username, // Giữ nguyên username
+            userId: userData.userId, 
+            username: userData.username, 
             fullName: displayName,
             email,
             numberPhone,
             address,
             password: newPwd, // Nếu có
-            isActive: userData.isActive, // Giữ nguyên isActive
-            roleId: userData.roleId, // Giữ nguyên roleId
-            loyaltyPoints: userData.loyaltyPoints // Giữ nguyên loyaltyPoints
+            isActive: userData.isActive, 
+            roleId: userData.roleId, 
+            loyaltyPoints: userData.loyaltyPoints 
         };
     
         try {
