@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Đảm bảo bạn nhập đúng
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import Don_hang from '../pages/cart/Don_hang';
 
@@ -106,11 +106,15 @@ export default function Thong_tin_tk() {
         // Tạo object chứa dữ liệu cần cập nhật
         const userDataToUpdate = {
             userId: userData.userId, // Thêm userId vào dữ liệu cập nhật
+            username: userData.username, // Giữ nguyên username
             fullName: displayName,
             email,
             numberPhone,
             address,
-            password: newPwd // Nếu có
+            password: newPwd, // Nếu có
+            isActive: userData.isActive, // Giữ nguyên isActive
+            roleId: userData.roleId, // Giữ nguyên roleId
+            loyaltyPoints: userData.loyaltyPoints // Giữ nguyên loyaltyPoints
         };
     
         try {
