@@ -194,7 +194,7 @@ export default function Chi_tiet_san_pham() {
                                                     <img src={productObj.image2} alt="product-details" />
                                                 </div>
                                                 <div className="pro-nav-thumb">
-                                                    <img src={productObj.image3} alt="product-details" />
+                                                     <img src={productObj.image3} alt="product-details" />
                                                 </div>
                                                 <div className="pro-nav-thumb">
                                                     <img src={productObj.image4} alt="product-details" />
