@@ -8,7 +8,14 @@ import { getDiamondImageUrls } from '../../FirebaseImage/firebaseHelper';
 import ReactPaginate from 'react-paginate';
 import { imageDb } from '../../FirebaseImage/Config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-
+import { logout } from '../../api/LogoutAPI';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import parse from 'html-react-parser';
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, message, Upload, Input, InputNumber, Select, Popconfirm } from 'antd';
+import { UploadProps, InputNumberProps } from 'antd';
+const { Option } = Select;
 const formatCurrency = (value) => {
     return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');
 };
@@ -41,6 +48,7 @@ const KimCuong = () => {
         productType: '',
         description: '',
         markupRate: 0,
+        markupPrice: 0,
         quantity: 0, // Đảm bảo quantity được khởi tạo đúng
         diamondCategoryId: 5,
         diameterMM: 0,
@@ -74,6 +82,7 @@ const KimCuong = () => {
         clarity: '',
         cut: '',
         basePrice: 0,
+        isActive: true,
         imageUrls: [],
         imageFiles: []
     });
@@ -93,14 +102,6 @@ const KimCuong = () => {
 
         try {
             const decodedToken = jwtDecode(token);
-            const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-            if (userRole !== 'Admin') {
-                console.log("User is not an admin. Redirecting to home.");
-                navigate('/');
-                return;
-            }
-
             setLoading(true);
             const headers = sendToken(); // Get headers with Authorization token
             const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
@@ -246,12 +247,6 @@ const KimCuong = () => {
 
         try {
             const headers = sendToken();
-            const imageUrls = await Promise.all(newProductDiamond.imageFiles.map(async (file) => {
-                const imgRef = ref(imageDb, `files/5/KC-${newProductDiamond.diameterMM}/${newProductDiamond.productId}/${file.name}`);
-                await uploadBytes(imgRef, file);
-                return await getDownloadURL(imgRef);
-            }));
-
             const diamondPayload = {
                 diamondID: 0,
                 productID: newProductDiamond.productId,
@@ -264,11 +259,11 @@ const KimCuong = () => {
                 basePrice: newProductDiamond.basePrice,
                 productName: newProductDiamond.productName,
                 description: newProductDiamond.description,
-                markupPrice: newProductDiamond.basePrice * newProductDiamond.markupRate,
+                markupPrice: newProductDiamond.markupPrice,
                 markupRate: newProductDiamond.markupRate,
                 productType: 'Diamond',
                 isActive: true,
-                imageUrls: imageUrls
+                // imageUrls: imageUrls
             };
 
             console.log('Diamond Payload:', diamondPayload);
@@ -279,12 +274,31 @@ const KimCuong = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
+            message.success('Thêm sản phẩm kim cương thành công');
             setIsAddModalOpen(false);
             fetchProductData(categoryFilter, currentPage + 1);
+            setNewProductDiamond({
+                productId: '',
+                productName: '',
+                productType: '',
+                description: '',
+                markupRate: 0,
+                markupPrice: 0,
+                quantity: 0, // Đảm bảo quantity được khởi tạo đúng
+                diamondCategoryId: 5,
+                diameterMM: 0,
+                carat: 0,
+                color: '',
+                clarity: '',
+                cut: '',
+                basePrice: 0,
+                // imageUrls: [],
+                // imageFiles: []
+            })
 
         } catch (error) {
             console.error('Error adding new diamond product:', error);
+            message.error('Lỗi thêm sản phẩm kim cương mới.');
             if (error.response) {
                 console.error('Response data:', error.response.data);
                 console.error('Response status:', error.response.status);
@@ -296,7 +310,42 @@ const KimCuong = () => {
             setErrorMessage('Error adding new diamond product.');
         }
     };
+    const handleFileUpload = async (file) => {
+        const imgRef = ref(imageDb, `files/5/KC-${newProductDiamond.diameterMM}/${newProductDiamond.productId}/${file.name}`);
+        await uploadBytes(imgRef, file);
+        return await getDownloadURL(imgRef);
+    };
 
+    const uploadProps = {
+        name: 'file',
+        customRequest: async ({ file, onSuccess, onError }) => {
+            try {
+                const downloadUrl = await handleFileUpload(file);
+                setNewProductDiamond(prevState => ({
+                    ...prevState,
+                    imageUrls: [...prevState.imageUrls, downloadUrl]
+                }));
+                onSuccess("Ok");
+                message.success(`Tải tệp ${file.name} thành công`);
+            } catch (error) {
+                onError(error);
+                message.error(`Tải tệp ${file.name} thất bại.`);
+            }
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+        }
+    };
+
+    const confirmDelete = (productId) => {
+        deleteProduct(productId);
+    };
+
+    const cancelDelete = (e) => {
+        message.error('Hủy bỏ xóa sản phẩm');
+    };
     // Function to handle editing product
     const handleEditProductClick = (product) => {
         setEditProductDiamond({
@@ -315,6 +364,7 @@ const KimCuong = () => {
             clarity: getClarityDiamond(product.productId),
             cut: getCutDiamond(product.productId),
             basePrice: getBasePriceDiamond(product.productId),
+            isActive: product.isActive,
             imageUrls: [product.imageUrl]
         });
 
@@ -329,7 +379,15 @@ const KimCuong = () => {
         };
         calculateMarkupPrice();
     }, [editProductDiamond.basePrice, editProductDiamond.markupRate]);
-
+    useEffect(() => {
+        const calculateMarkupPrice = () => {
+            setNewProductDiamond(prevState => ({
+                ...prevState,
+                markupPrice: prevState.basePrice * prevState.markupRate
+            }));
+        };
+        calculateMarkupPrice();
+    }, [newProductDiamond.basePrice, newProductDiamond.markupRate]);
     // Function to update diamond product
     const updateDiamondProduct = async (e) => {
         e.preventDefault();
@@ -356,7 +414,7 @@ const KimCuong = () => {
                 diameterMM: editProductDiamond.diameterMM,
                 color: editProductDiamond.color,
                 basePrice: editProductDiamond.basePrice,
-                isActive: true
+                isActive: editProductDiamond.isActive
             };
 
             // Update Diamond
@@ -366,11 +424,12 @@ const KimCuong = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
+            message.success('Chỉnh sửa sản phẩm kim cương thành công');
             setIsEditModalOpen(false); // Close the edit product modal
             fetchProductData(categoryFilter, currentPage + 1);
         } catch (error) {
             console.error('Error updating diamond product:', error);
+            message.error('Lỗi khi chỉnh sửa sản phẩm kim cương. Vui lòng thử lại sau.');
             setErrorMessage('Error updating diamond product.');
         }
     };
@@ -392,11 +451,12 @@ const KimCuong = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
+            message.success('Xóa sản phẩm kim cương thành công');
             // Refresh the product list after deletion
             fetchProductData(categoryFilter, currentPage + 1);
         } catch (error) {
             console.error('Error deleting product:', error);
+            message.error('Xóa sản phẩm kim cương thất bại.');
             setErrorMessage('Error deleting product.');
         }
     };
@@ -447,7 +507,7 @@ const KimCuong = () => {
         const status = getProductStatus(product);
         return (statusFilter === 'Tất cả' || status === statusFilter) && product.productName.toLowerCase().includes(searchTerm.toLowerCase());
     }).slice(currentPage * productsPerPage, (currentPage + 1) * productsPerPage);
-    
+
     // const displayProducts = products.filter(product => product.productName && product.productName.toLowerCase().includes(searchTerm.toLowerCase()))
     //     .slice(currentPage * productsPerPage, (currentPage + 1) * productsPerPage);
 
@@ -470,6 +530,24 @@ const KimCuong = () => {
         setIsEditModalOpen(false);
     };
 
+    const [userRole, setUserRole] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            setUserRole(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            userLogout();
+        }
+    }, [userLogout]);
+
     return (
         <div className="wrapper">
             <nav id="sidebar" className="sidebar js-sidebar">
@@ -482,65 +560,87 @@ const KimCuong = () => {
                         </div>
                     </a>
                     <ul className="sidebar-nav">
-                        <li className="sidebar-header">Trang chủ</li>
-                        <li className="sidebar-item">
-                            <a className="sidebar-link nav-link" >
-                                <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
-                            </a>
-                        </li>
-                        <li className="sidebar-header">Quản lý</li>
-                        <li className="sidebar-item">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/TrangSuc">Sản phẩm</Link></span>
-                            </a>
-                        </li>
-                        <li className="sidebar-item active">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
-                            </a>
+                        {userRole === 'Admin' && (
+                            <>
+                                <li className="sidebar-header">Trang chủ</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link">
+                                        <i className="align-middle" data-feather="square"></i>
+                                        <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                                    </a>
+                                </li>
+                            </>
+                        )}
+                        {userRole === 'Manager' && (
+                            <>
+                                <li className="sidebar-header">Trang chủ</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item " >
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-item active">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                                    </a>
 
-                            <ul className="sidebar-nav dropdown-menu">
-                                <li className={`sidebar-item ${activeCategory === '3.6' ? 'active' : ''}`} onClick={() => handleCategoryClick('3.6')}>
-                                    <a className="sidebar-link">
+                                    <ul className="sidebar-nav dropdown-menu">
+                                        <li className={`sidebar-item ${activeCategory === '3.6' ? 'active' : ''}`} onClick={() => handleCategoryClick('3.6')}>
+                                            <a className="sidebar-link">
+                                                <i className="align-middle" data-feather="square"></i>
+                                                <span className="align-middle">Kim cương 3.6 ly</span>
+                                            </a>
+                                        </li>
+                                        <li className={`sidebar-item ${activeCategory === '4.1' ? 'active' : ''}`} onClick={() => handleCategoryClick('4.1')}>
+                                            <a className="sidebar-link">
+                                                <i className="align-middle" data-feather="square"></i>
+                                                <span className="align-middle">Kim cương 4.1 ly</span>
+                                            </a>
+                                        </li>
+                                        <li className={`sidebar-item ${activeCategory === '4.5' ? 'active' : ''}`} onClick={() => handleCategoryClick('4.5')}>
+                                            <a className="sidebar-link">
+                                                <i className="align-middle" data-feather="square"></i>
+                                                <span className="align-middle">Kim cương 4.5 ly</span>
+                                            </a>
+                                        </li>
+                                        <li className={`sidebar-item ${activeCategory === '5.4' ? 'active' : ''}`} onClick={() => handleCategoryClick('5.4')}>
+                                            <a className="sidebar-link">
+                                                <i className="align-middle" data-feather="square"></i>
+                                                <span className="align-middle">Kim cương 5.4 ly</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </>
+                        )}
+                        {userRole === 'Staff' && (
+                            <>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link" >
                                         <i className="align-middle" data-feather="square"></i>
-                                        <span className="align-middle">Kim cương 3.6 ly</span>
+                                        <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
                                     </a>
                                 </li>
-                                <li className={`sidebar-item ${activeCategory === '4.1' ? 'active' : ''}`} onClick={() => handleCategoryClick('4.1')}>
-                                    <a className="sidebar-link">
-                                        <i className="align-middle" data-feather="square"></i>
-                                        <span className="align-middle">Kim cương 4.1 ly</span>
-                                    </a>
-                                </li>
-                                <li className={`sidebar-item ${activeCategory === '4.5' ? 'active' : ''}`} onClick={() => handleCategoryClick('4.5')}>
-                                    <a className="sidebar-link">
-                                        <i className="align-middle" data-feather="square"></i>
-                                        <span className="align-middle">Kim cương 4.5 ly</span>
-                                    </a>
-                                </li>
-                                <li className={`sidebar-item ${activeCategory === '5.4' ? 'active' : ''}`} onClick={() => handleCategoryClick('5.4')}>
-                                    <a className="sidebar-link">
-                                        <i className="align-middle" data-feather="square"></i>
-                                        <span className="align-middle">Kim cương 5.4 ly</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="sidebar-item ">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
-                            </a>
-                        </li>
-                        <li className="sidebar-item">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="square"></i>
-                                <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
-                            </a>
-                        </li>
+                            </>
+                        )}
+
 
                         {/* <li className="sidebar-item">
                             <a className="sidebar-link">
@@ -568,8 +668,7 @@ const KimCuong = () => {
                                     <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-end">
-
-                                    <a className="dropdown-item" href='/'>Đăng xuất</a>
+                                    <a className="dropdown-item" href='/' onClick={logout}>Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>
@@ -582,7 +681,7 @@ const KimCuong = () => {
                         <h2 className="text-center admin-page-title">Quản lí Kim cương</h2>
 
                         <div className="admin-page-controls">
-                            <button className='admin-page-add-button' onClick={handleAddProductClick}>Thêm sản phẩm</button>
+                            <button className='admin-page-add-button' onClick={handleAddProductClick}>Thêm kim cương</button>
 
                             <div className="admin-page-search-button-container">
                                 <input
@@ -597,7 +696,7 @@ const KimCuong = () => {
 
                             <div className="admin-page-status-filter">
                                 <select className="form-control admin-page-filter-dropdown" value={statusFilter} onChange={handleStatusFilterChange}>
-                                    <option value="Tất cả">Trạng thái</option>
+                                    <option value="Tất cả">Tất cả</option>
                                     <option value="Còn hàng">Còn hàng</option>
                                     <option value="Hết hàng">Hết hàng</option>
                                     <option value="Tạm ẩn">Tạm ẩn</option>
@@ -611,7 +710,6 @@ const KimCuong = () => {
                                     <th>ID</th>
                                     <th>Hình ảnh</th>
                                     <th>Tên</th>
-                                    <th>Mô tả</th>
                                     <th>Số lượng</th>
                                     <th>Giá</th>
                                     <th>Trạng thái</th>
@@ -626,24 +724,24 @@ const KimCuong = () => {
                                             <img src={product.imageUrl} alt={product.productName} style={{ width: '50px', height: '50px', backgroundColor: 'transparent' }} />
                                         </td>
                                         <td>{product.productName}</td>
-                                        <td>{product.description}</td>
                                         <td>{product.quantity}</td>
-                                        <td>{formatCurrency(product.markupPrice)}đ</td> {/* Định dạng tiền tệ */}
+                                        <td>{formatCurrency(product.markupPrice)}VNĐ</td> {/* Định dạng tiền tệ */}
                                         <td>{getProductStatus(product)}</td>
                                         <td>
                                             <div className="admin-page-buttons">
-                                                <button className='admin-page-view-button' onClick={() => openModal(product)}>Xem</button>
-                                                <button className='admin-page-edit-button' onClick={() => handleEditProductClick(product)}>Sửa</button>
-                                                <button
-                                                    className='admin-page-delete-button'
-                                                    onClick={() => {
-                                                        if (window.confirm(`Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`)) {
-                                                            deleteProduct(product.productId);
-                                                        }
-                                                    }}
+                                                <Button type='default' onClick={() => openModal(product)}>Xem</Button>
+                                                <Button type='default' onClick={() => handleEditProductClick(product)}>Sửa</Button>
+                                                <Popconfirm
+                                                    title="Xóa sản phẩm"
+                                                    description={`Bạn có chắc chắn muốn xóa sản phẩm ${product.productName}?`}
+                                                    onConfirm={() => confirmDelete(product.productId)}
+                                                    onCancel={cancelDelete}
+                                                    okText="Có"
+                                                    cancelText="Không"
                                                 >
-                                                    Xóa
-                                                </button>
+                                                    <Button danger>Xóa</Button>
+                                                </Popconfirm>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -680,18 +778,61 @@ const KimCuong = () => {
                                             <img src={selectedProduct.imageUrl} alt="Product Image" className="admin-page-details-large-image" />
                                         </div>
                                         <div className="admin-page-details-info-column">
-                                            <p><strong>ID:</strong> {selectedProduct.productId}</p>
-                                            <p><strong>Tên sản phẩm:</strong> {selectedProduct.productName}</p>
-                                            <p><strong>Loại:</strong> {`Kim cương ` + getDiameterMMDiamond(selectedProduct.productId) + ` ly`}</p>
-                                            <p><strong>Số lượng:</strong> {selectedProduct.quantity}</p>
-                                            <p><strong>Carat:</strong> {getCaratDiamond(selectedProduct.productId)}</p>
-                                            <p><strong>Cắt:</strong> {getCutDiamond(selectedProduct.productId)}</p>
-                                            <p><strong>Độ tinh khiết:</strong> {getClarityDiamond(selectedProduct.productId)}</p>
-                                            <p><strong>Màu sắc:</strong> {getColorDiamond(selectedProduct.productId)}</p>
-                                            <p><strong>Giá gốc sản phẩm:</strong> {formatCurrency(getBasePriceDiamond(selectedProduct.productId))}đ</p>
-                                            <p><strong>Tỉ lệ áp giá:</strong> {selectedProduct.markupRate}</p>
-                                            <p><strong>Giá bán:</strong> {formatCurrency(selectedProduct.markupPrice)}đ</p>
+                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Chi tiết sản phẩm kim cương</h2>
+                                            <div className="admin-page-add-product-form-group">
+                                                <label>Tên sản phẩm:</label>
+                                                <Input type="text" value={selectedProduct.productName} readOnly />
+                                            </div>
+                                            <div className="admin-page-add-product-form-group-row">
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Loại:</label>
+                                                    <Input type="text" value={`Kim cương ` + getDiameterMMDiamond(selectedProduct.productId) + ` ly`} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label><strong>Carat:</strong></label>
+                                                    <Input type="number" value={getCaratDiamond(selectedProduct.productId)} readOnly />
+                                                </div>
+                                            </div>
+                                            <div className="admin-page-add-product-form-group-row">
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Màu sắc:</label>
+                                                    <Input type="text" value={getColorDiamond(selectedProduct.productId)} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Độ tinh khiết:</label>
+                                                    <Input type="text" value={getClarityDiamond(selectedProduct.productId)} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Cắt:</label>
+                                                    <Input type="text" value={getCutDiamond(selectedProduct.productId)} readOnly />
+                                                </div>
+                                            </div>
+                                            <div className="admin-page-add-product-form-group-row">
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Số lượng:</label>
+                                                    <Input type="text" value={selectedProduct.quantity} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Giá gốc sản phẩm:</label>
+                                                    <Input type="text" value={formatCurrency(getBasePriceDiamond(selectedProduct.productId)) + 'VNĐ'} readOnly />
+                                                </div>
+                                            </div>
+                                            <div className="admin-page-add-product-form-group-row">
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Tỉ lệ áp giá:</label>
+                                                    <Input type="text" value={selectedProduct.markupRate} readOnly />
+                                                </div>
+                                                <div className="admin-page-add-product-form-group">
+                                                    <label>Giá bán:</label>
+                                                    <Input type="text" value={formatCurrency(selectedProduct.markupPrice) + 'VNĐ'} readOnly />
+                                                </div>
+                                            </div>
+                                            <div className="admin-page-add-product-form-group">
+                                                <label>Mô tả:</label>
+                                                <div>{parse(selectedProduct.description)}</div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -703,13 +844,12 @@ const KimCuong = () => {
                                     <button className="admin-page-add-product-close-button" onClick={closeAddModal}>&times;</button>
                                     <div className="admin-page-add-product-modal-content">
                                         <div className="admin-page-add-product-info-column">
-                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Thêm sản phẩm kim cương</h2>
+                                            <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Thêm kim cương</h2>
                                             <form onSubmit={addNewDiamondProduct}>
                                                 <div className="admin-page-add-product-form-group-row">
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="productId">ID</label>
-                                                        <input
-                                                            type="text"
+                                                        <Input
                                                             id="productId"
                                                             name="productId"
                                                             value={newProductDiamond.productId}
@@ -718,8 +858,7 @@ const KimCuong = () => {
                                                     </div>
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="diameterMM">Đường kính (mm)</label>
-                                                        <input
-                                                            type="number"
+                                                        <Input
                                                             id="diameterMM"
                                                             name="diameterMM"
                                                             value={newProductDiamond.diameterMM}
@@ -730,148 +869,152 @@ const KimCuong = () => {
 
                                                 <div className="admin-page-add-product-form-group">
                                                     <label htmlFor="productName">Tên sản phẩm</label>
-                                                    <input
-                                                        type="text"
+                                                    <Input
                                                         id="productName"
                                                         name="productName"
                                                         placeholder="Nhập tên sản phẩm"
                                                         value={newProductDiamond.productName}
-                                                        onChange={handleNewDiamondChange}
+                                                        onChange={e => setNewProductDiamond({ ...newProductDiamond, productName: e.target.value })}
                                                         required
                                                     />
                                                 </div>
                                                 <div className="admin-page-add-product-form-group-row">
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="quantity">Số lượng</label>
-                                                        <input
-                                                            type="number"
+                                                        <InputNumber
                                                             id="quantity"
                                                             name="quantity"
-                                                            placeholder="Nhập số lượng sản phẩm"
+                                                            min={1}
+                                                            max={100000}
+                                                            style={{ height: '46.7px', width: '140px' }}
                                                             value={newProductDiamond.quantity}
-                                                            onChange={handleNewDiamondChange}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, quantity: value })}
                                                             required
                                                         />
                                                     </div>
-                                                    <div className="admin-page-add-product-form-group">
-                                                        <label htmlFor="basePrice">Giá gốc sản phẩm</label>
-                                                        <input
-                                                            type="number"
-                                                            id="basePrice"
-                                                            name="basePrice"
-                                                            placeholder="Nhập giá gốc sản phẩm"
-                                                            value={newProductDiamond.basePrice}
-                                                            onChange={handleNewDiamondChange}
-                                                            required
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="admin-page-add-product-form-group-row">
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="carat">Carat</label>
-                                                        <input
-                                                            type="number"
+                                                        <InputNumber
                                                             id="carat"
                                                             name="carat"
                                                             placeholder="Carat"
                                                             value={newProductDiamond.carat}
-                                                            onChange={handleNewDiamondChange}
+                                                            style={{ height: '46.7px', width: '140px' }}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, carat: value })}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-add-product-form-group">
+                                                        <label htmlFor="markupRate">Tỉ lệ áp giá</label>
+                                                        <InputNumber
+                                                            id="markupRate"
+                                                            name="markupRate"
+                                                            placeholder="Tỉ lệ áp giá"
+                                                            value={newProductDiamond.markupRate}
+                                                            style={{ height: '46.7px', width: '140px' }}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, markupRate: value })}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="admin-page-add-product-form-group-row">
+                                                    <div className="admin-page-add-product-form-group">
+                                                        <label htmlFor="color">Màu sắc</label>
+                                                        <Select
+                                                            id="color"
+                                                            name="color"
+                                                            value={newProductDiamond.color}
+                                                            style={{ height: '46.7px' }}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, color: value })}
+                                                            options={[
+                                                                { value: 'D', label: 'D' },
+                                                                { value: 'E', label: 'E' },
+                                                                { value: 'F', label: 'F' }
+                                                            ]}
                                                             required
                                                         />
                                                     </div>
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="clarity">Độ tinh khiết</label>
-                                                        <select
+                                                        <Select
                                                             id="clarity"
                                                             name="clarity"
                                                             value={newProductDiamond.clarity}
-                                                            onChange={handleNewDiamondChange}
+                                                            style={{ height: '46.7px' }}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, clarity: value })}
+                                                            options={[
+                                                                { value: 'IF', label: 'IF' },
+                                                                { value: 'VVS1', label: 'VVS1' },
+                                                                { value: 'VVS2', label: 'VVS2' },
+                                                                { value: 'VS1', label: 'VS1' },
+                                                                { value: 'VS2', label: 'VS2' }
+                                                            ]}
                                                             required
-                                                        >
-                                                            <option >Chọn độ tinh khiết</option>
-                                                            <option value="IF">IF</option>
-                                                            <option value="VVS1">VVS1</option>
-                                                            <option value="VVS2">VVS2</option>
-                                                            <option value="VS1">VS1</option>
-                                                            <option value="VS2">VS2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div className="admin-page-add-product-form-group-row">
-                                                    <div className="admin-page-add-product-form-group">
-                                                        <label htmlFor="markupRate">Tỉ lệ áp giá</label>
-                                                        <input
-                                                            type="number"
-                                                            id="markupRate"
-                                                            name="markupRate"
-                                                            placeholder="Tỉ lệ áp giá"
-                                                            value={newProductDiamond.markupRate}
-                                                            onChange={handleNewDiamondChange}
-                                                            required
-                                                        />
-                                                    </div>
-                                                    <div className="admin-page-add-product-form-group">
-                                                        <label htmlFor="color">Màu sắc</label>
-                                                        <select
-                                                            id="color"
-                                                            name="color"
-                                                            value={newProductDiamond.color}
-                                                            onChange={handleNewDiamondChange}
-                                                            required
-                                                        >
-                                                            <option >Chọn màu sắc</option>
-                                                            <option value="D">D</option>
-                                                            <option value="E">E</option>
-                                                            <option value="F">F</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="admin-page-add-product-form-group-row">
-                                                    <div className="admin-page-add-product-form-group">
-                                                        <label htmlFor="imageFiles">Hình ảnh sản phẩm</label>
-                                                        <input
-                                                            type="file"
-                                                            id="imageFiles"
-                                                            name="imageFiles"
-                                                            multiple
-                                                            onChange={(e) => setNewProductDiamond({
-                                                                ...newProductDiamond,
-                                                                imageFiles: Array.from(e.target.files)
-                                                            })}
                                                         />
                                                     </div>
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="cut">Cắt</label>
-                                                        <select
+                                                        <Select
                                                             id="cut"
                                                             name="cut"
                                                             value={newProductDiamond.cut}
-                                                            onChange={handleNewDiamondChange}
+                                                            style={{ height: '46.7px' }}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, cut: value })}
+                                                            options={[
+                                                                { value: 'EX', label: 'EX' },
+                                                                { value: 'VG', label: 'VG' },
+                                                                { value: 'G', label: 'G' }
+                                                            ]}
                                                             required
-                                                        >
-                                                            <option >Chọn giác cắt</option>
-                                                            <option value="EX">EX</option>
-                                                            <option value="VG">VG</option>
-                                                            <option value="G">G</option>
-                                                        </select>
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="admin-page-add-product-form-group-row">
+                                                    <div className="admin-page-add-product-form-group">
+                                                        <label htmlFor="basePrice">Giá gốc sản phẩm</label>
+                                                        <InputNumber
+                                                            id="basePrice"
+                                                            name="basePrice"
+                                                            placeholder="Nhập giá gốc sản phẩm"
+                                                            style={{ height: '46.7px', width: '220px' }}
+                                                            value={newProductDiamond.basePrice}
+                                                            onChange={value => setNewProductDiamond({ ...newProductDiamond, basePrice: value })}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className="admin-page-add-product-form-group">
+                                                        <label htmlFor="markupPrice">Giá bán</label>
+                                                        <InputNumber
+                                                            id="markupPrice"
+                                                            name="markupPrice"
+                                                            placeholder="Giá bán"
+                                                            style={{ height: '46.7px', width: '220px' }}
+                                                            value={newProductDiamond.markupPrice}
+                                                            readOnly
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="admin-page-add-product-form-group-row">
+                                                    <div className="admin-page-add-product-form-group">
+                                                        <label htmlFor="imageFiles">Hình ảnh sản phẩm</label>
+                                                        <Upload {...uploadProps}>
+                                                            <Button icon={<UploadOutlined />}>Chọn hình ảnh</Button>
+                                                        </Upload>
                                                     </div>
                                                 </div>
 
                                                 <div className="admin-page-add-product-form-group">
                                                     <label htmlFor="description">Mô tả sản phẩm</label>
-                                                    <textarea
+                                                    <ReactQuill
                                                         id="description"
                                                         name="description"
-                                                        rows="4"
-                                                        placeholder="Nhập mô tả sản phẩm"
                                                         value={newProductDiamond.description}
-                                                        onChange={handleNewDiamondChange}
-                                                        required
+                                                        onChange={value => setNewProductDiamond({ ...newProductDiamond, description: value })}
                                                     />
                                                 </div>
                                                 <div className="admin-page-add-product-form-group">
-                                                    <input type="submit" value="Thêm Mới" />
+                                                    <Button type="primary" htmlType="submit">Thêm Mới</Button>
                                                 </div>
                                             </form>
                                         </div>
@@ -879,7 +1022,6 @@ const KimCuong = () => {
                                 </div>
                             </div>
                         )}
-
 
                         {isEditModalOpen && (
                             <div className="admin-page-edit-overlay">
@@ -892,29 +1034,6 @@ const KimCuong = () => {
                                         <div className="admin-page-edit-info-column">
                                             <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Chỉnh sửa sản phẩm kim cương</h2>
                                             <form onSubmit={updateDiamondProduct}>
-                                                <div className="admin-page-edit-product-form-group-row">
-                                                    <div className="admin-page-edit-product-form-group">
-                                                        <label htmlFor="productId">ID</label>
-                                                        <input
-                                                            type="text"
-                                                            id="productId"
-                                                            name="productId"
-                                                            placeholder="Nhập ID sản phẩm"
-                                                            value={editProductDiamond.productId}
-                                                            onChange={handleEditDiamondChange}
-                                                            readOnly
-                                                        />
-                                                    </div>
-                                                    <div className="admin-page-edit-product-form-group">
-                                                        <label>Đường kính (mm)</label>
-                                                        <input
-                                                            type="number"
-                                                            value={editProductDiamond.diameterMM}
-                                                            readOnly
-                                                        />
-                                                    </div>
-                                                </div>
-
                                                 <div className="admin-page-edit-product-form-group">
                                                     <label htmlFor="productName">Tên sản phẩm</label>
                                                     <input
@@ -941,25 +1060,6 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
-                                                        <label htmlFor="clarity">Độ tinh khiết</label>
-                                                        <select
-                                                            id="clarity"
-                                                            name="clarity"
-                                                            value={editProductDiamond.clarity}
-                                                            onChange={handleEditDiamondChange}
-                                                            required
-                                                        >
-                                                            <option value="IF">IF</option>
-                                                            <option value="VVS1">VVS1</option>
-                                                            <option value="VVS2">VVS2</option>
-                                                            <option value="VS1">VS1</option>
-                                                            <option value="VS2">VS2</option>
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-                                                <div className="admin-page-edit-product-form-group-row">
-                                                    <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="carat">Carat</label>
                                                         <input
                                                             type="number"
@@ -971,6 +1071,9 @@ const KimCuong = () => {
                                                             required
                                                         />
                                                     </div>
+                                                </div>
+
+                                                <div className="admin-page-edit-product-form-group-row">
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="color">Màu sắc</label>
                                                         <select
@@ -985,20 +1088,21 @@ const KimCuong = () => {
                                                             <option value="F">F</option>
                                                         </select>
                                                     </div>
-
-                                                </div>
-                                                <div className="admin-page-edit-product-form-group-row">
                                                     <div className="admin-page-edit-product-form-group">
-                                                        <label htmlFor="basePrice">Giá gốc sản phẩm</label>
-                                                        <input
-                                                            type="number"
-                                                            id="basePrice"
-                                                            name="basePrice"
-                                                            placeholder="Nhập giá gốc sản phẩm"
-                                                            value={editProductDiamond.basePrice}
+                                                        <label htmlFor="clarity">Độ tinh khiết</label>
+                                                        <select
+                                                            id="clarity"
+                                                            name="clarity"
+                                                            value={editProductDiamond.clarity}
                                                             onChange={handleEditDiamondChange}
                                                             required
-                                                        />
+                                                        >
+                                                            <option value="IF">IF</option>
+                                                            <option value="VVS1">VVS1</option>
+                                                            <option value="VVS2">VVS2</option>
+                                                            <option value="VS1">VS1</option>
+                                                            <option value="VS2">VS2</option>
+                                                        </select>
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="cut">Cắt</label>
@@ -1029,6 +1133,20 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
+                                                        <label htmlFor="basePrice">Giá gốc sản phẩm</label>
+                                                        <input
+                                                            type="number"
+                                                            id="basePrice"
+                                                            name="basePrice"
+                                                            placeholder="Nhập giá gốc sản phẩm"
+                                                            value={editProductDiamond.basePrice}
+                                                            onChange={handleEditDiamondChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="admin-page-edit-product-form-group-row">
+                                                    <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="markupPrice">Giá bán</label>
                                                         <input
                                                             type="number"
@@ -1040,22 +1158,30 @@ const KimCuong = () => {
                                                             readOnly
                                                         />
                                                     </div>
+                                                    <div className="admin-page-edit-account-form-group">
+                                                        <label>Trạng thái:</label>
+                                                        <Select
+                                                            name="isActive"
+                                                            value={editProductDiamond.isActive}
+                                                            style={{ width: '100%', height: '46.74px' }}
+                                                            onChange={(value) => handleEditDiamondChange({ target: { name: 'isActive', value } })}
+                                                        >
+                                                            <Option value={true}>Còn hàng</Option>
+                                                            <Option value={false}>Tạm ẩn</Option>
+                                                        </Select>
+                                                    </div>
                                                 </div>
-
                                                 <div className="admin-page-edit-product-form-group">
                                                     <label htmlFor="description">Mô tả sản phẩm</label>
-                                                    <textarea
+                                                    <ReactQuill
                                                         id="description"
                                                         name="description"
-                                                        rows="4"
-                                                        placeholder="Nhập mô tả sản phẩm"
                                                         value={editProductDiamond.description}
-                                                        onChange={handleEditDiamondChange}
-                                                        required
+                                                        onChange={(value) => setEditProductDiamond({ ...editProductDiamond, description: value })}
                                                     />
                                                 </div>
                                                 <div className="admin-page-edit-product-form-group">
-                                                    <input type="submit" value="Cập nhật" />
+                                                    <Button type="primary" htmlType="submit">Cập nhật</Button>
                                                 </div>
                                             </form>
                                         </div>

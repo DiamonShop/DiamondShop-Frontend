@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correctly
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { Link } from 'react-router-dom';
-
+import { logout } from '../../api/LogoutAPI';
 
 const Dashboard = () => {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -32,12 +32,6 @@ const Dashboard = () => {
             const decodedToken = jwtDecode(token);
             const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-            if (userRole !== 'Admin') {
-                console.log("User is not an admin. Redirecting to home.");
-                navigate('/');
-                return;
-            }
-
             setLoading(true);
             const headers = sendToken(); // Get headers with Authorization token
             const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
@@ -62,6 +56,25 @@ const Dashboard = () => {
     useEffect(() => {
         fetchUserData();
     }, [currentUser, userLogout, navigate]);
+
+    // Navbar by Role
+    const [userRole, setUserRole] = useState('');
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            userLogout();
+            return;
+        }
+
+        try {
+            const decodedToken = jwtDecode(token);
+            setUserRole(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            userLogout();
+        }
+    }, [userLogout]);
+
     return (
         <div>
             <div class="wrapper">
@@ -72,63 +85,71 @@ const Dashboard = () => {
                                 <img src="assets/img/logo/Logo.png" alt="" />
                             </span>
                         </a>
-                        <ul class="sidebar-nav">
-                            <li class="sidebar-header">
-                                Trang chủ
-                            </li>
+                        <ul className="sidebar-nav">
+                        {userRole === 'Admin' && (
+                            <>
+                                <li className="sidebar-header">Trang chủ</li>
+                                <li className="sidebar-item active">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link">
+                                        <i className="align-middle" data-feather="square"></i>
+                                        <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                                    </a>
+                                </li>
+                            </>
+                        )}
+                        {userRole === 'Manager' && (
+                            <>
+                                <li className="sidebar-header">Trang chủ</li>
+                                <li className="sidebar-item active">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item " >
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                                    </a>
+                                </li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                                    </a>
+                                </li>
+                            </>
+                        )}
+                        {userRole === 'Staff' && (
+                            <>
+                                <li className="sidebar-header">Quản lý</li>
+                                <li className="sidebar-item">
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="square"></i>
+                                        <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                                    </a>
+                                </li>
+                            </>
+                        )}
 
-                            <li class="sidebar-item active">
-                                <a class="sidebar-link" >
-                                    <i class="align-middle"
-                                        data-feather="sliders">
-                                    </i>
-                                    <span class="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
-                                </a>
-                            </li>
 
-                            <li class="sidebar-header">
-                                Quản lý
-                            </li>
-
-                            <li class="sidebar-item">
-                                <a class="sidebar-link">
-                                    <i class="align-middle"
-                                        data-feather="square">
-                                    </i>
-                                    <span class="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
-                                </a>
-                            </li>
-                            <li className="sidebar-item">
-                            <a className="sidebar-link" >
-                                <i className="align-middle" data-feather="sliders"></i>
-                                <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                        {/* <li className="sidebar-item">
+                            <a className="sidebar-link">
+                                <i className="align-middle"
+                                    data-feather="check-square">
+                                </i>
+                                <span className="align-middle">Chứng nhận sản phẩm</span>
                             </a>
-                        </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" >
-                                    <i class="align-middle"
-                                        data-feather="square">
-                                    </i>
-                                    <span class="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
-                                </a>
-                            </li>
-
-                            <li className="sidebar-item">
-                                <a className="sidebar-link" >
-                                    <i className="align-middle" data-feather="square"></i>
-                                    <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
-                                </a>
-                            </li>
-                            {/* <li className="sidebar-item">
-                                <a className="sidebar-link">
-                                    <i className="align-middle"
-                                        data-feather="check-square">
-                                    </i>
-                                    <span className="align-middle">Chứng nhận sản phẩm</span>
-                                </a>
-                            </li> */}
-
-                        </ul>
+                        </li> */}
+                    </ul>
 
                     </div>
                 </nav>
@@ -147,7 +168,7 @@ const Dashboard = () => {
                                         <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-end">
-                                        <a className="dropdown-item" href='/'>Đăng xuất</a>
+                                        <a className="dropdown-item" href='/' onClick={logout}>Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>
