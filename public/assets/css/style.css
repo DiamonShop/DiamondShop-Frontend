@@ -21222,7 +21222,7 @@ footer.footer p {
 .admin-page-add-product-info-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5px;
 }
 
 .admin-page-add-product-form-group {
@@ -21280,6 +21280,7 @@ footer.footer p {
   flex-direction: column;
   gap: 5px;
 }
+
 /* End add products in admin page */
 /* Edit products in admin page */
 .admin-page-edit-overlay {
