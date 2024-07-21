@@ -55,14 +55,19 @@ export default function Dang_nhap() {
                     if (roleName === 'Admin' || roleName === 'Manager') {
                         navigate('/Dashboard');
                         window.location.reload();
-                    } else if(roleName === 'Staff') {
+                    } else if (roleName === 'Staff') {
                         navigate('/DonHang');
                         window.location.reload();
-                    }else {
+                    }
+                    else if (roleName === 'Delivery') {
+                        navigate('/Shipper');
+                        window.location.reload();
+                    }
+                    else {
                         navigate('/');
                         window.location.reload();
                     }
-                    
+
                 });
 
             } else {
