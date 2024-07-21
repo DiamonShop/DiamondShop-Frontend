@@ -7,11 +7,7 @@ import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is installed and im
 import { formatCurrency } from '../../utils/NumberFormat';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetOrderByUserId } from '../../api/OrderAPI';
-import { Modal } from 'antd'; 
-//9704198526191432198
-//NGUYEN VAN A
-//07/15
-//123456
+import { Modal } from 'antd';
 
 export default function Thanh_toan() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -34,11 +30,11 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
-    const [BillId, setBillId] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
+    const [loyalPoint, setLoyalPoint] = useState('');
+    const [isLoyaltyChecked, setIsLoyaltyChecked] = useState(false); // State for loyalty checkbox
 
     useEffect(() => {
-        setBillId(Math.floor(100000000 + Math.random() * 900000000));
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
         const fetchUserData = async () => {
@@ -57,6 +53,7 @@ export default function Thanh_toan() {
                 setAddress(response.data.address || '');
                 setUserId(response.data.userId || '');
                 setNumberPhone(response.data.numberPhone || '');
+                setLoyalPoint(response.data.loyaltyPoints || '');
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -85,7 +82,7 @@ export default function Thanh_toan() {
                 const userId = decodeToken(token).sid;
                 const orders = await handleGetOrderByUserId(userId);
                 for (const item of orders) {
-                    if (item.status == 'Ordering') {
+                    if (item.status === 'Ordering') {
                         setTotalPrice(item.totalPrice);
                         setOrderDetail(item.orderDetails);
                     }
@@ -104,10 +101,9 @@ export default function Thanh_toan() {
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        const totalPrices = totalPrice;
+        const totalPrices = isLoyaltyChecked ? totalPrice - loyalPoint : totalPrice;
 
         const orderModel = {
-            billId: BillId,
             userId: userId,
             fullName: displayName,
             phoneNumber: numberPhone,
@@ -116,20 +112,6 @@ export default function Thanh_toan() {
             orderNote: formData.orderNote,
             price: totalPrices,
         };
-
-        const billCreateDTO = {
-            BillId: orderModel.billId,
-            UserId: orderModel.userId,
-            FullName: orderModel.fullName,
-            NumberPhone: orderModel.phoneNumber,
-            Email: orderModel.email,
-            Address: orderModel.streetAddress,
-            OrderNote: orderModel.orderNote,
-            IsActive: true, // or whatever logic you have for IsActive
-            Price: orderModel.price,
-        };
-
-        localStorage.setItem('billCreateDTO', JSON.stringify(billCreateDTO));
 
         try {
             const url = await handleCheckout(orderModel); // Await the promise
@@ -140,7 +122,6 @@ export default function Thanh_toan() {
             setIsModalVisible(true); // Show the modal on error
         }
     };
-
 
     const handleDisplayNameChange = (event) => {
         setDisplayName(event.target.value);
@@ -166,13 +147,18 @@ export default function Thanh_toan() {
     const handlePhoneChange = (event) => {
         setNumberPhone(event.target.value);
     };
+
     const handleModalOk = () => {
         setIsModalVisible(false);
     };
 
+    const handleLoyaltyCheckboxChange = (event) => {
+        setIsLoyaltyChecked(event.target.checked);
+    };
+
     return (
         <div>
-             <Modal
+            <Modal
                 title="Error"
                 visible={isModalVisible}
                 onOk={handleModalOk}
@@ -227,10 +213,6 @@ export default function Thanh_toan() {
                                                 ))) : (<></>)}
                                             </tbody>
                                             <tfoot>
-                                                {/* <tr>
-                                                    <td>Sub Total</td>
-                                                    <td><strong>$400</strong></td>
-                                                </tr> */}
                                                 <tr>
                                                     <td>Shipping</td>
                                                     <td class="d-flex justify-content-center">
@@ -240,7 +222,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td><strong>{formatCurrency(totalPrice)}</strong><strong> VND</strong></td>
+                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint : totalPrice)}</strong><strong> VND</strong></td>
                                                     <input id="total" type="hidden" value={totalPrice} />
                                                 </tr>
                                             </tfoot>
@@ -313,11 +295,37 @@ export default function Thanh_toan() {
 
                                         <div class="summary-footer-area">
                                             <div class="custom-control custom-checkbox mb-20">
-                                                <input type="checkbox" class="custom-control-input" id="terms" required />
-                                                <label class="custom-control-label" for="terms">Tôi đã đọc và đồng ý với các <a href="/Chinhsach">điều khoản và chính sách</a> của Enternal Sparkle.</label>
+
+
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input"
+                                                    id="sale"
+                                                    checked={isLoyaltyChecked}
+                                                    onChange={handleLoyaltyCheckboxChange}
+                                                />
+                                                <label class="custom-control-label" for="sale">
+                                                    Sử dụng {loyalPoint} point để giảm giá.
+                                                </label>
+                                                
+
                                             </div>
 
+
+                                            <div class="custom-control custom-checkbox mb-20">
+                                                <input
+                                                    type="checkbox"
+                                                    class="custom-control-input"
+                                                    id="terms"
+                                                    required
+                                                />
+                                                <label class="custom-control-label" for="terms">
+                                                    Tôi đã đọc và đồng ý với các <a href="index.html">điều khoản và chính sách</a> của Enternal Sparkle.
+                                                </label>
+
+                                            </div>
                                         </div>
+
                                         <button type="submit" value="THANH TOÁN"
                                             className="btn-login solid"
                                             id="btn_checkout">THANH TOÁN</button>
