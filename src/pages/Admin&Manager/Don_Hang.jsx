@@ -7,6 +7,9 @@ import { logout } from '../../api/LogoutAPI';
 import { sendToken } from "../../api/TokenAPI";
 import { jwtDecode } from "jwt-decode";
 import ReactPaginate from "react-paginate";
+const formatCurrency = (value) => {
+  return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');
+};
 
 const { Option } = Select;
 
@@ -483,7 +486,7 @@ const Don_Hang = () => {
                     <tr key={order.orderId}>
                       <td>{order.orderId}</td>
                       <td>{order.orderDate}</td>
-                      <td>{order.totalPrice}</td>
+                      <td>{formatCurrency(order.totalPrice)}VND</td>
                       <td className={getStatusClass(order.status)}>{order.status}</td>
                       <td className="admin-page-buttons">
                         <Button type='default' onClick={() => handleViewDetails(order)}>Xem chi tiết</Button>
@@ -532,7 +535,7 @@ const Don_Hang = () => {
                 <strong>Họ và tên:</strong> {selectedOrder.userName}
               </p>
               <p>
-                <strong>Tổng cộng:</strong> {selectedOrder.totalPrice}
+                <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice)  + "VND"}
               </p>
               <p>
                 <strong>Trạng thái:</strong> {selectedOrder.status}
@@ -563,7 +566,7 @@ const Don_Hang = () => {
                       <td>{product.productId}</td>
 
                       <td>{product.productName}</td>
-                      <td>{product.unitPrice}</td>
+                      <td>{formatCurrency(product.unitPrice)  + "VND"}</td>
                       <td>{product.quantity}</td>
                     </tr>
                   ))}
@@ -571,7 +574,7 @@ const Don_Hang = () => {
               </table>
               <div className="total-container">
                 <p>
-                  <strong>Tổng cộng:</strong> {selectedOrder.totalPrice}
+                  <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice) + "VND"}
                 </p>
               </div>
             </Modal>
