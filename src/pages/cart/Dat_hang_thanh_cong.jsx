@@ -3,6 +3,7 @@ import { Await, Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetLatestOrderByUserId, handleUpdateStatusToPending } from '../../api/OrderAPI';
 import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity, handleSetUserLoyalPointToZero} from '../../api/UpdateProfile';
+import {handleUpdateDiamondQuantity} from '../../api/DiamondAPI'
 
 function Dat_hang_thanh_cong() {
   const [order, setOrder] = useState([]);
@@ -15,6 +16,7 @@ function Dat_hang_thanh_cong() {
       await handleUpdateStatusToPending(userId);
       await handleUpdateUserLoyalPoint(userId);
       await handleUpdateJewelryQuantity(userId);
+      await handleUpdateDiamondQuantity(userId);
     }
   }
 
