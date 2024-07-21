@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode'; // Đảm bảo bạn nhập đúng
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import Don_hang from '../pages/cart/Don_hang';
 import Giay_bao_hanh from './Giay_bao_hanh';
@@ -21,6 +21,7 @@ export default function Thong_tin_tk() {
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
 
     const fetchUserData = async () => {
         if (!currentUser) {
@@ -106,12 +107,16 @@ export default function Thong_tin_tk() {
 
         // Tạo object chứa dữ liệu cần cập nhật
         const userDataToUpdate = {
-            userId: userData.userId, // Thêm userId vào dữ liệu cập nhật
+            userId: userData.userId, 
+            username: userData.username, 
             fullName: displayName,
             email,
             numberPhone,
             address,
-            password: newPwd // Nếu có
+            password: newPwd, // Nếu có
+            isActive: userData.isActive, 
+            roleId: userData.roleId, 
+            loyaltyPoints: userData.loyaltyPoints 
         };
 
         try {

@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+
+import React, { useEffect, useState } from 'react'
+import $ from 'jquery';
+import '../slick-min'
 import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
 import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
 import { Product_Nhan_Data } from '../Data/Product_nhan_data';
 import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
-
 import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
 
 function Sanphamtuongtu({ onProductClick }) {
     const productObj = JSON.parse(localStorage.getItem('product'));
     const [randomProducts, setRandomProducts] = useState([]);
     useEffect(() => {
+
         let productsData;
         switch (productObj.categoryId) {
             case 1:
@@ -29,23 +31,58 @@ function Sanphamtuongtu({ onProductClick }) {
                 productsData = [];
         }
         setRandomProducts(getRandomProducts(productsData, 5));
-    }, [productObj.categoryId]);
+        const initializeSlick = () => {
+            if ($('.product-carousel-4').hasClass('slick-initialized')) {
+                $('.product-carousel-4').slick('unslick');
+            }
+            $('.product-carousel-4').slick({
+                speed: 1000,
+                autoplay: true,
+                slidesToShow: 4,
+                adaptiveHeight: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            arrows: false
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false
+                        }
+                    }
+                ]
+            });
+        };
 
+        const timer = setTimeout(() => {
+            initializeSlick();
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            if ($('.product-carousel-4').hasClass('slick-initialized')) {
+                $('.product-carousel-4').slick('unslick');
+            }
+        };
+    }, [productObj.categoryId]);
     function getRandomProducts(products, count) {
         const shuffled = products.sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, count);
+        return shuffled.slice(0 , count);
     }
-
-    const relatedSliderSettings = {
-        speed: 1000,
-        autoplay: true,
-        infinite: true,
-        slidesToShow: 4,
-        adaptiveHeight: true,
-        arrows: true,
-        prevArrow: <button type="button" className="slick-prev"><i className="pe-7s-angle-left"></i></button>,
-        nextArrow: <button type="button" className="slick-next"><i className="pe-7s-angle-right"></i></button>,
-    };
+    
 
     return (
         <div>
@@ -58,10 +95,12 @@ function Sanphamtuongtu({ onProductClick }) {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-12">
-                            <Slider {...relatedSliderSettings} className="product-carousel-4 slick-row-10 slick-arrow-style">
-                                {randomProducts.map((item) => (
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="product-carousel-4 slick-row-10 slick-arrow-style">
+                            {randomProducts.map((item) => (
                                     <div key={item.id}>
                                         <Du_lieu_san_pham_tt
                                             productId={item.id}
@@ -73,6 +112,8 @@ function Sanphamtuongtu({ onProductClick }) {
                                             material={item.material}
                                             mainDiamondName={item.mainDiamondName}
                                             sideDiamondName={item.sideDiamondName}
+                                            mainDiamondQuantity={item.mainDiamondQuantity}
+                                            sideDiamondQuantity={item.sideDiamondQuantity}
                                             jewelrySizes={item.jewelrySizes}
                                             productName={item.productName}
                                             categoryName={item.categoryName}
@@ -84,7 +125,7 @@ function Sanphamtuongtu({ onProductClick }) {
                                         />
                                     </div>
                                 ))}
-                            </Slider>
+                            </div>
                         </div>
                     </div>
                 </div>

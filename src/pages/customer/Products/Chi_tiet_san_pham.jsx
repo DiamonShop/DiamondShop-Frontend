@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import $ from 'jquery';
+import '../../../slick-min'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utils/NumberFormat';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
@@ -83,6 +84,7 @@ export default function Chi_tiet_san_pham() {
     }, [productObj]);
 
     useEffect(() => {
+        setJewelrySizes(productObj.jewelrySizes);
         const initSlickSliders = () => {
             $('.product-large-slider').slick({
                 fade: true,
@@ -210,11 +212,19 @@ export default function Chi_tiet_san_pham() {
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
                                             <div className="ratings d-flex align-items-center">
-                                                <StarRating rating={rating} setRating={setRating} />
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
                                                 <div className="pro-review">
-                                                    <span>{reviewCount} Review(s)</span>
+                                                    <span>{reviewCount} Review{reviewCount !== 1 ? 's' : ''}</span>
+                                                </div>
+                                                <div className="average-rating">
+                                                    <span>({averageRating} )</span>
                                                 </div>
                                             </div>
+
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
@@ -245,6 +255,11 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <span>
+                                                            <h6 className='soluongsanphamtrongkho'>
+                                                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
+                                                            </h6>
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             ) : (
@@ -282,6 +297,7 @@ export default function Chi_tiet_san_pham() {
                                                                 <Link to="/Huongdandoni" className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
                                                             </>
                                                         )}
+
                                                     </li>
                                                     <li class="filter-group">
                                                         <div class="quantity-cart-box d-flex align-items-center">
@@ -300,6 +316,7 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </li>
                                                 </ul>
 

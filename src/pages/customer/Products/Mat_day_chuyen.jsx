@@ -78,7 +78,8 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}
                                                 sideDiamondName={item.sideDiamondName}
-                                                jewelrySizes={item.jewelrySizes}
+                                                mainDiamondQuantity={item.mainDiamondQuantity}
+                                                sideDiamondQuantity={item.sideDiamondQuantity}                                       
                                                 productName={item.productName}
                                                 categoryName={item.categoryName}
                                                 categoryId={item.categoryId}

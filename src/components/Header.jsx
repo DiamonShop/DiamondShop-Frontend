@@ -77,16 +77,16 @@ export default function Header({ tokenIsValid }) {
                             </a>
                             <ul className="dropdown">
                               <li>
-                                <Link to="/Nhan">Nhẫn</Link>
+                                <Link to="/Nhẫn">Nhẫn</Link>
                               </li>
                               <li>
-                                <Link to="/Daychuyen">Dây chuyền</Link>
+                                <Link to="/Dây chuyền">Dây chuyền</Link>
                               </li>
                               <li>
-                                <Link to="/Matdaychuyen">Mặt dây chuyền </Link>
+                                <Link to="/Mặt dây chuyền">Mặt dây chuyền </Link>
                               </li>
                               <li>
-                                <a href="/Vongtay">Vòng tay</a>
+                                <a href="/Vòng tay">Vòng tay</a>
                               </li>
                             </ul>
                           </li>

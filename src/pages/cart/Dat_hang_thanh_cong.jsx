@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Await, Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetLatestOrderByUserId, handleUpdateStatusToPending } from '../../api/OrderAPI';
+import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity, handleSetUserLoyalPointToZero } from '../../api/UpdateProfile';
+import { handleUpdateDiamondQuantity } from '../../api/DiamondAPI'
 
 function Dat_hang_thanh_cong() {
   const [order, setOrder] = useState([]);
 
   const getUserId = async () => {
     const token = localStorage.getItem("token");
+    const checked = localStorage.getItem("loyaltyChecked");
     if (token) {
       const userId = decodeToken(token).sid;
+      if (checked === 1) {
+        await handleSetUserLoyalPointToZero(userId);
+        localStorage.removeItem('loyaltyChecked');
+      }
       await handleUpdateStatusToPending(userId);
+      await handleUpdateUserLoyalPoint(userId);
+      await handleUpdateJewelryQuantity(userId);
+      await handleUpdateDiamondQuantity(userId);
     }
   }
 

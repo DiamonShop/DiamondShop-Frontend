@@ -5,18 +5,19 @@ import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
 
-const Mota_danhgia = ({ productId, onReviewCountChange }) => {
+const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
     const [feedbacks, setFeedbacks] = useState([]);
     const [canComment, setCanComment] = useState(false);
     const [orderIdForComment, setOrderIdForComment] = useState(null);
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const productObj = JSON.parse(localStorage.getItem('product'));
+
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
                 const feedbackData = await handleGetFeedbacksByProductId(productId);
-                setFeedbacks(feedbackData); // Ensure feedback data is being set correctly
+                setFeedbacks(feedbackData);
                 const avgRating = feedbackData.reduce((acc, curr) => acc + curr.rating, 0) / feedbackData.length;
                 onReviewCountChange(feedbackData.length, avgRating.toFixed(1));
             } catch (error) {
@@ -123,7 +124,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
-                                <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
+                            <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{productObj.productName}</span></h5>
                                 {feedbacks.map((feedback, index) => (
                                     <div className="total-reviews" key={index}>
                                         <div className="rev-avatar">
@@ -196,4 +197,4 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
     );
 };
 
-export default Mota_danhgia;
+export default Mota_danhgia_kc;

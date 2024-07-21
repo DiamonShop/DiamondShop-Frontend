@@ -4,10 +4,10 @@ import {jwtDecode} from 'jwt-decode';
 const updateProfile = async (token, userDataToUpdate) => {
     try {
         const decodedToken = jwtDecode(token);
-        const sid = decodedToken.sid;
+        const userId = decodedToken.sid;
 
         const response = await axios.put(
-            `https://localhost:7101/api/User/UpdateUserProfile?id=${sid}`, 
+            `https://localhost:7101/api/User/UpdateUserProfile?id=${userId}`, 
             userDataToUpdate,
             {
                 headers: {
@@ -16,6 +16,7 @@ const updateProfile = async (token, userDataToUpdate) => {
                 }
             }
         );
+        
         
         return response.data;
     } catch (error) {
@@ -31,5 +32,60 @@ const updateProfile = async (token, userDataToUpdate) => {
         }
     }
 };
+
+
+export const handleUpdateUserLoyalPoint = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/User/UpdateUserLoyalPoint?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export const handleSetUserLoyalPointToZero = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/User/SetLoyalPointToZero?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export const handleUpdateJewelryQuantity = async (userId) => {
+    try {
+        const response = await fetch(`https://localhost:7101/api/JewelrySize/UpdateJewelryQuantity?userId=${userId}`, {
+            method: 'PUT',
+            mode: 'cors'
+        });
+        const data = await response.json();
+        if (data == false) {
+            return false;
+        } else {
+            return true;
+        }
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
 
 export default updateProfile;

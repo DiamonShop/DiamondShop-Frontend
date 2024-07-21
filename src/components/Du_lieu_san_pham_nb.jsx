@@ -18,18 +18,11 @@ function Du_lieu_san_pham_nb(props) {
                             <span>{props.label}</span>
                         </div>
                     </div>
-                    <div className="button-group">
-                        <Link to="/Yeuthich"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="left"
-                            title="Add to wishlist">
-                            <i className="pe-7s-like"></i>
-                        </Link>
-
-                    </div>
+                    <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                     <div className="cart-hover">
-                        <button className="btn btn-cart">Thêm vào giỏ hàng</button>
+                        <button className="btn btn-cart">Khám phá ngay</button>
                     </div>
+                    </Link>
                 </figure>
                 <div className="product-caption text-center">
                     <h6 className="product-name">

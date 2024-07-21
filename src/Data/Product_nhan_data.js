@@ -8,13 +8,14 @@ const productData = await Promise.all(listProduct
     .map(async product => {
 
         const { markupPrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes, mainDiamondQuantity, sideDiamondQuantity } = product;
-        const { image1Url, image2Url, image3Url, } = await getJewelryImageUrls(productID, categoryId);
+        const { image1Url, image2Url, image3Url, image4Url} = await getJewelryImageUrls(productID, categoryId);
         return {
             id: productID,
             productName: productName,
             image1: image1Url ? image1Url : "default_image_url_1.png", // URL thay thế nếu ảnh không tồn tại
             image2: image2Url ? image2Url : "default_image_url_2.png", // URL thay thế nếu ảnh không tồn tại
-            image3: image3Url ? image3Url : "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại           
+            image3: image3Url ? image3Url : "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại         
+            image4: image4Url ? image4Url : "public/assets/img/background white.png",
             label: "Mới",
             newPrice: markupPrice,
             categoryName: "Nhẫn",
