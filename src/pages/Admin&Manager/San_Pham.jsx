@@ -255,7 +255,7 @@ const SanPham = () => {
         setSelectedSize(value);
         const selectedSizeData = sizeQuantities.find(item => item.size === value);
         if (selectedSizeData) {
-            handleEditJewelryChange({ target: { name: 'stock', value: selectedSizeData.quantity } });
+            handleEditJewelryChange({ target: { name: 'quantity', value: selectedSizeData.quantity } });
         }
     };
     // get Data from api
@@ -468,27 +468,52 @@ const SanPham = () => {
             userLogout();
             return;
         }
-
+    
         try {
             const headers = sendToken();
-            const jewelryPayload = {
-                jewelryID: 0,
-                jewelrySettingID: newProductJewelry.jewelrySettingID,
-                productID: newProductJewelry.productID,
-                productName: newProductJewelry.productName,
-                description: newProductJewelry.description,
-                markupRate: newProductJewelry.markupRate,
-                markupPrice: newProductJewelry.markupPrice,
-                categoryId: newProductJewelry.categoryId,
-                mainDiamondID: newProductJewelry.mainDiamondID,
-                mainDiamondQuantity: newProductJewelry.mainDiamondQuantity,
-                sideDiamondID: newProductJewelry.sideDiamondID,
-                sideDiamondQuantity: newProductJewelry.sideDiamondQuantity,
-                basePrice: newProductJewelry.basePrice,
-                size: newProductJewelry.size,
-                quantity: newProductJewelry.quantity,
-                // imageUrls: imageUrls
-            };
+            let jewelryPayload;
+    
+            // Kiểm tra categoryId có phải là 2 (Dây chuyền)
+            if (newProductJewelry.categoryName === 'Dây chuyền') {
+                jewelryPayload = {
+                    jewelryID: 0,
+                    jewelrySettingID: newProductJewelry.jewelrySettingID,
+                    productID: newProductJewelry.productID,
+                    productName: newProductJewelry.productName,
+                    description: newProductJewelry.description,
+                    markupRate: newProductJewelry.markupRate,
+                    markupPrice: newProductJewelry.markupPrice,
+                    categoryId: newProductJewelry.categoryId,
+                    mainDiamondID: 6, // Giá trị mặc định cho Dây chuyền
+                    mainDiamondQuantity: 0, // Giá trị mặc định cho Dây chuyền
+                    sideDiamondID: 5, // Giá trị mặc định cho Dây chuyền
+                    sideDiamondQuantity: 0, // Giá trị mặc định cho Dây chuyền
+                    basePrice: newProductJewelry.basePrice,
+                    size: 0, // Giá trị mặc định cho Dây chuyền
+                    quantity: newProductJewelry.quantity,
+                    // imageUrls: imageUrls
+                };
+            } else {
+                jewelryPayload = {
+                    jewelryID: 0,
+                    jewelrySettingID: newProductJewelry.jewelrySettingID,
+                    productID: newProductJewelry.productID,
+                    productName: newProductJewelry.productName,
+                    description: newProductJewelry.description,
+                    markupRate: newProductJewelry.markupRate,
+                    markupPrice: newProductJewelry.markupPrice,
+                    categoryId: newProductJewelry.categoryId,
+                    mainDiamondID: newProductJewelry.mainDiamondID,
+                    mainDiamondQuantity: newProductJewelry.mainDiamondQuantity,
+                    sideDiamondID: newProductJewelry.sideDiamondID,
+                    sideDiamondQuantity: newProductJewelry.sideDiamondQuantity,
+                    basePrice: newProductJewelry.basePrice,
+                    size: newProductJewelry.size,
+                    quantity: newProductJewelry.quantity,
+                    // imageUrls: imageUrls
+                };
+            }
+    
             console.log('jewelryPayload:', jewelryPayload);
             await axios.post('https://localhost:7101/api/Jewelry/CreateJewelry', jewelryPayload, {
                 headers: {
@@ -496,7 +521,7 @@ const SanPham = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            message.success(`Thêm sản phẩm ${getCategoryName(newProductJewelry.categoryId)} thành công`);
+            message.success(`Thêm sản phẩm trang s thành công`);
             setIsAddModalOpen(false);
             setNewProductJewelry({
                 jewelrySettingID: '',
@@ -516,14 +541,16 @@ const SanPham = () => {
                 basePrice: 0,
                 imageUrls: [],
                 imageFiles: []
-            })
+            });
             fetchProductData(categoryFilter, currentPage + 1);
-
+    
         } catch (error) {
             console.error('Error adding new jewelry product:', error);
             setErrorMessage('Error adding new jewelry product.');
         }
     };
+    
+
     const handleFileUpload = async (file) => {
         const imgRef = ref(imageDb, `files/${newProductJewelry.categoryId}/${newProductJewelry.productID}/${file.name}`);
         await uploadBytes(imgRef, file);
@@ -558,7 +585,7 @@ const SanPham = () => {
             productID: product.productId,
             productName: product.productName,
             description: product.description,
-            quantity: getQuantityJewelry(product.jewelryID),
+            quantity: 0,
             jewelrySettingID: product.jewelrySettingID,
             markupRate: product.markupRate,
             markupPrice: product.markupPrice,
@@ -608,7 +635,7 @@ const SanPham = () => {
                 quantity: editProductJewelry.quantity,
                 isActive: editProductJewelry.isActive
             };
-
+            console.log("Update data:", jewelryPayload);
             // Update Jewelry
             await axios.put('https://localhost:7101/api/Jewelry/UpdateJewelry', jewelryPayload, {
                 headers: {
@@ -1480,7 +1507,7 @@ const SanPham = () => {
                                         </div>
                                         <div className="admin-page-edit-info-column">
                                             <form onSubmit={updateJewelryProduct}>
-                                            <div className="admin-page-edit-product-form-group">
+                                                <div className="admin-page-edit-product-form-group">
                                                     <Input
                                                         type="hidden"
                                                         id="jewelryID"
@@ -1642,7 +1669,8 @@ const SanPham = () => {
                                                         <InputNumber
                                                             id="quantity-input"
                                                             style={{ width: '100%', height: '46.74px' }}
-                                                            value={quantity}
+                                                            placeholder='Nhập số lượng'
+                                                            value={editProductJewelry.quantity}
                                                             onChange={(value) => handleEditJewelryChange({ target: { name: 'quantity', value } })}
                                                             required
                                                         />
