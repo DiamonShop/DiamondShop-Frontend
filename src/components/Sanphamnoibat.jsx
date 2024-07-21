@@ -1,41 +1,31 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import '../slick-min'
+import '../slick-min';
 import Du_lieu_san_pham_nb from './Du_lieu_san_pham_nb';
 import { Product_Nhan_Data } from '../Data/Product_nhan_data';
 import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
 import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
 import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
 import Du_lieu_san_pham_vtxmdc from './Du_lieu_san_pham_vtxmdc';
+
 function Sanphamnoibat({ onProductClick }) {
     const [randomProductsNhan, setRandomProductsNhan] = useState([]);
     const [randomProductsDaychuyen, setRandomProductsDaychuyen] = useState([]);
     const [randomProductsMatdaychuyen, setRandomProductsMatdaychuyen] = useState([]);
     const [randomProductsVongtay, setrandomProductsVongtay] = useState([]);
+
     useEffect(() => {
-        function getRandomProductsNhan(products, count) {
-            const shuffled = products.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        setRandomProductsNhan(getRandomProductsNhan(Product_Nhan_Data, 5));
-        function getRandomProductsDaychuyen(products, count) {
-            const shuffled = products.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        setRandomProductsDaychuyen(getRandomProductsDaychuyen(Product_Daychuyen_Data, 5));
-        function getRandomProductsMatdaychuyen(products, count) {
-            const shuffled = products.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        setRandomProductsMatdaychuyen(getRandomProductsVongtay(Product_Matdaychuyen_Data, 5));
-        function getRandomProductsVongtay(products, count) {
-            const shuffled = products.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        setrandomProductsVongtay(getRandomProductsMatdaychuyen(Product_Vongtay_Data, 5));
+        setRandomProductsNhan(getRandomProducts(Product_Nhan_Data, 5));
+        setRandomProductsDaychuyen(getRandomProducts(Product_Daychuyen_Data, 5));
+        setRandomProductsMatdaychuyen(getRandomProducts(Product_Matdaychuyen_Data, 5));
+        setrandomProductsVongtay(getRandomProducts(Product_Vongtay_Data, 5));
 
         const initializeSlick = () => {
+            if ($('.product-carousel-4').hasClass('slick-initialized')) {
+                $('.product-carousel-4').slick('unslick');
+            }
+
             $('.product-carousel-4').slick({
                 speed: 1000,
                 autoplay: true,
@@ -43,39 +33,47 @@ function Sanphamnoibat({ onProductClick }) {
                 adaptiveHeight: true,
                 prevArrow: '<button type="button" class="slick-prev"><i class="pe-7s-angle-left"></i></button>',
                 nextArrow: '<button type="button" class="slick-next"><i class="pe-7s-angle-right"></i></button>',
-                responsive: [{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            arrows: false
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false
+                        }
                     }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        arrows: false
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        arrows: false
-                    }
-                }]
+                ]
             });
-
         };
 
-        $(document).ready(initializeSlick);
+        const timer = setTimeout(() => {
+            initializeSlick();
+        }, 100);
 
         return () => {
+            clearTimeout(timer);
             if ($('.product-carousel-4').hasClass('slick-initialized')) {
                 $('.product-carousel-4').slick('unslick');
             }
-
         };
     }, []);
+
+    function getRandomProducts(products, count) {
+        const shuffled = products.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
 
     return (
         <div>
@@ -96,27 +94,16 @@ function Sanphamnoibat({ onProductClick }) {
                                 <div className="product-tab-menu">
                                     <ul className="nav justify-content-center">
                                         <li>
-                                            <a href="#tab1"
-                                                className="active"
-                                                data-bs-toggle="tab"> Nhẫn
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#tab2"
-                                                data-bs-toggle="tab"> Dây chuyền
-                                            </a>
+                                            <a href="#tab1" className="active" data-bs-toggle="tab"> Nhẫn</a>
                                         </li>
                                         <li>
-                                            <a href="#tab3"
-                                                data-bs-toggle="tab"> Mặt dây chuyền
-                                            </a>
+                                            <a href="#tab2" data-bs-toggle="tab"> Dây chuyền</a>
                                         </li>
-
                                         <li>
-                                            <a href="#tab4"
-                                                data-bs-toggle="tab"> Vòng tay
-                                            </a>
+                                            <a href="#tab3" data-bs-toggle="tab"> Mặt dây chuyền</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab4" data-bs-toggle="tab"> Vòng tay</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -127,7 +114,7 @@ function Sanphamnoibat({ onProductClick }) {
                                             <div className="tab-pane fade show active" id="tab1">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
                                                     {randomProductsNhan.map((item) => (
-                                                        <div key={item.id} >
+                                                        <div key={item.id}>
                                                             <Du_lieu_san_pham_nb
                                                                 productId={item.id}
                                                                 image1={item.image1}
@@ -150,14 +137,12 @@ function Sanphamnoibat({ onProductClick }) {
                                                             />
                                                         </div>
                                                     ))}
-
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="tab2">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-
                                                     {randomProductsDaychuyen.map((item) => (
-                                                        <div key={item.id} >
+                                                        <div key={item.id}>
                                                             <Du_lieu_san_pham_nb
                                                                 productId={item.id}
                                                                 image1={item.image1}
@@ -179,15 +164,12 @@ function Sanphamnoibat({ onProductClick }) {
                                                             />
                                                         </div>
                                                     ))}
-
                                                 </div>
                                             </div>
-
-                                            <div className="tab-pane fade " id="tab3">
+                                            <div className="tab-pane fade" id="tab3">
                                                 <div className="product-carousel-4 slick-row-10 slick-arrow-style">
-
                                                     {randomProductsMatdaychuyen.map((item) => (
-                                                        <div key={item.id} >
+                                                        <div key={item.id}>
                                                             <Du_lieu_san_pham_vtxmdc
                                                                 productId={item.id}
                                                                 image1={item.image1}
@@ -206,8 +188,6 @@ function Sanphamnoibat({ onProductClick }) {
                                                             />
                                                         </div>
                                                     ))}
-
-
                                                 </div>
                                             </div>
                                             <div className="tab-pane fade" id="tab4">
@@ -232,11 +212,8 @@ function Sanphamnoibat({ onProductClick }) {
                                                             />
                                                         </div>
                                                     ))}
-
-
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </section>
@@ -246,7 +223,7 @@ function Sanphamnoibat({ onProductClick }) {
                 </div>
             </section>
         </div>
-    )
+    );
 }
 
-export default Sanphamnoibat
+export default Sanphamnoibat;

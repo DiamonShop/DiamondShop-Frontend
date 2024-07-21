@@ -112,6 +112,8 @@ function Sanphamtuongtu({ onProductClick }) {
                                             material={item.material}
                                             mainDiamondName={item.mainDiamondName}
                                             sideDiamondName={item.sideDiamondName}
+                                            mainDiamondQuantity={item.mainDiamondQuantity}
+                                            sideDiamondQuantity={item.sideDiamondQuantity}
                                             jewelrySizes={item.jewelrySizes}
                                             productName={item.productName}
                                             categoryName={item.categoryName}
