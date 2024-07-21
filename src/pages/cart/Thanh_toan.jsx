@@ -113,6 +113,12 @@ export default function Thanh_toan() {
             price: totalPrices,
         };
 
+        if (isLoyaltyChecked) {
+            localStorage.setItem('loyaltyChecked', '1');
+        } else {
+            localStorage.removeItem('loyaltyChecked');
+        }
+
         try {
             const url = await handleCheckout(orderModel); // Await the promise
             window.location.href = url; // Use the resolved URL
@@ -296,6 +302,7 @@ export default function Thanh_toan() {
                                         <div class="summary-footer-area">
                                             <div class="custom-control custom-checkbox mb-20">
 
+
                                                 <input
                                                     type="checkbox"
                                                     class="custom-control-input"
@@ -307,6 +314,7 @@ export default function Thanh_toan() {
                                                     Sử dụng {loyalPoint} point để giảm giá.
                                                 </label>
                                                 
+
                                             </div>
 
 

@@ -33,6 +33,7 @@ const updateProfile = async (token, userDataToUpdate) => {
     }
 };
 
+export default updateProfile;
 
 export const handleUpdateUserLoyalPoint = async (userId) => {
     try {

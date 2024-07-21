@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+
 import $ from 'jquery';
 import '../slick-min'
 import Du_lieu_san_pham_nb from './Du_lieu_san_pham_nb';
