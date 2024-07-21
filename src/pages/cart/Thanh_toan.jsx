@@ -113,6 +113,12 @@ export default function Thanh_toan() {
             price: totalPrices,
         };
 
+        if (isLoyaltyChecked) {
+            localStorage.setItem('loyaltyChecked', '1');
+        } else {
+            localStorage.removeItem('loyaltyChecked');
+        }
+
         try {
             const url = await handleCheckout(orderModel); // Await the promise
             window.location.href = url; // Use the resolved URL
