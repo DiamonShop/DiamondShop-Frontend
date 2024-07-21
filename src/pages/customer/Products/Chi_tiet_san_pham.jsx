@@ -10,10 +10,9 @@ import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
 import { notification } from 'antd';
 
-
 export default function Chi_tiet_san_pham() {
     const initialProductObj = JSON.parse(localStorage.getItem('product'));
-    const [productObj] = useState(initialProductObj);
+    const [productObj, setProductObj] = useState(initialProductObj);
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
@@ -80,11 +79,12 @@ export default function Chi_tiet_san_pham() {
         if (productObj && productObj.jewelrySizes) {
             setJewelrySizes(productObj.jewelrySizes);
             console.log('Jewelry Sizes:', productObj.jewelrySizes);
+        } else {
+            console.log('Product Object or Jewelry Sizes not found:', productObj);
         }
     }, [productObj]);
 
     useEffect(() => {
-        setJewelrySizes(productObj.jewelrySizes);
         const initSlickSliders = () => {
             $('.product-large-slider').slick({
                 fade: true,
@@ -288,7 +288,7 @@ export default function Chi_tiet_san_pham() {
                                                             <>
                                                                 <label htmlFor="jewelry-size" className="filter-name-jewelry">Size:</label>
                                                                 <select id="jewelry-size" className="jewelry-size-dropdown">
-                                                                    {Array.isArray(jewelrySizes) && jewelrySizes.map((item, index) => (
+                                                                    {Array.isArray(productObj.jewelrySizes) && productObj.jewelrySizes.map((item, index) => (
                                                                         <option key={index} value={item.size}>
                                                                             {item.size}
                                                                         </option>

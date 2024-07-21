@@ -1,13 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 export default function Bang_gia_kim_cuong() {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    const currentDate = `${day}/${month}/${year}`;
-  return (
-    <div> 
+    return (
+        <div>
             <div className="breadcrumb-area">
                 <div className="container">
                     <div className="row">
@@ -28,8 +23,91 @@ export default function Bang_gia_kim_cuong() {
 
             <div class="diamond-price-list-header-notes">
                 <p>* Đơn vị tính: VND</p>
-                <p>* Áp dụng từ ngày {currentDate}</p>
+                <p>* Áp dụng từ ngày 01/06</p>
                 <p>* Giá có thể thay đổi mà không cần báo trước. Vui lòng cập nhật giá mới nhất tại cửa hàng hoặc website</p>
+            </div>
+
+            <div class="diamond-price-list">
+                <h1 className='hightlight-color'>Giá Kim Cương <span class="highlight">3ly6</span>. Kiểm định GIA. Giác cắt Excellent</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Color / Clarity</th>
+                            <th>IF</th>
+                            <th>VVS1</th>
+                            <th>VVS2</th>
+                            <th>VS1</th>
+                            <th>VS2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D</td>
+                            <td>18.095.000</td>
+                            <td>15.792.000</td>
+                            <td>15.322.000</td>
+                            <td>13.066.000</td>
+                            <td>12.643.000</td>
+                        </tr>
+                        <tr>
+                            <td>E</td>
+                            <td>17.625.000</td>
+                            <td>15.322.000</td>
+                            <td>14.852.000</td>
+                            <td>12.643.000</td>
+                            <td>12.267.000</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>17.155.000</td>
+                            <td>14.852.000</td>
+                            <td>14.382.000</td>
+                            <td>12.267.000</td>
+                            <td>11.891.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="diamond-price-list">
+                <h1 className='hightlight-color'>Giá Kim Cương <span class="highlight">4ly1</span>. Kiểm định GIA. Giác cắt Excellent</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Color / Clarity</th>
+                            <th>IF</th>
+                            <th>VVS1</th>
+                            <th>VVS2</th>
+                            <th>VS1</th>
+                            <th>VS2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D</td>
+                            <td>28.576.000</td>
+                            <td>24.111.000</td>
+                            <td>23.218.000</td>
+                            <td>20.116.000</td>
+                            <td>19.411.000</td>
+                        </tr>
+                        <tr>
+                            <td>E</td>
+                            <td>27.683.000</td>
+                            <td>23.218.000</td>
+                            <td>22.325.000</td>
+                            <td>19.411.000</td>
+                            <td>18.659.000</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>26.790.000</td>
+                            <td>22.325.000</td>
+                            <td>21.432.000</td>
+                            <td>18.659.000</td>
+                            <td>17.907.000</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="diamond-price-list">
@@ -39,7 +117,7 @@ export default function Bang_gia_kim_cuong() {
                         <tr>
                             <th>Color / Clarity</th>
                             <th>IF</th>
-                            <th>VVS1</th>   
+                            <th>VVS1</th>
                             <th>VVS2</th>
                             <th>VS1</th>
                             <th>VS2</th>
@@ -48,39 +126,39 @@ export default function Bang_gia_kim_cuong() {
                     <tbody>
                         <tr>
                             <td>D</td>
-                            <td>37,880,000</td>
-                            <td>32,730,000</td>
-                            <td>29,515,000</td>
-                            <td>25,978,000</td>
-                            <td>24,617,000</td>
+                            <td>116.038.000</td>
+                            <td>103.519.000</td>
+                            <td>95.521.000</td>
+                            <td>79.470.000</td>
+                            <td>74.757.000</td>
                         </tr>
                         <tr>
                             <td>E</td>
-                            <td>33,680,000</td>
-                            <td>30,030,000</td>
-                            <td>28,950,000</td>
-                            <td>24,170,000</td>
-                            <td>22,878,000</td>
+                            <td>107.037.000</td>
+                            <td>95.545.000</td>
+                            <td>92.350.000</td>
+                            <td>76.272.000</td>
+                            <td>68.568.000</td>
                         </tr>
                         <tr>
                             <td>F</td>
-                            <td>29,690,000</td>
-                            <td>28,890,000</td>
-                            <td>27,889,000</td>
-                            <td>22,438,000</td>
-                            <td>21,582,000</td>
+                            <td>98.333.000</td>
+                            <td>89.352.000	</td>
+                            <td>87.560.000</td>
+                            <td>73.674.000</td>
+                            <td>67.166.000</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="diamond-price-list">
-                <h1 className='hightlight-color'>Giá Kim Cương <span class="highlight">4ly5</span>. Kiểm định GIA. Giác cắt Excellent</h1>
+                <h1 className='hightlight-color'>Giá Kim Cương <span class="highlight">5ly4</span>. Kiểm định GIA. Giác cắt Excellent</h1>
                 <table>
                     <thead>
                         <tr>
                             <th>Color / Clarity</th>
                             <th>IF</th>
-                            <th>VVS1</th>   
+                            <th>VVS1</th>
                             <th>VVS2</th>
                             <th>VS1</th>
                             <th>VS2</th>
@@ -89,31 +167,32 @@ export default function Bang_gia_kim_cuong() {
                     <tbody>
                         <tr>
                             <td>D</td>
-                            <td>37,880,000</td>
-                            <td>32,730,000</td>
-                            <td>29,515,000</td>
-                            <td>25,978,000</td>
-                            <td>24,617,000</td>
+                            <td>18.095.000</td>
+                            <td>15.792.000</td>
+                            <td>15.322.000</td>
+                            <td>13.066.000</td>
+                            <td>12.643.000</td>
                         </tr>
                         <tr>
                             <td>E</td>
-                            <td>33,680,000</td>
-                            <td>30,030,000</td>
-                            <td>28,950,000</td>
-                            <td>24,170,000</td>
-                            <td>22,878,000</td>
+                            <td>17.625.000</td>
+                            <td>15.322.000</td>
+                            <td>14.852.000</td>
+                            <td>12.643.000</td>
+                            <td>12.267.000</td>
                         </tr>
                         <tr>
                             <td>F</td>
-                            <td>29,690,000</td>
-                            <td>28,890,000</td>
-                            <td>27,889,000</td>
-                            <td>22,438,000</td>
-                            <td>21,582,000</td>
+                            <td>17.155.000</td>
+                            <td>14.852.000</td>
+                            <td>14.382.000</td>
+                            <td>12.267.000</td>
+                            <td>11.891.000</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
         </div>
-  )
+    )
 }

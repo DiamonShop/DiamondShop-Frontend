@@ -46,7 +46,7 @@ export default function Home() {
             <Sanphamnoibat onProductClick={handleProductClick} />
             <Main_banner />
             <Main_product />
-            <Main_bestseller_product />
+            
 
         </div>
     );
