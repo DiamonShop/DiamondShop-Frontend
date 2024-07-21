@@ -28,7 +28,6 @@ function Sanphamtuongtu({ onProductClick }) {
             default:
                 productsData = [];
         }
-        console.log(productsData)
         setRandomProducts(getRandomProducts(productsData, 5));
     }, [productObj.categoryId]);
 

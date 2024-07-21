@@ -7,7 +7,6 @@ import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is imported correct
 import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
 import { Link } from 'react-router-dom';
 
-
 const Dashboard = () => {
     const { user: currentUser, logout: userLogout } = useUser();
     const [errorMessage, setErrorMessage] = useState('');

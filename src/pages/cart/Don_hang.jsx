@@ -58,7 +58,7 @@ function Don_hang() {
                                     <td>{details.orderDate}</td>
                                     <td>{formatCurrency(details.totalPrice)}</td>
                                     <td>
-                                        {details.status === 'Shipping' ? 'Đang vận chuyển' : details.status === 'Ordering' ? 'Đang thanh toán' : 'Hoàn Thành'}
+                                        {details.status === 'Shipping' ? 'Đang vận chuyển' : details.status === 'Ordering' ? 'Đang thanh toán' : 'Chờ xác nhận'}
                                     </td>
                                     <td>
                                         <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang" onClick={() => handleViewOrderDetails(details.orderId)}>Xem</a>

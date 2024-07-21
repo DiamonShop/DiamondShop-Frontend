@@ -6,6 +6,7 @@ import { logout as apilogout } from '../api/LogoutAPI';
 import { jwtDecode } from 'jwt-decode';
 import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
 import Don_hang from '../pages/cart/Don_hang';
+import Giay_bao_hanh from './Giay_bao_hanh';
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -39,9 +40,9 @@ export default function Thong_tin_tk() {
             const decodedToken = jwtDecode(token);
             const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-                if (userRole === 'Admin') {
-                    navigate('/Dashboard');
-                }
+            if (userRole === 'Admin') {
+                navigate('/Dashboard');
+            }
 
             const response = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
                 headers: {
@@ -102,7 +103,7 @@ export default function Thong_tin_tk() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem('token');
-        
+
         // Tạo object chứa dữ liệu cần cập nhật
         const userDataToUpdate = {
             userId: userData.userId, // Thêm userId vào dữ liệu cập nhật
@@ -112,14 +113,14 @@ export default function Thong_tin_tk() {
             address,
             password: newPwd // Nếu có
         };
-    
+
         try {
             setLoading(true);
             const updatedUser = await updateProfile(token, userDataToUpdate);
             console.log('Update response:', updatedUser);
             setErrorMessage('Cập nhật thành công.');
             setUserData(updatedUser);
-            
+
             fetchUserData(); // Sau khi cập nhật thành công, fetch lại thông tin người dùng để hiển thị
         } catch (error) {
             if (error.response) {
@@ -179,7 +180,7 @@ export default function Thong_tin_tk() {
                                                     <i className="fa fa-cart-arrow-down"></i> Đơn hàng
                                                 </a>
                                                 <a href="#payment-method" data-bs-toggle="tab">
-                                                    <i className="fa fa-credit-card"></i> Phương thức thanh toán
+                                                    <i className="fa fa-credit-card"></i> Giấy bảo hành
                                                 </a>
                                             </div>
                                         </div>
@@ -233,10 +234,7 @@ export default function Thong_tin_tk() {
                                                     <Don_hang />
                                                 </div>
                                                 <div className="tab-pane fade" id="payment-method" role="tabpanel">
-                                                    <div className="myaccount-content">
-                                                        <h5>Phương thức thanh toán</h5>
-                                                        <p className="saved-message">Chúng tôi sẽ sớm phát triển </p>
-                                                    </div>
+                                                    <Giay_bao_hanh />
                                                 </div>
                                             </div>
                                         </div>

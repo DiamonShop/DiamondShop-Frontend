@@ -11,16 +11,14 @@ import { notification } from 'antd';
 
 
 export default function Chi_tiet_san_pham() {
-
-    const productObj = JSON.parse(localStorage.getItem('product'));
+    const initialProductObj = JSON.parse(localStorage.getItem('product'));
+    const [productObj] = useState(initialProductObj);
     const [quantity, setQuantity] = useState(1);
     const [rating, setRating] = useState(0);
     const [reviewCount, setReviewCount] = useState(0);
-
     const [api, contextHolder] = notification.useNotification();
-
     const [averageRating, setAverageRating] = useState(0);
-
+    const [jewelrySizes, setJewelrySizes] = useState([]);
 
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -77,7 +75,12 @@ export default function Chi_tiet_san_pham() {
         setAverageRating(avgRating);
     };
 
-    
+    useEffect(() => {
+        if (productObj && productObj.jewelrySizes) {
+            setJewelrySizes(productObj.jewelrySizes);
+            console.log('Jewelry Sizes:', productObj.jewelrySizes);
+        }
+    }, [productObj]);
 
     useEffect(() => {
         const initSlickSliders = () => {
@@ -87,7 +90,7 @@ export default function Chi_tiet_san_pham() {
                 speed: 1000,
                 asNavFor: '.pro-nav'
             });
-    
+
             $('.pro-nav').slick({
                 slidesToShow: 3,
                 asNavFor: '.product-large-slider',
@@ -105,21 +108,21 @@ export default function Chi_tiet_san_pham() {
                 }]
             });
         };
-    
+
         const timer = setTimeout(() => {
             initSlickSliders();
         }, 100); // Adjust the delay as needed
-    
+
         $('select').niceSelect();
         $('.img-zoom').zoom();
-    
+
         return () => {
             clearTimeout(timer);
             $('select').niceSelect('destroy');
             $('.img-zoom').trigger('zoom.destroy');
         };
     }, []);
-    
+
     const getCategoryName = (categoryId) => {
         switch (categoryId) {
             case 1:
@@ -134,6 +137,7 @@ export default function Chi_tiet_san_pham() {
                 return 'Unknown';
         }
     };
+
     return (
         <div>
             {contextHolder}
@@ -265,17 +269,17 @@ export default function Chi_tiet_san_pham() {
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
-                                                        {productObj.categoryName === 'Nhẫn' && (
+                                                        {productObj && productObj.categoryName === 'Nhẫn' && (
                                                             <>
-                                                                <h6 className='filter-name-jewelry'>Size :</h6>
-
-                                                                <select >
-                                                                    <option >8</option>
-                                                                    <option>9</option>
-                                                                    <option>10</option>
-                                                                    <option>11</option>
+                                                                <label htmlFor="jewelry-size" className="filter-name-jewelry">Size:</label>
+                                                                <select id="jewelry-size" className="jewelry-size-dropdown">
+                                                                    {Array.isArray(jewelrySizes) && jewelrySizes.map((item, index) => (
+                                                                        <option key={index} value={item.size}>
+                                                                            {item.size}
+                                                                        </option>
+                                                                    ))}
                                                                 </select>
-                                                                <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                                <Link to="/Huongdandoni" className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
                                                             </>
                                                         )}
                                                     </li>

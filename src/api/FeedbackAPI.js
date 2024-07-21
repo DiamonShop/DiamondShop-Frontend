@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 export const handleGetFeedbacksByProductId = async (productId) => {
-  try {
-      const response = await axios.get(`https://localhost:7101/api/Feedback/GetFeedbackByProductId`, {
-          params: { productId }
-      });
-      return response.data;
-  } catch (error) {
-      console.error("Error fetching feedbacks:", error);
-      throw error;
-  }
+    try {
+        const response = await axios.get(`https://localhost:7101/api/Feedback/GetFeedbackByProductId`, {
+            params: { productId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching feedbacks:", error);
+        throw error;
+    }
 };
 
 export const handleCreateFeedback = async (feedbackData) => {

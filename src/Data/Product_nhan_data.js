@@ -7,7 +7,7 @@ const productData = await Promise.all(listProduct
     .filter(product => product.categoryId === 1 && product.isActive === true)
     .map(async product => {
 
-        const { basePrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes, mainDiamondQuantity, sideDiamondQuantity } = product;
+        const { markupPrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes, mainDiamondQuantity, sideDiamondQuantity } = product;
         const { image1Url, image2Url, image3Url, } = await getJewelryImageUrls(productID, categoryId);
         return {
             id: productID,
@@ -16,7 +16,7 @@ const productData = await Promise.all(listProduct
             image2: image2Url ? image2Url : "default_image_url_2.png", // URL thay thế nếu ảnh không tồn tại
             image3: image3Url ? image3Url : "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại           
             label: "Mới",
-            newPrice: basePrice,
+            newPrice: markupPrice,
             categoryName: "Nhẫn",
             description: description,
             stock: stock,

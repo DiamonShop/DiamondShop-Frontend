@@ -14,7 +14,7 @@ async function GetProductByName(searchValue) {
             try {
                 if (product.productType === 'Jewelry') {
                     const jewelryData = await handleGetJewelryByProductId(product.productId);
-                    const { basePrice, productID, productName, categoryId, stock, description, isActive, categoryName } = jewelryData;
+                    const { markupPrice, productID, productName, categoryId, stock, description, isActive, categoryName } = jewelryData;
                     const { image1Url, image2Url, image3Url, image4Url } = await getJewelryImageUrls(productID, categoryId);
                     
                     productDetails = {
@@ -25,7 +25,7 @@ async function GetProductByName(searchValue) {
                         image3: image3Url || "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại
                         image4: image4Url || "default_image_url_4.png", // URL thay thế nếu ảnh không tồn tại
                         label: "Mới",
-                        newPrice: basePrice,
+                        newPrice: markupPrice,
                         description: description,
                         categoryId: categoryId,
                         categoryName: categoryName,
@@ -36,7 +36,7 @@ async function GetProductByName(searchValue) {
                     console.log(productDetails)
                 } else if (product.productType === 'Diamond') {
                     const diamondData = await handleGetDiamondByProductId(product.productId);
-                    const { basePrice, productID, productName, stock, description, isActive, diameterMM } = diamondData;
+                    const { markupPrice, productID, productName, stock, description, isActive, diameterMM } = diamondData;
                     const { image1Url, image2Url, image3Url, image4Url } = await getDiamondImageUrls(productID, 5, diameterMM);
 
                     productDetails = {
@@ -47,7 +47,7 @@ async function GetProductByName(searchValue) {
                         image3: image3Url || "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại
                         image4: image4Url || "default_image_url_4.png", // URL thay thế nếu ảnh không tồn tại
                         label: "Mới",
-                        newPrice: basePrice,
+                        newPrice: markupPrice,
                         description: description,
                         stock: stock,
                         productType: product.productType,

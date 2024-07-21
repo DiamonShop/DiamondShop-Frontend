@@ -172,8 +172,8 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                                 )}
                             </div>
                             <div className="tab-pane fade" id="tab_four">
-                                <p color="blue"><b>Bảo hành miễn phí 6 tháng</b></p>
-                                <p>- Bảo hành 6 tháng lỗi kỹ thuật, nước xi.</p>
+                                <p color="blue"><b>Bảo hành miễn phí 12 tháng</b></p>
+                                <p>- Bảo hành 12 tháng lỗi kỹ thuật, nước xi.</p>
                                 <ul>
                                     <li>- Đối với sản phẩm bị oxy hóa, xuống màu, sẽ được siêu âm làm sạch bằng máy chuyên dụng (siêu âm, không xi) miễn phí trọn đời tại cửa hàng.​</li>
                                     <li>- Miễn phí đánh bóng trọn đời . Nhẫn cưới sẽ được bảo hành, làm mới, đánh bóng, xi miễn phí trọn đời.​</li>
