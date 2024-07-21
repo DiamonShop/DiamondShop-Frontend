@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../../UserContext";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; // Ensure jwt-decode is imported correctly
-import { sendToken } from "../../api/TokenAPI"; // Adjust path as needed
+import { jwtDecode } from "jwt-decode";
+import { sendToken } from "../../api/TokenAPI";
+import { logout } from '../../api/LogoutAPI';
 import { Link } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
@@ -15,7 +16,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(BarElement, LinearScale, CategoryScale); // Register the required components
+ChartJS.register(BarElement, LinearScale, CategoryScale); 
 
 const Dashboard = () => {
   const { user: currentUser, logout: userLogout } = useUser();
@@ -313,17 +314,6 @@ const Dashboard = () => {
 
     try {
       const decodedToken = jwtDecode(token);
-      const userRole =
-        decodedToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        ];
-
-      if (userRole !== "Admin") {
-        console.log("User is not an admin. Redirecting to home.");
-        navigate("/");
-        return;
-      }
-
       setLoading(true);
       const headers = sendToken(); // Get headers with Authorization token
       const Userresponse = await axios.get(
@@ -352,6 +342,23 @@ const Dashboard = () => {
     fetchUserData();
   }, [currentUser, userLogout, navigate]);
 
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      userLogout();
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      userLogout();
+    }
+  }, [userLogout]);
   return (
     <div>
       <div className="wrapper">
@@ -363,48 +370,59 @@ const Dashboard = () => {
               </span>
             </a>
             <ul className="sidebar-nav">
-              <li className="sidebar-header">Trang chủ</li>
-              <li className="sidebar-item active">
-                <a className="sidebar-link">
-                  <i className="align-middle" data-feather="sliders"></i>
-                  <span className="align-middle">
-                    <Link to="/Dashboard">Dashboard</Link>
-                  </span>
-                </a>
-              </li>
-              <li className="sidebar-header">Quản lý</li>
-              <li className="sidebar-item">
-                <a className="sidebar-link">
-                  <i className="align-middle" data-feather="square"></i>
-                  <span className="align-middle">
-                    <Link to="/TrangSuc">Trang sức</Link>
-                  </span>
-                </a>
-              </li>
-              <li className="sidebar-item">
-                <a className="sidebar-link">
-                  <i className="align-middle" data-feather="sliders"></i>
-                  <span className="align-middle">
-                    <Link to="/KimCuongDashboard">Kim cương</Link>
-                  </span>
-                </a>
-              </li>
-              <li className="sidebar-item">
-                <a className="sidebar-link">
-                  <i className="align-middle" data-feather="square"></i>
-                  <span className="align-middle">
-                    <Link to="/TaiKhoan">Tài khoản</Link>
-                  </span>
-                </a>
-              </li>
-              <li className="sidebar-item">
-                <a className="sidebar-link">
-                  <i className="align-middle" data-feather="square"></i>
-                  <span className="align-middle">
-                    <Link to="/DonHang">Đơn hàng</Link>
-                  </span>
-                </a>
-              </li>
+              {userRole === 'Admin' && (
+                <>
+                  <li className="sidebar-header">Trang chủ</li>
+                  <li className="sidebar-item active">
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="sliders"></i>
+                      <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                    </a>
+                  </li>
+                  <li className="sidebar-header">Quản lý</li>
+                  <li className="sidebar-item">
+                    <a className="sidebar-link">
+                      <i className="align-middle" data-feather="square"></i>
+                      <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                    </a>
+                  </li>
+                </>
+              )}
+              {userRole === 'Manager' && (
+                <>
+                  <li className="sidebar-header">Trang chủ</li>
+                  <li className="sidebar-item active">
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="sliders"></i>
+                      <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                    </a>
+                  </li>
+                  <li className="sidebar-header">Quản lý</li>
+                  <li className="sidebar-item " >
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="sliders"></i>
+                      <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                    </a>
+                  </li>
+                  <li className="sidebar-item">
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="sliders"></i>
+                      <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                    </a>
+                  </li>
+                </>
+              )}
+              {userRole === 'Staff' && (
+                <>
+                  <li className="sidebar-header">Quản lý</li>
+                  <li className="sidebar-item">
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="square"></i>
+                      <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </nav>
@@ -433,7 +451,7 @@ const Dashboard = () => {
                     </span>
                   </a>
                   <div className="dropdown-menu dropdown-menu-end">
-                    <a className="dropdown-item" href="/">
+                    <a className="dropdown-item" href='/' onClick={logout}>
                       Đăng xuất
                     </a>
                   </div>
@@ -444,7 +462,7 @@ const Dashboard = () => {
           <div className="content">
             <div className="container-fluid p-0">
               <h1 className="h3 mb-3">
-                Bảng phân tích
+              <h2 style={{ color: '#8C6B2F', marginLeft: '20px' }}>Bảng phân tích</h2>
                 {/* Bảng điều khiển <strong> phân tích</strong>{" "} */}
               </h1>
               <div className="row">

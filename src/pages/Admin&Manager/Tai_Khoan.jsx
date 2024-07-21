@@ -614,7 +614,7 @@ const Taikhoan = () => {
                             breakClassName="page-item"
                             breakLinkClassName="page-link"
                         />
-                        {/* Overlay for adding new account */}
+
                         {showAddOverlay && (
                             <div className="admin-page-add-account-overlay">
                                 <div className="admin-page-add-account-modal">

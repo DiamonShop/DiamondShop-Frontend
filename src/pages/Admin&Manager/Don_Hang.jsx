@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button, Table, Input, Select, message } from "antd";
 import axios from "axios";
 import { useUser } from "../../UserContext";
-import { sendToken } from "../../api/TokenAPI"; // Adjust path as needed
+import { logout } from '../../api/LogoutAPI';
+import { sendToken } from "../../api/TokenAPI";
 import { jwtDecode } from "jwt-decode";
 import ReactPaginate from "react-paginate";
 
@@ -26,6 +27,8 @@ const Don_Hang = () => {
   const [ordersDetailProduct, setOrdersDetailProduct] = useState([]);
   const [showUpdatePopup, setShowUpdatePopup] = useState(false);
   const [selectedUpdateOrder, setSelectedUpdateOrder] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const ordersPerPage = 6;
 
   const orderStatuses = [
     "Đã hoàn thành",
@@ -34,6 +37,18 @@ const Don_Hang = () => {
     "Đang xử lý",
     "Ordering",
   ];
+
+  const sortOrders = (orders) => {
+    const statusOrder = {
+      "Ordering": 1,
+      "Shipping": 2,
+      "Pending": 3,
+      "Cancel": 4,
+      "Completed": 5,
+    };
+
+    return orders.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+  };
 
   const handleViewDetails = async (order) => {
     try {
@@ -228,20 +243,16 @@ const Don_Hang = () => {
       className: "column-action",
       render: (text, record) => (
         <span>
-          <button
-            type="button"
-            className="orders-page-view-button"
+          <Button type='default'
             onClick={() => handleViewDetails(record)}
           >
             Xem chi tiết
-          </button>
-          <button
-            type="button"
-            className="orders-page-edit-button"
+          </Button>
+          <Button type="dashed"
             onClick={() => handleViewUpdate(record)}
           >
             Cập nhật trạng thái
-          </button>
+          </Button>
         </span>
       ),
     },
@@ -262,17 +273,6 @@ const Don_Hang = () => {
 
     try {
       const decodedToken = jwtDecode(token);
-      const userRole =
-        decodedToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        ];
-
-      if (userRole !== "Admin") {
-        console.log("User is not an admin. Redirecting to home.");
-        navigate("/");
-        return;
-      }
-
       setLoading(true);
       const headers = sendToken(); // Get headers with Authorization token
       const Userresponse = await axios.get(
@@ -296,7 +296,8 @@ const Don_Hang = () => {
         }
       );
 
-      setOrders(ordersResponse.data);
+      const sortedOrders = sortOrders(ordersResponse.data);
+      setOrders(sortedOrders);
     } catch (error) {
       console.error("Error fetching user data:", error);
       if (error.response && error.response.status === 401) {
@@ -314,6 +315,30 @@ const Don_Hang = () => {
     fetchUserData();
   }, [currentUser, userLogout, navigate]);
 
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      userLogout();
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      userLogout();
+    }
+  }, [userLogout]);
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
+
+  const displayOrders = filteredOrders.slice(currentPage * ordersPerPage, (currentPage + 1) * ordersPerPage);
+
   return (
     <div className="wrapper">
       <nav id="sidebar" className="sidebar js-sidebar">
@@ -322,56 +347,59 @@ const Don_Hang = () => {
             <img src="assets/img/logo/logo.png" alt="Logo" />
           </a>
           <ul className="sidebar-nav">
-            <li className="sidebar-header">Trang chủ</li>
-            <li className="sidebar-item">
-              <a className="sidebar-link">
-                <i className="align-middle" data-feather="sliders"></i>
-                <span className="align-middle">
-                  <Link to="/Dashboard">Dashboard</Link>
-                </span>
-              </a>
-            </li>
-            <li className="sidebar-header">Quản lý</li>
-            <li className="sidebar-item ">
-              <a className="sidebar-link">
-                <i className="align-middle" data-feather="sliders"></i>
-                <span className="align-middle">
-                  <Link to="/TrangSuc">Trang sức</Link>
-                </span>
-              </a>
-            </li>
-            <li className="sidebar-item">
-              <a className="sidebar-link">
-                <i className="align-middle" data-feather="sliders"></i>
-                <span className="align-middle">
-                  <Link to="/KimCuongDashboard">Kim cương</Link>
-                </span>
-              </a>
-            </li>
-            <li className="sidebar-item ">
-              <a className="sidebar-link">
-                <i className="align-middle" data-feather="square"></i>
-                <span className="align-middle">
-                  <Link to="/TaiKhoan">Tài khoản</Link>
-                </span>
-              </a>
-            </li>
-            <li className="sidebar-item active">
-              <a className="sidebar-link">
-                <i className="align-middle" data-feather="square"></i>
-                <span className="align-middle">
-                  <Link to="/DonHang">Đơn hàng</Link>
-                </span>
-              </a>
-            </li>
-            {/* <li className="sidebar-item">
-                            <a className="sidebar-link">
-                                <i className="align-middle"
-                                    data-feather="check-square">
-                                </i>
-                                <span className="align-middle">Chứng nhận sản phẩm</span>
-                            </a>
-                        </li> */}
+            {userRole === 'Admin' && (
+              <>
+                <li className="sidebar-header">Trang chủ</li>
+                <li className="sidebar-item active">
+                  <a className="sidebar-link" >
+                    <i className="align-middle" data-feather="sliders"></i>
+                    <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                  </a>
+                </li>
+                <li className="sidebar-header">Quản lý</li>
+                <li className="sidebar-item">
+                  <a className="sidebar-link">
+                    <i className="align-middle" data-feather="square"></i>
+                    <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                  </a>
+                </li>
+              </>
+            )}
+            {userRole === 'Manager' && (
+              <>
+                <li className="sidebar-header">Trang chủ</li>
+                <li className="sidebar-item">
+                  <a className="sidebar-link" >
+                    <i className="align-middle" data-feather="sliders"></i>
+                    <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                  </a>
+                </li>
+                <li className="sidebar-header">Quản lý</li>
+                <li className="sidebar-item " >
+                  <a className="sidebar-link" >
+                    <i className="align-middle" data-feather="sliders"></i>
+                    <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                  </a>
+                </li>
+                <li className="sidebar-item">
+                  <a className="sidebar-link" >
+                    <i className="align-middle" data-feather="sliders"></i>
+                    <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                  </a>
+                </li>
+              </>
+            )}
+            {userRole === 'Staff' && (
+              <>
+                <li className="sidebar-header">Quản lý</li>
+                <li className="sidebar-item active">
+                  <a className="sidebar-link" >
+                    <i className="align-middle" data-feather="square"></i>
+                    <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
@@ -398,7 +426,7 @@ const Don_Hang = () => {
                   <span className="text-dark">Xin chào, {displayName}</span>
                 </a>
                 <div className="dropdown-menu dropdown-menu-end">
-                  <a className="dropdown-item" href="/">
+                  <a className="dropdown-item" href='/' onClick={logout}>
                     Đăng xuất
                   </a>
                 </div>
@@ -409,42 +437,84 @@ const Don_Hang = () => {
         <div className="content">
           <div className="container">
             <h2 className="text-center admin-page-title">Quản lí đơn hàng</h2>
-            <div className="search-filter-container">
-              <Input
-                style={{ width: 200, marginRight: 10 }}
-                placeholder="Tìm kiếm mã đơn hàng"
-                onChange={(e) => setSearchValue(e.target.value)}
+            <div className="admin-page-container">
+              <div className="search-filter-container">
+                <Input
+                  style={{ width: 200, marginRight: 10 }}
+                  placeholder="Tìm kiếm mã đơn hàng"
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+                <Select
+                  style={{ width: 200, marginRight: 10 }}
+                  placeholder="Sắp xếp trạng thái"
+                  onChange={(value) => setStatusFilter(value)}
+                  allowClear
+                >
+                  {orderStatuses.map((status) => (
+                    <Option key={status} value={status}>
+                      {status}
+                    </Option>
+                  ))}
+                </Select>
+                <Select
+                  style={{ width: 250 }}
+                  placeholder="Sắp xếp theo"
+                  onChange={(value) => setSortType(value)}
+                  allowClear
+                >
+                  <Option value="price-asc">Giá tiền từ thấp đến cao</Option>
+                  <Option value="price-desc">Giá tiền từ cao đến thấp</Option>
+                  <Option value="id-asc">Mã đơn hàng từ thấp đến cao</Option>
+                  <Option value="id-desc">Mã đơn hàng từ cao đến thấp</Option>
+                </Select>
+              </div>
+              <table className="admin-page-table">
+                <thead>
+                  <tr className="admin-page-column-table">
+                    <th>MÃ ĐƠN HÀNG</th>
+                    <th>NGÀY ĐẶT ĐƠN</th>
+                    <th>TỔNG CỘNG</th>
+                    <th>TRẠNG THÁI</th>
+                    <th>HÀNH ĐỘNG</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayOrders.map((order) => (
+                    <tr key={order.orderId}>
+                      <td>{order.orderId}</td>
+                      <td>{order.orderDate}</td>
+                      <td>{order.totalPrice}</td>
+                      <td className={getStatusClass(order.status)}>{order.status}</td>
+                      <td className="admin-page-buttons">
+                        <Button type='default' onClick={() => handleViewDetails(order)}>Xem chi tiết</Button>
+                        <Button type="dashed" onClick={() => handleViewUpdate(order)}>Cập nhật trạng thái</Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <ReactPaginate
+                previousLabel={"Trước"}
+                nextLabel={"Sau"}
+                breakLabel={"..."}
+                pageCount={Math.ceil(filteredOrders.length / ordersPerPage)}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
               />
-              <Select
-                style={{ width: 200, marginRight: 10 }}
-                placeholder="Sắp xếp trạng thái"
-                onChange={(value) => setStatusFilter(value)}
-                allowClear
-              >
-                {orderStatuses.map((status) => (
-                  <Option key={status} value={status}>
-                    {status}
-                  </Option>
-                ))}
-              </Select>
-              <Select
-                style={{ width: 250 }}
-                placeholder="Sắp xếp theo"
-                onChange={(value) => setSortType(value)}
-                allowClear
-              >
-                <Option value="price-asc">Giá tiền từ thấp đến cao</Option>
-                <Option value="price-desc">Giá tiền từ cao đến thấp</Option>
-                <Option value="id-asc">Mã đơn hàng từ thấp đến cao</Option>
-                <Option value="id-desc">Mã đơn hàng từ cao đến thấp</Option>
-              </Select>
             </div>
-            <Table
-              dataSource={filteredOrders}
-              columns={columns}
-              rowKey="orderId"
-              pagination={false}
-            />
+
+
           </div>
 
           {selectedOrder && (
@@ -506,32 +576,6 @@ const Don_Hang = () => {
               </div>
             </Modal>
           )}
-
-          {/* {showCancelPopup && (
-            <Modal
-              title={<span className="modal-title">Hủy đơn hàng</span>}
-              visible={showCancelPopup}
-              onCancel={() => setShowCancelPopup(false)}
-              footer={[
-                <Button key="back" onClick={() => setShowCancelPopup(false)}>
-                  Hủy bỏ
-                </Button>,
-                <Button key="submit" type="primary" onClick={handleCancelOrder}>
-                  Xác nhận
-                </Button>,
-              ]}
-            >
-              <p>
-                <strong>Lý do:</strong>
-              </p>
-              <Input
-                type="text"
-                value={cancelReason}
-                onChange={(e) => setCancelReason(e.target.value)}
-                placeholder="Nhập lý do hủy đơn hàng"
-              />
-            </Modal>
-          )} */}
 
           {showUpdatePopup && (
             <Modal
