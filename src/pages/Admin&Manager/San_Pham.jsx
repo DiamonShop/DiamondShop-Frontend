@@ -585,7 +585,7 @@ const SanPham = () => {
             productID: product.productId,
             productName: product.productName,
             description: product.description,
-            quantity: 0,
+            quantity: quantity,
             jewelrySettingID: product.jewelrySettingID,
             markupRate: product.markupRate,
             markupPrice: product.markupPrice,
@@ -594,6 +594,7 @@ const SanPham = () => {
             mainDiamondQuantity: product.mainDiamondQuantity,
             sideDiamondQuantity: product.sideDiamondQuantity,
             categoryId: product.categoryId, // Sử dụng categoryFilter để lấy category hiện tại
+            categoryName: getCategoryName(product.categoryId),
             basePrice: getBasePriceJewelry(product.productId),
             size: getSizeJewelry(product.jewelryID),
             isActive: product.isActive,
@@ -1198,6 +1199,7 @@ const SanPham = () => {
                                                             <Option value="">Chọn kích thước</Option>
                                                             {jewelrySize
                                                                 .filter(item => item.jewelryID === selectedProduct.jewelryID)
+                                                                .sort((a, b) => a.size - b.size)
                                                                 .map(item => (
                                                                     <Option key={item.jewelrySizeID} value={item.size}>{item.size}</Option>
                                                                 ))}
@@ -1338,6 +1340,7 @@ const SanPham = () => {
                                                             id="quantity"
                                                             name="quantity"
                                                             placeholder="Nhập số lượng"
+                                                            min={0}
                                                             style={{ width: '202.4px', height: '48.8px' }}
                                                             value={newProductJewelry.quantity}
                                                             onChange={(value) => handleNewJewelryChange({ target: { name: 'quantity', value } })}
@@ -1350,6 +1353,7 @@ const SanPham = () => {
                                                             id="markupRate"
                                                             name="markupRate"
                                                             style={{ width: '202.4px', height: '48.8px' }}
+                                                            min={0.1}
                                                             placeholder="Nhập tỉ lệ áp giá"
                                                             value={newProductJewelry.markupRate}
                                                             onChange={(value) => handleNewJewelryChange({ target: { name: 'markupRate', value } })}
@@ -1384,6 +1388,7 @@ const SanPham = () => {
                                                                     id="mainDiamondQuantity"
                                                                     name="mainDiamondQuantity"
                                                                     placeholder="Nhập số lượng kim cương chính"
+                                                                    min={0}
                                                                     style={{ width: '202.4px', height: '48.8px' }}
                                                                     value={newProductJewelry.mainDiamondQuantity}
                                                                     onChange={(value) => handleNewJewelryChange({ target: { name: 'mainDiamondQuantity', value } })}
@@ -1398,6 +1403,7 @@ const SanPham = () => {
                                                             id="basePrice"
                                                             name="basePrice"
                                                             style={{ width: '202.4px', height: '48.8px' }}
+                                                            min={0}
                                                             placeholder="Nhập giá gốc sản phẩm"
                                                             value={newProductJewelry.basePrice}
                                                             onChange={(value) => handleNewJewelryChange({ target: { name: 'basePrice', value } })}
@@ -1430,8 +1436,8 @@ const SanPham = () => {
                                                                 <InputNumber
                                                                     id="sideDiamondQuantity"
                                                                     name="sideDiamondQuantity"
+                                                                    min={0}
                                                                     style={{ width: '202.4px', height: '48.8px' }}
-                                                                    placeholder="Nhập số lượng kim cương phụ"
                                                                     value={newProductJewelry.sideDiamondQuantity}
                                                                     onChange={(value) => handleNewJewelryChange({ target: { name: 'sideDiamondQuantity', value } })}
                                                                     required
@@ -1551,6 +1557,7 @@ const SanPham = () => {
                                                             id="markupRate"
                                                             name="markupRate"
                                                             style={{ width: '100%', height: '46.74px' }}
+                                                            min={0.1}
                                                             placeholder="Nhập tỉ lệ áp giá"
                                                             value={editProductJewelry.markupRate}
                                                             onChange={(value) => handleEditJewelryChange({ target: { name: 'markupRate', value } })}
@@ -1559,7 +1566,7 @@ const SanPham = () => {
                                                     </div>
                                                 </div>
                                                 <div className="admin-page-edit-product-form-group-row">
-                                                    {editProductJewelry.categoryName !== 'Dây chuyền' && (
+                                                    {editProductJewelry.categoryId !== 2 && (
                                                         <>
                                                             <div className="admin-page-edit-product-form-group">
                                                                 <label htmlFor="mainDiamondID">Viên chính</label>
@@ -1581,6 +1588,7 @@ const SanPham = () => {
                                                                 <InputNumber
                                                                     id="mainDiamondQuantity"
                                                                     name="mainDiamondQuantity"
+                                                                    min={0}
                                                                     style={{ width: '100%', height: '46.74px' }}
                                                                     placeholder="Nhập số lượng kim cương chính"
                                                                     value={editProductJewelry.mainDiamondQuantity}
@@ -1595,6 +1603,7 @@ const SanPham = () => {
                                                             id="basePrice"
                                                             name="basePrice"
                                                             style={{ width: '100%', height: '46.74px' }}
+                                                            min={0}
                                                             placeholder="Nhập giá gốc sản phẩm"
                                                             value={editProductJewelry.basePrice}
                                                             onChange={(value) => handleEditJewelryChange({ target: { name: 'basePrice', value } })}
@@ -1603,7 +1612,7 @@ const SanPham = () => {
                                                     </div>
                                                 </div>
                                                 <div className="admin-page-edit-product-form-group-row">
-                                                    {editProductJewelry.categoryName !== 'Dây chuyền' && (
+                                                    {editProductJewelry.categoryId !== 2 && (
                                                         <>
                                                             <div className="admin-page-edit-product-form-group">
                                                                 <label htmlFor="sideDiamondID">Viên phụ</label>
@@ -1625,6 +1634,7 @@ const SanPham = () => {
                                                                 <InputNumber
                                                                     id="sideDiamondQuantity"
                                                                     name="sideDiamondQuantity"
+                                                                    min={0}
                                                                     style={{ width: '100%', height: '46.74px' }}
                                                                     placeholder="Nhập số lượng kim cương phụ"
                                                                     value={editProductJewelry.sideDiamondQuantity}
@@ -1658,6 +1668,7 @@ const SanPham = () => {
                                                                 <Option value="">Chọn ni</Option>
                                                                 {jewelrySize
                                                                     .filter(item => item.jewelryID === selectedProduct.jewelryID)
+                                                                    .sort((a, b) => a.size - b.size)
                                                                     .map(item => (
                                                                         <Option key={item.jewelrySizeID} value={item.size}>{item.size}</Option>
                                                                     ))}
@@ -1670,7 +1681,7 @@ const SanPham = () => {
                                                             id="quantity-input"
                                                             style={{ width: '100%', height: '46.74px' }}
                                                             placeholder='Nhập số lượng'
-                                                            value={editProductJewelry.quantity}
+                                                            value={quantity}
                                                             onChange={(value) => handleEditJewelryChange({ target: { name: 'quantity', value } })}
                                                             required
                                                         />
