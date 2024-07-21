@@ -78,8 +78,8 @@ function Chi_tiet_don_hang() {
                 const token = localStorage.getItem('token');
                 const feedbackData = {
                     userId: decodeToken(token).sid,
-                    orderId: selectedOrderId, // Ensure this field matches what the server expects
-                    productId: selectedProduct.productId, // Ensure this field matches what the server expects
+                    orderId: selectedOrderId, 
+                    productId: selectedProduct.productId, 
                     description: feedback.description,
                     rating: feedback.rating
                 };
@@ -93,7 +93,7 @@ function Chi_tiet_don_hang() {
                     messageApi.open({
                         type: 'success',
                         content: 'Đánh giá thành công!',
-                    });
+});
                     setIsModalVisible(false);
                     setFeedback({ description: '', rating: 0 });
                 } else {
@@ -106,7 +106,7 @@ function Chi_tiet_don_hang() {
                 console.error("Error creating feedback:", error);
                 messageApi.open({
                     type: 'error',
-                    content: 'Lỗi khi gửi đánh giá!',
+                    content: 'Bạn đã đánh giá hoặc sản phẩm chưa giao hoàn thành, không thể đánh giá!',
                 });
             }
         } else {
@@ -142,7 +142,6 @@ function Chi_tiet_don_hang() {
     };
 
     console.log(orderDetailLists);
-
     return (
         <div>
             {contextHolder}
@@ -173,7 +172,7 @@ function Chi_tiet_don_hang() {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th className="pro-thumbnail">Hình ảnh</th>
+                                                <th className="pro-thumbnail">Mã sản phẩm</th>
                                                 <th className="pro-title">Sản phẩm</th>
                                                 <th className="pro-price">Đơn giá</th>
                                                 <th className="pro-quantity">Số lượng</th>
@@ -184,13 +183,13 @@ function Chi_tiet_don_hang() {
                                         <tbody>
                                             {orderDetailLists.map((orderDetail, index) => (
                                                 <tr key={index}>
-                                                    <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+                                                    <td className="pro-thumbnail"> {orderDetail.productId}</td>
                                                     <td className="pro-title">{orderDetail.productName}</td>
                                                     <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
                                                     <td className="pro-quantity">{orderDetail.quantity}</td>
                                                     <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
                                                     <td className="pro-review">
-                                                        <button className="btn btn-sqr-danhgia" onClick={() => showModal(orderDetail)}>Đánh giá</button>
+                                                    <button className="btn btn-sqr-danhgia" onClick={() => showModal(orderDetail)}>Đánh giá</button>
                                                     </td>
                                                 </tr>
                                             ))}

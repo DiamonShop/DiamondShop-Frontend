@@ -76,7 +76,7 @@ export default function Gio_hang() {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th className="pro-thumbnail">Hình ảnh</th>
+                                                <th className="pro-thumbnail">Mã sản phẩm</th>
                                                 <th className="pro-title">Sản phẩm</th>
                                                 <th className="pro-price">Đơn giá</th>
                                                 <th className="pro-quantity">Số lượng</th>
@@ -92,7 +92,7 @@ export default function Gio_hang() {
                                             ) : (
                                                 orderDetailLists.map((orderDetail, index) => (
                                                     <tr key={index}>
-                                                        <td className="pro-thumbnail"><img className="img-fluid" src={orderDetail.imageUrl} alt="Product" /></td>
+                                                        <td className="pro-thumbnail">{orderDetail.productId} </td>
                                                         <td className="pro-title">{orderDetail.productName}</td>
                                                         <td className="pro-price">{formatCurrency(orderDetail.unitPrice)} VND</td>
                                                         <td className="pro-quantity">{orderDetail.quantity}</td>
