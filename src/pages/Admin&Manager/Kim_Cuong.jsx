@@ -748,7 +748,6 @@ const KimCuong = () => {
                                 ))}
                             </tbody>
                         </table>
-
                         <ReactPaginate
                             previousLabel={"Trước"}
                             nextLabel={"Sau"}

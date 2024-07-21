@@ -468,11 +468,11 @@ const SanPham = () => {
             userLogout();
             return;
         }
-    
+
         try {
             const headers = sendToken();
             let jewelryPayload;
-    
+
             // Kiểm tra categoryId có phải là 2 (Dây chuyền)
             if (newProductJewelry.categoryName === 'Dây chuyền') {
                 jewelryPayload = {
@@ -513,7 +513,7 @@ const SanPham = () => {
                     // imageUrls: imageUrls
                 };
             }
-    
+
             console.log('jewelryPayload:', jewelryPayload);
             await axios.post('https://localhost:7101/api/Jewelry/CreateJewelry', jewelryPayload, {
                 headers: {
@@ -543,13 +543,13 @@ const SanPham = () => {
                 imageFiles: []
             });
             fetchProductData(categoryFilter, currentPage + 1);
-    
+
         } catch (error) {
             console.error('Error adding new jewelry product:', error);
             setErrorMessage('Error adding new jewelry product.');
         }
     };
-    
+
 
     const handleFileUpload = async (file) => {
         const imgRef = ref(imageDb, `files/${newProductJewelry.categoryId}/${newProductJewelry.productID}/${file.name}`);
@@ -1093,7 +1093,6 @@ const SanPham = () => {
                                 ))}
                             </tbody>
                         </table>
-
                         <ReactPaginate
                             previousLabel={"Trước"}
                             nextLabel={"Sau"}
@@ -1113,6 +1112,7 @@ const SanPham = () => {
                             breakClassName="page-item"
                             breakLinkClassName="page-link"
                         />
+
                         {isSizeModalOpen && selectedProduct && (
                             <div className="admin-page-add-product-overlay">
                                 <div className="admin-page-add-product-modal">

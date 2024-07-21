@@ -54,10 +54,15 @@ export default function Dang_nhap() {
                 }).then(() => message.success('Đăng nhập thành công', 2)).then(() => {
                     if (roleName === 'Admin' || roleName === 'Manager') {
                         navigate('/Dashboard');
-                    } else {
+                        window.location.reload();
+                    } else if(roleName === 'Staff') {
+                        navigate('/DonHang');
+                        window.location.reload();
+                    }else {
                         navigate('/');
+                        window.location.reload();
                     }
-                    window.location.reload();
+                    
                 });
 
             } else {
