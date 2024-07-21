@@ -99,7 +99,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                                 <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-30">
                                                     {item.productType === 'Jewelry' ? (
                                                         <Du_lieu_san_pham
-                                                            productId={item.id}
+                                                            productId={item.productId}
                                                             image1={item.image1}
                                                             image2={item.image2}
                                                             image3={item.image3}
@@ -119,17 +119,17 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                                         />
                                                     ) : (
                                                         <Du_lieu_san_pham_kc
-                                                            productId={item.id}
+                                                            productId={item.productId}
                                                             image1={item.image1}
                                                             image2={item.image2}
                                                             image3={item.image3}
                                                             image4={item.image4}
                                                             label={item.label}
-                                                            Carat={item.Carat}
-                                                            Clarity={item.Clarity}
-                                                            Cut={item.Cut}
-                                                            Color={item.Color}
-                                                            Quantity={item.Quantity}
+                                                            Carat={item.carat}
+                                                            Clarity={item.clarity}
+                                                            Cut={item.cut}
+                                                            Color={item.color}
+                                                            Quantity={item.quantity}
                                                             productName={item.productName}
                                                             categoryName={item.categoryName}
                                                             newPrice={item.newPrice}
