@@ -884,7 +884,7 @@ const KimCuong = () => {
                                                         <InputNumber
                                                             id="quantity"
                                                             name="quantity"
-                                                            min={1}
+                                                            min={0}
                                                             max={100000}
                                                             style={{ height: '46.7px', width: '140px' }}
                                                             value={newProductDiamond.quantity}
@@ -898,6 +898,7 @@ const KimCuong = () => {
                                                             id="carat"
                                                             name="carat"
                                                             placeholder="Carat"
+                                                            min={0.01}
                                                             value={newProductDiamond.carat}
                                                             style={{ height: '46.7px', width: '140px' }}
                                                             onChange={value => setNewProductDiamond({ ...newProductDiamond, carat: value })}
@@ -910,6 +911,7 @@ const KimCuong = () => {
                                                             id="markupRate"
                                                             name="markupRate"
                                                             placeholder="Tỉ lệ áp giá"
+                                                            min={0.1}
                                                             value={newProductDiamond.markupRate}
                                                             style={{ height: '46.7px', width: '140px' }}
                                                             onChange={value => setNewProductDiamond({ ...newProductDiamond, markupRate: value })}
@@ -977,6 +979,7 @@ const KimCuong = () => {
                                                             id="basePrice"
                                                             name="basePrice"
                                                             placeholder="Nhập giá gốc sản phẩm"
+                                                            min={0}
                                                             style={{ height: '46.7px', width: '220px' }}
                                                             value={newProductDiamond.basePrice}
                                                             onChange={value => setNewProductDiamond({ ...newProductDiamond, basePrice: value })}
@@ -1053,6 +1056,7 @@ const KimCuong = () => {
                                                             type="number"
                                                             id="quantity"
                                                             name="quantity"
+                                                            min={0}
                                                             placeholder="Nhập số lượng sản phẩm"
                                                             value={editProductDiamond.quantity}
                                                             onChange={handleEditDiamondChange}
@@ -1126,6 +1130,7 @@ const KimCuong = () => {
                                                             type="number"
                                                             id="markupRate"
                                                             name="markupRate"
+                                                            min={0.1}
                                                             placeholder="Nhập tỉ lệ áp giá"
                                                             value={editProductDiamond.markupRate}
                                                             onChange={handleEditDiamondChange}
@@ -1138,6 +1143,7 @@ const KimCuong = () => {
                                                             type="number"
                                                             id="basePrice"
                                                             name="basePrice"
+                                                            min={0}
                                                             placeholder="Nhập giá gốc sản phẩm"
                                                             value={editProductDiamond.basePrice}
                                                             onChange={handleEditDiamondChange}

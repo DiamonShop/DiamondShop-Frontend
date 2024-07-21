@@ -31,6 +31,22 @@ const getRoleIdByRoleName = (roleName) => {
             return 'N/A'
     }
 }
+const convertRoleName = (roleName) => {
+    switch (roleName) {
+        case 'Admin':
+            return 'Quản trị viên';
+        case 'Manager':
+            return 'Quản lí';
+        case 'Member':
+            return 'Thành viên';
+        case 'Delivery':
+            return 'Vận chuyển';
+        case 'Staff':
+            return 'Nhân viên';
+        default:
+            return 'N/A'
+    }
+}
 
 const Taikhoan = () => {
     const [showAddOverlay, setShowAddOverlay] = useState(false);
@@ -140,10 +156,17 @@ const Taikhoan = () => {
     };
 
 
-    const handleAddAccount = async () => {
+    const handleAddAccount = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
         try {
             const headers = sendToken(); // Get headers with Authorization token
-            const response = await axios.post('https://localhost:7101/api/User/CreateUser', {
+            const userPayload = {
                 fullname: newAccount.fullname,
                 username: newAccount.username,
                 password: newAccount.password,
@@ -152,14 +175,15 @@ const Taikhoan = () => {
                 roleId: newAccount.roleId,
                 numberPhone: newAccount.numberPhone,
                 address: newAccount.address,
-            }, {
+            }
+            await axios.post('https://localhost:7101/api/User/CreateUser', userPayload, {
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json'
                 }
             });
 
-            console.log('New Account added:', response.data);
+            setShowAddOverlay(false);
             // Refresh user list
             fetchUserData();
             // Clear input fields
@@ -173,9 +197,11 @@ const Taikhoan = () => {
                 roleId: 0,
                 address: '',
             });
-            setShowAddOverlay(false);
+
+            message.success("Thêm mới tài khoản thành công");
         } catch (error) {
             console.error('Error adding new account:', error);
+            message.error("Thêm mới tài khoản thất bại");
             if (error.response) {
                 setErrorMessage(error.response.data.message || 'Unknown error occurred');
             } else {
@@ -240,7 +266,7 @@ const Taikhoan = () => {
         e.preventDefault();
         try {
             const headers = sendToken(); // Get headers with Authorization token
-            const response = await axios.put('https://localhost:7101/api/User/UpdateUserProfile', {
+            const userPayload = {
                 userId: editAccount.id,
                 roleId: editAccount.roleId,
                 username: editAccount.username,
@@ -251,14 +277,15 @@ const Taikhoan = () => {
                 address: editAccount.address,
                 loyaltyPoints: editAccount.loyaltyPoints,
                 isActive: editAccount.isActive
-            }, {
+            }
+            await axios.put('https://localhost:7101/api/User/UpdateUserProfile', userPayload, {
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json'
                 }
             });
 
-            console.log('Account updated:', response.data);
+            console.log('Account updated:', userPayload);
             message.success('Chỉnh sửa người dùng thành công');
             // Refresh user list
             fetchUserData();
@@ -348,7 +375,7 @@ const Taikhoan = () => {
     const pageCount = Math.ceil(filteredAccounts.length / usersPerPage);
     const offset = currentPage * usersPerPage;
     const currentPageUsers = filteredAccounts.slice(offset, offset + usersPerPage);
-    
+
     const handleOpenAddButtonClick = () => {
         setShowAddOverlay(true);
     };
@@ -545,7 +572,7 @@ const Taikhoan = () => {
                                         <td>{user.fullname}</td>
                                         <td>{user.username}</td>
                                         <td>{user.email}</td>
-                                        <td>{user.roleName}</td>
+                                        <td>{convertRoleName(user.roleName)}</td>
                                         <td>{user.isActive ? 'Hoạt động' : 'Ngừng hoạt động'}</td>
                                         <td>
                                             <div className="admin-page-buttons">
@@ -709,7 +736,7 @@ const Taikhoan = () => {
                                                 </div>
                                                 <div className="admin-page-add-account-form-group">
                                                     <label>Chức vụ:</label>
-                                                    <Input value={selectedAccount.roleName} readOnly />
+                                                    <Input value={convertRoleName(selectedAccount.roleName)} readOnly />
                                                 </div>
                                             </div>
 

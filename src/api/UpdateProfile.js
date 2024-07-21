@@ -32,6 +32,7 @@ const updateProfile = async (token, userDataToUpdate) => {
         }
     }
 };
+
 export default updateProfile;
 
 export const handleUpdateUserLoyalPoint = async (userId) => {
@@ -87,3 +88,5 @@ export const handleUpdateJewelryQuantity = async (userId) => {
         return false;
     }
 }
+
+export default updateProfile;
