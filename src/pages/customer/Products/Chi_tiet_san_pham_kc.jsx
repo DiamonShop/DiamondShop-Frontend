@@ -19,7 +19,8 @@ export default function Chi_tiet_san_pham_kc() {
   const navSliderRef = useRef(null);
   const productObj = JSON.parse(localStorage.getItem('product'));
   const [showMessage, setShowMessage] = useState(false);
-
+  const [reviewCount, setReviewCount] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
   const successAddMessage = () => {
     setShowMessage(true);
     setTimeout(() => {
@@ -188,17 +189,20 @@ const token = localStorage.getItem('token');
 
                     </div>
                   </div>
-                  <div class="col-lg-7">
-                    <div class="product-details-des">
-                      <h3 class="product-name">{productObj.productName}</h3>
-                      <div class="ratings d-flex">
-                        <span><i class="fa fa-star-o"></i></span>
-                        <span><i class="fa fa-star-o"></i></span>
-                        <span><i class="fa fa-star-o"></i></span>
-                        <span><i class="fa fa-star-o"></i></span>
-                        <span><i class="fa fa-star-o"></i></span>
-                        <div class="pro-review">
-                          <span>1 Reviews</span>
+                  <div className="col-lg-7">
+                    <div className="product-details-des">
+                      <h3 className="product-name">{productObj.productName}</h3>
+                      <div className="ratings d-flex">
+                        <span><i className="fa fa-star"></i></span>
+                        <span><i className="fa fa-star"></i></span>
+                        <span><i className="fa fa-star"></i></span>
+                        <span><i className="fa fa-star"></i></span>
+                        <span><i className="fa fa-star"></i></span>
+                        <div className="pro-review">
+                          <span>{reviewCount} Review{reviewCount !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div className="average-rating">
+                          <span>( {averageRating} )</span>
                         </div>
                       </div>
                       <div class="price-box">
@@ -272,11 +276,6 @@ const token = localStorage.getItem('token');
 
                             </div>
                           </div>
-                          <span>
-                            <h6 className='soluongsanphamtrongkho'>
-                              Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
-                            </h6>
-                          </span>
                         </li>
 
                       </ul>

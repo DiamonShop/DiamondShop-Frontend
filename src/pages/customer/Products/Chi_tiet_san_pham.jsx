@@ -78,7 +78,7 @@ export default function Chi_tiet_san_pham() {
         setAverageRating(avgRating);
     };
 
-    
+
 
     useEffect(() => {
         const initSlickSliders = () => {
@@ -120,7 +120,7 @@ export default function Chi_tiet_san_pham() {
             $('.img-zoom').trigger('zoom.destroy');
         };
     }, []);
-    
+
     const getCategoryName = (categoryId) => {
         switch (categoryId) {
             case 1:
@@ -194,7 +194,7 @@ export default function Chi_tiet_san_pham() {
                                                     <img src={productObj.image2} alt="product-details" />
                                                 </div>
                                                 <div className="pro-nav-thumb">
-                                                     <img src={productObj.image3} alt="product-details" />
+                                                    <img src={productObj.image3} alt="product-details" />
                                                 </div>
                                                 <div className="pro-nav-thumb">
                                                     <img src={productObj.image4} alt="product-details" />
@@ -206,12 +206,20 @@ export default function Chi_tiet_san_pham() {
                                     <div className="col-lg-7">
                                         <div className="product-details-des">
                                             <h3 className="product-name">{productObj.productName}</h3>
-                                            <div className="ratings d-flex ">
-                                                <StarRating rating={rating} setRating={setRating} />
-                                                <div className="pro-review">                                                   
-                                                <span>   {reviewCount} Review(s)  </span>                                                   
+                                            <div className="ratings d-flex align-items-center">
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <span><i className="fa fa-star"></i></span>
+                                                <div className="pro-review">
+                                                    <span>{reviewCount} Review{reviewCount !== 1 ? 's' : ''}</span>
+                                                </div>
+                                                <div className="average-rating">
+                                                    <span>({averageRating} )</span>
                                                 </div>
                                             </div>
+
                                             <div className="price-box">
                                                 <span className="price-regular-detail">{formatCurrency(productObj.newPrice)}đ</span>
                                             </div>
@@ -301,11 +309,7 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <span>
-                                                            <h6 className='soluongsanphamtrongkho'>
-                                                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
-                                                            </h6>
-                                                        </span>
+
                                                     </li>
                                                 </ul>
 

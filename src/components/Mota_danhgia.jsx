@@ -123,7 +123,7 @@ const Mota_danhgia = ({ productId, onReviewCountChange }) => {
                                 </div>
                             </div>
                             <div className="tab-pane fade" id="tab_three">
-                                <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{feedbacks.length > 0 ? feedbacks[0].productName : ''}</span></h5>
+                            <h5>{feedbacks.length} review{feedbacks.length !== 1 ? 's' : ''} for <span>{productObj.productName}</span></h5>
                                 {feedbacks.map((feedback, index) => (
                                     <div className="total-reviews" key={index}>
                                         <div className="rev-avatar">
