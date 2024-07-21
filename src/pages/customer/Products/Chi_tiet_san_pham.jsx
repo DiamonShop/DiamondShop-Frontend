@@ -21,7 +21,7 @@ export default function Chi_tiet_san_pham() {
     const [api, contextHolder] = notification.useNotification();
 
     const [averageRating, setAverageRating] = useState(0);
-
+    const [jewelrySizes, setJewelrySizes] = useState();
 
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -81,6 +81,7 @@ export default function Chi_tiet_san_pham() {
 
 
     useEffect(() => {
+        setJewelrySizes(productObj.jewelrySizes);
         const initSlickSliders = () => {
             $('.product-large-slider').slick({
                 fade: true,
@@ -281,16 +282,19 @@ export default function Chi_tiet_san_pham() {
                                                     <li class="filter-group">
                                                         {productObj.categoryName === 'Nhẫn' && (
                                                             <>
-                                                                <h6 className='filter-name-jewelry'>Size :</h6>
-                                                                <select >
-                                                                    <option >8</option>
-                                                                    <option>9</option>
-                                                                    <option>10</option>
-                                                                    <option>11</option>
+                                                                <label htmlFor="jewelry-size" className="filter-name-jewelry">Size:</label>
+                                                                <select id="jewelry-size" className="jewelry-size-dropdown">
+                                                                    {jewelrySizes.map((item, index) => (
+                                                                        <option key={index} value={item.size}>
+                                                                            {item.size}
+                                                                        </option>
+                                                                    ))}
                                                                 </select>
-                                                                <Link to='/Huongdandoni' className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                                <Link to="/Huongdandoni" className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+
                                                             </>
                                                         )}
+
                                                     </li>
                                                     <li class="filter-group">
                                                         <div class="quantity-cart-box d-flex align-items-center">
