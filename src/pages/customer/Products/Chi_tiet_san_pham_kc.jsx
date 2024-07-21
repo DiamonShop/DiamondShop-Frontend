@@ -301,7 +301,10 @@ const token = localStorage.getItem('token');
               </div>
 
 
-              <Mota_danhgia_kc />
+              <Mota_danhgia_kc productId={productObj.productId} onReviewCountChange={(count, avgRating) => {
+                setReviewCount(count);
+                setAverageRating(avgRating);
+              }} />
 
             </div>
 
