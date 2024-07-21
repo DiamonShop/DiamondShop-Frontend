@@ -296,6 +296,7 @@ export default function Thanh_toan() {
                                         <div class="summary-footer-area">
                                             <div class="custom-control custom-checkbox mb-20">
 
+
                                                 <input
                                                     type="checkbox"
                                                     class="custom-control-input"
@@ -307,6 +308,7 @@ export default function Thanh_toan() {
                                                     Sử dụng {loyalPoint} point để giảm giá.
                                                 </label>
                                                 
+
                                             </div>
 
 
