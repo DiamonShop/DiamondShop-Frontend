@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Await, Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetLatestOrderByUserId, handleUpdateStatusToPending } from '../../api/OrderAPI';
-import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity} from '../../api/UpdateProfile';
+import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity, handleSetUserLoyalPointToZero} from '../../api/UpdateProfile';
 
 function Dat_hang_thanh_cong() {
   const [order, setOrder] = useState([]);
@@ -11,6 +11,7 @@ function Dat_hang_thanh_cong() {
     const token = localStorage.getItem("token");
     if (token) {
       const userId = decodeToken(token).sid;
+      await handleSetUserLoyalPointToZero(userId);
       await handleUpdateStatusToPending(userId);
       await handleUpdateUserLoyalPoint(userId);
       await handleUpdateJewelryQuantity(userId);
