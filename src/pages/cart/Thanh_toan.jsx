@@ -114,10 +114,13 @@ export default function Thanh_toan() {
         };
 
         if (isLoyaltyChecked) {
-            localStorage.setItem('loyaltyChecked', '1');
+            localStorage.setItem('loyaltyChecked', '1');            
         } else {
             localStorage.removeItem('loyaltyChecked');
         }
+
+        localStorage.setItem('priceToUpdate', orderModel.price);
+        
 
         try {
             const url = await handleCheckout(orderModel); // Await the promise
