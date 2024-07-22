@@ -13,7 +13,7 @@ function Dat_hang_thanh_cong() {
     const checked = localStorage.getItem("loyaltyChecked");
     if (token) {
       const userId = decodeToken(token).sid;
-      if (checked === 1) {
+      if (checked === "1") {
         await handleSetUserLoyalPointToZero(userId);
         localStorage.removeItem('loyaltyChecked');
       }
