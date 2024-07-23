@@ -125,20 +125,7 @@ export default function Chi_tiet_san_pham() {
         };
     }, []);
 
-    const getCategoryName = (categoryId) => {
-        switch (categoryId) {
-            case 1:
-                return 'Nhan';
-            case 2:
-                return 'Daychuyen';
-            case 3:
-                return 'Matdaychuyen';
-            case 4:
-                return 'Vongtay';
-            default:
-                return 'Unknown';
-        }
-    };
+    
 
     return (
         <div>
@@ -151,7 +138,7 @@ export default function Chi_tiet_san_pham() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to={`/${getCategoryName(productObj.categoryId)}`}>{productObj.categoryName}</Link></li>
+                                        <li className="breadcrumb-item"><Link to={`/${productObj.categoryName}`}>{productObj.categoryName}</Link></li>
                                         <li className="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
                                     </ul>
                                 </nav>
@@ -255,11 +242,7 @@ export default function Chi_tiet_san_pham() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <span>
-                                                            <h6 className='soluongsanphamtrongkho'>
-                                                                Kho: <span style={{ color: 'red' }}>{productObj.Quantity}</span>
-                                                            </h6>
-                                                        </span>
+                                                        
                                                     </li>
                                                 </ul>
                                             ) : (
@@ -289,7 +272,7 @@ export default function Chi_tiet_san_pham() {
                                                                 <label htmlFor="jewelry-size" className="filter-name-jewelry">Size:</label>
                                                                 <select id="jewelry-size" className="jewelry-size-dropdown">
                                                                     {Array.isArray(productObj.jewelrySizes) && productObj.jewelrySizes.map((item, index) => (
-                                                                        <option key={index} value={item.size}>
+                                                                        <option key={index} value={item.quantity}>
                                                                             {item.size}
                                                                         </option>
                                                                     ))}

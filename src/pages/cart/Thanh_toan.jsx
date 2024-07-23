@@ -326,7 +326,7 @@ export default function Thanh_toan() {
                                                     required
                                                 />
                                                 <label class="custom-control-label" for="terms">
-                                                    Tôi đã đọc và đồng ý với các <a href="index.html">điều khoản và chính sách</a> của Enternal Sparkle.
+                                                    Tôi đã đọc và đồng ý với các <a href="/Chinhsach">điều khoản và chính sách</a> của Enternal Sparkle.
                                                 </label>
 
                                             </div>

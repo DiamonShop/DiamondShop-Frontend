@@ -64,6 +64,7 @@ function Kim_cuong_5_4({ onProductClick }) {
                                                     image1={item.image1}
                                                     image2={item.image2}
                                                     image3={item.image3}
+                                                    image4={item.image4}
                                                     label={item.label}
                                                     Carat={item.Carat}
                                                     Clarity={item.Clarity}

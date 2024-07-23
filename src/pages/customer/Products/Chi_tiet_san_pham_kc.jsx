@@ -173,7 +173,9 @@ const token = localStorage.getItem('token');
                       <div className="pro-large-img img-zoom">
                         <img src={productObj.image3} alt="product-details" />
                       </div>
-
+                      <div className="pro-large-img img-zoom">
+                        <img src={productObj.image4} alt="product-details" />
+                      </div>
                     </div>
 
                     <div className="pro-nav slick-row-10 slick-arrow-style">
@@ -186,7 +188,9 @@ const token = localStorage.getItem('token');
                       <div className="pro-nav-thumb">
                         <img src={productObj.image3} alt="product-details" />
                       </div>
-
+                      <div className="pro-nav-thumb">
+                        <img src={productObj.image4} alt="product-details" />
+                      </div>
                     </div>
                   </div>
                   <div className="col-lg-7">
@@ -312,8 +316,6 @@ const token = localStorage.getItem('token');
         </div>
       </div>
 
-
-      <Sanphamtuongtu_kc />
       <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>
       </div>

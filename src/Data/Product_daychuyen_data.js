@@ -12,9 +12,10 @@ const productData = await Promise.all(listProduct
         return {
             id: productID,
             productName: productName,
-            image1: image1Url ? image1Url : "default_image_url_1.png", // URL thay thế nếu ảnh không tồn tại
-            image2: image2Url ? image2Url : "default_image_url_2.png", // URL thay thế nếu ảnh không tồn tại
-            image3: image3Url ? image3Url : "default_image_url_3.png", // URL thay thế nếu ảnh không tồn tại           
+            image1: image1Url ? image1Url : "default_image_url_1.png", 
+            image2: image2Url ? image2Url : "default_image_url_2.png", 
+            image3: image3Url ? image3Url : "default_image_url_3.png",
+            image4: image4Url ? image4Url : "default_image_url_4.png",            
             label: "Mới",
             newPrice: markupPrice,
             categoryName: "Dây chuyền",
