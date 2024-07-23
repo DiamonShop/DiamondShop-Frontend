@@ -34,9 +34,9 @@ const updateProfile = async (token, userDataToUpdate) => {
 };
 
 
-export const handleUpdateUserLoyalPoint = async (userId) => {
+export const handleUpdateUserLoyalPoint = async (userId,price) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/User/UpdateUserLoyalPoint?userId=${userId}`, {
+        const response = await fetch(`https://localhost:7101/api/User/UpdateUserLoyalPoint?userId=${userId}&price=${price}`, {
             method: 'PUT',
             mode: 'cors'
         });

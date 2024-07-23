@@ -18,10 +18,10 @@ function Dat_hang_thanh_cong() {
         await handleSetUserLoyalPointToZero(userId);
         localStorage.removeItem('loyaltyChecked');
       }
-      await handleUpdateTotalPriceByUserId(userId,price);
-      localStorage.removeItem("priceToUpdate");
+      //await handleUpdateTotalPriceByUserId(userId,price);      
       await handleUpdateStatusToPending(userId);
-      await handleUpdateUserLoyalPoint(userId);
+      await handleUpdateUserLoyalPoint(userId,price);
+      localStorage.removeItem("priceToUpdate");
       await handleUpdateJewelryQuantity(userId);
       await handleUpdateDiamondQuantity(userId);
     }
