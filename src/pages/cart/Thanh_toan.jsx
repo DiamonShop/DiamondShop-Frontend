@@ -101,8 +101,10 @@ export default function Thanh_toan() {
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        const totalPrices = isLoyaltyChecked ? totalPrice - loyalPoint : totalPrice;
-
+        
+        const discount = isLoyaltyChecked ? loyalPoint * 1000 : 0;
+        const totalPrices = totalPrice - discount;
+    
         const orderModel = {
             userId: userId,
             fullName: displayName,
@@ -112,16 +114,16 @@ export default function Thanh_toan() {
             orderNote: formData.orderNote,
             price: totalPrices,
         };
-
+    
         if (isLoyaltyChecked) {
             localStorage.setItem('loyaltyChecked', '1');            
         } else {
             localStorage.removeItem('loyaltyChecked');
         }
-
+    
         localStorage.setItem('priceToUpdate', orderModel.price);
         
-
+    
         try {
             const url = await handleCheckout(orderModel); // Await the promise
             window.location.href = url; // Use the resolved URL
@@ -231,7 +233,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>Thành tiền</td>
-                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint : totalPrice)}</strong><strong> VND</strong></td>
+                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint*1000 : totalPrice)}</strong><strong> VND</strong></td>
                                                     <input id="total" type="hidden" value={totalPrice} />
                                                 </tr>
                                             </tfoot>

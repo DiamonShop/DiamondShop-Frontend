@@ -17,6 +17,7 @@ export default function Thong_tin_tk() {
     const [username, setUsername] = useState('');
     const [numberPhone, setNumberPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [loyalpoint, setLoyalpoint] = useState('');
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -57,6 +58,7 @@ export default function Thong_tin_tk() {
             setEmail(response.data.email || '');
             setNumberPhone(response.data.numberPhone || '');
             setAddress(response.data.address || '');
+            setLoyalpoint(response.data.loyaltyPoints || '');
         } catch (error) {
             console.error('Error fetching user data:', error);
             if (error.response && error.response.status === 401) {
@@ -199,6 +201,10 @@ export default function Thong_tin_tk() {
                                                                 <div className="single-input-item">
                                                                     <label htmlFor="display-name">Tên hiển thị</label>
                                                                     <input type="text" id="display-name" placeholder="Tên hiển thị" value={displayName} onChange={handleDisplayNameChange} />
+                                                                </div>
+                                                                <div className="single-input-item">
+                                                                    <label htmlFor="loyalpoint" >Điểm</label>
+                                                                    <input type="loyalpoint" id="loyalpoint" value={loyalpoint} readOnly />
                                                                 </div>
                                                                 <div className="single-input-item">
                                                                     <label htmlFor="email" className="required">Email</label>
