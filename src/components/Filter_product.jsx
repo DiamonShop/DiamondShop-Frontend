@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from "react-i18next";
 
 function Filter_product({ sortOption, handleSortChange, count}) {
+    const { t } = useTranslation();
     return (
         <div className="shop-top-bar">
             <div className="row align-items-center">
@@ -12,19 +14,19 @@ function Filter_product({ sortOption, handleSortChange, count}) {
                             </a>
                         </div>
                         <div className="product-amount">
-                            <p>Hiển thị 1–8 trên {count} kết quả</p>
+                            <p>{t("showing")} {count} {t("result")}</p>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-5 col-md-6 order-1 order-md-2">
                     <div className="top-bar-right">
                         <div className="product-short">
-                            <p>Liệt kê theo: </p>
+                            <p>{t("listBy")} </p>
                             <select className="nice-select" name="sortby" value={sortOption} onChange={handleSortChange}>
-                                <option value="name-asc">Tên (A - Z)</option>
-                                <option value="name-desc">Tên (Z - A)</option>
-                                <option value="price-asc">Giá (Thấp &gt; Cao)</option>
-                                <option value="price-desc">Giá (Cao &gt; Thấp)</option>
+                                <option value="name-asc">{t("name")} (A - Z)</option>
+                                <option value="name-desc">{t("name")} (Z - A)</option>
+                                <option value="price-asc">{t("price")} ({t("low")} &gt; {t("high")})</option>
+                                <option value="price-desc">{t("price")} ({t("high")} &gt; {t("low")})</option>
                             </select>
                         </div>
                     </div>
