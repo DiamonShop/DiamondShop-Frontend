@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
+import { useTranslation } from "react-i18next";
 
 function Du_lieu_san_pham_vtxmdc(props) {
+    const { t } = useTranslation();
     return (
         <div>
             <div className="product-item">
@@ -17,7 +19,7 @@ function Du_lieu_san_pham_vtxmdc(props) {
                     </div>
                     <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                         <div className="cart-hover">
-                            <button className="btn btn-cart">Khám phá ngay</button>
+                            <button className="btn btn-cart">{t("discoveryNow")}</button>
                         </div>
                     </Link>
                 </figure>

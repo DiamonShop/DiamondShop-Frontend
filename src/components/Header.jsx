@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
 import { handleGetOrderByUserId } from '../api/OrderAPI';
 import { decodeToken } from '../api/TokenAPI';
+import LanguageSelector from "../pages/customer/language/LanguageSelector.tsx";
+import { useTranslation } from "react-i18next";// luon luon co de dich
+
 
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
@@ -10,7 +13,8 @@ export default function Header({ tokenIsValid }) {
   const [orderCount, setOrderCount] = useState(0);
   const [orderDetail, setOrderDetails] = useState([]);
   const [isMinicartVisible, setMinicartVisible] = React.useState(false);
-
+  const { t } = useTranslation();//luon luon co de dich
+ 
   const openMinicart = () => {
     setMinicartVisible(true);
     document.body.classList.add('fix');
@@ -69,50 +73,50 @@ export default function Header({ tokenIsValid }) {
                       <nav className="desktop-menu">
                         <ul>
                           <li className="active">
-                            <Link to="/">Trang chủ</Link>
+                            <Link to="/">{t("homePage")}</Link>
                           </li>
                           <li>
                             <a href="">
-                              Trang sức <i className="fa fa-angle-down"></i>
+                            {t("jewelry")} <i className="fa fa-angle-down"></i>
                             </a>
                             <ul className="dropdown">
                               <li>
-                                <Link to="/Nhẫn">Nhẫn</Link>
+                                <Link to="/Nhẫn">{t("ring")}</Link>
                               </li>
                               <li>
-                                <Link to="/Dây chuyền">Dây chuyền</Link>
+                                <Link to="/Dây chuyền">{t("necklace")}</Link>
                               </li>
                               <li>
-                                <Link to="/Mặt dây chuyền">Mặt dây chuyền </Link>
+                                <Link to="/Mặt dây chuyền">{t("pendant")}</Link>
                               </li>
                               <li>
-                                <a href="/Vòng tay">Vòng tay</a>
+                                <a href="/Vòng tay">{t("bracelet")}</a>
                               </li>
                             </ul>
                           </li>
                           <li>
-                            <a href="">Kim cương  <i className="fa fa-angle-down"></i>
+                            <a href="">{t("diamond")}<i className="fa fa-angle-down"></i>
                             </a>
                             <ul className="dropdown">
                               <li>
-                                <Link to="/Kimcuong3.6">Kim cương 3.6 ly</Link>
+                                <Link to="/Kimcuong3.6">{t("diamond")} 3.6 {t("carat")}</Link>
                               </li>
                               <li>
-                                <Link to="/Kimcuong4.1">Kim cương 4.1 ly</Link>
+                                <Link to="/Kimcuong4.1">{t("diamond")} 4.1 {t("carat")}</Link>
                               </li>
                               <li>
-                                <Link to="/Kimcuong4.5">Kim cương 4.5 ly</Link>
+                                <Link to="/Kimcuong4.5">{t("diamond")} 4.5 {t("carat")}</Link>
                               </li>
                               <li>
-                                <Link to="/Kimcuong5.4">Kim cương 5.4 ly</Link>
+                                <Link to="/Kimcuong5.4">{t("diamond")} 5.4 {t("carat")}</Link>
                               </li>
                             </ul>
                           </li>
                           <li>
-                            <a href="/Banggiakimcuong">Bảng giá kim cương</a>
+                            <a href="/Banggiakimcuong">{t("priceList")}</a>
                           </li>
                           <li>
-                            <Link to="/Vechungtoi">Về chúng tôi</Link>
+                            <Link to="/Vechungtoi">{t("aboutUs")}</Link>
                           </li>
                         </ul>
                       </nav>
@@ -130,7 +134,7 @@ export default function Header({ tokenIsValid }) {
                         <input
                           type="text"
                           name='txtSearchValue'
-                          placeholder="Tìm kiếm sản phẩm"
+                          placeholder= {t("priceList")}
                           value={searchValue}
                           className="header-search-field bg-white"
                         />
@@ -147,8 +151,8 @@ export default function Header({ tokenIsValid }) {
                               <i className="pe-7s-user"></i>
                             </a>
                             <ul className="dropdown-list">
-                              <li><Link to="/Thongtintk">Thông tin tài khoản</Link></li>
-                              <li><a href="#" onClick={handleLogout}>Đăng xuất</a></li>
+                              <li><Link to="/Thongtintk">{t("accountInfomation")}</Link></li>
+                              <li><a href="#" onClick={handleLogout}>{t("logOut")}</a></li>
                             </ul>
                           </li>
                           <li>
@@ -160,15 +164,19 @@ export default function Header({ tokenIsValid }) {
                         </ul>
                       </div>
                     ) : (
+                      //change language
                       <div className="header-configure-area">
+                          <div className="i8-home-page">
+              <LanguageSelector />{" "} 
+            </div>
                         <ul className="nav justify-content-end">
                           <li className="user-hover">
                             <a href="#">
                               <i className="pe-7s-user"></i>
                             </a>
                             <ul className="dropdown-list">
-                              <li><Link to="/Dangnhap">Đăng Nhập</Link></li>
-                              <li><Link to="/Dangki">Đăng Kí</Link></li>
+                              <li><Link to="/Dangnhap">{t("logIn")}</Link></li>
+                              <li><Link to="/Dangki">{t("signUp")}</Link></li>
                             </ul>
                           </li>
                           <li>
@@ -181,6 +189,7 @@ export default function Header({ tokenIsValid }) {
                       </div>
                     )}
                   </div>
+                  
                 </div>
               </div>
             </div>

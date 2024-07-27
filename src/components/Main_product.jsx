@@ -5,7 +5,9 @@ import '../slick-min'
 import { HandleGetAll } from '../api/JewelryAPI';
 import { Product_Jewelry_Data } from '../Data/Product_jewelry_data';
 import Du_lieu_san_pham_vtxmdc from './Du_lieu_san_pham_vtxmdc';
+import { useTranslation } from "react-i18next";// luon luon co de dich
 function Main_product({ onProductClick }) {
+    const { t } = useTranslation();//luon luon co de dich
     const [randomProductsJewelry, setRandomProductsJewelry] = useState([]);
 
     useEffect(() => {
@@ -67,7 +69,7 @@ function Main_product({ onProductClick }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title text-center">
-                                <h2 className="title">Sản phẩm</h2>
+                                <h2 className="title">{t("product")}</h2>
                             </div>
 
                         </div>
