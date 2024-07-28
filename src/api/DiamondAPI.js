@@ -45,3 +45,16 @@ export const handleUpdateDiamondQuantity = async (userId) => {
         return false;
     }
 }
+export const fetchDiamondBasePrice = async (carat, clarity, color, cut, token) => {
+    try {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+        const response = await axios.get(`https://localhost:7101/api/DiamondPrices/GetPrice?carat=${carat}&clarity=${clarity}&color=${color}&cut=${cut}`, { headers });
+        return response.data.price; // Giả sử API trả về giá trong `response.data.price`
+    } catch (error) {
+        console.error('Error fetching diamond base price:', error);
+        return 0;
+    }
+};

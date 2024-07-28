@@ -3,19 +3,21 @@ import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { sendToken } from '../../api/TokenAPI'; // Adjust path as needed
+import { HandleGetAllDiamond } from '../../api/DiamondAPI';
 import { getDiamondImageUrls } from '../../FirebaseImage/firebaseHelper';
 import ReactPaginate from 'react-paginate';
 import { imageDb } from '../../FirebaseImage/Config';
+
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { logout } from '../../api/LogoutAPI';
+import { logout as apiLogout } from '../../api/LogoutAPI';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload, Input, InputNumber, Select, Popconfirm } from 'antd';
-import { UploadProps, InputNumberProps } from 'antd';
+
 const { Option } = Select;
+
 const formatCurrency = (value) => {
     return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');
 };
@@ -29,6 +31,7 @@ const KimCuong = () => {
 
     const [products, setProducts] = useState([]);
     const [productDiamonds, setProductDiamonds] = useState([]);
+    const [diamondPrices, setDiamondPrices] = useState([]); // State for diamond prices
 
     const [activeCategory, setActiveCategory] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('Tất cả');
@@ -38,7 +41,6 @@ const KimCuong = () => {
 
     const [searchTerm, setSearchTerm] = useState(''); // State for search term
     const [statusFilter, setStatusFilter] = useState('Tất cả');
-
 
     // State for managing the display of add product form
     const [showAddProductForm, setShowAddProductForm] = useState(false);
@@ -103,33 +105,24 @@ const KimCuong = () => {
         try {
             const decodedToken = jwtDecode(token);
             setLoading(true);
-            const headers = sendToken(); // Get headers with Authorization token
-            const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            const headers = { 'Authorization': `Bearer ${token}` }; // Get headers with Authorization token
+            const Userresponse = await axios.get(`https://localhost:7101/api/User/GetUserProfile?id=${decodedToken.sid}`, { headers });
             setDisplayName(Userresponse.data.fullName || '');
 
             // get all diamond
-            const productDiamondsResponse = await axios.get('https://localhost:7101/api/Diamonds/GetAllDiamond', {
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log("All Product Diamonds:", productDiamondsResponse.data);
+            const productDiamondsResponse = await HandleGetAllDiamond(token);
+            console.log("All Product Diamonds:", productDiamondsResponse);
 
-            const productDiamondMap = productDiamondsResponse.data.reduce((map, diamond) => {
+            const productDiamondMap = productDiamondsResponse.reduce((map, diamond) => {
                 map[diamond.productID] = diamond.diameterMM;
                 return map;
             }, {});
-            const productDiamondMapQuantity = productDiamondsResponse.data.reduce((map, diamond) => {
+            const productDiamondMapQuantity = productDiamondsResponse.reduce((map, diamond) => {
                 map[diamond.productID] = diamond.quantity;
                 return map;
             }, {});
 
-            const formattedProducts = await Promise.all(productDiamondsResponse.data.map(async (product) => {
+            const formattedProducts = await Promise.all(productDiamondsResponse.map(async (product) => {
                 const diameterMM = productDiamondMap[product.productID] || null;
                 const quantity = productDiamondMapQuantity[product.productID] || null;
                 const diamondImageUrls = await getDiamondImageUrls(product.productID, 5, diameterMM);
@@ -155,7 +148,7 @@ const KimCuong = () => {
                 : formattedProducts;
 
             setProducts(filteredProducts);
-            setProductDiamonds(productDiamondsResponse.data)
+            setProductDiamonds(productDiamondsResponse)
         } catch (error) {
             console.error('Error fetching user data:', error);
             if (error.response && error.response.status === 401) {
@@ -169,9 +162,72 @@ const KimCuong = () => {
         }
     };
 
+    const fetchDiamondPrices = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log("Token not found or expired. Logging out.");
+            userLogout();
+            return;
+        }
+
+        try {
+            const headers = { 'Authorization': `Bearer ${token}` };
+            const response = await axios.get('https://localhost:7101/api/DiamondPrices/Pricesdiamonds', { headers });
+            setDiamondPrices(response.data);
+        } catch (error) {
+            console.error('Error fetching diamond prices:', error);
+            setErrorMessage('Error fetching diamond prices.');
+        }
+    };
+
     useEffect(() => {
         fetchProductData(categoryFilter, currentPage + 1);
+        fetchDiamondPrices();
     }, [currentUser, userLogout, navigate, categoryFilter, currentPage]);
+
+    const calculateBasePrice = () => {
+        const { diameterMM, clarity, color, carat } = newProductDiamond;
+        const selectedCategory = diamondPrices.find(price => price.diameterMM === diameterMM);
+        if (selectedCategory) {
+            const selectedDiamond = selectedCategory.diamonds.find(diamond =>
+                diamond.clarity === clarity &&
+                diamond.color === color &&
+                diamond.carat === carat
+            );
+            if (selectedDiamond) {
+                setNewProductDiamond(prevState => ({
+                    ...prevState,
+                    basePrice: selectedDiamond.price
+                }));
+            }
+        }
+    };
+
+    useEffect(() => {
+        calculateBasePrice();
+    }, [newProductDiamond.diameterMM, newProductDiamond.clarity, newProductDiamond.color, newProductDiamond.carat]);
+
+    const calculateEditBasePrice = () => {
+        const { diameterMM, clarity, color, carat } = editProductDiamond;
+        const selectedCategory = diamondPrices.find(price => price.diameterMM === diameterMM);
+        if (selectedCategory) {
+            const selectedDiamond = selectedCategory.diamonds.find(diamond =>
+                diamond.clarity === clarity &&
+                diamond.color === color &&
+                diamond.carat === carat
+            );
+            if (selectedDiamond) {
+                setEditProductDiamond(prevState => ({
+                    ...prevState,
+                    basePrice: selectedDiamond.price
+                }));
+            }
+        }
+    };
+
+    useEffect(() => {
+        calculateEditBasePrice();
+    }, [editProductDiamond.diameterMM, editProductDiamond.clarity, editProductDiamond.color, editProductDiamond.carat]);
 
     const handleStatusFilterChange = (e) => {
         setStatusFilter(e.target.value);
@@ -190,15 +246,34 @@ const KimCuong = () => {
         setShowAddProductForm(true);
         setIsAddModalOpen(true); // Open the add product modal
         const diameterMM = parseFloat(categoryFilter); // Chuyển đổi categoryFilter thành số
+        const carat = getCaratByDiameter(diameterMM);
         generateProductId(diameterMM).then(newId => {
             setNewProductDiamond({
                 ...newProductDiamond,
                 productId: newId,
-                diameterMM: diameterMM // Gán giá trị diameterMM vào newProductDiamond
+                diameterMM: diameterMM, // Gán giá trị diameterMM vào newProductDiamond
+                carat: carat
             });
         });
     };
-
+    const getCaratByDiameter = (diameterMM) => {
+        switch (diameterMM) {
+            case 3.6:
+                return 0.5;
+                break;
+            case 4.1:
+                return 0.75;
+                break;
+            case 4.5:
+                return 1;
+                break;
+            case 5.4:
+                return 2;
+                break;
+            default:
+                break;
+        }
+    }
     const handleNewDiamondChange = (e) => {
         const { name, value } = e.target;
         setNewProductDiamond({ ...newProductDiamond, [name]: value });
@@ -206,9 +281,16 @@ const KimCuong = () => {
 
     const handleEditDiamondChange = (e) => {
         const { name, value } = e.target;
+        let parsedValue = value;
+    
+        // Chuyển đổi giá trị của isActive thành boolean
+        if (name === 'isActive') {
+            parsedValue = (value === 'true'); // Convert string to boolean
+        }
+    
         setEditProductDiamond(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: parsedValue
         }));
     };
 
@@ -217,14 +299,15 @@ const KimCuong = () => {
     };
 
     const generateProductId = async (diameterMM) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error("Token not found or expired. Logging out.");
+            return null;
+        }
+
         try {
-            const headers = sendToken();
-            const response = await axios.get(`https://localhost:7101/api/Diamonds/GetDiamondCountByDiameter?diameterMM=${diameterMM}`, {
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
-                }
-            });
+            const headers = { 'Authorization': `Bearer ${token}` };
+            const response = await axios.get(`https://localhost:7101/api/Diamonds/GetDiamondCountByDiameter?diameterMM=${diameterMM}`, { headers });
 
             const count = response.data;
             const nextId = count + 1;
@@ -234,7 +317,6 @@ const KimCuong = () => {
             return null;
         }
     };
-
 
     const addNewDiamondProduct = async (e) => {
         e.preventDefault();
@@ -246,7 +328,7 @@ const KimCuong = () => {
         }
 
         try {
-            const headers = sendToken();
+            const headers = { 'Authorization': `Bearer ${token}` };
             const diamondPayload = {
                 diamondID: 0,
                 productID: newProductDiamond.productId,
@@ -263,12 +345,12 @@ const KimCuong = () => {
                 markupRate: newProductDiamond.markupRate,
                 productType: 'Diamond',
                 isActive: true,
-                // imageUrls: imageUrls
+                imageUrls: newProductDiamond.imageUrls
             };
 
             console.log('Diamond Payload:', diamondPayload);
             // Create Diamond
-            await axios.post('https://localhost:7101/api/Diamonds/CreateDiamond', diamondPayload, {
+            await axios.post('https://localhost:7101/api/Diamonds/CreateDiamondWithPrice', diamondPayload, {
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json'
@@ -292,8 +374,8 @@ const KimCuong = () => {
                 clarity: '',
                 cut: '',
                 basePrice: 0,
-                // imageUrls: [],
-                // imageFiles: []
+                imageUrls: [],
+                imageFiles: []
             })
 
         } catch (error) {
@@ -310,6 +392,7 @@ const KimCuong = () => {
             setErrorMessage('Error adding new diamond product.');
         }
     };
+
     const handleFileUpload = async (file) => {
         const imgRef = ref(imageDb, `files/5/KC-${newProductDiamond.diameterMM}/${newProductDiamond.productId}/${file.name}`);
         await uploadBytes(imgRef, file);
@@ -346,6 +429,7 @@ const KimCuong = () => {
     const cancelDelete = (e) => {
         message.error('Hủy bỏ xóa sản phẩm');
     };
+
     // Function to handle editing product
     const handleEditProductClick = (product) => {
         setEditProductDiamond({
@@ -370,6 +454,7 @@ const KimCuong = () => {
 
         setIsEditModalOpen(true);
     };
+
     useEffect(() => {
         const calculateMarkupPrice = () => {
             setEditProductDiamond(prevState => ({
@@ -379,6 +464,7 @@ const KimCuong = () => {
         };
         calculateMarkupPrice();
     }, [editProductDiamond.basePrice, editProductDiamond.markupRate]);
+
     useEffect(() => {
         const calculateMarkupPrice = () => {
             setNewProductDiamond(prevState => ({
@@ -388,6 +474,7 @@ const KimCuong = () => {
         };
         calculateMarkupPrice();
     }, [newProductDiamond.basePrice, newProductDiamond.markupRate]);
+
     // Function to update diamond product
     const updateDiamondProduct = async (e) => {
         e.preventDefault();
@@ -399,7 +486,7 @@ const KimCuong = () => {
         }
 
         try {
-            const headers = sendToken();
+            const headers = { 'Authorization': `Bearer ${token}` };
             const diamondPayload = {
                 diamondID: editProductDiamond.diamondID,
                 productID: editProductDiamond.productId,
@@ -418,12 +505,7 @@ const KimCuong = () => {
             };
 
             // Update Diamond
-            await axios.put('https://localhost:7101/api/Diamonds/UpdateDiamond', diamondPayload, {
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
-                }
-            });
+            await axios.put('https://localhost:7101/api/Diamonds/UpdateDiamond', diamondPayload, { headers });
             message.success('Chỉnh sửa sản phẩm kim cương thành công');
             setIsEditModalOpen(false); // Close the edit product modal
             fetchProductData(categoryFilter, currentPage + 1);
@@ -444,13 +526,8 @@ const KimCuong = () => {
         }
 
         try {
-            const headers = sendToken();
-            await axios.delete(`https://localhost:7101/api/products/DeleteProduct?id=${productId}`, {
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
-                }
-            });
+            const headers = { 'Authorization': `Bearer ${token}` };
+            await axios.delete(`https://localhost:7101/api/products/DeleteProduct?id=${productId}`, { headers });
             message.success('Xóa sản phẩm kim cương thành công');
             // Refresh the product list after deletion
             fetchProductData(categoryFilter, currentPage + 1);
@@ -494,6 +571,7 @@ const KimCuong = () => {
         const product = productDiamonds.find(product => product.productID === productId);
         return product ? product.basePrice : 'N/A';
     };
+
     const getProductStatus = (product) => {
         if (!product.isActive) {
             return 'Tạm ẩn';
@@ -503,13 +581,11 @@ const KimCuong = () => {
             return 'Hết hàng';
         }
     };
+
     const displayProducts = products.filter(product => {
         const status = getProductStatus(product);
         return (statusFilter === 'Tất cả' || status === statusFilter) && product.productName.toLowerCase().includes(searchTerm.toLowerCase());
     }).slice(currentPage * productsPerPage, (currentPage + 1) * productsPerPage);
-
-    // const displayProducts = products.filter(product => product.productName && product.productName.toLowerCase().includes(searchTerm.toLowerCase()))
-    //     .slice(currentPage * productsPerPage, (currentPage + 1) * productsPerPage);
 
     const openModal = (product) => {
         setSelectedProduct(product);
@@ -627,6 +703,12 @@ const KimCuong = () => {
                                         </li>
                                     </ul>
                                 </li>
+                                <li className="sidebar-item " >
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/GiaKimCuong">Bảng giá kim cương</Link></span>
+                                    </a>
+                                </li>
                             </>
                         )}
                         {userRole === 'Staff' && (
@@ -640,16 +722,6 @@ const KimCuong = () => {
                                 </li>
                             </>
                         )}
-
-
-                        {/* <li className="sidebar-item">
-                            <a className="sidebar-link">
-                                <i className="align-middle"
-                                    data-feather="check-square">
-                                </i>
-                                <span className="align-middle">Chứng nhận sản phẩm</span>
-                            </a>
-                        </li> */}
                     </ul>
                 </div>
             </nav>
@@ -668,21 +740,17 @@ const KimCuong = () => {
                                     <span className="text-dark">Xin chào, {`${displayName}`}</span>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-end">
-                                    <a className="dropdown-item" href='/' onClick={logout}>Đăng xuất</a>
+                                    <a className="dropdown-item" href='/' onClick={userLogout}>Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
                 <div className="content">
-
                     <div className="admin-page-container">
-
                         <h2 className="text-center admin-page-title">Quản lí Kim cương</h2>
-
                         <div className="admin-page-controls">
                             <button className='admin-page-add-button' onClick={handleAddProductClick}>Thêm kim cương</button>
-
                             <div className="admin-page-search-button-container">
                                 <input
                                     type="text"
@@ -693,7 +761,6 @@ const KimCuong = () => {
                                     onChange={handleSearchInputChange}
                                 />
                             </div>
-
                             <div className="admin-page-status-filter">
                                 <select className="form-control admin-page-filter-dropdown" value={statusFilter} onChange={handleStatusFilterChange}>
                                     <option value="Tất cả">Tất cả</option>
@@ -703,7 +770,6 @@ const KimCuong = () => {
                                 </select>
                             </div>
                         </div>
-
                         <table className="admin-page-table">
                             <thead>
                                 <tr className='admin-page-column-table'>
@@ -741,7 +807,6 @@ const KimCuong = () => {
                                                 >
                                                     <Button danger>Xóa</Button>
                                                 </Popconfirm>
-
                                             </div>
                                         </td>
                                     </tr>
@@ -767,7 +832,6 @@ const KimCuong = () => {
                             breakClassName="page-item"
                             breakLinkClassName="page-link"
                         />
-
                         {isModalOpen && selectedProduct && (
                             <div className="admin-page-details-overlay">
                                 <div className="admin-page-details-modal">
@@ -831,12 +895,10 @@ const KimCuong = () => {
                                                 <div>{parse(selectedProduct.description)}</div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         )}
-
                         {isAddModalOpen && (
                             <div className="admin-page-add-product-overlay">
                                 <div className="admin-page-add-product-modal">
@@ -865,7 +927,6 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="admin-page-add-product-form-group">
                                                     <label htmlFor="productName">Tên sản phẩm</label>
                                                     <Input
@@ -901,7 +962,7 @@ const KimCuong = () => {
                                                             value={newProductDiamond.carat}
                                                             style={{ height: '46.7px', width: '140px' }}
                                                             onChange={value => setNewProductDiamond({ ...newProductDiamond, carat: value })}
-                                                            required
+                                                            readOnly
                                                         />
                                                     </div>
                                                     <div className="admin-page-add-product-form-group">
@@ -918,7 +979,6 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="admin-page-add-product-form-group-row">
                                                     <div className="admin-page-add-product-form-group">
                                                         <label htmlFor="color">Màu sắc</label>
@@ -964,8 +1024,6 @@ const KimCuong = () => {
                                                             onChange={value => setNewProductDiamond({ ...newProductDiamond, cut: value })}
                                                             options={[
                                                                 { value: 'EX', label: 'EX' },
-                                                                { value: 'VG', label: 'VG' },
-                                                                { value: 'G', label: 'G' }
                                                             ]}
                                                             required
                                                         />
@@ -1005,7 +1063,6 @@ const KimCuong = () => {
                                                         </Upload>
                                                     </div>
                                                 </div>
-
                                                 <div className="admin-page-add-product-form-group">
                                                     <label htmlFor="description">Mô tả sản phẩm</label>
                                                     <ReactQuill
@@ -1024,7 +1081,6 @@ const KimCuong = () => {
                                 </div>
                             </div>
                         )}
-
                         {isEditModalOpen && (
                             <div className="admin-page-edit-overlay">
                                 <div className="admin-page-edit-modal">
@@ -1075,7 +1131,6 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="admin-page-edit-product-form-group-row">
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="color">Màu sắc</label>
@@ -1117,8 +1172,6 @@ const KimCuong = () => {
                                                             required
                                                         >
                                                             <option value="EX">EX</option>
-                                                            <option value="VG">VG</option>
-                                                            <option value="G">G</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1129,7 +1182,6 @@ const KimCuong = () => {
                                                             type="number"
                                                             id="markupRate"
                                                             name="markupRate"
-                                                            min={0.1}
                                                             placeholder="Nhập tỉ lệ áp giá"
                                                             value={editProductDiamond.markupRate}
                                                             onChange={handleEditDiamondChange}
@@ -1150,31 +1202,18 @@ const KimCuong = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="admin-page-edit-product-form-group-row">
-                                                    <div className="admin-page-edit-product-form-group">
-                                                        <label htmlFor="markupPrice">Giá bán</label>
-                                                        <input
-                                                            type="number"
-                                                            id="markupPrice"
-                                                            name="markupPrice"
-                                                            placeholder="Nhập giá bán"
-                                                            value={editProductDiamond.markupPrice}
-                                                            onChange={handleEditDiamondChange}
-                                                            readOnly
-                                                        />
-                                                    </div>
-                                                    <div className="admin-page-edit-account-form-group">
-                                                        <label>Trạng thái:</label>
-                                                        <Select
-                                                            name="isActive"
-                                                            value={editProductDiamond.isActive}
-                                                            style={{ width: '100%', height: '46.74px' }}
-                                                            onChange={(value) => handleEditDiamondChange({ target: { name: 'isActive', value } })}
-                                                        >
-                                                            <Option value={true}>Còn hàng</Option>
-                                                            <Option value={false}>Tạm ẩn</Option>
-                                                        </Select>
-                                                    </div>
+                                                <div className="admin-page-edit-product-form-group">
+                                                    <label htmlFor="isActive">Trạng thái</label>
+                                                    <select
+                                                        id="isActive"
+                                                        name="isActive"
+                                                        value={editProductDiamond.isActive}
+                                                        onChange={handleEditDiamondChange}
+                                                        required
+                                                    >
+                                                        <option value={true}>Còn hàng</option>
+                                                        <option value={false}>Tạm ẩn</option>
+                                                    </select>
                                                 </div>
                                                 <div className="admin-page-edit-product-form-group">
                                                     <label htmlFor="description">Mô tả sản phẩm</label>
@@ -1182,11 +1221,11 @@ const KimCuong = () => {
                                                         id="description"
                                                         name="description"
                                                         value={editProductDiamond.description}
-                                                        onChange={(value) => setEditProductDiamond({ ...editProductDiamond, description: value })}
+                                                        onChange={value => setEditProductDiamond({ ...editProductDiamond, description: value })}
                                                     />
                                                 </div>
                                                 <div className="admin-page-edit-product-form-group">
-                                                    <Button type="primary" htmlType="submit">Cập nhật</Button>
+                                                    <button type="submit" className="admin-page-edit-button">Cập nhật</button>
                                                 </div>
                                             </form>
                                         </div>

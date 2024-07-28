@@ -16,7 +16,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(BarElement, LinearScale, CategoryScale); 
+ChartJS.register(BarElement, LinearScale, CategoryScale);
 
 const Dashboard = () => {
   const { user: currentUser, logout: userLogout } = useUser();
@@ -410,6 +410,12 @@ const Dashboard = () => {
                       <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
                     </a>
                   </li>
+                  <li className="sidebar-item" >
+                    <a className="sidebar-link" >
+                      <i className="align-middle" data-feather="sliders"></i>
+                      <span className="align-middle"><Link to="/GiaKimCuong">Bảng giá kim cương</Link></span>
+                    </a>
+                  </li>
                 </>
               )}
               {userRole === 'Staff' && (
@@ -462,7 +468,7 @@ const Dashboard = () => {
           <div className="content">
             <div className="container-fluid p-0">
               <h1 className="h3 mb-3">
-              <h2 style={{ color: '#8C6B2F', marginLeft: '20px' }}>Bảng phân tích</h2>
+                <h2 style={{ color: '#8C6B2F', marginLeft: '20px' }}>Bảng phân tích</h2>
                 {/* Bảng điều khiển <strong> phân tích</strong>{" "} */}
               </h1>
               <div className="row">

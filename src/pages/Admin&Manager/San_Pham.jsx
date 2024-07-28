@@ -856,10 +856,17 @@ const SanPham = () => {
             userLogout();
             return;
         }
+        const existingSize = jewelrySize.find(
+            item => item.jewelryID === sizeData.jewelryID && item.size === sizeData.size
+        );
 
+        if (existingSize) {
+            message.error('Kích thước ni đã tồn tại.');
+            return; 
+        }
         try {
             const headers = sendToken();
-            console.log(sizeData); // Kiểm tra dữ liệu trước khi gửi yêu cầu
+            console.log(sizeData); 
             const sizePayload = ({
                 jewelrySizeID: 0,
                 jewelryID: sizeData.jewelryID,
@@ -869,6 +876,12 @@ const SanPham = () => {
             await axios.post('https://localhost:7101/api/JewelrySize/CreateJewelrySize', sizePayload);
             message.success('Thêm ni cho sản phẩm thành công');
             closeSizeModal();
+            setSizeData({
+                jewelrySizeID: 0,
+                jewelryID: 0,
+                size: 0,
+                quantity: 0,
+            });
             fetchProductData(categoryFilter, currentPage + 1);
         } catch (error) {
             message.error('Thêm ni thất bại');
@@ -971,6 +984,12 @@ const SanPham = () => {
                                         <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
                                     </a>
                                 </li>
+                                <li className="sidebar-item" >
+                                    <a className="sidebar-link" >
+                                        <i className="align-middle" data-feather="sliders"></i>
+                                        <span className="align-middle"><Link to="/GiaKimCuong">Bảng giá kim cương</Link></span>
+                                    </a>
+                                </li>
                             </>
                         )}
                         {userRole === 'Staff' && (
@@ -985,15 +1004,6 @@ const SanPham = () => {
                             </>
                         )}
 
-
-                        {/* <li className="sidebar-item">
-                            <a className="sidebar-link">
-                                <i className="align-middle"
-                                    data-feather="check-square">
-                                </i>
-                                <span className="align-middle">Chứng nhận sản phẩm</span>
-                            </a>
-                        </li> */}
                     </ul>
                 </div>
             </nav>
