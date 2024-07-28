@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
+import { useTranslation } from "react-i18next";// luon luon co de dich
 
 const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
     const [feedbacks, setFeedbacks] = useState([]);
@@ -12,6 +13,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const productObj = JSON.parse(localStorage.getItem('product'));
+    const { t } = useTranslation();//luon luon co de dich
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
@@ -108,13 +110,13 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                     <div className="product-review-info">
                         <ul className="nav review-tab">
                             <li>
-                                <a className="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
+                                <a className="active" data-bs-toggle="tab" href="#tab_one">{t("productDescription")}</a>
                             </li>
                             <li>
-                                <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
+                                <a data-bs-toggle="tab" href="#tab_three">{t("feedback")}</a>
                             </li>
                             <li>
-                                <a data-bs-toggle="tab" href="#tab_four">Dịch vụ sau mua</a>
+                                <a data-bs-toggle="tab" href="#tab_four">{t("afterSalesService")}</a>
                             </li>
                         </ul>
                         <div className="tab-content reviews-tab">
@@ -145,7 +147,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                                     <form onSubmit={handleFeedbackSubmit} className="review-form">
                                         <div className="form-group row">
                                             <div className="col">
-                                                <label className="col-form-label"><span className="text-danger">*</span> Đánh giá:</label>
+                                                <label className="col-form-label"><span className="text-danger">*</span> {t("evaluate")}</label>
                                                 <textarea
                                                     className="form-control"
                                                     name="description"
@@ -162,7 +164,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                                             </div>
                                         </div>
                                         <div className="buttons">
-                                            <button className="btn btn-sqr" type="submit">Gửi</button>
+                                            <button className="btn btn-sqr" type="submit">{t("send")}</button>
                                         </div>
                                     </form>
                                 )}
@@ -173,20 +175,20 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                                 )}
                             </div>
                             <div className="tab-pane fade" id="tab_four">
-                                <p color="blue"><b>Bảo hành miễn phí 12 tháng</b></p>
-                                <p>- Bảo hành 12 tháng lỗi kỹ thuật, nước xi.</p>
+                                <p color="blue"><b>{t("guarantee1")}</b></p>
+                                <p>- {t("guarantee2")}</p>
                                 <ul>
-                                    <li>- Đối với sản phẩm bị oxy hóa, xuống màu, sẽ được siêu âm làm sạch bằng máy chuyên dụng (siêu âm, không xi) miễn phí trọn đời tại cửa hàng.​</li>
-                                    <li>- Miễn phí đánh bóng trọn đời . Nhẫn cưới sẽ được bảo hành, làm mới, đánh bóng, xi miễn phí trọn đời.​</li>
+                                    <li>- {t("guarantee3")}​</li>
+                                    <li>- {t("guarantee4")}​</li>
                                 </ul>
-                                <p><b>Miễn phí thay đá CZ và đá tổng hợp</b></p>
-                                <ul>Không áp dụng bảo hành cho các trường hợp sau:
-                                    <li>- Dây chuyền, lắc chế tác bị đứt gãy; bị biến dạng hoặc hư hỏng nặng</li>
-                                    <li>- Khách hàng cung cấp thông tin truy lục hóa đơn không chính xác.​​​​​</li>
+                                <p><b>{t("guarantee5")}</b></p>
+                                <ul>{t("guarantee6")}
+                                    <li>- {t("guarantee7")}</li>
+                                    <li>- {t("guarantee8")}</li>
                                 </ul>
-                                <ul><i>Lưu ý:</i>
-                                    <li><i>- ES bảo hành các sản phẩm thuộc hệ thống cửa hàng online của ES.</i>​​</li>
-                                    <li><i>- Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của ES đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.​</i></li>
+                                <ul><i>{t("guarantee9")}</i>
+                                    <li><i>{t("guarantee10")}</i>​​</li>
+                                    <li><i>{t("guarantee11")}​</i></li>
                                 </ul>
                             </div>
                         </div>

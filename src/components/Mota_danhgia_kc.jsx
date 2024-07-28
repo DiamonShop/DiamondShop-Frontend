@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
+import { useTranslation } from "react-i18next";// luon luon co de dich
 // function Mota_danhgia_kc() {
 //   const productObj = JSON.parse(localStorage.getItem('product'));
 //   return (
@@ -123,6 +124,7 @@ import StarRating from '../components/StarRating'; // Adjust the import path
 
 // export default Mota_danhgia_kc
 const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
+  const { t } = useTranslation();//luon luon co de dich
   const [feedbacks, setFeedbacks] = useState([]);
   const [canComment, setCanComment] = useState(false);
   const [orderIdForComment, setOrderIdForComment] = useState(null);
@@ -229,13 +231,13 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
           <div className="product-review-info">
             <ul className="nav review-tab">
               <li>
-                <a className="active" data-bs-toggle="tab" href="#tab_one">Mô tả sản phẩm</a>
+                <a className="active" data-bs-toggle="tab" href="#tab_one">{t("productDescription")}</a>
               </li>
               <li>
-                <a data-bs-toggle="tab" href="#tab_two">Thông số</a>
+                <a data-bs-toggle="tab" href="#tab_two">{t("parameters")}</a>
               </li>
               <li>
-                <a data-bs-toggle="tab" href="#tab_three">Phản hồi</a>
+                <a data-bs-toggle="tab" href="#tab_three">{t("feedback")}</a>
               </li>
              
             </ul>

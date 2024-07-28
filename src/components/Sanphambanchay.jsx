@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import '../slick-min'
 import $ from 'jquery';
+import { useTranslation } from "react-i18next";// luon luon co de dich
 function Sanphambanchay() {
+    const { t } = useTranslation();//luon luon co de dich
 
     useEffect(() => {
         const initializeSlick = () => {
@@ -43,7 +45,7 @@ function Sanphambanchay() {
     return (
         <div>
             <div className="section-title-append">
-                <h4>Sản Phẩm Bán Chạy</h4>
+                <h4>{t("bestSellingProduct")}</h4>
                 <div className="slick-append"></div>
             </div>
             <div className="group-list-item-wrapper">

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '../utils/NumberFormat';
+import { useTranslation } from "react-i18next";// luon luon co de dich
 function Du_lieu_san_pham_nb(props) {
-
+    const { t } = useTranslation();//luon luon co de dich
     return (
         <div>
             <div className="product-item">
@@ -20,7 +21,7 @@ function Du_lieu_san_pham_nb(props) {
                     </div>
                     <Link to={{ pathname: "/Chitietsanpham" }} onClick={() => props.onProductClick(props)}>
                     <div className="cart-hover">
-                        <button className="btn btn-cart">Khám phá ngay</button>
+                        <button className="btn btn-cart">{t("discoveryNow")}</button>
                     </div>
                     </Link>
                 </figure>

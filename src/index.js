@@ -31,6 +31,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { isTokenExpired } from './api/TokenAPI';
 import { UserProvider } from './UserContext';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n'; // Đường dẫn tới tệp i18n.jsx
 
 // Create a root.
 const rootElement = document.getElementById('root');
@@ -42,11 +44,15 @@ const tokenIsValid = token && !isTokenExpired(token); // Check if token exists a
 
 // Render the app with UserProvider
 root.render(
+  
   <React.StrictMode>
+    <I18nextProvider i18n={i18n}>
     <UserProvider>
       <App tokenIsValid={tokenIsValid} />
     </UserProvider>
+    </I18nextProvider>
   </React.StrictMode>
+  
 );
 
 reportWebVitals();
