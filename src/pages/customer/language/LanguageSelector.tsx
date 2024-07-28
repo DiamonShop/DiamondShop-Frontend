@@ -78,11 +78,6 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = () => {
         <span className="font-medium truncate">
           {lang === vn ? "VI" : "US"}
         </span>
-        <img
-          src={down}
-          className={`w-4 transform ${isOpen ? "rotate-180" : ""}`}
-          alt="chevron-down"
-        />
       </button>
 
       {isOpen && (

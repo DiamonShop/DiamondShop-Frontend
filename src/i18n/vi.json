@@ -2,7 +2,7 @@
     "logIn": "Đăng nhập",
     "signUp": "Đăng kí",
     "wrong": "Sai tài khoản hoặc mật khẩu",
-    "discoveryNow":"Khám phá ngay",
+    "discoveryNow": "Khám phá ngay",
     "showing": "Hiển thị 1–8 trên",
     "result": "kết quả",
     "listBy": "Liệt kê theo:",
@@ -21,7 +21,7 @@
     "bracelet": "Vòng tay",
     "diamond": "Kim cương",
     "carat": "ly",
-    "priceList": "bảng giá kim cương",
+    "priceList": "Bảng giá kim cương",
     "aboutUs": "Về chúng tôi",
     "searchProduct": "Tìm kiếm sản phẩm",
     "accountInfomation": "Thông tin tài khoản",
@@ -48,6 +48,10 @@
     "guarantee9": "Lưu ý:",
     "guarantee10": "ES bảo hành các sản phẩm thuộc hệ thống cửa hàng online của ES.",
     "guarantee11": "Chế độ bảo hành sản phẩm có thể thay đổi theo chính sách của ES đối với các dòng hàng và chương trình khuyến mãi vào từng thời điểm.",
-    "bestSellingProduct": "Sản Phẩm Bán Chạy"
-    
+    "bestSellingProduct": "Sản Phẩm Bán Chạy",
+    "freeShip": "Miễn phí vận chuyển",
+    "customerCare": "Chăm sóc khách hàng",
+    "warrantyCommit": "Dịch vụ bảo hành",
+    "security": "Bảo mật",
+    "featureJewelry":"Trang Sức Nổi Bật"
 }

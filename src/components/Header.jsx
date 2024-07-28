@@ -6,7 +6,6 @@ import { decodeToken } from '../api/TokenAPI';
 import LanguageSelector from "../pages/customer/language/LanguageSelector.tsx";
 import { useTranslation } from "react-i18next";// luon luon co de dich
 
-
 export default function Header({ tokenIsValid }) {
   const isLoggedIn = tokenIsValid;
   const [searchValue, setSearchValue] = useState();
@@ -14,7 +13,7 @@ export default function Header({ tokenIsValid }) {
   const [orderDetail, setOrderDetails] = useState([]);
   const [isMinicartVisible, setMinicartVisible] = React.useState(false);
   const { t } = useTranslation();//luon luon co de dich
- 
+
   const openMinicart = () => {
     setMinicartVisible(true);
     document.body.classList.add('fix');
@@ -77,7 +76,7 @@ export default function Header({ tokenIsValid }) {
                           </li>
                           <li>
                             <a href="">
-                            {t("jewelry")} <i className="fa fa-angle-down"></i>
+                              {t("jewelry")} <i className="fa fa-angle-down"></i>
                             </a>
                             <ul className="dropdown">
                               <li>
@@ -134,7 +133,7 @@ export default function Header({ tokenIsValid }) {
                         <input
                           type="text"
                           name='txtSearchValue'
-                          placeholder= {t("priceList")}
+                          placeholder={t("searchProduct")}
                           value={searchValue}
                           className="header-search-field bg-white"
                         />
@@ -142,6 +141,10 @@ export default function Header({ tokenIsValid }) {
                           <i className="pe-7s-search"></i>
                         </button>
                       </form>
+                    </div>
+                    {/* change language */}
+                    <div className="i8-home-page">
+                      <LanguageSelector />{" "}
                     </div>
                     {isLoggedIn ? (
                       <div className="header-configure-area">
@@ -164,11 +167,7 @@ export default function Header({ tokenIsValid }) {
                         </ul>
                       </div>
                     ) : (
-                      //change language
                       <div className="header-configure-area">
-                          <div className="i8-home-page">
-              <LanguageSelector />{" "} 
-            </div>
                         <ul className="nav justify-content-end">
                           <li className="user-hover">
                             <a href="#">
@@ -189,7 +188,7 @@ export default function Header({ tokenIsValid }) {
                       </div>
                     )}
                   </div>
-                  
+
                 </div>
               </div>
             </div>
