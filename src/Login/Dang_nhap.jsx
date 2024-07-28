@@ -4,10 +4,12 @@ import { jwtDecode } from 'jwt-decode';
 import { GoogleLogin, handleLoginUser } from '../api/LoginAPI';
 import { Link } from 'react-router-dom';
 import { Button, message } from 'antd';
+import { useTranslation } from "react-i18next";// luon luon co de dich
 
 export default function Dang_nhap() {
     const [signInForm, setSignInForm] = useState({ username: '', password: '' });
     const [messageApi, contextHolder] = message.useMessage();
+    const { t } = useTranslation();//luon luon co de dich
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -74,7 +76,7 @@ export default function Dang_nhap() {
                 console.error('Token is not available in the response');
                 messageApi.open({
                     type: 'error',
-                    content: 'Sai tài khoản hoặc mật khẩu',
+                    content: `${t('wrong')}`,// dạng biến
                 });
             }
         } catch (error) {

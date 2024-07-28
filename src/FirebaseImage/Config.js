@@ -8,7 +8,5 @@ const firebaseConfig = {
   messagingSenderId: "1079091432357",
   appId: "1:1079091432357:web:f2bd03aec9535f09cab64c"
 };
-
-
 const app = initializeApp(firebaseConfig);
 export const imageDb = getStorage(app)

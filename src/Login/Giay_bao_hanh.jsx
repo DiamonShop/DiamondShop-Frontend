@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { handleGetWarrantyByUserId } from "../api/WarrantyAPI";
-import GeneratePDF from './GeneratePDF';
+import GenerateWarrantyPDF from './GenerateWarrantyPDF';
 import { decodeToken } from "../api/TokenAPI";
 import { handleUserProfile } from "../api/UserProfile";
 
@@ -24,7 +24,6 @@ const Giay_bao_hanh = () => {
             if (warrantyData) {
                 setWarranties(warrantyData);
             }
-            console.log(warranties)
         };
 
         fetchData();
@@ -36,7 +35,7 @@ const Giay_bao_hanh = () => {
 
     return (
         <div>
-            <div className="myaccount-content" style={{ width: '126%' }}>
+            <div className="myaccount-content" style={{ width: '100%' }}>
                 <h5>Giấy bảo hành</h5>
                 <div className="myaccount-table table-responsive text-center">
                     <table>
@@ -50,22 +49,30 @@ const Giay_bao_hanh = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {warranties.map((warranty) => (
-                                <tr key={warranty.warrantyId}>
-                                    <td>{warranty.warrantyId}</td>
-                                    <td>{warranty.startDate}</td>
-                                    <td>{warranty.endDate}</td>
-                                    <td>{warranty.productName}</td>
-                                    <td>
-                                        <GeneratePDF
-                                            customerName={warranty.username}
-                                            productName={warranty.productName}
-                                            warrantyFrom={warranty.startDate}
-                                            warrantyTo={warranty.endDate}
-                                        />
+                            {warranties.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>
+                                        Không có giấy bảo hành
                                     </td>
                                 </tr>
-                            ))}
+                            ) : (
+                                warranties.map((warranty) => (
+                                    <tr key={warranty.warrantyId}>
+                                        <td>{warranty.warrantyId}</td>
+                                        <td>{warranty.startDate}</td>
+                                        <td>{warranty.endDate}</td>
+                                        <td>{warranty.productName}</td>
+                                        <td>
+                                            <GenerateWarrantyPDF
+                                                customerName={warranty.username}
+                                                productName={warranty.productName}
+                                                warrantyFrom={warranty.startDate}
+                                                warrantyTo={warranty.endDate}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </table>
                 </div>

@@ -14,8 +14,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, message, Upload, Input, InputNumber, Select, Popconfirm } from 'antd';
-
+import { Button, message, Upload, Input, InputNumber, Select, Popconfirm, Modal } from 'antd';
+import { uploadGiaToFirebase } from '../../FirebaseImage/FirebaseImageUpload';
 const { Option } = Select;
 
 const formatCurrency = (value) => {
@@ -624,6 +624,37 @@ const KimCuong = () => {
         }
     }, [userLogout]);
 
+    //-----------------------------------------Upload chứng nhận GIA--------------------------------------------------------
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [file, setFile] = useState(null);
+
+    const showModal = (product) => {
+        setSelectedProduct(product);
+        setIsModalVisible(true);
+    };
+
+    const handleOk = async () => {
+        if (file && selectedProduct) {
+            await uploadGiaToFirebase(file, selectedProduct.productId);
+        }
+        setIsModalVisible(false);
+        setFile(null);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        setFile(null);
+    };
+
+    const handleFileChange = (info) => {
+        if (info.file && info.file.originFileObj) {
+            setFile(info.file.originFileObj);
+        } else {
+            setFile(info.file);
+        }
+    };
+    //--------------------------------------------------------------------------------------------------------------------------
+
     return (
         <div className="wrapper">
             <nav id="sidebar" className="sidebar js-sidebar">
@@ -791,7 +822,7 @@ const KimCuong = () => {
                                         </td>
                                         <td>{product.productName}</td>
                                         <td>{product.quantity}</td>
-                                        <td>{formatCurrency(product.markupPrice)}VNĐ</td> {/* Định dạng tiền tệ */}
+                                        <td>{product.markupPrice}VNĐ</td>
                                         <td>{getProductStatus(product)}</td>
                                         <td>
                                             <div className="admin-page-buttons">
@@ -807,12 +838,20 @@ const KimCuong = () => {
                                                 >
                                                     <Button danger>Xóa</Button>
                                                 </Popconfirm>
+                                                <Button type='default' onClick={() => showModal(product)}>Thêm GIA</Button>
                                             </div>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+
+                        <Modal title="Thêm ảnh GIA" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                            <Upload beforeUpload={() => false} onChange={handleFileChange}>
+                                <Button icon={<UploadOutlined />}>Chọn ảnh</Button>
+                            </Upload>
+                        </Modal>
+
                         <ReactPaginate
                             previousLabel={"Trước"}
                             nextLabel={"Sau"}

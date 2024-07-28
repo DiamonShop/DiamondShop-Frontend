@@ -248,13 +248,6 @@ const Taikhoan = () => {
         }));
     };
 
-    const handleEditSelectChange = (value, name) => {
-        setEditAccount(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
     const handleEditInputNumberChange = (value, name) => {
         setEditAccount(prevState => ({
             ...prevState,
@@ -375,7 +368,7 @@ const Taikhoan = () => {
     const pageCount = Math.ceil(filteredAccounts.length / usersPerPage);
     const offset = currentPage * usersPerPage;
     const currentPageUsers = filteredAccounts.slice(offset, offset + usersPerPage);
-
+    
     const handleOpenAddButtonClick = () => {
         setShowAddOverlay(true);
     };
@@ -536,7 +529,7 @@ const Taikhoan = () => {
 
                             <div className="admin-page-status-filter">
                                 <select className="form-control admin-page-filter-dropdown" value={roleFilter} onChange={handleRoleFilterChange}>
-                                    <option value="Tất cả">Chức vụ</option>
+                                    <option value="Tất cả">Tất cả</option>
                                     <option value='Admin'>Quản trị viên</option>
                                     <option value='Manager'>Quản lí</option>
                                     <option value='Member'>Thành viên</option>
@@ -554,7 +547,7 @@ const Taikhoan = () => {
                         </div>
 
                         <table className="admin-page-table">
-                            <thead >
+                            <thead>
                                 <tr className='admin-page-column-table'>
                                     <th>ID</th>
                                     <th>Họ và tên</th>
@@ -578,23 +571,25 @@ const Taikhoan = () => {
                                             <div className="admin-page-buttons">
                                                 <Button type='default' onClick={() => openDetailModal(user)}>Xem</Button>
                                                 <Button type='default' onClick={() => handleEditUserClick(user)}>Sửa</Button>
-                                                <Popconfirm
-                                                    title="Xóa tài khoản"
-                                                    description={`Bạn có chắc chắn muốn xóa tài khoản của ${user.fullname}?`}
-                                                    onConfirm={() => confirmDelete(user.id)}
-                                                    onCancel={cancelDelete}
-                                                    okText="Có"
-                                                    cancelText="Không"
-                                                >
-                                                    <Button danger>Xóa</Button>
-                                                </Popconfirm>
+                                                {user.roleName !== 'Admin' && (
+                                                    <Popconfirm
+                                                        title="Xóa tài khoản"
+                                                        description={`Bạn có chắc chắn muốn xóa tài khoản của ${user.fullname}?`}
+                                                        onConfirm={() => confirmDelete(user.id)}
+                                                        onCancel={cancelDelete}
+                                                        okText="Có"
+                                                        cancelText="Không"
+                                                    >
+                                                        <Button danger>Xóa</Button>
+                                                    </Popconfirm>
+                                                )}
                                             </div>
-
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+
                         <ReactPaginate
                             previousLabel={"Trước"}
                             nextLabel={"Sau"}
@@ -685,11 +680,10 @@ const Taikhoan = () => {
                                                         <label>Chức vụ:</label>
                                                         <Select
                                                             name="roleId"
-                                                            value={newAccount.roleId}
                                                             style={{ width: '100%', height: '46.74px' }}
                                                             onChange={(value) => handleAddInputChange({ target: { name: 'roleId', value } })}
+                                                            placeholder='Chọn chức vụ'
                                                         >
-                                                            <Option value="">Chọn chức vụ</Option>
                                                             <Option value={1}>Quản trị viên</Option>
                                                             <Option value={2}>Quản lí</Option>
                                                             <Option value={3}>Thành viên</Option>

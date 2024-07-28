@@ -8,12 +8,14 @@ import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
 import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
 import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
 import Du_lieu_san_pham_vtxmdc from './Du_lieu_san_pham_vtxmdc';
+import { useTranslation } from 'react-i18next';
 
 function Sanphamnoibat({ onProductClick }) {
     const [randomProductsNhan, setRandomProductsNhan] = useState([]);
     const [randomProductsDaychuyen, setRandomProductsDaychuyen] = useState([]);
     const [randomProductsMatdaychuyen, setRandomProductsMatdaychuyen] = useState([]);
     const [randomProductsVongtay, setrandomProductsVongtay] = useState([]);
+    const { t } = useTranslation();//luon luon co de dich
 
     useEffect(() => {
         setRandomProductsNhan(getRandomProducts(Product_Nhan_Data, 5));
@@ -82,7 +84,7 @@ function Sanphamnoibat({ onProductClick }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title text-center">
-                                <h2 className="title">Trang sức nổi bật</h2>
+                                <h2 className="title">{t("featureJewelry")}</h2>
                                 <p className="sub-title">Trang sức mới ra mắt trong tháng</p>
                             </div>
                         </div>
