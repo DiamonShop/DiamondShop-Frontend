@@ -8,12 +8,15 @@ import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
 import { Product_Daychuyen_Data } from '../Data/Product_daychuyen_data';
 import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
 import Du_lieu_san_pham_vtxmdc from './Du_lieu_san_pham_vtxmdc';
+import { useTranslation } from "react-i18next";// luon luon co de dich
+
 
 function Sanphamnoibat({ onProductClick }) {
     const [randomProductsNhan, setRandomProductsNhan] = useState([]);
     const [randomProductsDaychuyen, setRandomProductsDaychuyen] = useState([]);
     const [randomProductsMatdaychuyen, setRandomProductsMatdaychuyen] = useState([]);
     const [randomProductsVongtay, setrandomProductsVongtay] = useState([]);
+    const { t } = useTranslation();//luon luon co de dich
 
     useEffect(() => {
         setRandomProductsNhan(getRandomProducts(Product_Nhan_Data, 5));
@@ -82,8 +85,8 @@ function Sanphamnoibat({ onProductClick }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title text-center">
-                                <h2 className="title">Trang sức nổi bật</h2>
-                                <p className="sub-title">Trang sức mới ra mắt trong tháng</p>
+                                <h2 className="title">{t("featuredJewelry1")}</h2>
+                                <p className="sub-title">{t("featuredJewelry2")}</p>
                             </div>
                         </div>
                     </div>
@@ -94,16 +97,16 @@ function Sanphamnoibat({ onProductClick }) {
                                 <div className="product-tab-menu">
                                     <ul className="nav justify-content-center">
                                         <li>
-                                            <a href="#tab1" className="active" data-bs-toggle="tab"> Nhẫn</a>
+                                            <a href="#tab1" className="active" data-bs-toggle="tab">{t("ring")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab2" data-bs-toggle="tab"> Dây chuyền</a>
+                                            <a href="#tab2" data-bs-toggle="tab"> {t("necklace")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab3" data-bs-toggle="tab"> Mặt dây chuyền</a>
+                                            <a href="#tab3" data-bs-toggle="tab"> {t("pendant")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab4" data-bs-toggle="tab"> Vòng tay</a>
+                                            <a href="#tab4" data-bs-toggle="tab"> {t("bracelet")}</a>
                                         </li>
                                     </ul>
                                 </div>

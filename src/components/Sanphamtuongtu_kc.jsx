@@ -1,6 +1,7 @@
 import React from 'react'
+import { useTranslation } from "react-i18next";
 function Sanphamtuongtu_kc() {
-   
+  const { t } = useTranslation();
   return (
     <div>
        <section class="related-products section-padding">
@@ -9,7 +10,7 @@ function Sanphamtuongtu_kc() {
             <div class="col-12">
 
               <div class="section-title text-center">
-                <h2 class="title">Sản phẩm tương tự</h2>
+                <h2 class="title">{t("similarProduct")}</h2>
                 {/* <p class="sub-title">Add related products to weekly lineup</p> */}
               </div>
 
@@ -54,7 +55,7 @@ function Sanphamtuongtu_kc() {
                       <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                     </div>
                     <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
+                      <button class="btn btn-cart">{t("addtoCart")}</button>
                     </div>
                   </figure>
                   <div class="product-caption text-center">
@@ -80,7 +81,7 @@ function Sanphamtuongtu_kc() {
                       <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                     </div>
                     <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
+                      <button class="btn btn-cart">{t("addtoCart")}</button>
                     </div>
                   </figure>
                   <div class="product-caption text-center">
@@ -106,7 +107,7 @@ function Sanphamtuongtu_kc() {
                       <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                     </div>
                     <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
+                      <button class="btn btn-cart">{t("addtoCart")}</button>
                     </div>
                   </figure>
                   <div class="product-caption text-center">
@@ -131,7 +132,7 @@ function Sanphamtuongtu_kc() {
                       <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" data-bs-placement="left" title="Quick View"><i class="pe-7s-search"></i></span></a>
                     </div>
                     <div class="cart-hover">
-                      <button class="btn btn-cart">add to cart</button>
+                      <button class="btn btn-cart">{t("addtoCart")}</button>
                     </div>
                   </figure>
                   <div class="product-caption text-center">

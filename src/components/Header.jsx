@@ -134,7 +134,7 @@ export default function Header({ tokenIsValid }) {
                         <input
                           type="text"
                           name='txtSearchValue'
-                          placeholder= {t("priceList")}
+                          placeholder= {t("searchProduct")}
                           value={searchValue}
                           className="header-search-field bg-white"
                         />

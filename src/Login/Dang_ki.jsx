@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { handleSignUpUser, isValidEmail } from '../api/SignUpAPI';
 import { Link } from 'react-router-dom';
 import { Button, message, Space } from 'antd';
+import { useTranslation } from "react-i18next";
 export default function Dang_ki() {
     const [signUpForm, setSignUpForm] = useState({ username: '', email: '', password: '' });
     // const [successMessage, setSuccessMessage] = useState('');
     const [messageApi, contextHolder] = message.useMessage();
     // const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -42,7 +44,7 @@ export default function Dang_ki() {
         if (!isValidEmail(user.email)) {
             messageApi.open({
                 type: 'error',
-                content: 'Email không hợp lệ',
+                content: {t("invalidEmail")},
             });
             return;
         }
@@ -81,13 +83,13 @@ export default function Dang_ki() {
                 <div className="signin-signup-forms-container">
                     <div className="signin-signup">
                         <form onSubmit={handleSignUpSubmit} className="sign-in-form">
-                            <h2 className="sign-up-form-title">Đăng kí</h2>
+                            <h2 className="sign-up-form-title">{t("signUp")}</h2>
                             <div className="input-field">
                                 <i className="pe-7s-users"></i>
                                 <input
                                     type="text"
                                     name="username"
-                                    placeholder="Tên đăng nhập"
+                                    placeholder={t("username")}
                                     value={signUpForm.username}
                                     onChange={handleSignUpChange}
                                 />
@@ -97,7 +99,7 @@ export default function Dang_ki() {
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="Email"
+                                    placeholder={t("email")}
                                     value={signUpForm.email}
                                     onChange={handleSignUpChange}
                                 />
@@ -107,7 +109,7 @@ export default function Dang_ki() {
                                 <input
                                     type="password"
                                     name="password"
-                                    placeholder="Mật khẩu"
+                                    placeholder={t("password")}
                                     value={signUpForm.password}
                                     onChange={handleSignUpChange}
                                 />
@@ -119,9 +121,9 @@ export default function Dang_ki() {
                 <div className="panels-container">
                     <div className="panel left-panel">
                         <div className="content">
-                            <h3>Đã có tài khoản ?</h3>
-                            <p>Đăng nhập để tiếp tục mua hàng</p>
-                            <Link to="/Dangnhap"><button className="btn transparent" id="sign-in-btn">Đăng nhập</button></Link>
+                            <h3>{t("AlreadyhaveAccount")}</h3>
+                            <p>{t("LogintoShopping")}</p>
+                            <Link to="/Dangnhap"><button className="btn transparent" id="sign-in-btn">{t("logIn")}</button></Link>
                         </div>
                     </div>
                     <div>

@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { useTranslation } from "react-i18next"; 
 function Service_policy() {
+    const { t } = useTranslation();
   return (
     <div>
         <div className="service-policy">
@@ -13,8 +14,8 @@ function Service_policy() {
                                         <i className="pe-7s-plane"></i>
                                     </div>
                                     <div className="policy-content">
-                                        <h6>Miễn phí vận chuyển</h6>
-                                        <p>Miễn phí vận chuyển cho tất cả đơn hàng</p>
+                                        <h6>{t("freeShipping1")}</h6>
+                                        <p>{t("freeShipping2")}</p>
                                     </div>
                                 </div>
                             </div>
@@ -24,8 +25,8 @@ function Service_policy() {
                                         <i className="pe-7s-help2"></i>
                                     </div>
                                     <div className="policy-content">
-                                        <h6>Chăm sóc khách hàng</h6>
-                                        <p>Hỗ trợ tư vấn 24/7</p>
+                                        <h6>{t("customerCare1")}</h6>
+                                        <p>{t("customerCare2")}</p>
                                     </div>
                                 </div>
                             </div>
@@ -35,8 +36,8 @@ function Service_policy() {
                                         <i className="pe-7s-back"></i>
                                     </div>
                                     <div className="policy-content">
-                                        <h6>Hoàn trả</h6>
-                                        <p>Hỗ trợ đổi trả trong vòng 30 ngày</p>
+                                        <h6>{t("refund1")}</h6>
+                                        <p>{t("refund2")}</p>
                                     </div>
                                 </div>
                             </div>
@@ -46,8 +47,8 @@ function Service_policy() {
                                         <i className="pe-7s-credit"></i>
                                     </div>
                                     <div className="policy-content">
-                                        <h6>Bảo mật</h6>
-                                        <p>Cam kết bảo mật thông tin khách hàng</p>
+                                        <h6>{t("security1")}</h6>
+                                        <p>{t("security2")}</p>
                                     </div>
                                 </div>
                             </div>

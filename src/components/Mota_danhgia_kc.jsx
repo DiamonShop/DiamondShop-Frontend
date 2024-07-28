@@ -251,23 +251,23 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                 <table class="table table-bordered">
                   <tbody>
                     <tr>
-                      <td>Tên sản phẩm </td>
+                      <td>{t("productName")} </td>
                       <td>{productObj.productName}</td>
                     </tr>
                     <tr>
-                      <td>Trọng lượng (Carat) </td>
+                      <td>{t("weight")} (Carat) </td>
                       <td>{productObj.Carat} carat</td>
                     </tr>
                     <tr>
-                      <td>Màu sắc (Color) </td>
+                      <td>{t("color")} (Color) </td>
                       <td>{productObj.Color}</td>
                     </tr>
                     <tr>
-                      <td>Độ Tinh Khiết (Clarity) </td>
+                      <td>{t("clarity")} (Clarity) </td>
                       <td>{productObj.Clarity}</td>
                     </tr>
                     <tr>
-                      <td>Giác Cắt (Cut) </td>
+                      <td>{t("cut")} (Cut) </td>
                       <td>{productObj.Cut}</td>
                     </tr>
                   </tbody>
@@ -295,7 +295,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                   <form onSubmit={handleFeedbackSubmit} className="review-form">
                     <div className="form-group row">
                       <div className="col">
-                        <label className="col-form-label"><span className="text-danger">*</span> Đánh giá:</label>
+                        <label className="col-form-label"><span className="text-danger">*</span> {t("evaluate")}</label>
                         <textarea
                           className="form-control"
                           name="description"
@@ -312,7 +312,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
                       </div>
                     </div>
                     <div className="buttons">
-                      <button className="btn btn-sqr" type="submit">Gửi</button>
+                      <button className="btn btn-sqr" type="submit">{t("send")}</button>
                     </div>
                   </form>
                 )}
