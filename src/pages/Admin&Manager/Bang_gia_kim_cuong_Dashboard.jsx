@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../../UserContext';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import 'react-quill/dist/quill.snow.css';
 import { Button, message, Popconfirm } from 'antd';
 
@@ -61,7 +61,12 @@ export default function Bang_gia_kim_cuong() {
                                 {clarities.map(clarity => (
                                     <td key={clarity}>
                                         {getPriceForClarityAndColor(clarity, color)}
-                                        <button onClick={() => openEditModal(diamonds.find(d => d.clarity === clarity && d.color === color))}>Edit</button>
+                                        <button
+                                            style={{ color: 'blue', paddingLeft: '10px'}}
+                                            onClick={() => openEditModal(diamonds.find(d => d.clarity === clarity && d.color === color))}
+                                        >
+                                            Sửa
+                                        </button>
                                     </td>
                                 ))}
                             </tr>
