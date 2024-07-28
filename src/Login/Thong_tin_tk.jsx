@@ -3,30 +3,30 @@ import axios from 'axios';
 import { useUser } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout as apilogout } from '../api/LogoutAPI';
-import {jwtDecode} from 'jwt-decode'; // Đảm bảo bạn nhập đúng
-import updateProfile from '../api/UpdateProfile'; // Assuming this handles profile updates
+import {jwtDecode} from 'jwt-decode';
+import updateProfile from '../api/UpdateProfile';
 import Don_hang from '../pages/cart/Don_hang';
 import Giay_bao_hanh from './Giay_bao_hanh';
+import Giay_chung_nhan from './Giay_chung_nhan';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
     const [userData, setUserData] = useState(null);
-    const [errorMessage, setErrorMessage] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [numberPhone, setNumberPhone] = useState('');
     const [address, setAddress] = useState('');
-    const [loyalpoint, setLoyalpoint] = useState('');
+    const [loyalpoint, setLoyalpoint] = useState(0);
     const [newPwd, setNewPassword] = useState('');
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-
     const fetchUserData = async () => {
         if (!currentUser) {
-            console.log("User not logged in. Redirecting to login.");
             return;
         }
 
@@ -58,14 +58,14 @@ export default function Thong_tin_tk() {
             setEmail(response.data.email || '');
             setNumberPhone(response.data.numberPhone || '');
             setAddress(response.data.address || '');
-            setLoyalpoint(response.data.loyaltyPoints || '');
+            setLoyalpoint(response.data.loyaltyPoints);
         } catch (error) {
             console.error('Error fetching user data:', error);
             if (error.response && error.response.status === 401) {
                 console.log('Token expired or invalid. Redirecting to login.');
                 userLogout();
             } else {
-                setErrorMessage('Error fetching user data.');
+                toast.error('Error fetching user data.');
             }
         } finally {
             setLoading(false);
@@ -102,9 +102,41 @@ export default function Thong_tin_tk() {
         setAddress(event.target.value);
     };
 
-    // Hàm handleSubmit để cập nhật thông tin người dùng
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Kiểm tra các điều kiện đầu vào
+        if (!displayName || !email || !numberPhone || !address) {
+            toast.error('Tất cả các ô nhập không được để trống.');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            toast.error('Email không hợp lệ.');
+            return;
+        }
+
+        if (numberPhone.length < 10) {
+            toast.error('Số điện thoại phải có ít nhất 10 số.');
+            return;
+        }
+
+        if (newPwd) {
+            if (newPwd.length === 0) {
+                toast.error('Mật khẩu không được để trống.');
+                return;
+            }
+            if (newPwd !== confirmPwd) {
+                toast.error('Mật khẩu xác nhận không khớp.');
+                return;
+            }
+        }
+
         const token = localStorage.getItem('token');
 
         // Tạo object chứa dữ liệu cần cập nhật
@@ -125,7 +157,7 @@ export default function Thong_tin_tk() {
             setLoading(true);
             const updatedUser = await updateProfile(token, userDataToUpdate);
             console.log('Update response:', updatedUser);
-            setErrorMessage('Cập nhật thành công.');
+            toast.success('Cập nhật thành công.');
             setUserData(updatedUser);
 
             fetchUserData(); // Sau khi cập nhật thành công, fetch lại thông tin người dùng để hiển thị
@@ -133,28 +165,22 @@ export default function Thong_tin_tk() {
             if (error.response) {
                 console.log('Server responded with error:', error.response.data);
                 console.error('Error details:', error.response.data.errors);
-                setErrorMessage(error.response.data.title || 'Đã xảy ra lỗi không xác định');
+                toast.error(error.response.data.title || 'Đã xảy ra lỗi không xác định');
             } else if (error.request) {
                 console.log('No response received:', error.request);
-                setErrorMessage('Không nhận được phản hồi từ máy chủ');
+                toast.error('Không nhận được phản hồi từ máy chủ');
             } else {
                 console.log('Error setting up request:', error.message);
-                setErrorMessage('Đã xảy ra lỗi trong quá trình xử lý yêu cầu');
+                toast.error('Đã xảy ra lỗi trong quá trình xử lý yêu cầu');
             }
         } finally {
             setLoading(false);
         }
     };
 
-    // Hàm handleLogout để đăng xuất
-    const handleLogout = () => {
-        apilogout();
-        userLogout();
-        navigate('/');
-    };
-
     return (
         <div>
+            <ToastContainer />
             <div className="breadcrumb-area">
                 <div className="container">
                     <div className="row">
@@ -186,8 +212,11 @@ export default function Thong_tin_tk() {
                                                 <a href="#orders" data-bs-toggle="tab">
                                                     <i className="fa fa-cart-arrow-down"></i> Đơn hàng
                                                 </a>
-                                                <a href="#payment-method" data-bs-toggle="tab">
+                                                <a href="#warranty" data-bs-toggle="tab">
                                                     <i className="fa fa-credit-card"></i> Giấy bảo hành
+                                                </a>
+                                                <a href="#certificate" data-bs-toggle="tab">
+                                                    <i className="fa fa-certificate"></i> Giấy chứng nhận
                                                 </a>
                                             </div>
                                         </div>
@@ -233,19 +262,17 @@ export default function Thong_tin_tk() {
                                                                     <button className="btn btn-sqr">Lưu thay đổi</button>
                                                                 </div>
                                                             </form>
-                                                            {errorMessage && (
-                                                                <div className="error-message">
-                                                                    {errorMessage}
-                                                                </div>
-                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="orders" role="tabpanel">
                                                     <Don_hang />
                                                 </div>
-                                                <div className="tab-pane fade" id="payment-method" role="tabpanel">
+                                                <div className="tab-pane fade" id="warranty" role="tabpanel">
                                                     <Giay_bao_hanh />
+                                                </div>
+                                                <div className="tab-pane fade" id="certificate" role="tabpanel">
+                                                    <Giay_chung_nhan />
                                                 </div>
                                             </div>
                                         </div>

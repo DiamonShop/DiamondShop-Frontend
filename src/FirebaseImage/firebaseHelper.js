@@ -89,3 +89,39 @@ export const getDiamondImageUrls = async (productId, categoryId, diameterMM) => 
         return { image1Url: null, image2Url: null, image3Url: null, image4Url: null };
     }
 };
+
+export const getCertificateImageUrls = async (productId) => {
+    if (!productId) {
+        console.error("Invalid productId:", productId);
+        return { imageUrl: null };
+    }
+
+    const parts = productId.split('-');
+    const productPrefix = `${parts[0]}-${parts[1]}`; // Join the first two parts
+
+    const productRef = ref(imageDb, `certificates/${productPrefix}/${productId}`);
+
+    try {
+        const list = await listAll(productRef);
+        const imageRefs = list.items.slice(0, 1); // Get the first file only
+
+        const imageUrls = await Promise.all(
+            imageRefs.map(async (imageRef) => {
+                try {
+                    return await getDownloadURL(imageRef);
+                } catch (error) {
+                    if (error.code === 'storage/object-not-found') {
+                        console.error(`File not found: ${imageRef.fullPath}`);
+                        return null; // or provide a fallback URL
+                    }
+                    throw error;
+                }
+            })
+        );
+
+        return { imageUrl: imageUrls[0] }; // Return the first image URL
+    } catch (error) {
+        console.error("Error listing files:", error);
+        return { imageUrl: null }; // Return null if an error occurs
+    }
+};

@@ -63,7 +63,7 @@ const WarrantyDocument = ({ customerName, productName, warrantyFrom, warrantyTo 
     </Document>
 );
 
-const GeneratePDF = ({ customerName, productName, warrantyFrom, warrantyTo }) => {
+const GenerateWarrantyPDF = ({ customerName, productName, warrantyFrom, warrantyTo }) => {
     const [pdfDocument, setPdfDocument] = useState(null);
     const [pdfUrl, setPdfUrl] = useState('');
 
@@ -97,4 +97,4 @@ const GeneratePDF = ({ customerName, productName, warrantyFrom, warrantyTo }) =>
     );
 };
 
-export default GeneratePDF;
+export default GenerateWarrantyPDF;

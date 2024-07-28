@@ -34,18 +34,18 @@ const Don_Hang = () => {
   const ordersPerPage = 6;
 
   const orderStatuses = [
-    "Đã hoàn thành",
-    "Đã hủy",
-    "Đang giao hàng",
-    "Đang xử lý",
+    "Pending",
     "Ordering",
+    "Shipping",
+    "Cancel",
+    "Completed",
   ];
 
   const sortOrders = (orders) => {
     const statusOrder = {
-      "Ordering": 1,
-      "Shipping": 2,
-      "Pending": 3,
+      "Pending": 1,
+      "Ordering": 2,
+      "Shipping": 3,
       "Cancel": 4,
       "Completed": 5,
     };
@@ -535,7 +535,7 @@ const Don_Hang = () => {
                 <strong>Họ và tên:</strong> {selectedOrder.userName}
               </p>
               <p>
-                <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice)  + "VND"}
+                <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice) + "VND"}
               </p>
               <p>
                 <strong>Trạng thái:</strong> {selectedOrder.status}
@@ -566,7 +566,7 @@ const Don_Hang = () => {
                       <td>{product.productId}</td>
 
                       <td>{product.productName}</td>
-                      <td>{formatCurrency(product.unitPrice)  + "VND"}</td>
+                      <td>{formatCurrency(product.unitPrice) + "VND"}</td>
                       <td>{product.quantity}</td>
                     </tr>
                   ))}
