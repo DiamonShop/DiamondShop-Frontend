@@ -15,11 +15,10 @@ import { notification } from 'antd';
 
 export default function Chi_tiet_san_pham_kc() {
 
-  const largeSliderRef = useRef(null);
-  const navSliderRef = useRef(null);
   const productObj = JSON.parse(localStorage.getItem('product'));
   const [showMessage, setShowMessage] = useState(false);
   const [reviewCount, setReviewCount] = useState(0);
+  const [api, contextHolder] = notification.useNotification();
   const [averageRating, setAverageRating] = useState(0);
   const successAddMessage = () => {
     setShowMessage(true);
@@ -50,18 +49,18 @@ export default function Chi_tiet_san_pham_kc() {
     setIsOverlayVisible(false);
   };
 
-  const [api, contextHolder] = notification.useNotification();
+ 
 
   const openNotificationWithIcon = (type, message, description) => {
     api[type]({
       message: message,
       description: description,
-      duration: 1,
+      duration: 1.5,
     });
   };
 
   const handleAddToCart = async () => {
-const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
       const userId = decodeToken(token).sid;
       const orders = await handleGetOrderByUserId(parseInt(userId, 10));

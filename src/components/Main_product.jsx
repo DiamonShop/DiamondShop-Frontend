@@ -18,6 +18,9 @@ function Main_product({ onProductClick }) {
         setRandomProductsJewelry(getRandomProductsJewelry(Product_Jewelry_Data, 10));
 
         const initializeSlick = () => {
+            if ($('.product-carousel-4_2').hasClass('slick-initialized')) {
+                $('.product-carousel-4_2').slick('unslick');
+            }
             $('.product-carousel-4_2').slick({
                 speed: 1000,
                 slidesToShow: 4,
@@ -51,10 +54,12 @@ function Main_product({ onProductClick }) {
             });
         };
 
-        $(document).ready(initializeSlick);
+        const timer = setTimeout(() => {
+            initializeSlick();
+        }, 100);
 
         return () => {
-
+            clearTimeout(timer);
             if ($('.product-carousel-4_2').hasClass('slick-initialized')) {
                 $('.product-carousel-4_2').slick('unslick');
             }
@@ -100,7 +105,6 @@ function Main_product({ onProductClick }) {
                                         />
                                     </div>
                                 ))}
-
                             </div>
                         </div>
                     </div>
