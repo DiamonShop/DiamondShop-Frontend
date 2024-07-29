@@ -44,7 +44,7 @@ export default function Dang_ki() {
         if (!isValidEmail(user.email)) {
             messageApi.open({
                 type: 'error',
-                content: {t("invalidEmail")},
+                content: 'Email không hợp lệ',
             });
             return;
         }
