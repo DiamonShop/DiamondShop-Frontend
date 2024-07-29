@@ -1,6 +1,7 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 function Sanphamtuongtu_kc() {
-   
+  const { t } = useTranslation();
   return (
     <div>
        <section class="related-products section-padding">
@@ -9,7 +10,7 @@ function Sanphamtuongtu_kc() {
             <div class="col-12">
 
               <div class="section-title text-center">
-                <h2 class="title">Sản phẩm tương tự</h2>
+                <h2 class="title">{t("similarProduct")}</h2>
                 {/* <p class="sub-title">Add related products to weekly lineup</p> */}
               </div>
 

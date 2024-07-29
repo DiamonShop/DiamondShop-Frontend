@@ -7,10 +7,12 @@ import { Product_Matdaychuyen_Data } from '../Data/Product_matdaychuyen_data';
 import { Product_Nhan_Data } from '../Data/Product_nhan_data';
 import { Product_Vongtay_Data } from '../Data/Product_vongtay_data';
 import Du_lieu_san_pham_tt from './Du_lieu_san_pham_tt';
+import { useTranslation } from 'react-i18next';
 
 function Sanphamtuongtu({ onProductClick }) {
     const productObj = JSON.parse(localStorage.getItem('product'));
     const [randomProducts, setRandomProducts] = useState([]);
+    const { t } = useTranslation();
     useEffect(() => {
 
         let productsData;
@@ -91,7 +93,7 @@ function Sanphamtuongtu({ onProductClick }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title text-center">
-                                <h2 className="title">Sản phẩm tương tự</h2>
+                                <h2 className="title">{t("similarProduct")}</h2>
                             </div>
                         </div>
                     </div>
