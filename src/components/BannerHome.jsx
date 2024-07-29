@@ -32,23 +32,22 @@ function BannerHome() {
             
         };
     }, []);
-    
     return (
         <div>
             <section className="slider-area">
                 <div className="hero-slider-active slick-arrow-style slick-arrow-style_hero slick-dot-style">                 
                         <div className="hero-single-slide hero-overlay">
-                            <Link to="/Nhan">
+                            <Link to="/Nhẫn">
                                 <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-1.jpg)` }} />
                             </Link>
                         </div>
                         <div className="hero-single-slide hero-overlay">
-                            <Link to="/Matdaychuyen">
+                            <Link to="/Mặt dây chuyền">
                                 <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-2.jpg)` }} />
                             </Link>
                         </div>
                         <div className="hero-single-slide hero-overlay">
-                            <Link to="/Vongtay">
+                            <Link to="/Vòng tay">
                                 <div className="hero-slider-item bg-img" style={{ backgroundImage: `url(/assets/img/slider/banner-3.jpg)` }} />
                             </Link>
                         </div>

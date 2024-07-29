@@ -37,7 +37,7 @@ export default function FirebaseImageUpload() {
     const handleClick = async () => {
         if (img !== null) {
             const productId = "your-product-id"; // Thay thế bằng ID sản phẩm thực tế
-            const url = await uploadImageToFirebase(img, productId);
+            const url = await uploadGiaToFirebase(img, productId);
             setImgUrl(prevUrls => {
                 if (!prevUrls.includes(url)) {
                     return [...prevUrls, url];
