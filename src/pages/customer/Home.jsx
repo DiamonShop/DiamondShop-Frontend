@@ -45,7 +45,7 @@ export default function Home() {
             <Service_policy />
             <Sanphamnoibat onProductClick={handleProductClick} />
             <Main_banner />
-            <Main_product />
+            <Main_product onProductClick={handleProductClick}/>
             
 
         </div>
