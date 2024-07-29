@@ -105,7 +105,6 @@ function Main_product({ onProductClick }) {
                                         />
                                     </div>
                                 ))}
-
                             </div>
                         </div>
                     </div>
