@@ -53,7 +53,7 @@ export default function Dang_nhap() {
                     type: 'loading',
                     content: 'Logging in...',
                     duration: 2,
-                }).then(() => message.success('Đăng nhập thành công', 2)).then(() => {
+                }).then(() => message.success(`${t("loginSuccess")}`, 2)).then(() => {
                     if (roleName === 'Admin' || roleName === 'Manager') {
                         navigate('/Dashboard');
                         window.location.reload();
@@ -83,7 +83,7 @@ export default function Dang_nhap() {
             console.error('Login failed', error);
             messageApi.open({
                 type: 'error',
-                content: 'Đăng nhập thất bại: ' + error.message,
+                content: `${t("loginFail")}` + error.message,
             });
         }
     };
@@ -104,13 +104,13 @@ export default function Dang_nhap() {
                 <div className="signin-signup-forms-container">
                     <div className="signin-signup">
                         <form onSubmit={handleSignInSubmit} className="sign-in-form">
-                            <h2 className="sign-in-form-title">Đăng nhập</h2>
+                            <h2 className="sign-in-form-title">{t("logIn")}</h2>
                             <div className="input-field">
                                 <i className="pe-7s-users"></i>
                                 <input
                                     type="text"
                                     name="username"
-                                    placeholder="Tên đăng nhập"
+                                    placeholder= {t("username")}
                                     value={signInForm.username}
                                     onChange={handleSignInChange}
                                 />
@@ -120,7 +120,7 @@ export default function Dang_nhap() {
                                 <input
                                     type="password"
                                     name="password"
-                                    placeholder="Mật khẩu"
+                                    placeholder= {t("password")}
                                     value={signInForm.password}
                                     onChange={handleSignInChange}
                                 />
@@ -136,8 +136,8 @@ export default function Dang_nhap() {
                 <div className="panels-container">
                     <div className="panel left-panel">
                         <div className="content">
-                            <h3>Bạn chưa có tài khoản?</h3>
-                            <p>Hãy đăng kí để có trải nghiệm mua hàng tốt nhất</p>
+                            <h3>{t("notHaveAccount")}</h3>
+                            <p>{t("signuptoShopping")}</p>
                             <Link to="/Dangki"><button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button></Link>
                         </div>
                     </div>

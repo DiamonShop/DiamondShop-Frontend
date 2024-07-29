@@ -84,8 +84,8 @@ function Sanphamnoibat({ onProductClick }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title text-center">
-                                <h2 className="title">{t("featureJewelry")}</h2>
-                                <p className="sub-title">Trang sức mới ra mắt trong tháng</p>
+                                <h2 className="title">{t("featuredJewelry1")}</h2>
+                                <p className="sub-title">{t("featuredJewelry2")}</p>
                             </div>
                         </div>
                     </div>
@@ -96,16 +96,16 @@ function Sanphamnoibat({ onProductClick }) {
                                 <div className="product-tab-menu">
                                     <ul className="nav justify-content-center">
                                         <li>
-                                            <a href="#tab1" className="active" data-bs-toggle="tab"> Nhẫn</a>
+                                            <a href="#tab1" className="active" data-bs-toggle="tab"> {t("ring")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab2" data-bs-toggle="tab"> Dây chuyền</a>
+                                            <a href="#tab2" data-bs-toggle="tab"> {t("necklace")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab3" data-bs-toggle="tab"> Mặt dây chuyền</a>
+                                            <a href="#tab3" data-bs-toggle="tab"> {t("pendant")}</a>
                                         </li>
                                         <li>
-                                            <a href="#tab4" data-bs-toggle="tab"> Vòng tay</a>
+                                            <a href="#tab4" data-bs-toggle="tab"> {t("bracelet")}</a>
                                         </li>
                                     </ul>
                                 </div>

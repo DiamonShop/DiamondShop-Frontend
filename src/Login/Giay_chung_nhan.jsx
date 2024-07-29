@@ -3,9 +3,11 @@ import { decodeToken } from "../api/TokenAPI";
 import { handleUserProfile } from "../api/UserProfile";
 import { getCertificateImageUrls } from "../FirebaseImage/firebaseHelper"; // Đảm bảo import đúng hàm
 import { handleGetCetificateByUserId } from "../api/CertificateAPI";
+import { useTranslation } from "react-i18next";
 
 const Giay_chung_nhan = () => {
     const [certificates, setCertificates] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,22 +49,22 @@ const Giay_chung_nhan = () => {
     return (
         <div>
             <div className="myaccount-content">
-                <h5>Giấy chứng nhận GIA</h5>
+                <h5>{t("GIACertificate")}</h5>
                 <div className="myaccount-table table-responsive text-center">
                     <table className="table">
                         <thead className="thead-light">
                             <tr>
-                                <th>Mã sản phẩm</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Ảnh GIA</th>
-                                <th>Chi tiết</th>
+                                <th>{t("GIAID")}</th>
+                                <th>{t("GIAProductName")}</th>
+                                <th>{t("GIAPhoto")}</th>
+                                <th>{t("GIADetail")}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {certificates.length === 0 ? (
                                 <tr>
                                     <td colSpan="4" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>
-                                        Không có giấy chứng nhận
+                                        {t("nothaveGIA")}
                                     </td>
                                 </tr>
                             ) : (
@@ -80,10 +82,10 @@ const Giay_chung_nhan = () => {
                                         <td>
                                             {certificate.imageUrl ? (
                                                 <a href={certificate.imageUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sqr-chitietdondang">
-                                                    Xem
+                                                    {t("GIAView")}
                                                 </a>
                                             ) : (
-                                                'Không có ảnh để xem'
+                                                `${("noGIAView")}`
                                             )}
                                         </td>
                                     </tr>

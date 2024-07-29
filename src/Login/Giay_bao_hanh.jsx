@@ -3,11 +3,11 @@ import { handleGetWarrantyByUserId } from "../api/WarrantyAPI";
 import GenerateWarrantyPDF from './GenerateWarrantyPDF';
 import { decodeToken } from "../api/TokenAPI";
 import { handleUserProfile } from "../api/UserProfile";
-
+import { useTranslation } from "react-i18next";
 const Giay_bao_hanh = () => {
     const [warranties, setWarranties] = useState([]);
     const [user, setUser] = useState(null);
-
+    const { t } = useTranslation();
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
@@ -36,23 +36,23 @@ const Giay_bao_hanh = () => {
     return (
         <div>
             <div className="myaccount-content" style={{ width: '100%' }}>
-                <h5>Giấy bảo hành</h5>
+                <h5>{t("warrantyCard")}</h5>
                 <div className="myaccount-table table-responsive text-center">
                     <table>
                         <thead className="thead-light">
                             <tr>
-                                <th>Mã bảo hành</th>
-                                <th>Ngày bắt đầu</th>
-                                <th>Ngày kết thúc</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Chi tiết</th>
+                                <th>{t("warrantyId")}</th>
+                                <th>{t("startDate")}</th>
+                                <th>{t("endDate")}</th>
+                                <th>{t("productName")}</th>
+                                <th>{t("detail")}</th>
                             </tr>
                         </thead>
                         <tbody>
                             {warranties.length === 0 ? (
                                 <tr>
                                     <td colSpan="5" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>
-                                        Không có giấy bảo hành
+                                        {t("notwarrantyCard")}
                                     </td>
                                 </tr>
                             ) : (
