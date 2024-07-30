@@ -4,11 +4,12 @@ import { ToastContainer } from 'react-toastify';
 import { handleDeleteOrderDetail, handleGetAllOrderDetail, handleGetOrderByUserId, handleUpdateTotalPrice } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
+import { useTranslation } from "react-i18next";
 
 export default function Gio_hang() {
     const [orderDetailLists, setOrderDetailLists] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-
+    const { t } = useTranslation();
     useEffect(() => {
         const fetchOrderDetails = async () => {
             const token = localStorage.getItem('token');
@@ -59,7 +60,7 @@ export default function Gio_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{("cart")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -76,18 +77,18 @@ export default function Gio_hang() {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th className="pro-thumbnail">Mã sản phẩm</th>
-                                                <th className="pro-title">Sản phẩm</th>
-                                                <th className="pro-price">Đơn giá</th>
-                                                <th className="pro-quantity">Số lượng</th>
-                                                <th className="pro-subtotal">Thành tiền</th>
-                                                <th className="pro-remove">Xóa</th>
+                                                <th className="pro-thumbnail">{t("cartID")}</th>
+                                                <th className="pro-title">{t("cartProduct")}</th>
+                                                <th className="pro-price">{t("cartPrice")}</th>
+                                                <th className="pro-quantity">{t("cartQuantity")}</th>
+                                                <th className="pro-subtotal">{t("cartSubTotal")}</th>
+                                                <th className="pro-remove">{("remove")}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {orderDetailLists.length === 0 ? (
                                                 <tr>
-                                                    <td colSpan="6" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có sản phẩm nào trong giỏ hàng</td>
+                                                    <td colSpan="6" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>{t("noCartItem")}</td>
                                                 </tr>
                                             ) : (
                                                 orderDetailLists.map((orderDetail, index) => (
@@ -114,15 +115,15 @@ export default function Gio_hang() {
                                             <table className="table">
                                                 <tbody>
                                                     <tr>
-                                                        <td>Tổng tiền hàng</td>
+                                                        <td>{t("totalProduct")}</td>
                                                         <td>{formatCurrency(totalPrice)} VND</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Phí vận chuyển</td>
-                                                        <td>Miễn phí</td>
+                                                        <td>{t("transportFee")}</td>
+                                                        <td>{("free")}</td>
                                                     </tr>
                                                     <tr className="total">
-                                                        <td>Tổng thanh toán</td>
+                                                        <td>{t("total")}</td>
                                                         <td className="total-amount">{formatCurrency(totalPrice)} VND</td>
                                                     </tr>
                                                 </tbody>
@@ -132,9 +133,9 @@ export default function Gio_hang() {
                                 </div>
                                 <div >
                                     {totalPrice > 0 ? (
-                                        <Link to="/Thanhtoan" className="btn-sqr-xacnhanthanhtoan d-block">Xác nhận thanh toán</Link>
+                                        <Link to="/Thanhtoan" className="btn-sqr-xacnhanthanhtoan d-block">{t("confirm")}</Link>
                                     ) : (
-                                        <button className="btn-sqr-xacnhanthanhtoan d-block" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>Xác nhận thanh toán</button>
+                                        <button className="btn-sqr-xacnhanthanhtoan d-block" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>{t("confirm")}</button>
                                     )}
                                 </div>
                             </div>

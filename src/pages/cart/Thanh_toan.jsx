@@ -8,6 +8,7 @@ import { formatCurrency } from '../../utils/NumberFormat';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetOrderByUserId } from '../../api/OrderAPI';
 import { Modal } from 'antd';
+import { useTranslation } from "react-i18next";
 
 export default function Thanh_toan() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -22,6 +23,7 @@ export default function Thanh_toan() {
     const [orderDetail, setOrderDetail] = useState('');
     const navigate = useNavigate();
     const [totalPrice, setTotalPrice] = useState(0);
+    const { t } = useTranslation();
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNumber: '',
@@ -185,8 +187,8 @@ export default function Thanh_toan() {
                                 <nav aria-label="breadcrumb">
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                        <li class="breadcrumb-item"><Link to="/Giohang">Giỏ hàng</Link></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+                                        <li class="breadcrumb-item"><Link to="/Giohang">{t("cart")}</Link></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{t("pay")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -204,15 +206,15 @@ export default function Thanh_toan() {
                         {/* <!-- Order Summary Details --> */}
                         <div class="col-lg-6">
                             <div class="order-summary-details">
-                                <h5 class="checkout-title">Thông tin giỏ hàng</h5>
+                                <h5 class="checkout-title">{t("cartInformation")}</h5>
                                 <div class="order-summary-content">
                                     {/* <!-- Order Summary Table --> */}
                                     <div class="order-summary-table table-responsive text-center">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Sản phẩm</th>
-                                                    <th>Giá</th>
+                                                    <th>{t("product")}</th>
+                                                    <th>{("price")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -227,12 +229,12 @@ export default function Thanh_toan() {
                                                 <tr>
                                                     <td>Shipping</td>
                                                     <td class="d-flex justify-content-center">
-                                                        <label class="custom-control-label" for="freeshipping">Miễn phí vận chuyển</label>
+                                                        <label class="custom-control-label" for="freeshipping">{t("freeShipping1")}</label>
 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Thành tiền</td>
+                                                    <td>{t("cartSubTotal")}</td>
                                                     <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint*1000 : totalPrice)}</strong><strong> VND</strong></td>
                                                     <input id="total" type="hidden" value={totalPrice} />
                                                 </tr>
@@ -245,19 +247,19 @@ export default function Thanh_toan() {
                         {/* <!-- Checkout Billing Details --> */}
                         <div class="col-lg-6">
                             <div class="checkout-billing-details-wrap">
-                                <h5 class="checkout-title">Thông tin người mua</h5>
+                                <h5 class="checkout-title">{t("buyerInformation")}</h5>
                                 <div class="billing-form-wrap">
                                     <form className="createOrder" onSubmit={handleCheckoutSubmit}>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="single-input-item">
                                                     <label for="f_name" class="required">
-                                                        Họ tên
+                                                        {t("fullName")}
                                                     </label>
                                                     <input
                                                         type="text"
                                                         name="displayName"
-                                                        placeholder="Họ tên"
+                                                        placeholder={t("fullName")}
                                                         required
                                                         value={displayName}
                                                         onChange={handleDisplayNameChange}
@@ -267,12 +269,12 @@ export default function Thanh_toan() {
                                             <div class="col-md-6">
                                                 <div class="single-input-item">
                                                     <label for="phone-number" class="required">
-                                                        Số điện thoại
+                                                        {t("phoneNumber")}
                                                     </label>
                                                     <input
                                                         type="text"
                                                         name="phoneNumber"
-                                                        placeholder="Số điện thoại"
+                                                        placeholder= {t("phoneNumber")}
                                                         required
                                                         value={numberPhone}
                                                         onChange={handlePhoneChange}
@@ -289,17 +291,17 @@ export default function Thanh_toan() {
                                         </div>
 
                                         <div class="single-input-item">
-                                            <label for="street-address" class="required ">Địa chỉ</label>
-                                            <input type="text" name="address" placeholder="Địa chỉ nhận hàng"
+                                            <label for="street-address" class="required ">{("iAddress")}</label>
+                                            <input type="text" name="address" placeholder={t("deliveryAddress")}
                                                 value={address} onChange={handleAddressChange}
                                                 required />
                                         </div>
 
 
                                         <div class="single-input-item">
-                                            <label for="ordernote">Ghi chú</label>
+                                            <label for="ordernote">{("guarantee9")}</label>
                                             <textarea name="orderNote" id="orderNote"
-                                                cols="30" rows="3" placeholder="Ghi chú khác"
+                                                cols="30" rows="3" placeholder="otherNote"
                                                 value={formData.orderNote} onChange={handleCheckoutChange}
                                             ></textarea>
                                         </div>
@@ -316,7 +318,7 @@ export default function Thanh_toan() {
                                                     onChange={handleLoyaltyCheckboxChange}
                                                 />
                                                 <label class="custom-control-label" for="sale">
-                                                    Sử dụng {loyalPoint} point để giảm giá.
+                                                    {t("using")} {loyalPoint} {("pointsforDiscount")}
                                                 </label>
                                                 
 
@@ -331,7 +333,7 @@ export default function Thanh_toan() {
                                                     required
                                                 />
                                                 <label class="custom-control-label" for="terms">
-                                                    Tôi đã đọc và đồng ý với các <a href="/Chinhsach">điều khoản và chính sách</a> của Enternal Sparkle.
+                                                    {t("accept1")} <a href="/Chinhsach">{t("accept2")}</a> {t("accept3")}
                                                 </label>
 
                                             </div>
@@ -339,7 +341,7 @@ export default function Thanh_toan() {
 
                                         <button type="submit" value="THANH TOÁN"
                                             className="btn-login solid"
-                                            id="btn_checkout">THANH TOÁN</button>
+                                            id="btn_checkout">{t("payUpper")}</button>
                                     </form>
                                 </div>
                             </div>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { handleGetHistoryOrderByUserId, handleGetOrderByUserId } from '../../api/OrderAPI';
 import { decodeToken } from '../../api/TokenAPI';
+import { useTranslation } from "react-i18next";
 
 function Don_hang() {
     const [orderLists, setOrderLists] = useState([]);
     const token = localStorage.getItem('token');
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
@@ -34,23 +36,23 @@ function Don_hang() {
     return (
         <div>
             <div className="myaccount-content">
-                <h5>Đơn hàng</h5>
+                <h5>{t("orders")}</h5>
                 <div className="myaccount-table table-responsive text-center">
                     <table >
                         <thead className="thead-light">
                             <tr>
-                                <th>Mã Đơn hàng</th>
-                                <th>Ngày đặt hàng</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                                <th>Chi tiết</th>
+                                <th>{t("orderCode")}</th>
+                                <th>{t("orderDate")}</th>
+                                <th>{t("orderTotal")}</th>
+                                <th>{t("orderStatus")}</th>
+                                <th>{t("orderDetail")}</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             {orderLists.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>Không có đơn hàng</td>
+                                    <td colSpan="5" className="text-center" style={{ fontSize: '20px', fontStyle: 'italic', color: 'red' }}>{t("noOrder")}</td>
                                 </tr>
                             ) : (orderLists.map((details, index) => (
                                 <tr key={index}>
@@ -61,7 +63,7 @@ function Don_hang() {
                                         {details.status === 'Shipping' ? 'Đang vận chuyển' : details.status === 'Ordering' ? 'Đang thanh toán' : details.status === 'Pending' ? 'Chờ xác nhận' : 'Đã thành công'}
                                     </td>
                                     <td>
-                                        <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang" onClick={() => handleViewOrderDetails(details.orderId)}>Xem</a>
+                                        <a href="/Chitietdonhang" className="btn btn-sqr-chitietdondang" onClick={() => handleViewOrderDetails(details.orderId)}>{t("view")}</a>
                                     </td>
                                 </tr>
                             )))}

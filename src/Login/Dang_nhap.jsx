@@ -138,7 +138,7 @@ export default function Dang_nhap() {
                         <div className="content">
                             <h3>{t("notHaveAccount")}</h3>
                             <p>{t("signuptoShopping")}</p>
-                            <Link to="/Dangki"><button className="btn transparent" id="sign-up-btn">ĐĂNG KÍ</button></Link>
+                            <Link to="/Dangki"><button className="btn transparent" id="sign-up-btn">{t("uppersignUp")}</button></Link>
                         </div>
                     </div>
                     <div className="panel right-panel">
