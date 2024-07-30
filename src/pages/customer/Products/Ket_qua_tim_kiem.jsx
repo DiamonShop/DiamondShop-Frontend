@@ -4,6 +4,7 @@ import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Du_lieu_san_pham_kc from '../../../components/Du_lieu_san_pham_kc';
 import Filter_product from '../../../components/Filter_product';
 import GetProductByName from '../../../Data/Product_all_data';
+import { useTranslation } from 'react-i18next';
 
 export default function Ket_qua_tim_kiem({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
@@ -11,7 +12,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [productCount, setProductCount] = useState(0);
     const itemsPerPage = 8;
-
+    const { t } = useTranslation();
     function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
@@ -77,7 +78,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                             <Link to="/"><i className="fa fa-home"></i></Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
-                                            Kết quả tìm kiếm
+                                            {t("searchResult")}
                                         </li>
                                     </ul>
                                 </nav>
@@ -142,14 +143,14 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                         </div>
                                     ) : (
                                         <div className="no-products">
-                                            <p>Không có sản phẩm nào được tìm thấy.</p>
+                                            <p>{t("noProductFound")}</p>
                                         </div>
                                     )}
                                     <div className="pagination-area text-center">
                                         <ul className="pagination-box">
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, currentPage - 1)}>
-                                                    Trước
+                                                    {t("previous")}
                                                 </a>
                                             </li>
                                             {pageNumbers.map(number => (
@@ -161,7 +162,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                             ))}
                                             <li>
                                                 <a href="#" onClick={(e) => handleClick(e, currentPage + 1)}>
-                                                    Sau
+                                                    {t("next")}
                                                 </a>
                                             </li>
                                         </ul>
@@ -169,7 +170,7 @@ export default function Ket_qua_tim_kiem({ onProductClick }) {
                                 </div>
                             ) : (
                                 <div className="no-products">
-                                    <p>Không có sản phẩm nào được tìm thấy.</p>
+                                    <p>{t("noProductFound")}</p>
                                 </div>
                             )}
                         </div>
