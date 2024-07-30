@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { Product_Matdaychuyen_Data } from '../../../Data/Product_matdaychuyen_data';
 import Filter_product from '../../../components/Filter_product';
 import Du_lieu_san_pham_vtxmdc from '../../../components/Du_lieu_san_pham_vtxmdc';
+import { useTranslation } from 'react-i18next';
+
 export default function Mat_day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-
+    const { t } = useTranslation();
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
@@ -54,7 +56,7 @@ export default function Mat_day_chuyen({ onProductClick }) {
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link>
                                         </li>
-                                        <li className="breadcrumb-item active" aria-current="page">Mặt dây chuyền</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("pendant")}</li>
                                     </ul>
                                 </nav>
                             </div>

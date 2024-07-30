@@ -12,6 +12,7 @@ import { formatCurrency } from '../../../utils/NumberFormat';
 import Mota_danhgia_kc from '../../../components/Mota_danhgia_kc';
 import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
 import { notification } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 export default function Chi_tiet_san_pham_kc() {
 
@@ -20,6 +21,7 @@ export default function Chi_tiet_san_pham_kc() {
   const [reviewCount, setReviewCount] = useState(0);
   const [api, contextHolder] = notification.useNotification();
   const [averageRating, setAverageRating] = useState(0);
+  const { t } = useTranslation();
   const successAddMessage = () => {
     setShowMessage(true);
     setTimeout(() => {
@@ -68,12 +70,12 @@ export default function Chi_tiet_san_pham_kc() {
         for (const item of orders) {
           if (item.status === 'Ordering') {
             handleAddProductToOrder(item.orderId, productObj.productId, quantity);
-            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
             break;
           } else if (item.status === 'Completed' || item.status === 'Shipping') {
             const orderId = await handleCreateOrder(userId);
             handleAddProductToOrder(orderId, productObj.productId, quantity);
-            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
             break;
           }
         }
@@ -84,7 +86,7 @@ export default function Chi_tiet_san_pham_kc() {
         for (const item of order) {
           if (item.status === 'Ordering' && item.orderId === orderId) {
             handleAddProductToOrder(orderId, productObj.productId, quantity);
-            openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+            openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
             break;
           }
         }
@@ -143,8 +145,8 @@ export default function Chi_tiet_san_pham_kc() {
                 <nav aria-label="breadcrumb">
                   <ul class="breadcrumb">
                     <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                    <li class="breadcrumb-item"><Link to="/Kimcuong">Kim cương</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
+                    <li class="breadcrumb-item"><Link to="/Kimcuong">{t("diamond")}</Link></li>
+                    <li class="breadcrumb-item active" aria-current="page">(t{"productDetail"})</li>
                   </ul>
                 </nav>
               </div>
@@ -214,25 +216,25 @@ export default function Chi_tiet_san_pham_kc() {
                       <p className='diamond-filter-line'>-----------------------------------------------------------------------------</p>
                       <ul class="diamond-filter-container">
                         <li class="filter-group">
-                          <h6 className='filter-name-kc'>Màu sắc (Color):</h6>
+                          <h6 className='filter-name-kc'>{t("color")} (Color):</h6>
                           <select className='nice-select'>
                             <option value="G">{productObj.Color}</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <h6 className='filter-name-kc'>Độ Tinh Khiết (Clarity):</h6>
+                          <h6 className='filter-name-kc'>{t("clarity")} (Clarity):</h6>
                           <select className='nice-select' >
                             <option value="VS2">{productObj.Clarity}</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <h6 className='filter-name-kc'>Giác Cắt (Cut):</h6>
+                          <h6 className='filter-name-kc'>{t("cut")} (Cut):</h6>
                           <select className='nice-select'>
                             <option value="EX">{productObj.Cut}</option>
                           </select>
                         </li>
                         <li class="filter-group">
-                          <h6 className='filter-name-kc'>Giấy kiểm định</h6>
+``                          <h6 className='filter-name-kc'>{t("certificate")}</h6>
                           <div className='filter-img' onClick={handleImageClick}>
                             <img src="https://file.hstatic.net/1000381168/file/gia-logo_5deb96f1f2b541568f93dc916976d435.svg" alt="GIA" />
                           </div>
@@ -243,13 +245,12 @@ export default function Chi_tiet_san_pham_kc() {
                                   <button onClick={closeOverlay}>X</button>
                                 </div>
 
-                                <h1 className='overlay-title'>TRA CỨU GIẤY KIỂM ĐỊNH KIM CƯƠNG GIA</h1>
+                                <h1 className='overlay-title'>{t("searchGIAcertification")}</h1>
                                 <p class="overlay-description">
-                                  Kim cương được bán ra bởi Thế Giới Kim Cương luôn có đầy đủ giấy kiểm định quốc tế.
-                                  Quý Khách có thể tra cứu xác thực giấy kiểm định trên website của GIA <br />
-                                  theo đường link bên dưới.
+                                  {t("searchGIAcertification1")} <br />
+                                  {t("searchGIAcertification2")}
                                 </p>
-                                <a href="https://www.gia.edu/report-check-landing" class="overlay-link" target="_blank">Quý Khách nhấn vào đây để tra cứu giấy kiểm định GIA</a>
+                                <a href="https://www.gia.edu/report-check-landing" class="overlay-link" target="_blank">{t("searchGIAcertification3")}</a>
                                 <div className='overlay-GIA-image'>
                                   <img src="assets\img\product\Kim-cuong\GIA\giay-kiem-dinh_b7f8dc6b92bd4c11bb2ac134bdd51398.webp" alt="GIA" />
                                 </div>
@@ -260,7 +261,7 @@ export default function Chi_tiet_san_pham_kc() {
                         </li>
                         <li class="filter-group">
                           <div class="quantity-cart-box d-flex align-items-center">
-                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                            <h6 className='filter-name-jewelry'>{t("ordersQuantity")}</h6>
                             <div class="quantity">
                               <div class="pro-qty">
                                 <span className=" qtybtn" onClick={handleDecrement}>-</span>
@@ -287,13 +288,13 @@ export default function Chi_tiet_san_pham_kc() {
                       <div class="quantity-cart-box d-flex align-items-center">
                         <div class="button-them-vao-gio-hang">
                           <div class="action_link">
-                            <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
+                            <a class="btn btn-cart2" onClick={handleAddToCart}>{t("addtoCart")}</a>
                           </div>
                         </div>
 
                         {showMessage && (
                           <div class="message-add-to-cart-success">
-                            <span style={{ color: 'red' }}>Thêm vào giỏ hàng thành công</span>
+                            <span style={{ color: 'red' }}>{t("addtoCartSuccess")}</span>
                           </div>
                         )}
                       </div>

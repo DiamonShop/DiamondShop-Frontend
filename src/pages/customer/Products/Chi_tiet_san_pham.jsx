@@ -9,6 +9,7 @@ import Sanphamtuongtu from '../../../components/Sanphamtuongtu';
 import Mota_danhgia from '../../../components/Mota_danhgia';
 import StarRating from '../../../components/StarRating';
 import { notification } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 export default function Chi_tiet_san_pham() {
     const initialProductObj = JSON.parse(localStorage.getItem('product'));
@@ -19,6 +20,7 @@ export default function Chi_tiet_san_pham() {
     const [api, contextHolder] = notification.useNotification();
     const [averageRating, setAverageRating] = useState(0);
     const [jewelrySizes, setJewelrySizes] = useState([]);
+    const { t } = useTranslation();
 
     const handleIncrement = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -45,12 +47,12 @@ export default function Chi_tiet_san_pham() {
                 for (const item of orders) {
                     if (item.status === 'Ordering') {
                         await handleAddProductToOrder(item.orderId, productObj.productId, quantity);
-                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+                        openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
                         break;
                     } else if (item.status === 'Completed' || item.status === 'Shipping') {
                         const orderId = await handleCreateOrder(userId);
                         await handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+                        openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
                         break;
                     }
                 }
@@ -60,13 +62,13 @@ export default function Chi_tiet_san_pham() {
                 for (const item of order) {
                     if (item.status === 'Ordering' && item.orderId === orderId) {
                         await handleAddProductToOrder(orderId, productObj.productId, quantity);
-                        openNotificationWithIcon('success', 'Thành công', 'Sản phẩm đã được thêm vào giỏ hàng.');
+                        openNotificationWithIcon('success', `${t("success")}`, `${t("productAddSuccess")}`);
                         break;
                     }
                 }
             }
         } else {
-            openNotificationWithIcon('warning', 'Cảnh báo', 'Vui lòng đăng nhập để tiếp tục mua hàng', 'top');
+            openNotificationWithIcon('warning', `${t("warning")}`, `${t("logintoOrder")}`, 'top');
         }
     };
 
@@ -220,14 +222,14 @@ export default function Chi_tiet_san_pham() {
                                             {productObj.categoryName === 'Dây chuyền' ? (
                                                 <ul class="jewelry-filter-container">
                                                     <li class="filter-group">
-                                                        <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                        <h6 className='filter-name-jewelry'>{t("material")}:</h6>
                                                         <select className='nice-select'>
                                                             <option value="Vàng">{productObj.material}</option>
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
                                                         <div class="quantity-cart-box d-flex align-items-center">
-                                                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                            <h6 className='filter-name-jewelry'>{t("cartQuantity")}:</h6>
                                                             <div class="quantity">
                                                                 <div class="pro-qty">
                                                                     <span className=" qtybtn" onClick={handleDecrement}>-</span>
@@ -249,19 +251,19 @@ export default function Chi_tiet_san_pham() {
 
                                                 <ul class="jewelry-filter-container">
                                                     <li class="filter-group">
-                                                        <h6 className='filter-name-jewelry'>Chất liệu:</h6>
+                                                        <h6 className='filter-name-jewelry'>{t("material")}:</h6>
                                                         <select className='nice-select'>
                                                             <option value="Vàng">{productObj.material}</option>
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
-                                                        <h6 className='filter-name-jewelry' >Viên chính:</h6>
+                                                        <h6 className='filter-name-jewelry' >{t("main")}:</h6>
                                                         <select className='nice-select' >
                                                             <option value="VS2">{productObj.mainDiamondName} x{productObj.mainDiamondQuantity}</option>
                                                         </select>
                                                     </li>
                                                     <li class="filter-group">
-                                                        <h6 className='filter-name-jewelry'>Viên phụ:</h6>
+                                                        <h6 className='filter-name-jewelry'>{t("second")}:</h6>
                                                         <select  >
                                                             <option value="VS2">{productObj.sideDiamondName} x{productObj.sideDiamondQuantity}</option>
                                                         </select>
@@ -277,14 +279,14 @@ export default function Chi_tiet_san_pham() {
                                                                         </option>
                                                                     ))}
                                                                 </select>
-                                                                <Link to="/Huongdandoni" className="huong-dan-do-ni">Hướng dẫn đo ni (Size)</Link>
+                                                                <Link to="/Huongdandoni" className="huong-dan-do-ni">{t("ringMeasurementGuide")} (Size)</Link>
                                                             </>
                                                         )}
 
                                                     </li>
                                                     <li class="filter-group">
                                                         <div class="quantity-cart-box d-flex align-items-center">
-                                                            <h6 className='filter-name-jewelry'>Số lượng:</h6>
+                                                            <h6 className='filter-name-jewelry'>{t("cartQuantity")}:</h6>
                                                             <div class="quantity">
                                                                 <div class="pro-qty">
                                                                     <span className=" qtybtn" onClick={handleDecrement}>-</span>
@@ -306,7 +308,7 @@ export default function Chi_tiet_san_pham() {
                                             )}
                                             <div class="button-them-vao-gio-hang">
                                                 <div class="action_link">
-                                                    <a class="btn btn-cart2" onClick={handleAddToCart}>Thêm vào giỏ hàng</a>
+                                                    <a class="btn btn-cart2" onClick={handleAddToCart}>{t("addtoCart")}</a>
 
                                                 </div>
                                             </div>

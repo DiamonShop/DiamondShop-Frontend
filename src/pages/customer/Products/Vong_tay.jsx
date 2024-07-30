@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { Product_Vongtay_Data } from '../../../Data/Product_vongtay_data';
 import Filter_product from '../../../components/Filter_product';
 import Du_lieu_san_pham_vtxmdc from '../../../components/Du_lieu_san_pham_vtxmdc';
+import { useTranslation } from 'react-i18next';
 
 export default function Vongtay({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
+    const { t } = useTranslation();
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -55,7 +57,7 @@ export default function Vongtay({ onProductClick }) {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Vòng tay</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("bracelet")}</li>
                                     </ul>
                                 </nav>
                             </div>

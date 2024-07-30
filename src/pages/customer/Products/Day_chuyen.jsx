@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import Filter_product from '../../../components/Filter_product';
 import { Product_Daychuyen_Data } from '../../../Data/Product_daychuyen_data';
+import { useTranslation } from 'react-i18next';
 export default function Day_chuyen({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-
+    const { t } = useTranslation();
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
@@ -56,7 +57,7 @@ export default function Day_chuyen({ onProductClick }) {
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link>
                                         </li>
-                                        <li className="breadcrumb-item active" aria-current="page">Dây chuyền</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("necklace")}</li>
                                     </ul>
                                 </nav>
                             </div>

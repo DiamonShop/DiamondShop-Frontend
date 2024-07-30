@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 export default function About_us() {
+    const { t } = useTranslation();
     return (
         <div>
             <div class="breadcrumb-area">
@@ -11,7 +14,7 @@ export default function About_us() {
                                 <nav aria-label="breadcrumb">
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Về chúng tôi</li>
+                                        <li class="breadcrumb-item active" aria-current="page">{t("aboutUs")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -30,7 +33,7 @@ export default function About_us() {
                         </div>
                         <div class="col-lg-7">
                             <div class="about-content">
-                                <h2 class="about-title">Về Chúng Tôi</h2>
+                                <h2 class="about-title">{t("Về Chúng Tôi")}</h2>
                                 <h5 class="about-sub-title">
                                     Được thành lập vào năm 2024, Eternal Sparkle là cửa hàng kim cương danh tiếng tại Hồ Chí Minh. Chúng tôi tự hào mang đến những sản phẩm kim cương tinh tế, độc đáo và chất lượng cao cho khách hàng. Với mục tiêu tạo ra trải nghiệm mua sắm tuyệt vời, Eternal Sparkle không ngừng nỗ lực để đáp ứng mọi nhu cầu và mong muốn của khách hàng.
                                 </h5>

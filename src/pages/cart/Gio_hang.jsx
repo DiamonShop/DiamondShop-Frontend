@@ -60,7 +60,7 @@ export default function Gio_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">{("cart")}</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("cart")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -120,7 +120,7 @@ export default function Gio_hang() {
                                                     </tr>
                                                     <tr>
                                                         <td>{t("transportFee")}</td>
-                                                        <td>{("free")}</td>
+                                                        <td>{t("free")}</td>
                                                     </tr>
                                                     <tr className="total">
                                                         <td>{t("total")}</td>

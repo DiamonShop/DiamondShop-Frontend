@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import Du_lieu_san_pham from '../../../components/Du_lieu_san_pham';
 import { Product_Nhan_Data } from '../../../Data/Product_nhan_data';
 import Filter_product from '../../../components/Filter_product';
+import { useTranslation } from 'react-i18next';
+
 export default function Nhan({ onProductClick }) {
     const [sortOption, setSortOption] = useState('');
-
+    const { t } = useTranslation();
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
