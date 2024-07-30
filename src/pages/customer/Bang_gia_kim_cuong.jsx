@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Bang_gia_kim_cuong() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    const currentDate = `${day}/${month}/${year}`;
     const [diamondData, setDiamondData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -72,7 +77,7 @@ export default function Bang_gia_kim_cuong() {
 
             <div className="diamond-price-list-header-notes">
                 <p>* Đơn vị tính: VND</p>
-                <p>* Áp dụng từ ngày 01/06</p>
+                <p>* Áp dụng từ ngày {currentDate}</p>
                 <p>* Giá có thể thay đổi mà không cần báo trước. Vui lòng cập nhật giá mới nhất tại cửa hàng hoặc website</p>
             </div>
 
