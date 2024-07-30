@@ -7,6 +7,7 @@ import { decodeToken } from '../../api/TokenAPI';
 import { formatCurrency } from '../../utils/NumberFormat';
 import { HandleGetAll } from '../../api/JewelryAPI';
 import { handleCreatefeedback } from '../../api/FeedbackAPI';
+import { useTranslation } from "react-i18next";
 
 const { TextArea } = Input;
 
@@ -18,6 +19,7 @@ function Chi_tiet_don_hang() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [feedback, setFeedback] = useState({ description: '', rating: 0 });
     const [messageApi, contextHolder] = message.useMessage();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
@@ -154,8 +156,8 @@ function Chi_tiet_don_hang() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to="/Thongtintk">Thông tin tài khoản</Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
+                                        <li className="breadcrumb-item"><Link to="/Thongtintk">{t("accountInfomation")}</Link></li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("ordersDetail")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -172,12 +174,12 @@ function Chi_tiet_don_hang() {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th className="pro-thumbnail">Mã sản phẩm</th>
-                                                <th className="pro-title">Sản phẩm</th>
-                                                <th className="pro-price">Đơn giá</th>
-                                                <th className="pro-quantity">Số lượng</th>
-                                                <th className="pro-subtotal">Giá</th>
-                                                <th className="pro-review">Đánh giá</th>
+                                                <th className="pro-thumbnail">{t("ordersID")}</th>
+                                                <th className="pro-title">{t("ordersProductName")}</th>
+                                                <th className="pro-price">{t("ordersUnitPrice")}</th>
+                                                <th className="pro-quantity">{t("ordersQuantity")}</th>
+                                                <th className="pro-subtotal">{t("ordersPrice")}</th>
+                                                <th className="pro-review">{t("ordersReview")}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -189,7 +191,7 @@ function Chi_tiet_don_hang() {
                                                     <td className="pro-quantity">{orderDetail.quantity}</td>
                                                     <td className="pro-subtotal">{formatCurrency(orderDetail.unitPrice * orderDetail.quantity)} VND</td>
                                                     <td className="pro-review">
-                                                    <button className="btn btn-sqr-danhgia" onClick={() => showModal(orderDetail)}>Đánh giá</button>
+                                                    <button className="btn btn-sqr-danhgia" onClick={() => showModal(orderDetail)}>{t("ordersReview")}</button>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -211,7 +213,7 @@ function Chi_tiet_don_hang() {
                         Hủy
                     </Button>,
                     <Button key="submit" type="primary" onClick={handleOk}>
-                        Gửi
+                        {t("send")}
                     </Button>,
                 ]}
             >

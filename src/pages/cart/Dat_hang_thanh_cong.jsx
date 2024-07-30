@@ -4,10 +4,11 @@ import { decodeToken } from '../../api/TokenAPI';
 import { handleGetLatestOrderByUserId, handleUpdateStatusToPending, handleUpdateTotalPriceByUserId } from '../../api/OrderAPI';
 import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity, handleSetUserLoyalPointToZero } from '../../api/UpdateProfile';
 import { handleUpdateDiamondQuantity } from '../../api/DiamondAPI'
+import { useTranslation } from "react-i18next";
 
 function Dat_hang_thanh_cong() {
   const [order, setOrder] = useState([]);
-
+  const { t } = useTranslation();
   const getUserId = async () => {
     const token = localStorage.getItem("token");
     const checked = localStorage.getItem("loyaltyChecked");
@@ -63,20 +64,20 @@ function Dat_hang_thanh_cong() {
               <div className="main-contents">
                 <div className="success-icon">&#10004;</div>
                 <div className="success-title">
-                  Đặt hàng thành công
+                  {t("ordersSuccess")}
                 </div>
                 <div className="success-description">
-                  Cảm ơn bạn đã hoàn tất thanh toán! Bạn sẽ nhận được sản phẩm bạn đã mua trong thời gian sớm nhất.
+                  {t("ordersMessage")}
                 </div>
                 <div className="order-details">
-                  <div className="order-number-label">Mã thanh toán</div>
+                  <div className="order-number-label">{t("ordersCode")}</div>
                   <div className="order-number">{order ? order.orderId : ''}</div>
                   <div className="complement">Thank You!</div>
                   <div className='btn-dat-hang-thanh-cong'>
-                    <Link to="/" className="btn-return-home">Tiếp tục mua hàng</Link>
+                    <Link to="/" className="btn-return-home">{t("continueShopping")}</Link>
                     <div>
                       <Link to="/Chitietdonhang"
-                        className="btn-view-cart" onClick={() => handleViewOrderDetails(order.orderId)}>Xem đơn hàng</Link>
+                        className="btn-view-cart" onClick={() => handleViewOrderDetails(order.orderId)}>{t("viewOrders")}</Link>
                     </div>
                   </div>
                 </div>

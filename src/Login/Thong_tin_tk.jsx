@@ -10,6 +10,7 @@ import Giay_bao_hanh from './Giay_bao_hanh';
 import Giay_chung_nhan from './Giay_chung_nhan';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from "react-i18next";
 
 export default function Thong_tin_tk() {
     const { user: currentUser, logout: userLogout } = useUser();
@@ -24,6 +25,7 @@ export default function Thong_tin_tk() {
     const [confirmPwd, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const fetchUserData = async () => {
         if (!currentUser) {
@@ -189,7 +191,7 @@ export default function Thong_tin_tk() {
                                 <nav aria-label="breadcrumb">
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to="/"><i className="fa fa-home"></i></Link></li>
-                                        <li className="breadcrumb-item active" aria-current="page">Tài khoản của tôi</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{t("myAccount")}</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -207,16 +209,16 @@ export default function Thong_tin_tk() {
                                         <div className="col-lg-3 col-md-4">
                                             <div className="myaccount-tab-menu nav" role="tablist">
                                                 <a className="active" href="#account-info" data-bs-toggle="tab">
-                                                    <i className="fa fa-user"></i> Thông tin cá nhân
+                                                    <i className="fa fa-user"></i> {t("personalInformation")}
                                                 </a>
                                                 <a href="#orders" data-bs-toggle="tab">
-                                                    <i className="fa fa-cart-arrow-down"></i> Đơn hàng
+                                                    <i className="fa fa-cart-arrow-down"></i> {t("orders")}
                                                 </a>
                                                 <a href="#warranty" data-bs-toggle="tab">
-                                                    <i className="fa fa-credit-card"></i> Giấy bảo hành
+                                                    <i className="fa fa-credit-card"></i> {t("warranty")}
                                                 </a>
                                                 <a href="#certificate" data-bs-toggle="tab">
-                                                    <i className="fa fa-certificate"></i> Giấy chứng nhận
+                                                    <i className="fa fa-certificate"></i> {t("certificate")}
                                                 </a>
                                             </div>
                                         </div>
@@ -224,46 +226,46 @@ export default function Thong_tin_tk() {
                                             <div className="tab-content" id="myaccountContent">
                                                 <div className="tab-pane fade show active" id="account-info" role="tabpanel">
                                                     <div className="myaccount-content">
-                                                        <h5>Thông tin cá nhân</h5>
+                                                        <h5>{t("personalInformation")}</h5>
                                                         <div className="account-details-form">
                                                             <form onSubmit={handleSubmit}>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="display-name">Tên hiển thị</label>
-                                                                    <input type="text" id="display-name" placeholder="Tên hiển thị" value={displayName} onChange={handleDisplayNameChange} />
+                                                                    <label htmlFor="display-name">{t("displayName")}</label>
+                                                                    <input type="text" id="display-name" placeholder={t("displayName")} value={displayName} onChange={handleDisplayNameChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="loyalpoint" >Điểm</label>
+                                                                    <label htmlFor="loyalpoint" >{t("point")}</label>
                                                                     <input type="loyalpoint" id="loyalpoint" value={loyalpoint} readOnly />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="email" className="required">Email</label>
+                                                                    <label htmlFor="email" className="required">{("email")}</label>
                                                                     <input type="email" id="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="number-phone">Số điện thoại</label>
-                                                                    <input type="text" id="number-phone" placeholder="Số điện thoại" value={numberPhone} onChange={handleNumberPhoneChange} />
+                                                                    <label htmlFor="number-phone">{t("phoneNumber")}</label>
+                                                                    <input type="text" id="number-phone" placeholder={t("phoneNumber")} value={numberPhone} onChange={handleNumberPhoneChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="loyalty-points">Điểm trung thành</label>
+                                                                    <label htmlFor="loyalty-points">{t("loyaltyPoints")}</label>
                                                                     <input type="text" id="loyalty-points" value={userData?.loyaltyPoints || ''} readOnly />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="address">Địa chỉ</label>
-                                                                    <input type="text" id="address" placeholder="Địa chỉ" value={address} onChange={handleAddressChange} />
+                                                                    <label htmlFor="address">{t("iAddress")}</label>
+                                                                    <input type="text" id="address" placeholder={t("iAddress")} value={address} onChange={handleAddressChange} />
                                                                 </div>
                                                                 <fieldset>
-                                                                    <h5>Thay đổi mật khẩu</h5>
+                                                                    <h5>{t("changePassword")}</h5>
                                                                     <div className="single-input-item">
-                                                                        <label htmlFor="new-pwd">Mật khẩu mới</label>
-                                                                        <input type="password" id="new-pwd" placeholder="Mật khẩu mới" value={newPwd} onChange={handlePasswordChange} />
+                                                                        <label htmlFor="new-pwd">{t("newPassword")}</label>
+                                                                        <input type="password" id="new-pwd" placeholder={t("newPassword")} value={newPwd} onChange={handlePasswordChange} />
                                                                     </div>
                                                                     <div className="single-input-item">
-                                                                        <label htmlFor="confirm-pwd" className="required">Xác nhận mật khẩu</label>
-                                                                        <input type="password" id="confirm-pwd" placeholder="Xác nhận mật khẩu" value={confirmPwd} onChange={handlePasswordChange} />
+                                                                        <label htmlFor="confirm-pwd" className="required">{t("confirmPassword")}</label>
+                                                                        <input type="password" id="confirm-pwd" placeholder={t("confirmPassword")} value={confirmPwd} onChange={handlePasswordChange} />
                                                                     </div>
                                                                 </fieldset>
                                                                 <div className="single-input-item">
-                                                                    <button className="btn btn-sqr">Lưu thay đổi</button>
+                                                                    <button className="btn btn-sqr">{t("saveChanges")}</button>
                                                                 </div>
                                                             </form>
                                                         </div>
