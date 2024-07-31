@@ -1,6 +1,8 @@
 {
     "logIn": "Login",
     "signUp": "Sign up",
+    "loginIn": "Logging in...",
+    "LOGIN": "LOGIN",
     "uppersignUp": "SIGN UP",
     "loginSuccess": "Login successful",
     "loginFail": "Login Fail",
@@ -10,6 +12,7 @@
     "result": "result",
     "listBy": "List by:",
     "name": "Name",
+    "viewPDF": "View PDF",
     "price": "Price",
     "low": "Low",
     "high": "High",
