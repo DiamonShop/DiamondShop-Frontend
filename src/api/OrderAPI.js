@@ -181,9 +181,9 @@ export const handleGetLatestOrderByUserId = async (userId) => {
     }
 }
 
-export const handleUpdateTotalPriceByUserId = async (userId,price) => {
+export const handleUpdateOrderNoteByUserId = async (userId,note) => {
     try {
-        const response = await fetch(`https://localhost:7101/api/orders/UpdateTotalPriceByUserId?userId=${userId}&price=${price}`, {
+        const response = await fetch(`https://localhost:7101/api/orders/UpdateOrderNoteByUserId?userId=${userId}&note=${note}`, {
             method: 'PUT',
             mode: 'cors'
         });

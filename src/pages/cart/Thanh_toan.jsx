@@ -135,6 +135,7 @@ export default function Thanh_toan() {
         }
 
         localStorage.setItem('priceToUpdate', orderModel.price);
+        localStorage.setItem('noteToUpdate', orderModel.orderNote);
 
 
         try {

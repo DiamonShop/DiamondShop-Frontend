@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Await, Link } from 'react-router-dom';
 import { decodeToken } from '../../api/TokenAPI';
-import { handleGetLatestOrderByUserId, handleUpdateStatusToPending, handleUpdateTotalPriceByUserId } from '../../api/OrderAPI';
+import { handleGetLatestOrderByUserId, handleUpdateStatusToPending, handleUpdateOrderNoteByUserId } from '../../api/OrderAPI';
 import { handleUpdateUserLoyalPoint, handleUpdateJewelryQuantity, handleSetUserLoyalPointToZero } from '../../api/UpdateProfile';
 import { handleUpdateDiamondQuantity } from '../../api/DiamondAPI'
 import { useTranslation } from "react-i18next";
@@ -13,13 +13,15 @@ function Dat_hang_thanh_cong() {
     const token = localStorage.getItem("token");
     const checked = localStorage.getItem("loyaltyChecked");
     const price = localStorage.getItem("priceToUpdate");
+    const note = localStorage.getItem("noteToUpdate");
     if (token) {
       const userId = decodeToken(token).sid;
       if (checked === "1") {
         await handleSetUserLoyalPointToZero(userId);
         localStorage.removeItem('loyaltyChecked');
       }
-      //await handleUpdateTotalPriceByUserId(userId,price);      
+      await handleUpdateOrderNoteByUserId(userId,note);  
+      localStorage.removeItem("noteToUpdate");    
       await handleUpdateStatusToPending(userId);
       await handleUpdateUserLoyalPoint(userId,price);
       localStorage.removeItem("priceToUpdate");

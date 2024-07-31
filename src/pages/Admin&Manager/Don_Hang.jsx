@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button, Table, Input, Select, message } from "antd";
 import axios from "axios";
 import { useUser } from "../../UserContext";
-import { logout } from '../../api/LogoutAPI';
+import { logout } from "../../api/LogoutAPI";
 import { sendToken } from "../../api/TokenAPI";
 import { jwtDecode } from "jwt-decode";
 import ReactPaginate from "react-paginate";
+
 const formatCurrency = (value) => {
-  return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', '');
+  return value
+    .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
+    .replace("₫", "");
 };
 
 const { Option } = Select;
@@ -41,16 +44,37 @@ const Don_Hang = () => {
     "Completed",
   ];
 
-  const sortOrders = (orders) => {
+  const sortOrders = (orders, sortType) => {
     const statusOrder = {
-      "Pending": 1,
-      "Ordering": 2,
-      "Shipping": 3,
-      "Cancel": 4,
-      "Completed": 5,
+      Pending: 1,
+      Ordering: 2,
+      Shipping: 3,
+      Cancel: 4,
+      Completed: 5,
     };
 
-    return orders.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+    let sortedOrders = orders.sort(
+      (a, b) => statusOrder[a.status] - statusOrder[b.status]
+    );
+
+    switch (sortType) {
+      case "price-asc":
+        sortedOrders = sortedOrders.sort((a, b) => a.totalPrice - b.totalPrice);
+        break;
+      case "price-desc":
+        sortedOrders = sortedOrders.sort((a, b) => b.totalPrice - a.totalPrice);
+        break;
+      case "id-asc":
+        sortedOrders = sortedOrders.sort((a, b) => a.orderId - b.orderId);
+        break;
+      case "id-desc":
+        sortedOrders = sortedOrders.sort((a, b) => b.orderId - a.orderId);
+        break;
+      default:
+        break;
+    }
+
+    return sortedOrders;
   };
 
   const handleViewDetails = async (order) => {
@@ -84,7 +108,7 @@ const Don_Hang = () => {
   };
 
   const handleViewUpdate = (order) => {
-    if (["Shipping", "Complete", "Cancel"].includes(order.status)) {
+    if (["Shipping", "Completed", "Cancel", "Ordering"].includes(order.status)) {
       message.error("Bạn không thể cập nhật trạng thái đơn hàng này.");
       return;
     }
@@ -246,14 +270,10 @@ const Don_Hang = () => {
       className: "column-action",
       render: (text, record) => (
         <span>
-          <Button type='default'
-            onClick={() => handleViewDetails(record)}
-          >
+          <Button type="default" onClick={() => handleViewDetails(record)}>
             Xem chi tiết
           </Button>
-          <Button type="dashed"
-            onClick={() => handleViewUpdate(record)}
-          >
+          <Button type="dashed" onClick={() => handleViewUpdate(record)}>
             Cập nhật trạng thái
           </Button>
         </span>
@@ -299,7 +319,7 @@ const Don_Hang = () => {
         }
       );
 
-      const sortedOrders = sortOrders(ordersResponse.data);
+      const sortedOrders = sortOrders(ordersResponse.data, sortType);
       setOrders(sortedOrders);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -318,10 +338,15 @@ const Don_Hang = () => {
     fetchUserData();
   }, [currentUser, userLogout, navigate]);
 
-  const [userRole, setUserRole] = useState('');
+  useEffect(() => {
+    const sortedOrders = sortOrders(orders, sortType);
+    setOrders(sortedOrders);
+  }, [sortType, orders]);
+
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
       userLogout();
       return;
@@ -329,9 +354,13 @@ const Don_Hang = () => {
 
     try {
       const decodedToken = jwtDecode(token);
-      setUserRole(decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+      setUserRole(
+        decodedToken[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ]
+      );
     } catch (error) {
-      console.error('Error decoding token:', error);
+      console.error("Error decoding token:", error);
       userLogout();
     }
   }, [userLogout]);
@@ -340,7 +369,10 @@ const Don_Hang = () => {
     setCurrentPage(event.selected);
   };
 
-  const displayOrders = filteredOrders.slice(currentPage * ordersPerPage, (currentPage + 1) * ordersPerPage);
+  const displayOrders = filteredOrders.slice(
+    currentPage * ordersPerPage,
+    (currentPage + 1) * ordersPerPage
+  );
 
   return (
     <div className="wrapper">
@@ -350,55 +382,67 @@ const Don_Hang = () => {
             <img src="assets/img/logo/logo.png" alt="Logo" />
           </a>
           <ul className="sidebar-nav">
-            {userRole === 'Admin' && (
+            {userRole === "Admin" && (
               <>
                 <li className="sidebar-header">Trang chủ</li>
                 <li className="sidebar-item active">
-                  <a className="sidebar-link" >
+                  <a className="sidebar-link">
                     <i className="align-middle" data-feather="sliders"></i>
-                    <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                    <span className="align-middle">
+                      <Link to="/Dashboard">Dashboard</Link>
+                    </span>
                   </a>
                 </li>
                 <li className="sidebar-header">Quản lý</li>
                 <li className="sidebar-item">
                   <a className="sidebar-link">
                     <i className="align-middle" data-feather="square"></i>
-                    <span className="align-middle"><Link to="/TaiKhoan">Tài khoản</Link></span>
+                    <span className="align-middle">
+                      <Link to="/TaiKhoan">Tài khoản</Link>
+                    </span>
                   </a>
                 </li>
               </>
             )}
-            {userRole === 'Manager' && (
+            {userRole === "Manager" && (
               <>
                 <li className="sidebar-header">Trang chủ</li>
                 <li className="sidebar-item">
-                  <a className="sidebar-link" >
+                  <a className="sidebar-link">
                     <i className="align-middle" data-feather="sliders"></i>
-                    <span className="align-middle"><Link to="/Dashboard">Dashboard</Link></span>
+                    <span className="align-middle">
+                      <Link to="/Dashboard">Dashboard</Link>
+                    </span>
                   </a>
                 </li>
                 <li className="sidebar-header">Quản lý</li>
-                <li className="sidebar-item " >
-                  <a className="sidebar-link" >
+                <li className="sidebar-item ">
+                  <a className="sidebar-link">
                     <i className="align-middle" data-feather="sliders"></i>
-                    <span className="align-middle"><Link to="/TrangSuc">Trang sức</Link></span>
+                    <span className="align-middle">
+                      <Link to="/TrangSuc">Trang sức</Link>
+                    </span>
                   </a>
                 </li>
                 <li className="sidebar-item">
-                  <a className="sidebar-link" >
+                  <a className="sidebar-link">
                     <i className="align-middle" data-feather="sliders"></i>
-                    <span className="align-middle"><Link to="/KimCuongDashboard">Kim cương</Link></span>
+                    <span className="align-middle">
+                      <Link to="/KimCuongDashboard">Kim cương</Link>
+                    </span>
                   </a>
                 </li>
               </>
             )}
-            {userRole === 'Staff' && (
+            {userRole === "Staff" && (
               <>
                 <li className="sidebar-header">Quản lý</li>
                 <li className="sidebar-item active">
-                  <a className="sidebar-link" >
+                  <a className="sidebar-link">
                     <i className="align-middle" data-feather="square"></i>
-                    <span className="align-middle"><Link to="/DonHang">Đơn hàng</Link></span>
+                    <span className="align-middle">
+                      <Link to="/DonHang">Đơn hàng</Link>
+                    </span>
                   </a>
                 </li>
               </>
@@ -429,7 +473,7 @@ const Don_Hang = () => {
                   <span className="text-dark">Xin chào, {displayName}</span>
                 </a>
                 <div className="dropdown-menu dropdown-menu-end">
-                  <a className="dropdown-item" href='/' onClick={logout}>
+                  <a className="dropdown-item" href="/" onClick={logout}>
                     Đăng xuất
                   </a>
                 </div>
@@ -487,10 +531,14 @@ const Don_Hang = () => {
                       <td>{order.orderId}</td>
                       <td>{order.orderDate}</td>
                       <td>{formatCurrency(order.totalPrice)}VND</td>
-                      <td className={getStatusClass(order.status)}>{order.status}</td>
+                      <td className={getStatusClass(order.status)}>
+                        {order.status}
+                      </td>
                       <td className="admin-page-buttons">
+
                         <Button type='default' onClick={() => handleViewDetails(order)}>Xem chi tiết</Button>
                         <Button type="dashed" onClick={() => handleViewUpdate(order)}>Xác nhận đơn hàng</Button>
+
                       </td>
                     </tr>
                   ))}
@@ -516,8 +564,6 @@ const Don_Hang = () => {
                 breakLinkClassName="page-link"
               />
             </div>
-
-
           </div>
 
           {selectedOrder && (
@@ -535,7 +581,8 @@ const Don_Hang = () => {
                 <strong>Họ và tên:</strong> {selectedOrder.userName}
               </p>
               <p>
-                <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice) + "VND"}
+                <strong>Tổng cộng:</strong>{" "}
+                {formatCurrency(selectedOrder.totalPrice) + "VND"}
               </p>
               <p>
                 <strong>Trạng thái:</strong> {selectedOrder.status}
@@ -574,7 +621,8 @@ const Don_Hang = () => {
               </table>
               <div className="total-container">
                 <p>
-                  <strong>Tổng cộng:</strong> {formatCurrency(selectedOrder.totalPrice) + "VND"}
+                  <strong>Tổng cộng:</strong>{" "}
+                  {formatCurrency(selectedOrder.totalPrice) + "VND"}
                 </p>
               </div>
             </Modal>

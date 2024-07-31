@@ -51,7 +51,7 @@ export default function Dang_nhap() {
 
                 messageApi.open({
                     type: 'loading',
-                    content: 'Logging in...',
+                    content: `${t("loginIn")}`,
                     duration: 2,
                 }).then(() => message.success(`${t("loginSuccess")}`, 2)).then(() => {
                     if (roleName === 'Admin' || roleName === 'Manager') {
@@ -125,7 +125,7 @@ export default function Dang_nhap() {
                                     onChange={handleSignInChange}
                                 />
                             </div>
-                            <input type="submit" value="ĐĂNG NHẬP" className="btn-login solid" />
+                            <input type="submit" value={t("LOGIN")} className="btn-login solid" />
                             {/* <p className="social-text">Hoặc đăng nhập bằng Google</p>
                             <div className="social-media">
                                 

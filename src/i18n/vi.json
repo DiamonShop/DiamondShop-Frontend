@@ -1,6 +1,8 @@
 {
     "logIn": "Đăng nhập",
     "signUp": "Đăng kí",
+    "loginIn": "Đang đăng nhập...",
+    "LOGIN": "ĐĂNG NHẬP",
     "uppersignUp": "ĐĂNG KÍ",
     "loginSuccess": "Đăng nhập thành công",
     "loginFail": "Đăng nhập thất bại",
@@ -10,6 +12,7 @@
     "result": "kết quả",
     "listBy": "Liệt kê theo:",
     "name": "Tên",
+    "viewPDF": "Xem PDF",
     "price": "Giá",
     "low": "Thấp",
     "high": "Cao",
