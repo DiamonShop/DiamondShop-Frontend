@@ -535,18 +535,10 @@ const Don_Hang = () => {
                         {order.status}
                       </td>
                       <td className="admin-page-buttons">
-                        <Button
-                          type="default"
-                          onClick={() => handleViewDetails(order)}
-                        >
-                          Xem chi tiết
-                        </Button>
-                        <Button
-                          type="dashed"
-                          onClick={() => handleViewUpdate(order)}
-                        >
-                          Cập nhật trạng thái
-                        </Button>
+
+                        <Button type='default' onClick={() => handleViewDetails(order)}>Xem chi tiết</Button>
+                        <Button type="dashed" onClick={() => handleViewUpdate(order)}>Xác nhận đơn hàng</Button>
+
                       </td>
                     </tr>
                   ))}
@@ -638,7 +630,7 @@ const Don_Hang = () => {
 
           {showUpdatePopup && (
             <Modal
-              title={<span className="modal-title">Cập nhật đơn hàng</span>}
+              title={<span className="modal-title">Xác nhận đơn hàng</span>}
               visible={showUpdatePopup}
               onCancel={() => setShowUpdatePopup(false)}
               footer={[
@@ -652,7 +644,7 @@ const Don_Hang = () => {
             >
               <p>
                 <strong>
-                  Bạn có muốn cập nhật trạng thái đơn hàng thành Đang giao?
+                  Bạn có muốn xác nhận đơn hàng và chuyển đến cho vận chuyển ?
                 </strong>
               </p>
             </Modal>
