@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode'; // Ensure jwt-decode is installed and im
 import { formatCurrency } from '../../utils/NumberFormat';
 import { decodeToken } from '../../api/TokenAPI';
 import { handleGetOrderByUserId } from '../../api/OrderAPI';
-import { Modal } from 'antd';
+import { notification, Button } from 'antd';
 import { useTranslation } from "react-i18next";
 
 export default function Thanh_toan() {
@@ -32,10 +32,10 @@ export default function Thanh_toan() {
         streetAddress: '',
         orderNote: ''
     });
-    const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
     const [loyalPoint, setLoyalPoint] = useState('');
     const [isLoyaltyChecked, setIsLoyaltyChecked] = useState(false); // State for loyalty checkbox
-
+    const [isTermsChecked, setIsTermsChecked] = useState(false); // State for terms checkbox
+    const [api, contextHolder] = notification.useNotification();
     useEffect(() => {
         const checkout_btn = document.querySelector("#btn_checkout");
         const container = document.querySelector(".createOrder");
@@ -49,13 +49,14 @@ export default function Thanh_toan() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setUserData(response.data);
-                setDisplayName(response.data.fullName || '');
-                setEmail(response.data.email || '');
-                setAddress(response.data.address || '');
-                setUserId(response.data.userId || '');
-                setNumberPhone(response.data.numberPhone || '');
-                setLoyalPoint(response.data.loyaltyPoints || '');
+                const userData = response.data;
+                setUserData(userData);
+                setDisplayName(userData.fullName || '');
+                setEmail(userData.email || '');
+                setAddress(userData.address || '');
+                setUserId(userData.userId || '');
+                setNumberPhone(userData.numberPhone || '');
+                setLoyalPoint(userData.loyaltyPoints || 0);
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
@@ -98,15 +99,25 @@ export default function Thanh_toan() {
             checkout_btn.removeEventListener('click', handleCheckoutClick);
         };
 
-    }, [navigate]);
+    }, [navigate, api, userLogout]);
 
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
-        
-        const discount = isLoyaltyChecked ? loyalPoint * 100 : 0;
+
+        // require user click checkbox 
+        if (!isTermsChecked) {
+            setErrorMessage('Bạn phải đồng ý với các chính sách và điều khoản trước khi thanh toán');
+            api.error({
+                message: 'Lỗi',
+                description: 'Bạn phải đồng ý với các chính sách và điều khoản trước khi thanh toán',
+            });
+            return;
+        }
+        const discount = isLoyaltyChecked ? (loyalPoint || 0) * 100 : 0;
+
         const totalPrices = totalPrice - discount;
-    
+
         const orderModel = {
             userId: userId,
             fullName: displayName,
@@ -116,23 +127,26 @@ export default function Thanh_toan() {
             orderNote: formData.orderNote,
             price: totalPrices,
         };
-    
+
         if (isLoyaltyChecked) {
-            localStorage.setItem('loyaltyChecked', '1');            
+            localStorage.setItem('loyaltyChecked', '1');
         } else {
             localStorage.removeItem('loyaltyChecked');
         }
-    
+
         localStorage.setItem('priceToUpdate', orderModel.price);
-        
-    
+
+
         try {
             const url = await handleCheckout(orderModel); // Await the promise
             window.location.href = url; // Use the resolved URL
         } catch (error) {
             console.error('Error during checkout:', error);
             setErrorMessage('Thanh toán không thành công');
-            setIsModalVisible(true); // Show the modal on error
+            api.error({
+                message: 'Lỗi',
+                description: 'Thanh toán không thành công.',
+            });
         }
     };
 
@@ -161,26 +175,19 @@ export default function Thanh_toan() {
         setNumberPhone(event.target.value);
     };
 
-    const handleModalOk = () => {
-        setIsModalVisible(false);
-    };
-
     const handleLoyaltyCheckboxChange = (event) => {
         setIsLoyaltyChecked(event.target.checked);
+    };
+    const handleTermsCheckboxChange = (event) => {
+        setIsTermsChecked(event.target.checked);
     };
 
     return (
         <div>
-            <Modal
-                title="Error"
-                visible={isModalVisible}
-                onOk={handleModalOk}
-            >
-                <p>{errorMessage}</p>
-            </Modal>
+            {contextHolder}
             {/* <!-- breadcrumb area start --> */}
             <div class="breadcrumb-area">
-                <div class="container-giohang">
+                <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-wrap">
@@ -227,16 +234,25 @@ export default function Thanh_toan() {
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td>Shipping</td>
+                                                    <td>{t("Shipping")}</td>
                                                     <td class="d-flex justify-content-center">
                                                         <label class="custom-control-label" for="freeshipping">{t("freeShipping1")}</label>
 
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Giảm giá </td>
+                                                    <td class="d-flex justify-content-center">
+                                                        <label class="custom-control-label" for="discount">{formatCurrency(isLoyaltyChecked ? loyalPoint*100 : 0)} VND</label>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td>{t("cartSubTotal")}</td>
-                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint*100 : totalPrice)}</strong><strong> VND</strong></td>
-                                                    <input id="total" type="hidden" value={totalPrice} />
+
+                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - (loyalPoint || 0) * 100 : totalPrice)}</strong><strong> VND</strong></td>
+                                                    <input id="total" type="hidden" value={totalPrice} name="totalPrice" />
+
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -274,7 +290,7 @@ export default function Thanh_toan() {
                                                     <input
                                                         type="text"
                                                         name="phoneNumber"
-                                                        placeholder= {t("phoneNumber")}
+                                                        placeholder={t("phoneNumber")}
                                                         required
                                                         value={numberPhone}
                                                         onChange={handlePhoneChange}
@@ -291,7 +307,7 @@ export default function Thanh_toan() {
                                         </div>
 
                                         <div class="single-input-item">
-                                            <label for="street-address" class="required ">{("iAddress")}</label>
+                                            <label for="street-address" class="required ">{t("Address")}</label>
                                             <input type="text" name="address" placeholder={t("deliveryAddress")}
                                                 value={address} onChange={handleAddressChange}
                                                 required />
@@ -299,9 +315,9 @@ export default function Thanh_toan() {
 
 
                                         <div class="single-input-item">
-                                            <label for="ordernote">{("guarantee9")}</label>
+                                            <label for="ordernote">{t("note")}</label>
                                             <textarea name="orderNote" id="orderNote"
-                                                cols="30" rows="3" placeholder="otherNote"
+                                                cols="30" rows="3" placeholder={t("otherNote")}
                                                 value={formData.orderNote} onChange={handleCheckoutChange}
                                             ></textarea>
                                         </div>
@@ -318,9 +334,9 @@ export default function Thanh_toan() {
                                                     onChange={handleLoyaltyCheckboxChange}
                                                 />
                                                 <label class="custom-control-label" for="sale">
-                                                    {t("using")} {loyalPoint} {("pointsforDiscount")}
+                                                    {t("using")} <strong>{loyalPoint}</strong>  {t("pointsforDiscount")}
                                                 </label>
-                                                
+
 
                                             </div>
 
@@ -330,7 +346,8 @@ export default function Thanh_toan() {
                                                     type="checkbox"
                                                     class="custom-control-input"
                                                     id="terms"
-                                                    required
+                                                    checked={isTermsChecked}
+                                                    onChange={handleTermsCheckboxChange}
                                                 />
                                                 <label class="custom-control-label" for="terms">
                                                     {t("accept1")} <a href="/Chinhsach">{t("accept2")}</a> {t("accept3")}
