@@ -43,10 +43,7 @@ export default function Chinh_sach_giao_hang() {
                 <div className="faq-section">
                     <button className="faq-section-header"><strong> Chi phí và phạm vi giao hàng</strong></button>
                     <div className="faq-content">
-                        <p>Chi phí giao hàng sẽ được tính dựa trên khoảng cách từ cửa hàng Eternal Sparkle gần nhất đến địa chỉ của khách hàng. </p>
-                        <p>Các khu vực nội thành như TP. Hồ Chí Minh và Hà Nội thường có chi phí thấp hơn và thời gian giao hàng nhanh hơn so với các khu vực ngoại thành và vùng xa.</p>
-                        <p>Đối với những đơn hàng có khoảng cách dưới 20km, dịch vụ giao hàng thường được thực hiện trong ngày hoặc ngày kế tiếp. Tuy nhiên, đối với khoảng cách trên 20km, thời gian giao hàng có thể kéo dài từ 2 đến 7 ngày.</p>
-                        <p>Đặc biệt, khu vực biển đảo có thể có chi phí và thời gian giao hàng dài hơn do điều kiện địa lý và thời tiết. Eternal Sparkle cam kết mang lại dịch vụ giao hàng hiệu quả và tối ưu nhất cho khách hàng ở mọi nơi.</p>
+                        <p> Miễn phí giao hàng trong thành phố</p>
                     </div>
                 </div>
                 <div className="faq-section">
@@ -82,25 +79,7 @@ export default function Chinh_sach_giao_hang() {
                         <p>Trước khi chấp nhận và thanh toán cho một đơn hàng, <strong>quý khách hàng có quyền yêu cầu được mở thùng hàng để kiểm tra hàng hóa bên trong</strong> có đúng với thông tin đặt hàng hay không, bao gồm: số lượng, chủng loại, màu sắc, hình thức, tính nguyên vẹn của hàng hóa.</p>
                         <p><strong>Quý khách hàng có quyền từ chối nhận hàng nếu phát hiện thùng hàng không còn nguyên vẹn hoặc thiếu tem mác.</strong></p>
                         <p>Quý khách vui lòng <strong>quay lại video toàn bộ quá trình mở hàng</strong> để những vấn đề phát sinh được dễ dàng xử lý.</p>
-                        <p>Trường hợp đơn hàng giá trị cao trên 20 triệu, quý khách vui lòng đặt cọc trước:</p>
-                        <table>
-                            <tr>
-                                <th className="th-faq">Giá trị đơn hàng</th>
-                                <th className="th-faq">Quy định đặt cọc</th>
-                            </tr>
-                            <tr>
-                                <td>Từ 20 Triệu đến dưới 50 Triệu	</td>
-                                <td>30%</td>
-                            </tr>
-                            <tr>
-                                <td>Từ 50 Triệu đến dưới 100 Triệu	</td>
-                                <td>50%</td>
-                            </tr>
-                            <tr>
-                                <td>Trên 100 Triệu	</td>
-                                <td>70%</td>
-                            </tr>
-                        </table>
+                       
                     </div>
                 </div>
                 <div className="faq-section">

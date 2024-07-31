@@ -41,7 +41,7 @@ export default function ChinhSachBaoMat() {
     return (
         <div className="faq-container">
             <h2 className="faq-title">CHÍNH SÁCH BẢO MẬT THÔNG TIN KHÁCH HÀNG</h2>
-            <p>Cảm ơn bạn đã truy cập vào trang website được vận hành bởi Công ty Cổ phần Vàng bạc Đá quý Phú Nhuận. Bảo vệ thông tin khách hàng luôn là vấn đề hàng đầu của Eternal Sparkle. Do đó, chúng tôi tôn trọng và cam kết sẽ bảo mật những thông tin mang tính riêng tư và chỉ thu thập những thông tin cần thiết liên quan đến giao dịch mua bán. Để đảm bảo tính bảo mật của thông tin khách hàng, Eternal Sparkle thực hiện các nguyên tắc sau:</p>
+            <p>Cảm ơn bạn đã truy cập vào trang website được vận hành bởi <strong>Eternal Sparkle</strong> . Bảo vệ thông tin khách hàng luôn là vấn đề hàng đầu của <strong>Eternal Sparkle</strong>. Do đó, chúng tôi tôn trọng và cam kết sẽ bảo mật những thông tin mang tính riêng tư và chỉ thu thập những thông tin cần thiết liên quan đến giao dịch mua bán. Để đảm bảo tính bảo mật của thông tin khách hàng, <strong>Eternal Sparkle</strong> thực hiện các nguyên tắc sau:</p>
             <div className="faq-section">
                 <button className="faq-section-header"><strong>Mục đích thu thập thông tin cá nhân của khách hàng</strong></button>
                 <div className="faq-content">

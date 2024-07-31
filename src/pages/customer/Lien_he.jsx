@@ -27,39 +27,8 @@ export default function Lien_he() {
             <div class="contact-area section-padding pt-0">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="contact-message">
-                                <h4 class="contact-title">Hãy gửi thông điệp của bạn đến với chúng tôi</h4>
-                                <form id="contact-form" action="https://whizthemes.com/mail-php/genger/mail.php" method="post" class="contact-form">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input name="first_name" placeholder="Tên *" type="text" required />
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input name="phone" placeholder="Số điện thoại *" type="text" required />
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input name="email_address" placeholder="Email *" type="text" required />
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6">
-                                            <input name="contact_subject" placeholder="Chủ đề *" type="text" />
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="contact2-textarea text-center">
-                                                <textarea placeholder="Thông điệp *" name="message" class="form-control2" required=""></textarea>
-                                            </div>
-                                            <div class="contact-btn">
-                                                <button class="btn btn-sqr" type="submit">Gửi</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex justify-content-center">
-                                            <p class="form-messege"></p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
+                       
+                        <div class="col-lg-12">
                             <div class="contact-info">
                                 <h4 class="contact-title">Liên hệ với chúng tôi</h4>
                                 <p>Để biết thêm thông tin và nhận tư vấn về sản phẩm,

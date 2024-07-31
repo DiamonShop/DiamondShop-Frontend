@@ -12,6 +12,7 @@ export const handleCheckout = async (orderModel) => {
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
+        console.log(orderModel)
 
         const contentType = response.headers.get("content-type");
         let data;

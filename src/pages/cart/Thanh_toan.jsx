@@ -221,7 +221,7 @@ export default function Thanh_toan() {
                                             <thead>
                                                 <tr>
                                                     <th>{t("product")}</th>
-                                                    <th>{("price")}</th>
+                                                    <th>{t("price")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -350,7 +350,7 @@ export default function Thanh_toan() {
                                                     onChange={handleTermsCheckboxChange}
                                                 />
                                                 <label class="custom-control-label" for="terms">
-                                                    {t("accept1")} <a href="/Chinhsach">{t("accept2")}</a> {t("accept3")}
+                                                    {t("accept1")} <a target='_blank' href="/Chinhsach">{t("accept2")}</a> {t("accept3")}
                                                 </label>
 
                                             </div>

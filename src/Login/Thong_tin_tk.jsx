@@ -128,15 +128,9 @@ export default function Thong_tin_tk() {
             return;
         }
 
-        if (newPwd) {
-            if (newPwd.length === 0) {
-                toast.error('Mật khẩu không được để trống.');
-                return;
-            }
-            if (newPwd !== confirmPwd) {
-                toast.error('Mật khẩu xác nhận không khớp.');
-                return;
-            }
+        if (newPwd && newPwd !== confirmPwd) {
+            toast.error('Mật khẩu xác nhận không khớp.');
+            return;
         }
 
         const token = localStorage.getItem('token');
@@ -149,10 +143,11 @@ export default function Thong_tin_tk() {
             email,
             numberPhone,
             address,
-            password: newPwd, // Nếu có
             isActive: userData.isActive,
             roleId: userData.roleId,
-            loyaltyPoints: userData.loyaltyPoints
+            loyaltyPoints: userData.loyaltyPoints,
+            // Giữ nguyên mật khẩu cũ nếu không có mật khẩu mới
+            password: newPwd ? newPwd : userData.password 
         };
 
         try {

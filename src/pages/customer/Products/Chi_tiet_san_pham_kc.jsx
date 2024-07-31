@@ -30,7 +30,13 @@ export default function Chi_tiet_san_pham_kc() {
   }
   const [quantity, setQuantity] = useState(1);
   const handleIncrement = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
+    setQuantity(prevQuantity => {
+      if (prevQuantity < productObj.Quantity) {
+        return prevQuantity + 1;
+      } else {
+        return prevQuantity; // hoặc bạn có thể hiển thị thông báo cho người dùng biết rằng họ đã đạt đến giới hạn
+      }
+    });
   };
 
   const handleDecrement = () => {
@@ -146,7 +152,7 @@ export default function Chi_tiet_san_pham_kc() {
                   <ul class="breadcrumb">
                     <li class="breadcrumb-item"><Link to="/"><i class="fa fa-home"></i></Link></li>
                     <li class="breadcrumb-item"><Link to="/Kimcuong">{t("diamond")}</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">(t{"productDetail"})</li>
+                    <li class="breadcrumb-item active" aria-current="page">{t("productDetail")}</li>
                   </ul>
                 </nav>
               </div>
@@ -234,7 +240,7 @@ export default function Chi_tiet_san_pham_kc() {
                           </select>
                         </li>
                         <li class="filter-group">
-``                          <h6 className='filter-name-kc'>{t("certificate")}</h6>
+                          <h6 className='filter-name-kc'>{t("certificate")}</h6>
                           <div className='filter-img' onClick={handleImageClick}>
                             <img src="https://file.hstatic.net/1000381168/file/gia-logo_5deb96f1f2b541568f93dc916976d435.svg" alt="GIA" />
                           </div>

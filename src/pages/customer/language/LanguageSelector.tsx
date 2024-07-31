@@ -21,7 +21,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = () => {
   };
 
   const handleChoose = (lang: string) => {
-    const currentLang = lang === us ? "en" : "vi";
+    const currentLang = lang === vn ? "vi" : "en";
     i18n.changeLanguage(currentLang);
     localStorage.setItem("lang", currentLang);
     setLang(lang);

@@ -31,7 +31,7 @@ export default function Chinh_sach() {
                                  đều được kiểm định chất lượng, 
                                  đảm bảo nguồn gốc rõ ràng và đạt tiêu chuẩn quốc tế.
                             </p>
-                            <p>2. <b>Chính Sách Mua Hàng</b> : Vì giá tiền của đơn hàng quá lớn, Quý Khách NÊN KIỂM TRA KĨ ĐƠN HÀNG TRƯỚC KHI THANH TOÁN. Cửa hàng chúng tôi không cho phép HỦY BỎ ĐƠN HÀNG nếu như Quý Khách đã THANH TOÁN THÀNH CÔNG.
+                            <p>2. <b>Chính Sách Mua Hàng</b> : Vì giá tiền của đơn hàng quá lớn, Quý Khách <strong>NÊN KIỂM TRA KĨ ĐƠN HÀNG TRƯỚC KHI THANH TOÁN</strong>. Cửa hàng chúng tôi không cho phép <strong>HỦY BỎ ĐƠN HÀNG</strong>  nếu như Quý Khách đã <strong>THANH TOÁN THÀNH CÔNG</strong>.
                                 
                             </p>
                             <p>3. <b>Chính Sách Bảo Hành</b> : Chúng tôi cung cấp dịch vụ bảo hành 12 tháng
@@ -53,7 +53,7 @@ export default function Chinh_sach() {
                         <div class="policy-list">
                             <h3 class="policy-title">Liên Hệ:</h3>
                             <p>Nếu có bất kỳ thắc mắc nào về chính sách của chúng tôi, 
-                                vui lòng liên hệ qua email passswp159753@gmail.com hoặc gọi đến hotline 0123456789.
+                                vui lòng liên hệ qua email <strong>passswp159753@gmail.com</strong> hoặc gọi đến hotline <strong>0123456789</strong> .
                                 Chúng tôi luôn sẵn sàng hỗ trợ và giải đáp mọi câu hỏi của bạn.</p>
                         </div> 
                     </div>
