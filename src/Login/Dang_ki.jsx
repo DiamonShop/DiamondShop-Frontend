@@ -122,7 +122,7 @@ export default function Dang_ki() {
                         <div className="content">
                             <h3>{t("AlreadyhaveAccount")}</h3>
                             <p>{t("LogintoShopping")}</p>
-                            <Link to="/Dangnhap"><button className="btn transparent" id="sign-in-btn">{t("logIn")}</button></Link>
+                            <Link to="/Dangnhap"><button className="btn transparent" id="sign-in-btn">{t("LOGIN")}</button></Link>
                         </div>
                     </div>
                     <div>
