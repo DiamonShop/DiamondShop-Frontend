@@ -21160,6 +21160,10 @@ footer.footer p {
 
 /* end gio hang */
 /* start thanh toan */
+.container-thanhtoan {
+  padding-right: var(--bs-gutter-x, 50px);
+  padding-left: var(--bs-gutter-x, 50px);
+}
 .btn-view-cart {
   display: inline-block;
   background-color: #4caf50;

@@ -234,10 +234,6 @@ export default function Thong_tin_tk() {
                                                                     <input type="text" id="display-name" placeholder={t("displayName")} value={displayName} onChange={handleDisplayNameChange} />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="loyalpoint" >{t("point")}</label>
-                                                                    <input type="loyalpoint" id="loyalpoint" value={loyalpoint} readOnly />
-                                                                </div>
-                                                                <div className="single-input-item">
                                                                     <label htmlFor="email" className="required">{("email")}</label>
                                                                     <input type="email" id="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                                                                 </div>
@@ -247,11 +243,11 @@ export default function Thong_tin_tk() {
                                                                 </div>
                                                                 <div className="single-input-item">
                                                                     <label htmlFor="loyalty-points">{t("loyaltyPoints")}</label>
-                                                                    <input type="text" id="loyalty-points" value={userData?.loyaltyPoints || ''} readOnly />
+                                                                    <input type="text" id="loyalty-points" value={userData?.loyaltyPoints || 0} readOnly />
                                                                 </div>
                                                                 <div className="single-input-item">
-                                                                    <label htmlFor="address">{t("iAddress")}</label>
-                                                                    <input type="text" id="address" placeholder={t("iAddress")} value={address} onChange={handleAddressChange} />
+                                                                    <label htmlFor="address">{t("Address")}</label>
+                                                                    <input type="text" id="address" placeholder={t("Address")} value={address} onChange={handleAddressChange} />
                                                                 </div>
                                                                 <fieldset>
                                                                     <h5>{t("changePassword")}</h5>
