@@ -104,6 +104,7 @@ export default function Thanh_toan() {
 
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
+
         // require user click checkbox 
         if (!isTermsChecked) {
             setErrorMessage('Bạn phải đồng ý với các chính sách và điều khoản trước khi thanh toán');
@@ -114,6 +115,7 @@ export default function Thanh_toan() {
             return;
         }
         const discount = isLoyaltyChecked ? (loyalPoint || 0) * 100 : 0;
+
         const totalPrices = totalPrice - discount;
 
         const orderModel = {
@@ -247,8 +249,10 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>{t("cartSubTotal")}</td>
+
                                                     <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - (loyalPoint || 0) * 100 : totalPrice)}</strong><strong> VND</strong></td>
                                                     <input id="total" type="hidden" value={totalPrice} name="totalPrice" />
+
                                                 </tr>
                                             </tfoot>
                                         </table>
