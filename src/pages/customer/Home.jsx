@@ -17,24 +17,11 @@ export default function Home() {
         localStorage.setItem('product', JSON.stringify(product));
     }
 
-    const getUserId = async () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const userId = decodeToken(token).sid;
-            const status = await handleUpdateStatusToPending(userId);
-        }
-    }
-
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const message = params.get('message');
         if (message) {
-            toast.info(message);
-            if (message === "Payment Successful") {
-                getUserId();
-            } else {
-
-            }
+            toast.info(message);            
         }
     }, [location]);
 
