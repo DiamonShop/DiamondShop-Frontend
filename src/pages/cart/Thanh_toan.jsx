@@ -104,7 +104,7 @@ export default function Thanh_toan() {
     const handleCheckoutSubmit = async (e) => {
         e.preventDefault();
         
-        const discount = isLoyaltyChecked ? loyalPoint * 1000 : 0;
+        const discount = isLoyaltyChecked ? loyalPoint * 100 : 0;
         const totalPrices = totalPrice - discount;
     
         const orderModel = {
@@ -235,7 +235,7 @@ export default function Thanh_toan() {
                                                 </tr>
                                                 <tr>
                                                     <td>{t("cartSubTotal")}</td>
-                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint*1000 : totalPrice)}</strong><strong> VND</strong></td>
+                                                    <td><strong>{formatCurrency(isLoyaltyChecked ? totalPrice - loyalPoint*100 : totalPrice)}</strong><strong> VND</strong></td>
                                                     <input id="total" type="hidden" value={totalPrice} />
                                                 </tr>
                                             </tfoot>
