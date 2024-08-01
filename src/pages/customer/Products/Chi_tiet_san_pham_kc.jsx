@@ -8,6 +8,7 @@ import { decodeToken } from '../../../api/TokenAPI';
 import { handleAddProductToOrder, handleCreateOrder, handleGetOrderByUserId } from '../../../api/OrderAPI';
 import '../../../nice-select';
 import '../../../image-zoom';
+
 import { formatCurrency } from '../../../utils/NumberFormat';
 import Mota_danhgia_kc from '../../../components/Mota_danhgia_kc';
 import Sanphamtuongtu_kc from '../../../components/Sanphamtuongtu_kc';
@@ -97,7 +98,9 @@ export default function Chi_tiet_san_pham_kc() {
           }
         }
       }
-    }
+    }else {
+      openNotificationWithIcon('warning', `${t("warning")}`, `${t("logintoOrder")}`, 'top');
+  }
   };
   useEffect(() => {
     const initSlickSliders = () => {
