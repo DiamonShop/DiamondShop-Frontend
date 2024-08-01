@@ -38,7 +38,7 @@ const Giay_bao_hanh = () => {
             <div className="myaccount-content" style={{ width: '100%' }}>
                 <h5>{t("warrantyCard")}</h5>
                 <div className="myaccount-table table-responsive text-center">
-                    <table>
+                    <table >
                         <thead className="thead-light">
                             <tr>
                                 <th>{t("warrantyId")}</th>
