@@ -132,8 +132,8 @@ function Sanphamnoibat({ onProductClick }) {
                                                                 jewelrySizes={item.jewelrySizes}
                                                                 productName={item.productName}
                                                                 categoryName={item.categoryName}
+                                                                categoryId={item.categoryId}
                                                                 newPrice={item.newPrice}
-                                                                oldPrice={item.oldPrice}
                                                                 description={item.description}
                                                                 onProductClick={onProductClick}
                                                             />
@@ -157,10 +157,11 @@ function Sanphamnoibat({ onProductClick }) {
                                                                 sideDiamondName={item.sideDiamondName}
                                                                 mainDiamondQuantity={item.mainDiamondQuantity}
                                                                 sideDiamondQuantity={item.sideDiamondQuantity}
+                                                                jewelrySizes={item.jewelrySizes}
                                                                 productName={item.productName}
                                                                 categoryName={item.categoryName}
+                                                                categoryId={item.categoryId}
                                                                 newPrice={item.newPrice}
-                                                                oldPrice={item.oldPrice}
                                                                 description={item.description}
                                                                 onProductClick={onProductClick}
                                                             />
@@ -175,16 +176,20 @@ function Sanphamnoibat({ onProductClick }) {
                                                             <Du_lieu_san_pham_vtxmdc
                                                                 productId={item.id}
                                                                 image1={item.image1}
+                                                                image2={item.image2}
+                                                                image3={item.image3}
+                                                                image4={item.image4}
                                                                 label={item.label}
                                                                 material={item.material}
                                                                 mainDiamondName={item.mainDiamondName}
                                                                 sideDiamondName={item.sideDiamondName}
                                                                 mainDiamondQuantity={item.mainDiamondQuantity}
                                                                 sideDiamondQuantity={item.sideDiamondQuantity}
+                                                                jewelrySizes={item.jewelrySizes}
                                                                 productName={item.productName}
                                                                 categoryName={item.categoryName}
+                                                                categoryId={item.categoryId}
                                                                 newPrice={item.newPrice}
-                                                                oldPrice={item.oldPrice}
                                                                 description={item.description}
                                                                 onProductClick={onProductClick}
                                                             />
@@ -197,20 +202,24 @@ function Sanphamnoibat({ onProductClick }) {
                                                     {randomProductsVongtay.map((item) => (
                                                         <div key={item.id}>
                                                             <Du_lieu_san_pham_vtxmdc
-                                                                productId={item.id}
-                                                                image1={item.image1}
-                                                                label={item.label}
-                                                                material={item.material}
-                                                                mainDiamondName={item.mainDiamondName}
-                                                                sideDiamondName={item.sideDiamondName}
-                                                                mainDiamondQuantity={item.mainDiamondQuantity}
-                                                                sideDiamondQuantity={item.sideDiamondQuantity}
-                                                                productName={item.productName}
-                                                                categoryName={item.categoryName}
-                                                                newPrice={item.newPrice}
-                                                                oldPrice={item.oldPrice}
-                                                                description={item.description}
-                                                                onProductClick={onProductClick}
+                                                               productId={item.id}
+                                                               image1={item.image1}
+                                                               image2={item.image2}
+                                                               image3={item.image3}
+                                                               image4={item.image4}
+                                                               label={item.label}
+                                                               material={item.material}
+                                                               mainDiamondName={item.mainDiamondName}
+                                                               sideDiamondName={item.sideDiamondName}
+                                                               mainDiamondQuantity={item.mainDiamondQuantity}
+                                                               sideDiamondQuantity={item.sideDiamondQuantity}
+                                                               jewelrySizes={item.jewelrySizes}
+                                                               productName={item.productName}
+                                                               categoryName={item.categoryName}
+                                                               categoryId={item.categoryId}
+                                                               newPrice={item.newPrice}
+                                                               description={item.description}
+                                                               onProductClick={onProductClick}
                                                             />
                                                         </div>
                                                     ))}

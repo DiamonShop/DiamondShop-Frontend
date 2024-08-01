@@ -286,8 +286,7 @@ const Dashboard = () => {
         const allOrders = response.data;
         const today = new Date().toISOString().split("T")[0];
         const todayOrders = allOrders.filter(
-          (order) =>
-            new Date(order.orderDate).toISOString().split("T")[0] === today
+          (order) => order.orderDate.split("T")[0] === today
         );
         setOrders(todayOrders);
       } catch (error) {
@@ -296,6 +295,7 @@ const Dashboard = () => {
     };
     fetchOrders();
   }, []);
+  
   //end today Orders
 
   // Fetch User Data
@@ -558,9 +558,7 @@ const Dashboard = () => {
                           orders.map((order) => (
                             <tr key={order.orderId}>
                               <td>{order.orderId}</td>
-                              <td>
-                                {new Date(order.orderDate).toLocaleString()}
-                              </td>
+                              <td>{order.orderDate}</td>
                               <td>
                                 {order.totalPrice.toLocaleString("vi-VN", {
                                   style: "currency",

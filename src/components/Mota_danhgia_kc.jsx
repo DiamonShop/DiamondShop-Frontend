@@ -5,6 +5,7 @@ import { decodeToken } from '../api/TokenAPI'; // Adjust the import path
 import { handleGetOrderByUserId } from '../api/OrderAPI'; // Adjust the import path
 import StarRating from '../components/StarRating'; // Adjust the import path
 import { useTranslation } from "react-i18next";// luon luon co de dich
+import parse from 'html-react-parser';
 // function Mota_danhgia_kc() {
 //   const productObj = JSON.parse(localStorage.getItem('product'));
 //   return (
@@ -244,7 +245,7 @@ const Mota_danhgia_kc = ({ productId, onReviewCountChange }) => {
             <div className="tab-content reviews-tab">
               <div className="tab-pane fade show active" id="tab_one">
                 <div className="tab-one">
-                  <p>{productObj.description}</p>
+                  <p>{parse(productObj.description)}</p>
                 </div>
               </div>
               <div class="tab-pane fade" id="tab_two">

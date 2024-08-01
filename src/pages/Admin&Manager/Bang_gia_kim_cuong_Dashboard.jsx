@@ -247,67 +247,42 @@ export default function Bang_gia_kim_cuong() {
                                         <div className="admin-page-edit-info-column">
                                             <h2 style={{ color: '#8C6B2F', textAlign: 'center' }}>Chỉnh sửa giá kim cương</h2>
                                             <form onSubmit={editDiamondPrice}>
-                                                <div className="admin-page-edit-product-form-group-row">
-                                                    <div className="admin-page-edit-product-form-group">
-                                                        <label htmlFor="carat">Carat</label>
-                                                        <input
-                                                            type="number"
-                                                            id="carat"
-                                                            name="carat"
-                                                            placeholder="Carat"
-                                                            value={editProductDiamond.carat}
-                                                            onChange={handleEditDiamondChange}
-                                                            readOnly
-                                                        />
-                                                    </div>
+                                                <div className="admin-page-edit-product-form-group-row">                                                    
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="color">Màu sắc</label>
-                                                        <select
+                                                        <input
                                                             id="color"
                                                             name="color"
                                                             value={editProductDiamond.color}
                                                             onChange={handleEditDiamondChange}
                                                             readOnly
-                                                        >
-                                                            <option value="D">D</option>
-                                                            <option value="E">E</option>
-                                                            <option value="F">F</option>
-                                                        </select>
+                                                        />
+
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="clarity">Độ tinh khiết</label>
-                                                        <select
+                                                        <input
                                                             id="clarity"
                                                             name="clarity"
                                                             value={editProductDiamond.clarity}
                                                             onChange={handleEditDiamondChange}
                                                             readOnly
-                                                        >
-                                                            <option value="IF">IF</option>
-                                                            <option value="VVS1">VVS1</option>
-                                                            <option value="VVS2">VVS2</option>
-                                                            <option value="VS1">VS1</option>
-                                                            <option value="VS2">VS2</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="cut">Cắt</label>
-                                                        <select
+                                                        <input
                                                             id="cut"
                                                             name="cut"
                                                             value={editProductDiamond.cut}
                                                             onChange={handleEditDiamondChange}
                                                             readOnly
-                                                        >
-                                                            <option value="EX">EX</option>
-                                                            <option value="VG">VG</option>
-                                                            <option value="G">G</option>
-                                                        </select>
+                                                        />
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
                                                         <label htmlFor="price">Giá</label>
                                                         <input
-                                                            type="number"
+                                                            type="text"
                                                             id="price"
                                                             name="price"
                                                             placeholder="Giá"

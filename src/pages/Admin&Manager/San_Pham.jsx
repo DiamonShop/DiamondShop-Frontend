@@ -1617,7 +1617,7 @@ const SanPham = () => {
                                                             placeholder="Nhập giá gốc sản phẩm"
                                                             value={editProductJewelry.basePrice}
                                                             onChange={(value) => handleEditJewelryChange({ target: { name: 'basePrice', value } })}
-                                                            required
+                                                            readOnly
                                                         />
                                                     </div>
                                                 </div>

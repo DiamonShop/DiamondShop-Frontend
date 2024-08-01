@@ -85,6 +85,7 @@ export default function Day_chuyen({ onProductClick }) {
                                                 material={item.material}
                                                 mainDiamondName={item.mainDiamondName}
                                                 sideDiamondName={item.sideDiamondName}
+                                                jewelrySizes={item.jewelrySizes}
                                                 mainDiamondQuantity={item.mainDiamondQuantity}
                                                 sideDiamondQuantity={item.sideDiamondQuantity}
                                                 stock={item.stock}
