@@ -6,7 +6,7 @@ const listProduct = await HandleGetAll();
 const productData = await Promise.all(listProduct
     .filter(product => product.categoryId === 3 && product.isActive === true)
     .map(async product => {
-        const { markupPrice, productID, productName, stock, categoryId, description,isActive,material,mainDiamondName,sideDiamondName } = product;
+        const { markupPrice, productID, productName, categoryId, stock, description, isActive, material, mainDiamondName, sideDiamondName, jewelrySizes, mainDiamondQuantity, sideDiamondQuantity } = product;
         const { image1Url } = await getJewelryImageUrls(productID,categoryId);
         
         return {
@@ -15,14 +15,17 @@ const productData = await Promise.all(listProduct
             image1: image1Url ? image1Url : "default_image_url_1.png", // URL thay thế nếu ảnh không tồn tại
             label: "Mới",
             newPrice: markupPrice,
-            categoryId: categoryId,
-            description: description,
             categoryName: "Mặt dây chuyền",
+            description: description,
             stock: stock,
-            material:material,
-            mainDiamondName:mainDiamondName,
-            sideDiamondName:sideDiamondName,
             isActive: isActive,
+            categoryId: categoryId,
+            material: material,
+            mainDiamondName: mainDiamondName,
+            sideDiamondName: sideDiamondName,
+            jewelrySizes: jewelrySizes,
+            mainDiamondQuantity: mainDiamondQuantity,
+            sideDiamondQuantity: sideDiamondQuantity,
         };
     })
 );

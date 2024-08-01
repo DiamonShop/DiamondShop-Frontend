@@ -99,6 +99,7 @@ function Main_product({ onProductClick }) {
                                             jewelrySizes={item.jewelrySizes}
                                             productName={item.productName}
                                             categoryName={item.categoryName}
+                                            categoryId={item.categoryId}
                                             newPrice={item.newPrice}
                                             description={item.description}
                                             onProductClick={onProductClick}

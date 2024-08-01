@@ -822,7 +822,7 @@ const KimCuong = () => {
                                         </td>
                                         <td>{product.productName}</td>
                                         <td>{product.quantity}</td>
-                                        <td>{product.markupPrice}VNĐ</td>
+                                        <td>{formatCurrency(product.markupPrice)} VND</td>
                                         <td>{getProductStatus(product)}</td>
                                         <td>
                                             <div className="admin-page-buttons">
@@ -916,7 +916,7 @@ const KimCuong = () => {
                                                 </div>
                                                 <div className="admin-page-add-product-form-group">
                                                     <label>Giá gốc sản phẩm:</label>
-                                                    <Input type="text" value={formatCurrency(getBasePriceDiamond(selectedProduct.productId)) + 'VNĐ'} readOnly />
+                                                    <Input type="text" value={formatCurrency(getBasePriceDiamond(selectedProduct.productId)) + 'VND'} readOnly />
                                                 </div>
                                             </div>
                                             <div className="admin-page-add-product-form-group-row">
@@ -926,7 +926,7 @@ const KimCuong = () => {
                                                 </div>
                                                 <div className="admin-page-add-product-form-group">
                                                     <label>Giá bán:</label>
-                                                    <Input type="text" value={formatCurrency(selectedProduct.markupPrice) + 'VNĐ'} readOnly />
+                                                    <Input type="text" value={formatCurrency(selectedProduct.markupPrice) + 'VND'} readOnly />
                                                 </div>
                                             </div>
                                             <div className="admin-page-add-product-form-group">
@@ -1166,7 +1166,7 @@ const KimCuong = () => {
                                                             placeholder="Carat"
                                                             value={editProductDiamond.carat}
                                                             onChange={handleEditDiamondChange}
-                                                            required
+                                                            readOnly
                                                         />
                                                     </div>
                                                 </div>
@@ -1224,7 +1224,7 @@ const KimCuong = () => {
                                                             placeholder="Nhập tỉ lệ áp giá"
                                                             value={editProductDiamond.markupRate}
                                                             onChange={handleEditDiamondChange}
-                                                            required
+                                                            readOnly
                                                         />
                                                     </div>
                                                     <div className="admin-page-edit-product-form-group">
@@ -1237,7 +1237,7 @@ const KimCuong = () => {
                                                             placeholder="Nhập giá gốc sản phẩm"
                                                             value={editProductDiamond.basePrice}
                                                             onChange={handleEditDiamondChange}
-                                                            required
+                                                            readOnly
                                                         />
                                                     </div>
                                                 </div>

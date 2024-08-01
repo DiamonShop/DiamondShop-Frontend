@@ -54,7 +54,7 @@ export default function Thong_tin_tk() {
                 }
             });
             console.log("Response data:", response.data);
-            setUserData(response.data);
+            setUserData({ ...response.data, currentPassword: response.data.password || '' });
             setUsername(response.data.username || '');
             setDisplayName(response.data.fullName || '');
             setEmail(response.data.email || '');
@@ -146,9 +146,21 @@ export default function Thong_tin_tk() {
             isActive: userData.isActive,
             roleId: userData.roleId,
             loyaltyPoints: userData.loyaltyPoints,
-            // Giữ nguyên mật khẩu cũ nếu không có mật khẩu mới
-            password: newPwd ? newPwd : userData.password 
+            password: userData.currentPassword // Giữ mật khẩu hiện tại
         };
+        // Chỉ thêm trường password nếu cả "Mật khẩu mới" và "Xác nhận mật khẩu" đều được nhập và khớp nhau
+        if (newPwd && confirmPwd) {
+            if (newPwd !== confirmPwd) {
+                toast.error('Mật khẩu xác nhận không khớp.');
+                return;
+            }
+            userDataToUpdate.password = newPwd;
+        } else {
+            // Nếu không có mật khẩu mới, sử dụng mật khẩu hiện tại
+            userDataToUpdate.password = userData.currentPassword;
+        }
+
+        console.log('Dữ liệu gửi đi:', userDataToUpdate); // Kiểm tra dữ liệu gửi đi
 
         try {
             setLoading(true);
